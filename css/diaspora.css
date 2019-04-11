@@ -254,7 +254,7 @@ pre .keyword,pre .javascript .function {color:#cc99cc;}
   .else h3 + p {margin:10px 60px 0 60px;}
   .here {left:60px;bottom:50px;}
   .article{width:100%;}
-  .article .main{width:98%;}
+  .article .main{width:94%;}
   .article .side {display:none}
   .comment .gt-btn-public .gt-btn-text:after{content:"";}
 }
@@ -273,7 +273,7 @@ pre .keyword,pre .javascript .function {color:#cc99cc;}
   .else h3 + p {margin:10px 30px 0 20px;}
   .here {position:static;margin:20px 0 20px 20px;}
   .article{width:100%;}
-  .article .main{width:98%;}
+  .article .main{width:94%;}
   .article .side {display:none}
   .comment .gt-btn-public .gt-btn-text:after{content:"";}
 }
@@ -293,7 +293,7 @@ pre .keyword,pre .javascript .function {color:#cc99cc;}
   .icon-pause,.icon-play {left:50px;}
   .comment.link {width:140px;padding:5px 0;}
   .article{width:100%;}
-  .article .main{width:98%;}
+  .article .main{width:94%;}
   .article .side {display:none}
   .comment .gt-btn-public .gt-btn-text:after{content:"";}
 }
@@ -309,7 +309,7 @@ pre .keyword,pre .javascript .function {color:#cc99cc;}
   .content table {font-size:smaller;}
   .content table tr td {padding:6px;}
   .article {width:100%;}
-  .article .main{width:98%;}
+  .article .main{width:94%;}
   .article .side {display:none}
   .comment .gt-btn-public .gt-btn-text:after{content:"";}
 }
