@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[aaaaaaaaaaaa]]></title>
+    <url>%2F2019%2F04%2F11%2Faaaaaaaaaaaa%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>C</category>
+        <category>分类2</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[CCCC]]></title>
+    <url>%2F2019%2F04%2F11%2FCCCC%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>C</category>
+        <category>分类2</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[tttt]]></title>
+    <url>%2F2019%2F04%2F11%2Ftttt%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[text]]></title>
+    <url>%2F2019%2F04%2F11%2Ftext%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[text]]></title>
+    <url>%2F2019%2F04%2F11%2Ftext-3%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Cplusplus</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Markdown教程]]></title>
+    <url>%2F2019%2F04%2F11%2FMarkdown%E6%95%99%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[一级标签二级标签三级标签这是四级标题这是五级标题这是六级标题 加粗 斜体 斜体加粗 删除线 这是引入内容 这是引入内容 这是引用的内容 分割线 三个或者三个以上的-或*都可以 图片图片alt就是显示在图片下面的文字，相当于对图片内容的解释。图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加 我爱你 超链接 要加https://超链接名title可加可不加 列表无序列表用 - + * 任何一种都可以 1234 1234 1234注意：- + * 跟内容之间都要有一个空格 有序列表数字加点 123 123 123注意：序号跟内容之间要有空格 列表嵌套 一级无序列表 二级无序列表 三级无序列表 上一级和下一级之间敲三个空格即可 123 123 123 表格 表头 表头 表头 内容 内容 内容 内容 内容 内容 内容 内容 内容 代码单行代码：代码之间分别用一个反引号包起来int sum = 0 代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行```语言例如12345678910int main()&#123;int a = 0;while(a)&#123; continue;&#125;return 0;&#125; 用\来转义字符\`\`\` st=>start: 开始 e=>end: 结束 op=>operation: 我的操作 cond=>condition: 确认？ st->op->cond cond(yes)->e cond(no)->op{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12} var code = document.getElementById("flowchart-0-code").value; var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value)); var diagram = flowchart.parse(code); diagram.drawSVG("flowchart-0", options);]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F04%2F10%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. XiaowuyouCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
