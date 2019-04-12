@@ -30,7 +30,10 @@
 <body class="loading">
     <span id="config-title" style="display:none">Xiaowuyou</span>
     <div id="loader"></div>
-    <div id="single">
+     {% include footer.html %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"> <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> 
+
+<div id="single">
     <div id="top" style="display: block;">
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;" data-url="https://Xiaowuyoucy.github.io"></a>
@@ -76,15 +79,31 @@
             
         </div>
         
-    <div id="gitalk-container" class="comment link" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="4637a1e0bff33eb66ca6" data-cs="c997f31ca9a0ad4901c7f432f0a6cd4cfe4caf83" data-r="Xiaowuyoucy.github.io" data-o="Xiaowuyoucy" data-a="Xiaowuyoucy" data-d="true">查看评论</div>
 
 
+<script>
+var gitalk = new Gitalk({
+  clientID: '4637a1e0bff33eb66ca6',
+  clientSecret: 'c997f31ca9a0ad4901c7f432f0a6cd4cfe4caf83',
+  repo: 'Xiaowuyoucy.github.io',
+  owner: 'Xiaowuyoucy',
+  admin: ['Xiaowuyoucy'],
+  id: location.pathname,      // Ensure uniqueness and length less than 50
+  distractionFreeMode: ture  // Facebook-like distraction free mode
+})
+
+gitalk.render('gitalk-container')
+
+</script>
+        <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     </div>
     
 </div>
 
 
     </div>
+
 </div>
 </body>
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -147,4 +166,5 @@
 
 
 
+<div id="gitalk-container"></div>
 </html>
