@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>urlib2库的基本使用 | YanChen</title>
+  <meta name="description" content="所谓⽹⻚抓取，就是把 URL 地址中指定的⽹络资源从⽹络流中读取出来，保存到本地。 在 Python 中，我们使⽤  urllib2  这个组件来抓取⽹⻚。  urllib2 是 Python2.7 ⾃带的模块(不需要下载)， 是 Python 的⼀个获取URLs(Uniform Resource Locators)的重要组件。 urllib2 官⽅⽂档：https://docs.python.">
+<meta name="keywords" content="urlib2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="urlib2库的基本使用">
+<meta property="og:url" content="http://jianweiwen.com/2017/07/23/201902262135/index.html">
+<meta property="og:site_name" content="YanChen">
+<meta property="og:description" content="所谓⽹⻚抓取，就是把 URL 地址中指定的⽹络资源从⽹络流中读取出来，保存到本地。 在 Python 中，我们使⽤  urllib2  这个组件来抓取⽹⻚。  urllib2 是 Python2.7 ⾃带的模块(不需要下载)， 是 Python 的⼀个获取URLs(Uniform Resource Locators)的重要组件。 urllib2 官⽅⽂档：https://docs.python.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img.vim-cn.com/1f/b4a4c0d75352a3d18ab8f19e9292856e8ba281.jpg">
+<meta property="og:image" content="https://img.vim-cn.com/2a/b1d62c7ac7c1ca9854eb52bc3d78424282b560.jpg">
+<meta property="og:image" content="https://img.vim-cn.com/f5/890657b3e27ea8119725682e7bc6260a56a5dd.jpg">
+<meta property="og:image" content="https://img.vim-cn.com/93/bf05cb6b673973e0ea81ae8baa55884aee76cf.jpg">
+<meta property="og:image" content="https://img.vim-cn.com/4c/d96f1d31d6fcd985892e20882806290e2178c2.jpg">
+<meta property="og:updated_time" content="2019-04-14T18:24:45.251Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="urlib2库的基本使用">
+<meta name="twitter:description" content="所谓⽹⻚抓取，就是把 URL 地址中指定的⽹络资源从⽹络流中读取出来，保存到本地。 在 Python 中，我们使⽤  urllib2  这个组件来抓取⽹⻚。  urllib2 是 Python2.7 ⾃带的模块(不需要下载)， 是 Python 的⼀个获取URLs(Uniform Resource Locators)的重要组件。 urllib2 官⽅⽂档：https://docs.python.">
+<meta name="twitter:image" content="https://img.vim-cn.com/1f/b4a4c0d75352a3d18ab8f19e9292856e8ba281.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://jianweiwen.com/2017/07/23/201902262135/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fonts2/iconfont.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xiaowuyoucy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">YanChen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> GuangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="https://www.jianweiwen.com/navigation/index.html">
+            
+            <i class="icon icon-map-marker"></i>
+            
+            <span class="menu-title">导航</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon iconfont icon-video"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">格言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+				
+				<p id="hitokoto">:D 获取中...</p>
+				<p id="from" style="text-align: right"></p>
+                <script>
+					  var xhr = new XMLHttpRequest();
+					  xhr.open('get', 'https://v1.hitokoto.cn');
+					  xhr.onreadystatechange = function () {
+						if (xhr.readyState === 4) {
+						  var data = JSON.parse(xhr.responseText);
+						  var hitokoto = document.getElementById('hitokoto');
+						  hitokoto.innerText = data.hitokoto;
+						  var from = document.getElementById('from');
+						  from.innerText = "-- " + data.from;
+						}
+					  }
+					  xhr.send();
+				</script>
+				
+				
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KaliLinux/">KaliLinux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WEB安全渗透/">WEB安全渗透</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/apache/">apache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于博主/">关于博主</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术资讯/">技术资讯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/理财投资/">理财投资</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简谈计算机/">简谈计算机</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络爬虫/">网络爬虫</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GET/">$_GET</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POST，-SERVER/">$_POST，$_SERVER</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REQUEST/">$_REQUEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOTO语句/">GOTO语句</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang函数/">Golang函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang匿名函数/">Golang匿名函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础/">Golang基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础类型占位符/">Golang基础类型占位符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang常量与变量里表达式/">Golang常量与变量里表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang循环结构/">Golang循环结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang指针/">Golang指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang标准输入与输出/">Golang标准输入与输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang流程控制/">Golang流程控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang程序运算/">Golang程序运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang类型转换及移位运算/">Golang类型转换及移位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang闭包函数/">Golang闭包函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ISO七层模型/">ISO七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript输出三角形式/">JavaScript输出三角形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalinux/">Kalinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP两种定义常量的形式/">PHP两种定义常量的形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP常量/">PHP常量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python教程/">Python教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python笔记/">Python笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python运算符/">Python运算符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO网站优化/">SEO网站优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIR/">__DIR__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FILE/">__FILE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/">__LINE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache环境变量/">apache环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache配置/">apache配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments-的用法/">arguments 的用法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beef劫持/">beef劫持</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dowhile循环/">dowhile循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iota定义常量组/">iota定义常量组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数/">javascript函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数小案例/">javascript函数小案例</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript引用的几种方式/">javascript引用的几种方式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this方法/">js-this方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js事件/">js事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js作用域/">js作用域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js内置对象/">js内置对象</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js创建对象方法/">js创建对象方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js字面量/">js字面量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js对象/">js对象</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js布尔类型隐私转换/">js布尔类型隐私转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js数据类型/">js数据类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js预解析/">js预解析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kali/">kali</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kalinux更新源/">kalinux更新源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux目录结构/">linux目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new关键字的执行过程/">new关键字的执行过程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php变量/">php变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urlib2/">urlib2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmtools/">vmtools</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全渗透/">web安全渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web渗透/">web渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人生事记/">人生事记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/变量的操作/">变量的操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/延时执行defer/">延时执行defer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格狼日/">拉格狼日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间复杂度测试/">时间复杂度测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财，投资/">理财，投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简历/">简历</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络模型/">网络模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/顺序表/">顺序表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/GET/" style="font-size: 13px;">$_GET</a> <a href="/tags/POST，-SERVER/" style="font-size: 13px;">$_POST，$_SERVER</a> <a href="/tags/REQUEST/" style="font-size: 13px;">$_REQUEST</a> <a href="/tags/Cookie/" style="font-size: 13px;">Cookie</a> <a href="/tags/GOTO语句/" style="font-size: 13px;">GOTO语句</a> <a href="/tags/Golang/" style="font-size: 13px;">Golang</a> <a href="/tags/Golang函数/" style="font-size: 13px;">Golang函数</a> <a href="/tags/Golang匿名函数/" style="font-size: 13px;">Golang匿名函数</a> <a href="/tags/Golang基础/" style="font-size: 13.5px;">Golang基础</a> <a href="/tags/Golang基础类型占位符/" style="font-size: 13px;">Golang基础类型占位符</a> <a href="/tags/Golang常量与变量里表达式/" style="font-size: 13px;">Golang常量与变量里表达式</a> <a href="/tags/Golang循环结构/" style="font-size: 13px;">Golang循环结构</a> <a href="/tags/Golang指针/" style="font-size: 13px;">Golang指针</a> <a href="/tags/Golang标准输入与输出/" style="font-size: 13px;">Golang标准输入与输出</a> <a href="/tags/Golang流程控制/" style="font-size: 13px;">Golang流程控制</a> <a href="/tags/Golang程序运算/" style="font-size: 13px;">Golang程序运算</a> <a href="/tags/Golang类型转换及移位运算/" style="font-size: 13px;">Golang类型转换及移位运算</a> <a href="/tags/Golang闭包函数/" style="font-size: 13px;">Golang闭包函数</a> <a href="/tags/ISO七层模型/" style="font-size: 13px;">ISO七层模型</a> <a href="/tags/JavaScript输出三角形式/" style="font-size: 13px;">JavaScript输出三角形式</a> <a href="/tags/Kalinux/" style="font-size: 13px;">Kalinux</a> <a href="/tags/PHP两种定义常量的形式/" style="font-size: 13px;">PHP两种定义常量的形式</a> <a href="/tags/PHP常量/" style="font-size: 13px;">PHP常量</a> <a href="/tags/Python教程/" style="font-size: 13px;">Python教程</a> <a href="/tags/Python笔记/" style="font-size: 13px;">Python笔记</a> <a href="/tags/Python运算符/" style="font-size: 13px;">Python运算符</a> <a href="/tags/SEO网站优化/" style="font-size: 13px;">SEO网站优化</a> <a href="/tags/XSS/" style="font-size: 13.5px;">XSS</a> <a href="/tags/DIR/" style="font-size: 13px;">__DIR__</a> <a href="/tags/FILE/" style="font-size: 13px;">__FILE__</a> <a href="/tags/LINE/" style="font-size: 13px;">__LINE__</a> <a href="/tags/apache环境变量/" style="font-size: 13px;">apache环境变量</a> <a href="/tags/apache配置/" style="font-size: 13px;">apache配置</a> <a href="/tags/arguments-的用法/" style="font-size: 13px;">arguments 的用法</a> <a href="/tags/beef劫持/" style="font-size: 13px;">beef劫持</a> <a href="/tags/dowhile循环/" style="font-size: 13px;">dowhile循环</a> <a href="/tags/iota定义常量组/" style="font-size: 13px;">iota定义常量组</a> <a href="/tags/javascript函数/" style="font-size: 13px;">javascript函数</a> <a href="/tags/javascript函数小案例/" style="font-size: 13px;">javascript函数小案例</a> <a href="/tags/javascript引用的几种方式/" style="font-size: 13px;">javascript引用的几种方式</a> <a href="/tags/js-this方法/" style="font-size: 13px;">js-this方法</a> <a href="/tags/js事件/" style="font-size: 13px;">js事件</a> <a href="/tags/js作用域/" style="font-size: 13px;">js作用域</a> <a href="/tags/js内置对象/" style="font-size: 13px;">js内置对象</a> <a href="/tags/js创建对象方法/" style="font-size: 13px;">js创建对象方法</a> <a href="/tags/js字面量/" style="font-size: 13px;">js字面量</a> <a href="/tags/js对象/" style="font-size: 13px;">js对象</a> <a href="/tags/js布尔类型隐私转换/" style="font-size: 13px;">js布尔类型隐私转换</a> <a href="/tags/js数据类型/" style="font-size: 13px;">js数据类型</a> <a href="/tags/js预解析/" style="font-size: 13px;">js预解析</a> <a href="/tags/kali/" style="font-size: 13px;">kali</a> <a href="/tags/kalinux更新源/" style="font-size: 13px;">kalinux更新源</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/linux目录结构/" style="font-size: 13px;">linux目录结构</a> <a href="/tags/new关键字的执行过程/" style="font-size: 13px;">new关键字的执行过程</a> <a href="/tags/php变量/" style="font-size: 13px;">php变量</a> <a href="/tags/sql注入/" style="font-size: 13px;">sql注入</a> <a href="/tags/urlib2/" style="font-size: 13px;">urlib2</a> <a href="/tags/vmtools/" style="font-size: 14px;">vmtools</a> <a href="/tags/web安全渗透/" style="font-size: 13px;">web安全渗透</a> <a href="/tags/web渗透/" style="font-size: 13px;">web渗透</a> <a href="/tags/人生事记/" style="font-size: 13px;">人生事记</a> <a href="/tags/变量的操作/" style="font-size: 13px;">变量的操作</a> <a href="/tags/延时执行defer/" style="font-size: 13px;">延时执行defer</a> <a href="/tags/拉格狼日/" style="font-size: 13px;">拉格狼日</a> <a href="/tags/数组/" style="font-size: 13px;">数组</a> <a href="/tags/时间复杂度测试/" style="font-size: 13px;">时间复杂度测试</a> <a href="/tags/理财，投资/" style="font-size: 13px;">理财，投资</a> <a href="/tags/简历/" style="font-size: 13px;">简历</a> <a href="/tags/算法/" style="font-size: 13px;">算法</a> <a href="/tags/网络模型/" style="font-size: 13px;">网络模型</a> <a href="/tags/计算机基础/" style="font-size: 13px;">计算机基础</a> <a href="/tags/顺序表/" style="font-size: 13px;">顺序表</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/12/05/123/" class="title">123</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-05T10:31:10.000Z" itemprop="datePublished">2019-12-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Golang/">Golang</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/12/05/201912050104/" class="title">Golang 指针</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-04T17:05:00.000Z" itemprop="datePublished">2019-12-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/11/27/hello-world/" class="title">Hello World</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-11-27T08:08:58.620Z" itemprop="datePublished">2019-11-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Golang/">Golang</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/11/19/201911190628/" class="title">Golang闭包函数</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-11-18T22:28:00.000Z" itemprop="datePublished">2019-11-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Golang/">Golang</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/11/19/201911190625/" class="title">Golang匿名函数</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-11-18T22:26:00.000Z" itemprop="datePublished">2019-11-19</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1urlopen"><span class="toc-number">1.</span> <span class="toc-text"> 1.urlopen</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2user-agent"><span class="toc-number">2.</span> <span class="toc-text"> 2.User-Agent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3添加更多的-header-信息"><span class="toc-number">3.</span> <span class="toc-text"> 3.添加更多的 Header 信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4数据传送"><span class="toc-number">4.</span> <span class="toc-text"> 4.数据传送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5自定义-opener"><span class="toc-number">5.</span> <span class="toc-text"> 5.⾃定义 Opener</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6proxy代理的设置"><span class="toc-number">6.</span> <span class="toc-text"> 6.Proxy（代理）的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7debug-log"><span class="toc-number">7.</span> <span class="toc-text"> 7.Debug Log</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8cookie"><span class="toc-number">8.</span> <span class="toc-text"> 8.Cookie</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-201902262135" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      urlib2库的基本使用
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2017/07/23/201902262135/" class="article-date">
+	  <time datetime="2017-07-23T09:20:34.000Z" itemprop="datePublished">2017-07-23</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/网络爬虫/">网络爬虫</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/urlib2/">urlib2</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/07/23/201902262135/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 17(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>所谓⽹⻚抓取，就是把 URL 地址中指定的⽹络资源从⽹络流中读取出来，保存到本地。 在 Python 中，我们使⽤  urllib2  这个组件来抓取⽹⻚。</p>
+</blockquote>
+<p>urllib2 是 Python2.7 ⾃带的模块(不需要下载)，<br>
+是 Python 的⼀个获取URLs(Uniform Resource Locators)的重要组件。</p>
+<p>urllib2 官⽅⽂档：<a href="https://docs.python.org/2/library/urllib2.html" target="_blank" rel="noopener">https://docs.python.org/2/library/urllib2.html</a></p>
+<p>urllib2 源码：<a href="https://hg.python.org/cpython/file/2.7/Lib/urllib2.py" target="_blank" rel="noopener">https://hg.python.org/cpython/file/2.7/Lib/urllib2.py</a></p>
+<p>urllib2 在 python3.x 中被改为  urllib.request</p>
+<h2 id="1urlopen"><a class="markdownIt-Anchor" href="#1urlopen"></a> 1.urlopen</h2>
+<p><strong>我们先来段代码：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urllib2_baidu.py</span></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line">response = urllib2.urlopen(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line">html = response.read()</span><br><span class="line"><span class="keyword">print</span> html</span><br></pre></td></tr></table></figure>
+<p>So Easy! 最简单的获取⼀个 url 的⻚⾯代码居然只需要 4⾏！ 执⾏写的<br>
+<strong>python 代码:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Power@PowerMac ~$: python urllib2_baidu.py</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>会看到以下结果：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span><span class="comment">&lt;!--STATUS OK--&gt;</span><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"conten</span></span></span><br><span class="line"><span class="tag"><span class="string">t-type"</span> <span class="attr">content</span>=<span class="string">"text/html;charset=utf-8"</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Co</span></span></span><br><span class="line"><span class="tag"><span class="string">mpatible"</span> <span class="attr">content</span>=<span class="string">"IE=Edge"</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"always"</span> <span class="attr">name</span>=<span class="string">"referrer"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"theme-color"</span> <span class="attr">content</span>=<span class="string">"#2932e1"</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"shortcut ico</span></span></span><br><span class="line"><span class="tag"><span class="string">n"</span> <span class="attr">href</span>=<span class="string">"/favicon.ico"</span> <span class="attr">type</span>=<span class="string">"image/x-icon"</span> /&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"search"</span> <span class="attr">typ</span></span></span><br><span class="line"><span class="tag"><span class="attr">e</span>=<span class="string">"application/opensearchdescription+xml"</span> <span class="attr">href</span>=<span class="string">"/content-search.xm</span></span></span><br><span class="line"><span class="tag"><span class="string">l"</span> <span class="attr">title</span>=<span class="string">"百度搜索"</span> /&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">sizes</span>=<span class="string">"any"</span> <span class="attr">mask</span> <span class="attr">href</span>=<span class="string">"//www.</span></span></span><br><span class="line"><span class="tag"><span class="string">b</span></span></span><br><span class="line"><span class="tag"><span class="string">aidu.com/img/baidu.svg"</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefetch"</span> <span class="attr">href</span>=<span class="string">"//s1.bdstati</span></span></span><br><span class="line"><span class="tag"><span class="string">c.com"</span>/&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefetch"</span> <span class="attr">href</span>=<span class="string">"//t1.baidu.com"</span>/&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">re</span></span></span><br><span class="line"><span class="tag"><span class="attr">l</span>=<span class="string">"dns-prefetch"</span> <span class="attr">href</span>=<span class="string">"//t2.baidu.com"</span>/&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefetch"</span> <span class="attr">hr</span></span></span><br><span class="line"><span class="tag"><span class="attr">ef</span>=<span class="string">"//t3.baidu.com"</span>/&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefetch"</span> <span class="attr">href</span>=<span class="string">"//t10.baidu.co</span></span></span><br><span class="line"><span class="tag"><span class="string">m"</span>/&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefetch"</span> <span class="attr">href</span>=<span class="string">"//t11.baidu.com"</span>/&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dn</span></span></span><br><span class="line"><span class="tag"><span class="string">s-prefetch"</span> <span class="attr">href</span>=<span class="string">"//t12.baidu.com"</span>/&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefetch"</span> <span class="attr">hre</span></span></span><br><span class="line"><span class="tag"><span class="attr">f</span>=<span class="string">"//b1.bdstatic.com"</span>/&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>百度⼀下，你就知道<span class="tag">&lt;/<span class="name">title</span>&gt;</span> ...</span><br></pre></td></tr></table></figure>
+<p>​	实际上，如果我们在浏览器上打开百度主⻚， 右键选择“查看源代码”，你会发现，跟我们刚才打印出来的是⼀模⼀样。也就是说，上⾯的4⾏代码就已经帮我们把百度的⾸⻚的全部代码爬了下来。<br></p>
+<p><strong>分析代码：</strong>  我们来分析⼀下上⾯的这 4⾏代码：<br><br></p>
+<p><strong>1.第⼀⾏：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib2</span><br></pre></td></tr></table></figure>
+<p>就是将 urllib2 组建引⼊进来，供给我们使⽤。<br><br></p>
+<p><strong>2.第⼆⾏</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = urllib2.urlopen(<span class="string">"http://www.baidu.com"</span>)</span><br></pre></td></tr></table></figure>
+<p>然后我们调⽤的是 urllib2 库⾥⾯的 urlopen ⽅法，传⼊的 url⽹址是百度⾸⻚，<br>
+urlopen()⽅法⼀般接受三个参数：urlopen(url, data=None, timeout=<object object>)</object></p>
+<p>第⼀个参数 URL 是必须要传送的，可以传⼊⼀个字符串类型的url 地址，同时打开这个 url 并返回⼀个像⽂件对象⼀样的对象。</p>
+<p>第⼆个参数是 data 是经过编码的 post 数据（⼀般使⽤urllib.urlencode()来编码，我们后⾯会说到），默认为空None；第三个参数是 timeout 是可选的超时期（以秒为单位），供所有阻塞操作内部使⽤。默认为 60s，也可以直接设置  timeout=10<br><br></p>
+<p><strong>3.第三⾏</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html = response.read()</span><br></pre></td></tr></table></figure>
+<p>urlopen()返回的⽂件对象，除了⽀持⽂件⽅法外，还⽀持下⾯的这 些常⽤的⽅法：</p>
+<ul>
+<li>
+<p>response.getcode() 返回整数形式的 HTTP 响应代码，⽐如成功返回 200,未找到⽂件时返回 404</p>
+</li>
+<li>
+<p>response.geturl() 返回所返回的数据的实际 url，但是会考虑发⽣的重定向问题</p>
+</li>
+<li>
+<p><a href="http://response.info" target="_blank" rel="noopener">response.info</a>() 返回映射对象，该对象带有与 url 关联的信息，对 HTTP 来说，</p>
+</li>
+<li>
+<p>返回的服务器响应包含 HTTP 报头<br><br></p>
+</li>
+</ul>
+<p><strong>4.第四⾏</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> html</span><br></pre></td></tr></table></figure>
+<p>最后就是将字符串打出来，显示到终端上。</p>
+<p>⼀个基本的 url 请求对应的 python 代码真的⾮常简单。<br><br></p>
+<p><strong>Request</strong></p>
+<p>我们编辑 urllib2_test2.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urllib2_request.py</span></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line">request = urllib2.Request(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line">response = urllib2.urlopen(request)</span><br><span class="line">html = response.read()</span><br><span class="line"><span class="keyword">print</span> html</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<p><strong>运⾏结果是完全⼀样的：</strong></p>
+<p>在我们第⼀个例⼦⾥，urlopen()的 url 参数就是⼀个 url 地址；但是如果需要执⾏更复杂的操作，⽐如增加 HTTP 报头，可以创建⼀个Request 实例来作为 urlopen()的 url 参数，⽽url 地址则作为 Request 实例 的参数。</p>
+<br>
+<p><img src="https://img.vim-cn.com/1f/b4a4c0d75352a3d18ab8f19e9292856e8ba281.jpg" alt></p>
+<p>新建 Request 实例，url 为 url 字符串，data 是伴随 url 提交的数据（⽐如要 post 的数据），headers 是⼀个字典，包含了可表示 HTTP 报头的键值对,注意，data 请求为空时，默认 HTTP 请求为&quot;GET&quot;，提供 data 参数时，HTTP 请求将从&quot;GET&quot;改为‘POST’。<br><br><br></p>
+<h2 id="2user-agent"><a class="markdownIt-Anchor" href="#2user-agent"></a> 2.User-Agent</h2>
+<p>但是这样直接⽤python的urllib2给⼀个⽹站发送请求的话，确实略有些唐突了，就好⽐，⼈家每家都有⻔，你以⼀个路⼈的身份直接闯进去显然不是很礼貌。所以有⼀些站点不喜欢被程序（⾮⼈为访问）访问，有可能会拒绝你的访问请求。</p>
+<p><img src="https://img.vim-cn.com/2a/b1d62c7ac7c1ca9854eb52bc3d78424282b560.jpg" alt></p>
+<p>​			但是如果我们⽤⼀个合法的身份去请求别⼈⽹站，显然⼈家就是欢迎的。</p>
+<p><img src="https://img.vim-cn.com/f5/890657b3e27ea8119725682e7bc6260a56a5dd.jpg" alt></p>
+<p><br><br>所以我们就应该给我们的这个代码加上⼀个身份，就是所谓的  User-Agent  头。</p>
+<p>User-Agent？显然如果你不是学习前端专业的，这个东⻄确实对于后端开发⼯程师是⼀个头疼的东⻄，<br>
+不过不要紧，不是我们的东⻄我们只作为了解即可。</p>
+<p>我们只需要知道，⽤ 不同的浏览器 在发送请求的时候，会有不同的 UserAgent 头。</p>
+<p>浏览器 就是互联⽹世界上 被允许的身份 。 那么如果你不想你的爬⾍代码成为⼀个路⼈，你需要伪装成⼀个被 公认的浏览器 。伪装的办法就是给⾃⼰的请求加上⼀个对应的 User-Agent 头。</p>
+<br> 
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#urllib2_useragent.py</span></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line">url = <span class="string">"http://www.baidu.com"</span></span><br><span class="line"><span class="comment">#IE 9.0 的 User-Agent</span></span><br><span class="line">header = &#123;<span class="string">"User-Agent"</span> : <span class="string">"Mozilla/5.0 (compatible; MSIE 9.0; Window</span></span><br><span class="line"><span class="string">s NT 6.1; Trident/5.0;"</span>&#125;</span><br><span class="line">request = urllib2.Request(url, headers = header)</span><br><span class="line">response = urllib2.urlopen(req)</span><br><span class="line">html = response.read()</span><br><span class="line"><span class="keyword">print</span> html</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<h2 id="3添加更多的-header-信息"><a class="markdownIt-Anchor" href="#3添加更多的-header-信息"></a> 3.<strong>添加更多的 Header 信息</strong></h2>
+<ul>
+<li>
+<p>在 HTTP Request 中加⼊特定的 Header，来构造⼀个完整的 HTTP 请求消息。</p>
+</li>
+<li>
+<p>可以通过调⽤  Request.add_header()  添加/修改⼀个特定的 header</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urllib2_headers.py</span></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line">url = <span class="string">"http://www.baidu.com"</span></span><br><span class="line"><span class="comment">#IE 9.0 的 User-Agent</span></span><br><span class="line">header = &#123;<span class="string">"User-Agent"</span> : <span class="string">"Mozilla/5.0 (compatible; MSIE 9.0; Window</span></span><br><span class="line"><span class="string">s NT 6.1; Trident/5.0;"</span>&#125;</span><br><span class="line">request = urllib2.Request(url, headers = header)</span><br><span class="line"><span class="comment">#也可以通过调⽤Request.add_header() 添加/修改⼀个特定的 header</span></span><br><span class="line">request.add_header(<span class="string">"Connection"</span>, <span class="string">"keep-alive"</span>)</span><br><span class="line"><span class="comment"># 也可以通过调⽤Request.get_header()来查看 header 信息</span></span><br><span class="line"><span class="comment"># request.get_header(header_name="Connection")</span></span><br><span class="line">response = urllib2.urlopen(req)</span><br><span class="line"><span class="keyword">print</span> response.code  <span class="comment">#可以查看响应状态码</span></span><br><span class="line">html = response.read()</span><br><span class="line"><span class="keyword">print</span> html</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<p><strong>headers 的⼀些属性，需要特别注意⼀下：</strong></p>
+<ul>
+<li>
+<p>User-Agent : 有些服务器或 Proxy 会通过该值来判断是否是浏览器发出的请求;</p>
+</li>
+<li>
+<p>Content-Type : ⽤来确定 HTTP Body 中的内容该怎样解析，</p>
+<p>服务 器会检查该值，设置错误会导致服务器拒绝服务</p>
+</li>
+<li>
+<p>application/xml ： 在 XML RPC 调⽤时使⽤</p>
+</li>
+<li>
+<p>application/json ： 在 JSON RPC 调⽤时使⽤</p>
+</li>
+<li>
+<p>application/x-www-form-urlencoded ： 浏览器提交 Web 表单时使⽤</p>
+</li>
+</ul>
+<p><br><br></p>
+<h2 id="4数据传送"><a class="markdownIt-Anchor" href="#4数据传送"></a> 4.数据传送</h2>
+<p>上⾯演示的都是最基本的⽹⻚抓取，有时候我们也希望发送⼀些数据到URL，</p>
+<p>⽐如账号密码、表单数据等等，这样也能得到相应的响应。</p>
+<p><strong>urllib2 默认只⽀持 HTTP 的  GET  和  POST  ⽅法</strong></p>
+<p><strong>Get⽅式</strong></p>
+<p>GET 请求⼀般⽤于我们向服务器获取数据，⽐如说，我们⽤百度搜索  老男孩</p>
+<p><a href="https://www.baidu.com/s?wd=" target="_blank" rel="noopener">https://www.baidu.com/s?wd=</a> <a href="https://www.baidu.com/s?wd=" target="_blank" rel="noopener">老男孩</a></p>
+<p><img src="https://img.vim-cn.com/93/bf05cb6b673973e0ea81ae8baa55884aee76cf.jpg" alt></p>
+<p>在其中我们可以看到在  <a href="http://www.baidu.com/s" target="_blank" rel="noopener">http://www.baidu.com/s</a>?  之后出现⼀个⻓⻓的字符串，其中就包含我们要查询的关键词。通过 Fiddler 观察，发现 URL 的QueryString 查询字符串的键是  wd  ，于是我们可以尝试⽤默认的 Get⽅式来 发送请求。</p>
+<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urllib2_get.py</span></span><br><span class="line"><span class="keyword">import</span> urllib  <span class="comment">#负责 url 编码处理</span></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line">url = <span class="string">"http://www.baidu.com/s"</span></span><br><span class="line">word = &#123;<span class="string">"wd"</span>:<span class="string">"老男孩"</span>&#125;</span><br><span class="line">word = urllib.urlencode(word) <span class="comment">#转换成 url 编码格式（字符串）</span></span><br><span class="line">newurl = url + <span class="string">"?"</span> + word  <span class="comment"># url⾸个分隔符就是 ?</span></span><br><span class="line">headers=&#123; <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; WOW64) Apple</span></span><br><span class="line"><span class="string">WebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.3</span></span><br><span class="line"><span class="string">6"</span>&#125;</span><br><span class="line">request = urllib2.Request(newurl, headers=headers)</span><br><span class="line">response = urllib2.urlopen(request)</span><br><span class="line"><span class="keyword">print</span> response.read()</span><br></pre></td></tr></table></figure>
+<p><strong>⼀般 HTTP 请求提交 HTML 表单数据，word 需要编码成 URL 编码格式，然后 做为参数传到 Request 对象。</strong><br>
+<strong>urllib 和 urllib2 都是接受 URL 请求的相关模块，但是提供了不同的功能。</strong></p>
+<p><strong>两个最显著的不同如下：</strong></p>
+<ul>
+<li>
+<p>urllib 仅可以接受 URL，⽽ urllib2 可以接受⼀个设置了 headers 的Request 类实例。这表示我们可以伪装⾃⼰的 User Agent 字符串等。</p>
+</li>
+<li>
+<p>urllib 提供  urlencode  ⽅法⽤来 GET 查询字符串的产⽣，⽽ urllib2没有。这是为何 urllib 常和 urllib2 ⼀起使⽤的原因。</p>
+</li>
+<li>
+<p>编码⼯作使⽤urllib 的  urlencode()  函数，帮我们将  key:value  这样的键值对转换成  “key=value”  这样的字符串，解码⼯作可以使⽤urllib 的  unquote()  函数。（注意，不是 urllib2.urlencode() )</p>
+<br> 
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># IPython2 中的测试结果</span></span><br><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> urllib</span><br><span class="line">In [<span class="number">2</span>]: word = &#123;<span class="string">"wd"</span>:<span class="string">"老男孩"</span>&#125;</span><br><span class="line"><span class="comment"># 将字典按 URL 编码转换，汉字部分先转成 GBK 编码，然后把 \x 替换成 %</span></span><br><span class="line">In [<span class="number">3</span>]: urllib.urlencode(word)</span><br><span class="line">Out[<span class="number">3</span>]: <span class="string">"wd=%E4%BC%A0%E6%99%BA%E6%92%AD%E5%AE%A2"</span></span><br><span class="line"><span class="comment"># 把 % 替换成 \x，变回 GBK 编码，打印出来</span></span><br><span class="line">In [<span class="number">4</span>]: <span class="keyword">print</span> urllib.unquote(<span class="string">"wd=%E4%BC%A0%E6%99%BA%E6%92%AD%E5%AE%</span></span><br><span class="line"><span class="string">A2"</span>)</span><br><span class="line">wd=老男孩</span><br></pre></td></tr></table></figure>
+<br>
+<p>**POST⽅式：  **</p>
+<p>上⾯我们说了 Request 请求对象的⾥有 data 参数，它就是⽤在 POST⾥的，我 们要传送的数据就是这个参数 data，data 是⼀个字典，⾥⾯要匹配键值对。</p>
+<p>拿拉勾⽹站数据举例，<a href="https://www.lagou.com/" target="_blank" rel="noopener">https://www.lagou.com/</a>      在站内搜索任意关键字 。 输⼊测试数据，再通过使⽤Fiddler 观察，其中有⼀条是 POST 请求，响应⽂件是 JSON 格式⽂件，⽽向服务器发送的请求数据并不是在 url⾥，那么我们可以试着模拟这个 POST 请求。</p>
+<p><img src="https://img.vim-cn.com/4c/d96f1d31d6fcd985892e20882806290e2178c2.jpg" alt></p>
+<br>
+<p>于是，我们可以尝试⽤POST⽅式发送请求</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urllib2_post.py</span></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line">output = open(<span class="string">"lagou.json"</span>, <span class="string">"w"</span>)</span><br><span class="line">page = <span class="number">1</span></span><br><span class="line"><span class="comment"># POST 请求要传送的数据</span></span><br><span class="line">formdata = <span class="string">"first=false&amp;pn="</span> + str(page) + <span class="string">"&amp;kd=xxx"</span></span><br><span class="line">headers=&#123; <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; WOW64) Apple</span></span><br><span class="line"><span class="string">WebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.3</span></span><br><span class="line"><span class="string">6"</span>&#125;</span><br><span class="line">request = urllib2.Request(<span class="string">"http://www.lagou.com/jobs/positionAjax.j</span></span><br><span class="line"><span class="string">son?px=new&amp;needAddtionalResult=false"</span>, headers=headers)</span><br><span class="line"><span class="comment"># 通过 request.add_data() 将 data 数据传进⼊request 内</span></span><br><span class="line">request.add_data(formdata)</span><br><span class="line"><span class="comment">#print request.get_data()</span></span><br><span class="line">response = urllib2.urlopen(request)</span><br><span class="line"><span class="keyword">print</span> response.code</span><br><span class="line"><span class="comment">#print resHtml</span></span><br><span class="line">output.write(response.read())</span><br><span class="line">output.close()</span><br></pre></td></tr></table></figure>
+<br>
+<p>当然可以⽤post 的⽅式发送账号密码到登录界⾯模拟登陆，当⽹⻚采⽤JavaScript 动态技术以后，想封锁基于 HttpClient 的模拟登录就太容易了，甚⾄可以根据你的⿏标活动的特征准确地判断出是不是真⼈在操作。</p>
+<p>所以，想做通⽤的模拟登录还得选别的技术，⽐如⽤内置浏览器引擎的爬⾍(关键词：Cookie，PhantomJS，Selenium)，这个我们将在以后会学习到。</p>
+<p><strong>问题：为什么有时候 POST 也能在 URL 内看到数据？</strong></p>
+<ul>
+<li>
+<p>GET⽅式是直接以链接形式访问，链接中包含了所有的参数，服务器端⽤Request.QueryString获取变量的值。如果包含了密码的话是⼀种不安全的选择，不过你可以直观地看到⾃⼰提交了什么内容。</p>
+</li>
+<li>
+<p>POST则不会在⽹址上显示所有的参数，服务器端⽤Request.Form获取提交的数据，在 Form 提交的时候。但是 HTML 代码⾥如果不指 定 method 属性，则默认为 GET 请求，Form 中提交的数据将会附加 在 url 之后，以  ?  分开与 url 分开。</p>
+</li>
+<li>
+<p>表单数据可以作为 URL 字段（method=“get”）或者 HTTP POST（method=“post”）的⽅式来发送。⽐如在下⾯的 HTML 代码中，表单数据将因为 （method=“get”） ⽽附加到 URL 上：</p>
+</li>
+</ul>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"form_action.asp"</span> <span class="attr">method</span>=<span class="string">"get"</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>First name: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"fname"</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Last name: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"lname"</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Submit"</span> /&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<h2 id="5自定义-opener"><a class="markdownIt-Anchor" href="#5自定义-opener"></a> 5.⾃定义 Opener</h2>
+<ul>
+<li>
+<p>基本的 urlopen()函数不⽀持代理、cookie 或其他的 HTTP⾼级功能。要⽀持这些功能，</p>
+<p>必须使⽤  build_opener()  函数来创建⾃⼰的⾃定义opener 对象。</p>
+</li>
+<li>
+<p>opener 是 urllib2.OpenerDirector 的实例，我们之前⼀直都在使⽤的urlopen，它是⼀个特殊的 opener</p>
+</li>
+<li>
+<p>install_opener  将⾃定义的 opener 对象 定义为 全局 opener，表示如果之后凡是调⽤urlopen，都将使⽤这个 opener（根据⾃⼰的需求来选择）</p>
+</li>
+</ul>
+<p><br><br></p>
+<h2 id="6proxy代理的设置"><a class="markdownIt-Anchor" href="#6proxy代理的设置"></a> 6.Proxy（代理）的设置</h2>
+<p>很多⽹站会检测某⼀段时间某个 IP 的访问次数，如果访问次数过多，它会禁⽌你的访问。所以我们可以设置⼀些代理服务器，每隔⼀段时间换⼀个代理，⽹站管理员就不知道是谁在捣⻤了。</p>
+<p>urllib2 中通过 ProxyHandler 来设置使⽤代理服务器，下⾯代码说明如何实⽤⾃定义 opener 来使⽤代理：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#urllib2_proxy.py</span></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line">proxyWork = <span class="literal">True</span> <span class="comment">#定义⼀个代理开关</span></span><br><span class="line"><span class="comment"># 定义了两个代理模式，其中⼀个为不适⽤代理</span></span><br><span class="line">httpProxyHandler = urllib2.ProxyHandler(&#123;<span class="string">"http"</span> : <span class="string">"124.88.67.81:80"</span></span><br><span class="line">&#125;)</span><br><span class="line">nullProxyHandler = urllib2.ProxyHandler(&#123;&#125;)</span><br><span class="line"><span class="keyword">if</span> proxyWork: <span class="comment">#根据代理开关是否打开，使⽤不同的代理模式</span></span><br><span class="line">opener = urllib2.build_opener(httpProxyHandler)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">opener = urllib2.build_opener(nullProxyHandler)</span><br><span class="line"><span class="comment"># 如果这么写，之后的 urlopen 将使⽤这个 opener</span></span><br><span class="line"><span class="comment">#urllib2.install_opener(opener)</span></span><br><span class="line"><span class="comment">#response = urlopen("http://www.baidu.com/")</span></span><br><span class="line"><span class="comment"># 使⽤我们⾃定义的代理 opener 的 open()⽅法打开 url</span></span><br><span class="line">response = opener.open(<span class="string">"http://www.baidu.com/"</span>)</span><br><span class="line">html = response.read()</span><br><span class="line"><span class="keyword">print</span> html</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<h2 id="7debug-log"><a class="markdownIt-Anchor" href="#7debug-log"></a> 7.Debug Log</h2>
+<p>使⽤ urllib2 时，可以通过下⾯的⽅法把 HTTP 和 HTTPS 的 debug Log 打开，这样程序在执⾏的时候，会把收发包的内容在屏幕上打印出来，⽅便调试，有时可以省去抓包的⼯作 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urllib2_debuglog.py</span></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line"><span class="comment"># 打开 HTTP debug log</span></span><br><span class="line">httpHandler = urllib2.HTTPHandler(debuglevel=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 打开 HTTPS debug log</span></span><br><span class="line">httpsHandler = urllib2.HTTPSHandler(debuglevel=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 同时使⽤两种不同的 debug log 模式</span></span><br><span class="line">opener = urllib2.build_opener(httpHandler, httpsHandler)</span><br><span class="line"><span class="comment"># 使⽤install_opener ⽤来创建全局的 opener</span></span><br><span class="line">urllib2.install_opener(opener)</span><br><span class="line"><span class="comment"># urlopen() 默认使⽤之前创建的全局 opener</span></span><br><span class="line">response = urllib2.urlopen(<span class="string">"http://www.baidu.com"</span>)</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<h2 id="8cookie"><a class="markdownIt-Anchor" href="#8cookie"></a> 8.Cookie</h2>
+<p>Cookie 是指某些⽹站的 Web 服务器为了辨别⽤户身份和进⾏Session 跟踪⽽储存在⽤户浏览器上的⽂本⽂件，Cookie 可以保持登录信息到⽤户下次与服务器的会话。</p>
+<p>Cookie 由变量名和值组成，根据 Netscape 公司的规定，Cookie 格式如下：Set－Cookie: NAME=VALUE；Expires=DATE；Path=PATH；Domain=DOMAIN_NAME；</p>
+<p><strong>SECURE但是注意：</strong></p>
+<ol>
+<li>登录⼀般都会先有⼀个 HTTP GET，⽤于拉取⼀些信息及获得Cookie，然后再 HTTP POST 登录。</li>
+<li>http POST 登录的链接有可能是动态的，从 GET 返回的信息中获取。</li>
+<li>password 有些是明⽂发送，有些是加密后发送，有些甚⾄⽤动态加密的，包括了很多其他数据的加密信息，不只是密码。能通过查看JS 源码获得加密算法。</li>
+<li>⼤多数⽹站的登陆整体流程类似，可能有些细节不⼀样，所以不能<br>
+保证其他⽹站登录成功。</li>
+</ol>
+<br>
+<p><strong>cookielib 库</strong></p>
+<p>cookielib 模块的主要作⽤是提供⽤于存储 cookie 的对象，⼀般与 urllib2 模块配 合使⽤，Python 处理 cookie 是⼀般是 cookielib 和 HTTPCookieProcessor⼀ 起使⽤。</p>
+<p>该模块主要的对象有 CookieJar、FileCookieJar、MozillaCookieJar、LWPCookieJar。</p>
+<p>它们的关系：CookieJar —-派⽣—-&gt; FileCookieJar(Cookie⽂件保存) —-派⽣—–&gt; MozillaCookieJar(Firefox 浏览器 Cookie) 和 LWPCookieJar。</p>
+<br>
+<p><strong>CookieJar</strong></p>
+<ul>
+<li>管理 HTTP cookie 值、存储 HTTP 请求⽣成的 cookie、向传出的 HTTP请求添加 cookie 的对象。整个 cookie 都存储在内存中，对 CookieJar 实例进⾏垃圾回收后 cookie 也将丢失。</li>
+</ul>
+<br> 
+<p><strong>FileCookieJar (filename,delayload=None,policy=None)</strong></p>
+<ul>
+<li>创建 FileCookieJar 实例，检索 cookie 信息并将 cookie 存储到⽂件中。filename 是存储 cookie 的⽂件名。delayload 为 True 时⽀持延迟访问访问⽂件，即只有在需要时才读取⽂件或在⽂件中存储数据</li>
+</ul>
+<br>
+<p><strong>MozillaCookieJar (filename,delayload=None,policy=None)</strong></p>
+<ul>
+<li>创建与 Mozilla 浏览器 cookies.txt 兼容的 FileCookieJar 实例。</li>
+</ul>
+<br>
+<p><strong>LWPCookieJar (filename,delayload=None,policy=None)</strong></p>
+<ul>
+<li>创建与 libwww-perl 的 Set-Cookie3⽂件格式兼容的 FileCookieJar 实例。</li>
+</ul>
+<br>
+<p><strong>1）使⽤get⽅式获取 Cookie 保存到变量</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urllib2_cookielibtest1.py</span></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line"><span class="keyword">import</span> cookielib</span><br><span class="line"><span class="comment">#声明⼀个 CookieJar 对象实例来保存 cookie</span></span><br><span class="line">cookie = cookielib.CookieJar()</span><br><span class="line"><span class="comment">#利⽤urllib2 库的 HTTPCookieProcessor 对象来创建 cookie 处理器</span></span><br><span class="line">handler=urllib2.HTTPCookieProcessor(cookie)</span><br><span class="line"><span class="comment">#通过 handler 来构建 opener</span></span><br><span class="line">opener = urllib2.build_opener(handler)</span><br><span class="line"><span class="comment">#此处的 open⽅法同 urllib2 的 urlopen⽅法，也可以传⼊request</span></span><br><span class="line">response = opener.open(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line"><span class="comment"># 按标准格式存储 Cookie</span></span><br><span class="line">cookies = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> cookie:</span><br><span class="line">cookies = cookies + item.name + <span class="string">"="</span> + item.value + <span class="string">";"</span></span><br><span class="line"><span class="comment"># 舍去最后⼀位的分号</span></span><br><span class="line"><span class="keyword">print</span> cookies[:<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<p>我们使⽤以上⽅法将 cookie 保存到变量中，然后打印出了 cookie 中的值，运⾏结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BAIDUID=4327A58E63A92B73FF7A297FB3B2B4D0:FG=1;BIDUPSID=4327A58E63A9</span><br><span class="line">2B73FF7A297FB3B2B4D0;H_PS_PSSID=1429_21115_17001_21454_21409_21554_</span><br><span class="line">21398;PSTM=1480815736;BDSVRTM=0;BD_HOME=0</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>2) 访问⽹站获得 cookie，并把获得的 cookie 保存在 cookie⽂件中</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urllib2_cookielibtest2.py</span></span><br><span class="line"><span class="keyword">import</span> cookielib</span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line"><span class="comment"># 设置保存 cookie 的⽂件，同级⽬录下的 cookie.txt</span></span><br><span class="line">filename = <span class="string">'cookie.txt'</span></span><br><span class="line"><span class="comment"># 声明⼀个 LWPCookieJar(有 save 实现)对象实例来保存 cookie，之后写⼊⽂件</span></span><br><span class="line">cookie = cookielib.LWPCookieJar(filename)</span><br><span class="line"><span class="comment"># 利⽤urllib2 库的 HTTPCookieProcessor 对象来创建 cookie 处理器</span></span><br><span class="line">handler = urllib2.HTTPCookieProcessor(cookie)</span><br><span class="line"><span class="comment"># 通过 handler 来构建 opener</span></span><br><span class="line">opener = urllib2.build_opener(handler)</span><br><span class="line"><span class="comment"># 创建⼀个请求，原理同 urllib2 的 urlopen</span></span><br><span class="line">response = opener.open(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line"><span class="comment"># 保存 cookie 到⽂件，且忽略 cookie 失效限制</span></span><br><span class="line">cookie.save(ignore_discard=<span class="literal">True</span>, ignore_expires=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>3) 从⽂件中获取 cookies 并访问</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urllib2_cookielibtest2.py</span></span><br><span class="line"><span class="keyword">import</span> cookielib</span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line"><span class="comment"># 创建 LWPCookieJar(有 load 实现)实例对象</span></span><br><span class="line">cookie = cookielib.LWPCookieJar()</span><br><span class="line"><span class="comment"># 从⽂件中读取 cookie 内容到变量，忽略 cookie 的使⽤时效</span></span><br><span class="line">cookie.load(<span class="string">'cookie.txt'</span>, ignore_discard=<span class="literal">True</span>, ignore_expires=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># 创建请求的 request</span></span><br><span class="line">req = urllib2.Request(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line"><span class="comment"># 利⽤urllib2 的 build_opener⽅法创建⼀个 opener</span></span><br><span class="line">opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))</span><br><span class="line">response = opener.open(req)</span><br><span class="line"><span class="keyword">print</span> response.read()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://jianweiwen.com/2017/07/23/201902262135/" title="urlib2库的基本使用" target="_blank" rel="external">http://jianweiwen.com/2017/07/23/201902262135/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+		  
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/12/28/201812282242/" title="Robots文件中的配置说明"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2016/09/27/201609270452/" title="Resume of David Wei"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+	<span>More contact information</span>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'db6888e6acd291372964',
+    clientSecret: 'a0257997541d7ca688bd8116cf9d8834db8e801b',
+    repo: 'mycnblog.github.io',
+    owner: 'mycnblog',
+    admin: ['mycnblog'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>
