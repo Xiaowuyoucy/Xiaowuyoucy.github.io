@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://jianweiwen.com/"/>
+  <link href="https://xiaowuyoucy.github.io/"/>
   <updated>2019-12-05T11:54:56.085Z</updated>
-  <id>http://jianweiwen.com/</id>
+  <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
     <name>John Doe</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>123</title>
-    <link href="http://jianweiwen.com/2019/12/05/123/"/>
-    <id>http://jianweiwen.com/2019/12/05/123/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/12/05/123/"/>
+    <id>https://xiaowuyoucy.github.io/2019/12/05/123/</id>
     <published>2019-12-05T10:31:10.000Z</published>
     <updated>2019-12-05T11:54:56.085Z</updated>
     
@@ -39,8 +39,8 @@
   
   <entry>
     <title>Golang 指针</title>
-    <link href="http://jianweiwen.com/2019/12/05/201912050104/"/>
-    <id>http://jianweiwen.com/2019/12/05/201912050104/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/12/05/201912050104/"/>
+    <id>https://xiaowuyoucy.github.io/2019/12/05/201912050104/</id>
     <published>2019-12-04T17:05:00.000Z</published>
     <updated>2019-12-04T17:06:13.569Z</updated>
     
@@ -55,17 +55,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang指针" scheme="http://jianweiwen.com/tags/Golang%E6%8C%87%E9%92%88/"/>
+      <category term="Golang指针" scheme="https://xiaowuyoucy.github.io/tags/Golang%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://jianweiwen.com/2019/11/27/hello-world/"/>
-    <id>http://jianweiwen.com/2019/11/27/hello-world/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/27/hello-world/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/27/hello-world/</id>
     <published>2019-11-27T08:08:58.620Z</published>
     <updated>2019-11-27T08:08:58.620Z</updated>
     
@@ -85,8 +85,8 @@
   
   <entry>
     <title>Golang闭包函数</title>
-    <link href="http://jianweiwen.com/2019/11/19/201911190628/"/>
-    <id>http://jianweiwen.com/2019/11/19/201911190628/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/19/201911190628/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/19/201911190628/</id>
     <published>2019-11-18T22:28:00.000Z</published>
     <updated>2019-11-30T17:34:35.064Z</updated>
     
@@ -102,17 +102,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang闭包函数" scheme="http://jianweiwen.com/tags/Golang%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0/"/>
+      <category term="Golang闭包函数" scheme="https://xiaowuyoucy.github.io/tags/Golang%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
   <entry>
     <title>Golang匿名函数</title>
-    <link href="http://jianweiwen.com/2019/11/19/201911190625/"/>
-    <id>http://jianweiwen.com/2019/11/19/201911190625/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/19/201911190625/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/19/201911190625/</id>
     <published>2019-11-18T22:26:00.000Z</published>
     <updated>2019-11-18T22:27:43.510Z</updated>
     
@@ -130,17 +130,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang匿名函数" scheme="http://jianweiwen.com/tags/Golang%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/"/>
+      <category term="Golang匿名函数" scheme="https://xiaowuyoucy.github.io/tags/Golang%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
   <entry>
     <title>函数</title>
-    <link href="http://jianweiwen.com/2019/11/19/201911190615/"/>
-    <id>http://jianweiwen.com/2019/11/19/201911190615/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/19/201911190615/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/19/201911190615/</id>
     <published>2019-11-18T22:15:00.000Z</published>
     <updated>2019-11-18T22:23:31.611Z</updated>
     
@@ -159,17 +159,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang函数" scheme="http://jianweiwen.com/tags/Golang%E5%87%BD%E6%95%B0/"/>
+      <category term="Golang函数" scheme="https://xiaowuyoucy.github.io/tags/Golang%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
   <entry>
     <title>Golang延时执行defer</title>
-    <link href="http://jianweiwen.com/2019/11/19/201911190306/"/>
-    <id>http://jianweiwen.com/2019/11/19/201911190306/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/19/201911190306/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/19/201911190306/</id>
     <published>2019-11-18T19:09:00.000Z</published>
     <updated>2019-11-18T19:21:46.056Z</updated>
     
@@ -187,17 +187,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="延时执行defer" scheme="http://jianweiwen.com/tags/%E5%BB%B6%E6%97%B6%E6%89%A7%E8%A1%8Cdefer/"/>
+      <category term="延时执行defer" scheme="https://xiaowuyoucy.github.io/tags/%E5%BB%B6%E6%97%B6%E6%89%A7%E8%A1%8Cdefer/"/>
     
   </entry>
   
   <entry>
     <title>Golang的跳转语句（GOTO）</title>
-    <link href="http://jianweiwen.com/2019/11/19/201911190123/"/>
-    <id>http://jianweiwen.com/2019/11/19/201911190123/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/19/201911190123/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/19/201911190123/</id>
     <published>2019-11-18T17:25:00.000Z</published>
     <updated>2019-11-18T17:26:00.356Z</updated>
     
@@ -212,17 +212,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="GOTO语句" scheme="http://jianweiwen.com/tags/GOTO%E8%AF%AD%E5%8F%A5/"/>
+      <category term="GOTO语句" scheme="https://xiaowuyoucy.github.io/tags/GOTO%E8%AF%AD%E5%8F%A5/"/>
     
   </entry>
   
   <entry>
     <title>Golang流程控制</title>
-    <link href="http://jianweiwen.com/2019/11/18/201911182336/"/>
-    <id>http://jianweiwen.com/2019/11/18/201911182336/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/18/201911182336/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/18/201911182336/</id>
     <published>2019-11-18T15:37:00.000Z</published>
     <updated>2019-11-18T16:01:40.381Z</updated>
     
@@ -238,17 +238,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang流程控制" scheme="http://jianweiwen.com/tags/Golang%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/"/>
+      <category term="Golang流程控制" scheme="https://xiaowuyoucy.github.io/tags/Golang%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/"/>
     
   </entry>
   
   <entry>
     <title>Golang类型转换及移位运算</title>
-    <link href="http://jianweiwen.com/2019/11/18/201911180045/"/>
-    <id>http://jianweiwen.com/2019/11/18/201911180045/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/18/201911180045/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/18/201911180045/</id>
     <published>2019-11-17T16:46:00.000Z</published>
     <updated>2019-11-17T17:24:35.343Z</updated>
     
@@ -264,17 +264,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang类型转换及移位运算" scheme="http://jianweiwen.com/tags/Golang%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%8F%8A%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
+      <category term="Golang类型转换及移位运算" scheme="https://xiaowuyoucy.github.io/tags/Golang%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%8F%8A%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
     
   </entry>
   
   <entry>
     <title>Golang循环结构</title>
-    <link href="http://jianweiwen.com/2019/11/18/201911190001/"/>
-    <id>http://jianweiwen.com/2019/11/18/201911190001/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/18/201911190001/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/18/201911190001/</id>
     <published>2019-11-17T16:03:00.000Z</published>
     <updated>2019-11-18T19:33:59.906Z</updated>
     
@@ -289,17 +289,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang循环结构" scheme="http://jianweiwen.com/tags/Golang%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/"/>
+      <category term="Golang循环结构" scheme="https://xiaowuyoucy.github.io/tags/Golang%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>Golang程序运算</title>
-    <link href="http://jianweiwen.com/2019/11/16/201911160050/"/>
-    <id>http://jianweiwen.com/2019/11/16/201911160050/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/16/201911160050/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/16/201911160050/</id>
     <published>2019-11-15T16:51:18.000Z</published>
     <updated>2019-11-17T09:00:06.792Z</updated>
     
@@ -314,17 +314,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang程序运算" scheme="http://jianweiwen.com/tags/Golang%E7%A8%8B%E5%BA%8F%E8%BF%90%E7%AE%97/"/>
+      <category term="Golang程序运算" scheme="https://xiaowuyoucy.github.io/tags/Golang%E7%A8%8B%E5%BA%8F%E8%BF%90%E7%AE%97/"/>
     
   </entry>
   
   <entry>
     <title>Golang基础类型占位符</title>
-    <link href="http://jianweiwen.com/2019/11/16/20191116038/"/>
-    <id>http://jianweiwen.com/2019/11/16/20191116038/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/16/20191116038/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/16/20191116038/</id>
     <published>2019-11-15T16:40:18.000Z</published>
     <updated>2019-11-15T16:46:18.416Z</updated>
     
@@ -339,17 +339,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang基础类型占位符" scheme="http://jianweiwen.com/tags/Golang%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E5%8D%A0%E4%BD%8D%E7%AC%A6/"/>
+      <category term="Golang基础类型占位符" scheme="https://xiaowuyoucy.github.io/tags/Golang%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E5%8D%A0%E4%BD%8D%E7%AC%A6/"/>
     
   </entry>
   
   <entry>
     <title>Golang标准输入与输出</title>
-    <link href="http://jianweiwen.com/2019/11/15/201911152305/"/>
-    <id>http://jianweiwen.com/2019/11/15/201911152305/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/15/201911152305/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/15/201911152305/</id>
     <published>2019-11-15T15:06:01.000Z</published>
     <updated>2019-11-15T15:42:39.487Z</updated>
     
@@ -365,19 +365,19 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang标准输入与输出" scheme="http://jianweiwen.com/tags/Golang%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/"/>
+      <category term="Golang基础" scheme="https://xiaowuyoucy.github.io/tags/Golang%E5%9F%BA%E7%A1%80/"/>
     
-      <category term="Golang基础" scheme="http://jianweiwen.com/tags/Golang%E5%9F%BA%E7%A1%80/"/>
+      <category term="Golang标准输入与输出" scheme="https://xiaowuyoucy.github.io/tags/Golang%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/"/>
     
   </entry>
   
   <entry>
     <title>iota定义常量组</title>
-    <link href="http://jianweiwen.com/2019/11/15/201911152154/"/>
-    <id>http://jianweiwen.com/2019/11/15/201911152154/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/15/201911152154/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/15/201911152154/</id>
     <published>2019-11-15T13:56:00.000Z</published>
     <updated>2019-11-15T16:26:26.564Z</updated>
     
@@ -393,17 +393,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="iota定义常量组" scheme="http://jianweiwen.com/tags/iota%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F%E7%BB%84/"/>
+      <category term="iota定义常量组" scheme="https://xiaowuyoucy.github.io/tags/iota%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F%E7%BB%84/"/>
     
   </entry>
   
   <entry>
     <title>Golang</title>
-    <link href="http://jianweiwen.com/2019/11/15/201911152138/"/>
-    <id>http://jianweiwen.com/2019/11/15/201911152138/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/15/201911152138/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/15/201911152138/</id>
     <published>2019-11-15T13:38:18.000Z</published>
     <updated>2019-12-04T17:07:39.006Z</updated>
     
@@ -419,17 +419,17 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang" scheme="http://jianweiwen.com/tags/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/tags/Golang/"/>
     
   </entry>
   
   <entry>
     <title>计算机基础</title>
-    <link href="http://jianweiwen.com/2019/11/15/201910190031/"/>
-    <id>http://jianweiwen.com/2019/11/15/201910190031/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/15/201910190031/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/15/201910190031/</id>
     <published>2019-11-15T11:09:18.000Z</published>
     <updated>2019-11-17T09:02:41.207Z</updated>
     
@@ -451,17 +451,17 @@
     
     </summary>
     
-      <category term="简谈计算机" scheme="http://jianweiwen.com/categories/%E7%AE%80%E8%B0%88%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+      <category term="简谈计算机" scheme="https://xiaowuyoucy.github.io/categories/%E7%AE%80%E8%B0%88%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
     
-      <category term="计算机基础" scheme="http://jianweiwen.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+      <category term="计算机基础" scheme="https://xiaowuyoucy.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
   <entry>
     <title>Golang常量与变量表达式</title>
-    <link href="http://jianweiwen.com/2019/11/15/201911151907/"/>
-    <id>http://jianweiwen.com/2019/11/15/201911151907/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/11/15/201911151907/"/>
+    <id>https://xiaowuyoucy.github.io/2019/11/15/201911151907/</id>
     <published>2019-11-15T11:09:18.000Z</published>
     <updated>2019-11-15T16:26:29.255Z</updated>
     
@@ -477,19 +477,19 @@
     
     </summary>
     
-      <category term="Golang" scheme="http://jianweiwen.com/categories/Golang/"/>
+      <category term="Golang" scheme="https://xiaowuyoucy.github.io/categories/Golang/"/>
     
     
-      <category term="Golang基础" scheme="http://jianweiwen.com/tags/Golang%E5%9F%BA%E7%A1%80/"/>
+      <category term="Golang基础" scheme="https://xiaowuyoucy.github.io/tags/Golang%E5%9F%BA%E7%A1%80/"/>
     
-      <category term="Golang常量与变量里表达式" scheme="http://jianweiwen.com/tags/Golang%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%98%E9%87%8F%E9%87%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+      <category term="Golang常量与变量里表达式" scheme="https://xiaowuyoucy.github.io/tags/Golang%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%98%E9%87%8F%E9%87%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
     <title>人生事件纪要</title>
-    <link href="http://jianweiwen.com/2019/09/25/201909250204/"/>
-    <id>http://jianweiwen.com/2019/09/25/201909250204/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/09/25/201909250204/"/>
+    <id>https://xiaowuyoucy.github.io/2019/09/25/201909250204/</id>
     <published>2019-09-24T18:18:00.000Z</published>
     <updated>2019-10-18T11:43:45.679Z</updated>
     
@@ -509,17 +509,17 @@
     
     </summary>
     
-      <category term="关于博主" scheme="http://jianweiwen.com/categories/%E5%85%B3%E4%BA%8E%E5%8D%9A%E4%B8%BB/"/>
+      <category term="关于博主" scheme="https://xiaowuyoucy.github.io/categories/%E5%85%B3%E4%BA%8E%E5%8D%9A%E4%B8%BB/"/>
     
     
-      <category term="人生事记" scheme="http://jianweiwen.com/tags/%E4%BA%BA%E7%94%9F%E4%BA%8B%E8%AE%B0/"/>
+      <category term="人生事记" scheme="https://xiaowuyoucy.github.io/tags/%E4%BA%BA%E7%94%9F%E4%BA%8B%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title>Python运算符</title>
-    <link href="http://jianweiwen.com/2019/09/06/201609060218/"/>
-    <id>http://jianweiwen.com/2019/09/06/201609060218/</id>
+    <link href="https://xiaowuyoucy.github.io/2019/09/06/201609060218/"/>
+    <id>https://xiaowuyoucy.github.io/2019/09/06/201609060218/</id>
     <published>2019-09-05T18:20:00.000Z</published>
     <updated>2019-09-05T21:19:05.032Z</updated>
     
@@ -534,10 +534,10 @@
     
     </summary>
     
-      <category term="Python" scheme="http://jianweiwen.com/categories/Python/"/>
+      <category term="Python" scheme="https://xiaowuyoucy.github.io/categories/Python/"/>
     
     
-      <category term="Python运算符" scheme="http://jianweiwen.com/tags/Python%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+      <category term="Python运算符" scheme="https://xiaowuyoucy.github.io/tags/Python%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
     
   </entry>
   
