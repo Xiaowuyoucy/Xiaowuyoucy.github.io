@@ -1,0 +1,21 @@
+在这里打开 Git Bash Here
+
+使用 "hexo new 文章名字" 创建文章
+
+title: 文章标题
+
+categories:
+  - 文章分类
+
+tags:
+  - 文章标签
+
+toc: true 是否启用内容索引
+
+
+会自动分类
+
+
+写博客用到的图片放在模板中的\source\images中
+
+
