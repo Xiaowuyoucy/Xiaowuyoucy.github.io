@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/06/java00009%E6%96%B9%E6%B3%95%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8/</loc>
+    
+    <lastmod>2020-02-05T21:34:04.363Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/06/java00008%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</loc>
+    
+    <lastmod>2020-02-05T21:13:05.461Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/05/java00007%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/</loc>
+    
+    <lastmod>2020-02-05T13:36:13.790Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaowuyoucy.github.io/2020/02/05/%E4%BD%BF%E7%94%A8hexo-GitHub%E6%90%AD%E5%BB%BA%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD/</loc>
     
     <lastmod>2020-02-05T12:19:28.220Z</lastmod>
@@ -541,14 +562,14 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/categories/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/categories/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
