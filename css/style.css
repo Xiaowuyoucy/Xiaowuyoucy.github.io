@@ -459,17 +459,17 @@ h6 .small,
 
 h1,
 .h1 {
-  font-size: 30px;
+  font-size: 34px;
 }
 
 h2,
 .h2 {
-  font-size: 26px;
+  font-size: 28px;
 }
 
 h3,
 .h3 {
-  font-size: 22px;
+  font-size: 24px;
 }
 
 h4,
@@ -479,7 +479,7 @@ h4,
 
 h5,
 .h5 {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 h6,
@@ -5535,7 +5535,7 @@ pre,
   margin: 10px 0;
   padding: 15px 10px;
   overflow: auto;
-  font-size: 13px;
+  font-size: 18px;
   color: #4d4d4c;
   line-height: 1.5;
 }
@@ -6579,13 +6579,13 @@ body.no-sidebar .sidebar {
 
 .marked-body h1 {
   padding-bottom: 0.3em;
-  font-size: 2em;
+  font-size: 3em;
   border-bottom: 1px solid #f2f2f2;
 }
 
 .marked-body h2 {
   padding-bottom: 0.3em;
-  font-size: 1.5em;
+  font-size: 2em;
   border-bottom: 1px solid #f2f2f2;
 }
 

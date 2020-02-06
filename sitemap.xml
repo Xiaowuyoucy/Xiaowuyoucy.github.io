@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/06/java00010%E6%95%B0%E7%BB%84/</loc>
+    
+    <lastmod>2020-02-06T12:26:34.553Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaowuyoucy.github.io/2020/02/06/java00009%E6%96%B9%E6%B3%95%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2020-02-05T21:34:04.363Z</lastmod>
@@ -562,14 +569,14 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/categories/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/categories/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
