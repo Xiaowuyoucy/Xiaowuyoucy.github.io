@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-02-07T19:35:14.584Z</updated>
+  <updated>2020-02-07T20:08:12.994Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>两个引用指向同一个数组</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/08/java00014%E4%B8%A4%E4%B8%AA%E5%BC%95%E7%94%A8%E6%8C%87%E5%90%91%E5%90%8C%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/08/java00014两个引用指向同一个数组/</id>
+    <published>2020-02-07T20:05:38.000Z</published>
+    <updated>2020-02-07T20:08:12.994Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200207202603.png" alt></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package xiaochenyan.top;</span><br><span class="line"></span><br><span class="line">public class test013 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] arrayA = new int[3];</span><br><span class="line">        System.out.println(arrayA);</span><br><span class="line">        System.out.println(arrayA[0]);</span><br><span class="line">        System.out.println(arrayA[1]);</span><br><span class="line">        System.out.println(arrayA[2]);</span><br><span class="line">        System.out.println(&quot;====================&quot;);</span><br><span class="line">        arrayA[1] = 10;</span><br><span class="line">        arrayA[2] = 20;</span><br><span class="line">        System.out.println(arrayA);</span><br><span class="line">        System.out.println(arrayA[0]);</span><br><span class="line">        System.out.println(arrayA[1]);</span><br><span class="line">        System.out.println(arrayA[2]);</span><br><span class="line">        System.out.println(&quot;====================&quot;);</span><br><span class="line"></span><br><span class="line">        int[] arrayB = arrayA;</span><br><span class="line">        System.out.println(arrayB);</span><br><span class="line">        System.out.println(arrayB[0]);</span><br><span class="line">        System.out.println(arrayB[1]);</span><br><span class="line">        System.out.println(arrayB[2]);</span><br><span class="line">        System.out.println(&quot;====================&quot;);</span><br><span class="line">        arrayB[1] = 10;</span><br><span class="line">        arrayB[2] = 20;</span><br><span class="line">        System.out.println(arrayB);</span><br><span class="line">        System.out.println(arrayB[0]);</span><br><span class="line">        System.out.println(arrayB[1]);</span><br><span class="line">        System.out.println(arrayB[2]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200207202603.png&quot; alt&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>两个数组的内存图</title>
@@ -460,20 +484,6 @@
     <id>https://xiaowuyoucy.github.io/2019/12/07/个人简历/</id>
     <published>2019-12-07T10:59:46.000Z</published>
     <updated>2019-12-07T10:59:46.442Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>个人经历</title>
-    <link href="https://xiaowuyoucy.github.io/2019/12/07/%E4%B8%AA%E4%BA%BA%E7%BB%8F%E5%8E%86/"/>
-    <id>https://xiaowuyoucy.github.io/2019/12/07/个人经历/</id>
-    <published>2019-12-07T10:57:37.000Z</published>
-    <updated>2019-12-07T10:57:37.110Z</updated>
     
     <summary type="html">
     
