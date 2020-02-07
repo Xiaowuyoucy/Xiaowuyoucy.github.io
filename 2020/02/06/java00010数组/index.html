@@ -18,18 +18,18 @@
   
   
   <title>数组 | YanChen</title>
-  <meta name="description" content="数组  数组的概念 ​	数组是引用数据类型 ​			类型要统一 ​		数组的长度在运行期间不可以改变  初始化  动态初始化（指定长度） ​			数据类型[] 数组名称 = new 数据类型[数组长度] 1234567public class test010 &amp;#123;    public static void main(String[] args) &amp;#123;        int[]">
+  <meta name="description" content="数组  数组的概念 ​	数组是引用数据类型 ​			类型要统一 ​		数组的长度在运行期间不可以改变  初始化  动态初始化（指定长度） ​	数据类型[] 数组名称 = new 数据类型[数组长度] ​	使用动态初始化数组的时候,其中的元素将会自动拥有一个默认值.规则如下:  如果是整数类型,那么默认值为0; 如果是浮点类型,那么默认值为0.0; 如果是字符类型,那么默认值为’\u0000’ u">
 <meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数组">
 <meta property="og:url" content="https://xiaowuyoucy.github.io/2020/02/06/java00010数组/index.html">
 <meta property="og:site_name" content="YanChen">
-<meta property="og:description" content="数组  数组的概念 ​	数组是引用数据类型 ​			类型要统一 ​		数组的长度在运行期间不可以改变  初始化  动态初始化（指定长度） ​			数据类型[] 数组名称 = new 数据类型[数组长度] 1234567public class test010 &amp;#123;    public static void main(String[] args) &amp;#123;        int[]">
+<meta property="og:description" content="数组  数组的概念 ​	数组是引用数据类型 ​			类型要统一 ​		数组的长度在运行期间不可以改变  初始化  动态初始化（指定长度） ​	数据类型[] 数组名称 = new 数据类型[数组长度] ​	使用动态初始化数组的时候,其中的元素将会自动拥有一个默认值.规则如下:  如果是整数类型,那么默认值为0; 如果是浮点类型,那么默认值为0.0; 如果是字符类型,那么默认值为’\u0000’ u">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-06T12:26:34.553Z">
+<meta property="og:updated_time" content="2020-02-07T11:50:26.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数组">
-<meta name="twitter:description" content="数组  数组的概念 ​	数组是引用数据类型 ​			类型要统一 ​		数组的长度在运行期间不可以改变  初始化  动态初始化（指定长度） ​			数据类型[] 数组名称 = new 数据类型[数组长度] 1234567public class test010 &amp;#123;    public static void main(String[] args) &amp;#123;        int[]">
+<meta name="twitter:description" content="数组  数组的概念 ​	数组是引用数据类型 ​			类型要统一 ​		数组的长度在运行期间不可以改变  初始化  动态初始化（指定长度） ​	数据类型[] 数组名称 = new 数据类型[数组长度] ​	使用动态初始化数组的时候,其中的元素将会自动拥有一个默认值.规则如下:  如果是整数类型,那么默认值为0; 如果是浮点类型,那么默认值为0.0; 如果是字符类型,那么默认值为’\u0000’ u">
   <!-- Canonical links -->
   <link rel="canonical" href="https://xiaowuyoucy.github.io/2020/02/06/java00010数组/index.html">
   
@@ -410,7 +410,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/02/06/java00010数组/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 442(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 649(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 2(分)</span>
@@ -427,14 +427,29 @@
 ​		数组的长度在运行期间不可以改变</p>
 <h4 id="初始化"><a class="markdownIt-Anchor" href="#初始化"></a> 初始化</h4>
 <h5 id="动态初始化指定长度"><a class="markdownIt-Anchor" href="#动态初始化指定长度"></a> 动态初始化（指定长度）</h5>
-<p>​			数据类型[] 数组名称 = new 数据类型[数组长度]</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] arr1 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">int</span>[] arr2 = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​	数据类型[] 数组名称 = new 数据类型[数组长度]</p>
+<p>​	使用动态初始化数组的时候,其中的元素将会自动拥有一个默认值.规则如下:</p>
+<ol>
+<li>如果是整数类型,那么默认值为0;</li>
+<li>如果是浮点类型,那么默认值为0.0;</li>
+<li>如果是字符类型,那么默认值为’\u0000’ u代表Unicode ,0000代表十六进制数;</li>
+<li>如果是布尔类型,那么默认值为false;</li>
+<li>如果是引用类型,那么默认值为null(空常量);</li>
+</ol>
+<h5 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> 注意事项</h5>
+<p>静态初始化其实也有默认值的过程,只不过系统自动马上将默认值替换成为了大括号当中的具体数值.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] arr1 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">int</span>[] arr2 = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"></span><br><span class="line">        System.out.println(arr1[<span class="number">0</span>]);<span class="comment">//默认值为0;</span></span><br><span class="line">        System.out.println(arr1[<span class="number">1</span>]);<span class="comment">//默认值为0;</span></span><br><span class="line">        System.out.println(arr1[<span class="number">2</span>]);<span class="comment">//默认值为0;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*数组赋值*/</span></span><br><span class="line">        arr1[<span class="number">1</span>] = <span class="number">100</span>;</span><br><span class="line">        System.out.println(arr1[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="拆分格式"><a class="markdownIt-Anchor" href="#拆分格式"></a> 拆分格式</h5>
-<p>​				1.数据类型[] 数组名;</p>
-<p>​				数组名 = new 数据类型名[]{元素1,元素2,…}</p>
-<p>​				2.数组名 = new  数据类型名[长度];</p>
-<p>​</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] arr;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">10</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<h4 id="数据类型-数组名"><a class="markdownIt-Anchor" href="#数据类型-数组名"></a> 数据类型[] 数组名;</h4>
+<ol>
+<li>数组名 = new 数据类型名[]{元素1,元素2,…}</li>
+<li>数组名 = new  数据类型名[长度];</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] arr;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">10</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">        <span class="comment">//arr = new int[10];</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="静态初始化指定内容"><a class="markdownIt-Anchor" href="#静态初始化指定内容"></a> 静态初始化(指定内容)</h4>
 <p>​	数据类型[] 数组名 = new 数据类型[] {元素1,元素2,…,元素n};</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class test010 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">    </span><br><span class="line">    	int[] arr = new int[]&#123;1,2,3,4&#125;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
