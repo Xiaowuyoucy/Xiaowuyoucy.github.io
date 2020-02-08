@@ -180,7 +180,7 @@ comment:
   # https://api.douban.com/v2/movie/subject/:id 单个电影信息
   # https://api.douban.com/v2/movie/search?q={text} 电影搜索
 douban:
-  user: 72823588
+  user: #72823588
   start: 0 # 从哪一条记录开始
   count: 100 # 获取豆瓣书单数据条数
   
@@ -226,9 +226,9 @@ profile:
   social:
     links:
       github: https://github.com/xiaowuyoucy
-     # weibo: 
-     # B站 iconfont icon-bilibili-: 
-      #wechat: https://img.vim-cn.com/ec/311c3afd4fc79159779b01622e038929abdc26.jpg
+     # weibo: /
+     # B站 iconfont icon-bilibili-: /
+     # wechat: /
       #facebook: /
       # dribbble: /
       #email: mailto:admin@jianweiwen.com
