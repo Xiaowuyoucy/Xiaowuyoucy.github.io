@@ -174,7 +174,7 @@ comment:
   type: livere # 启用哪种评论系统
   disqus:  # enter disqus shortname here
   youyan: 
-    uid: *** # enter youyan uid 
+    # uid: *** # enter youyan uid 
   livere:
     uid: *** # enter livere uid
   gitment:
