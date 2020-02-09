@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-02-09T04:59:23.096Z</updated>
+  <updated>2020-02-09T06:44:49.507Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -15,6 +15,153 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>类的定义</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/09/java00027%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/09/java00027类的定义/</id>
+    <published>2020-02-09T06:37:24.000Z</published>
+    <updated>2020-02-09T06:44:49.507Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="类的定义"><a class="markdownIt-Anchor" href="#类的定义"></a> 类的定义</h1><h5 id="定义一个类有两个组成部分"><a class="markdownIt-Anchor" href="#定义一个类有两个组成部分"></a> 定义一个类,有两个组成部分:</h5><p>  <b>成员属性:</b> 事物的状态信息.</p><p>  <b>成员行为:</b> 事物的行为.</p><h5 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> 注意事项:</h5><p>  1.成员变量是直接定义在类当中的,在方法外面.<br>  2.成员方法不要写static关键字.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.banji;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">定义一个类,用模拟"学生"事物.其中有两个组成部分:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">属性(是什么):</span></span><br><span class="line"><span class="comment">    姓名</span></span><br><span class="line"><span class="comment">    年龄</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">行为(能做什么):</span></span><br><span class="line"><span class="comment">    吃饭</span></span><br><span class="line"><span class="comment">    睡觉</span></span><br><span class="line"><span class="comment">    学习</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">对应到Java的类当中:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">成员变量(属性):</span></span><br><span class="line"><span class="comment">    String name;</span></span><br><span class="line"><span class="comment">    int    age;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">成员方法(行为):</span></span><br><span class="line"><span class="comment">    public void eat()&#123;&#125;; //吃饭</span></span><br><span class="line"><span class="comment">    public void sleep()&#123;&#125;; //睡觉</span></span><br><span class="line"><span class="comment">    public void study()&#123;&#125;; //学习</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student01</span> </span>&#123;</span><br><span class="line">    <span class="comment">//属性(成员变量)</span></span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">int</span>    age;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//行为(成员方法)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"吃饭饭"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"睡觉觉"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">study</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"学习!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;类的定义&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#类的定义&quot;&gt;&lt;/a&gt; 类的定义&lt;/h1&gt;
+&lt;h5 id=&quot;定义一个类有两个组成部分&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#定义一个类有两个组成部
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>对象的创建及其使用</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/09/Java00028%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/09/Java00028对象的创建及其使用/</id>
+    <published>2020-02-09T06:28:42.000Z</published>
+    <updated>2020-02-09T06:37:01.158Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="对象的创建及其使用"><a class="markdownIt-Anchor" href="#对象的创建及其使用"></a> 对象的创建及其使用</h1><p>1.<b>导包:</b> 也就是指出需要使用的类,在什么位置.<br>  import 包名称.类名称;<br>  import xiaochenyan.top.banji;<br>对于和当前类属于同一个包的情况,可以省略导包语句不写.</p><p>2.<b>创建,格式</b><br>  类名称 对象名 = new 类名称();<br>  Student01 std = new Student01();</p><p>3.<b>使用,分为两种情况</b><br>  使用成员变量,对象名.成员变量<br>  使用成员方法,对象名.成员方法名(参数)<br>  (也就是,想用谁,就用对象名点谁)</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.banji;</span><br><span class="line"><span class="comment">//导包格式</span></span><br><span class="line"><span class="keyword">import</span> xiaochenyan.top.banji.Student01;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">1.导包: 也就是指出需要使用的类,在什么位置.</span></span><br><span class="line"><span class="comment">import 包名称.类名称;</span></span><br><span class="line"><span class="comment">import xiaochenyan.top.banji;</span></span><br><span class="line"><span class="comment">对于和当前类属于同一个包的情况,可以省略导包语句不写.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">2.创建,格式</span></span><br><span class="line"><span class="comment">类名称 对象名 = new 类名称();</span></span><br><span class="line"><span class="comment">Student01 std = new Student01();</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">3.使用,分为两种情况</span></span><br><span class="line"><span class="comment">使用成员变量,对象名.成员变量</span></span><br><span class="line"><span class="comment">使用成员方法,对象名.成员方法名(参数)</span></span><br><span class="line"><span class="comment">(也就是,想用谁,就用对象名点谁)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test001</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建对象格式</span></span><br><span class="line">        Student01 std = <span class="keyword">new</span> Student01();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用成员变量格式</span></span><br><span class="line">        System.out.println(std.age);</span><br><span class="line">        System.out.println(std.name);</span><br><span class="line">        <span class="comment">//使用成员方法格式</span></span><br><span class="line">        std.eat();</span><br><span class="line">        std.sleep();</span><br><span class="line">        std.study();</span><br><span class="line">        System.out.println(<span class="string">"==========================="</span>);</span><br><span class="line"></span><br><span class="line">        std.name = <span class="string">"金毛狮王"</span>;</span><br><span class="line">        std.age = <span class="number">52</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用成员变量格式</span></span><br><span class="line">        System.out.println(std.age);</span><br><span class="line">        System.out.println(std.name);</span><br><span class="line">        <span class="comment">//使用成员方法格式</span></span><br><span class="line">        std.eat();</span><br><span class="line">        std.sleep();</span><br><span class="line">        std.study();</span><br><span class="line">        System.out.println(<span class="string">"==========================="</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;对象的创建及其使用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#对象的创建及其使用&quot;&gt;&lt;/a&gt; 对象的创建及其使用&lt;/h1&gt;
+&lt;p&gt;1.&lt;b&gt;导包:&lt;/b&gt; 也就是指出需要使用的类,在什么位置.&lt;br&gt;
+  import 包名称.类名
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>类的定义</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/09/java00026%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/09/java00026类的定义/</id>
+    <published>2020-02-09T05:52:12.000Z</published>
+    <updated>2020-02-09T06:04:59.484Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="类的定义"><a class="markdownIt-Anchor" href="#类的定义"></a> 类的定义</h1><h3 id="事物与类的对比"><a class="markdownIt-Anchor" href="#事物与类的对比"></a> 事物与类的对比</h3><p>现实世界的一类事物:</p><p>  <b>属性:</b> 事物的状态信息</p><p> <b> 行为:</b> 事物能够做什么</p><p>java中用class描述事物也是如此:</p><p><b>  成员变量:</b> 对应事物的<b>属性</b></p><p><b>  成员方法: </b>对应事物的<b>行为</b></p><h3 id="类的定义格式"><a class="markdownIt-Anchor" href="#类的定义格式"></a> 类的定义格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassName</span></span>&#123;</span><br><span class="line"><span class="comment">//成员变量</span></span><br><span class="line"><span class="comment">//成员方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><b>定义类</b>: 就是定义类的成员,包括<b>成员变量</b>和<b>成员方法</b>.</li><li><b>成员变量</b>: 和以前定义变量几乎一样的,只不过位置发生了改变.<b>在类中,在方法外</b>.</li><li><b>成员方法</b>: 和以前定义方法几乎是一样的.只不过<b>把static去掉</b>.</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;类的定义&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#类的定义&quot;&gt;&lt;/a&gt; 类的定义&lt;/h1&gt;
+&lt;h3 id=&quot;事物与类的对比&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#事物与类的对比&quot;&gt;&lt;/a&gt; 事物
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>类和对象的关系</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/09/java00025%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%B3%E7%B3%BB/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/09/java00025类和对象的关系/</id>
+    <published>2020-02-09T05:47:30.000Z</published>
+    <updated>2020-02-09T05:50:15.205Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="类和对象"><a class="markdownIt-Anchor" href="#类和对象"></a> 类和对象</h1><p><img src="/images/javawz/aa1581227347621.png" alt="1581227347621"></p><p><img src="/images/javawz/aa1581227368817.png" alt="1581227368817"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;类和对象&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#类和对象&quot;&gt;&lt;/a&gt; 类和对象&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/images/javawz/aa1581227347621.png&quot; alt=&quot;1581227347621&quot;&gt;
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>面向对象思想的举例</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/09/java00024%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E7%9A%84%E4%B8%BE%E4%BE%8B/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/09/java00024面向对象思想的举例/</id>
+    <published>2020-02-09T05:44:02.000Z</published>
+    <updated>2020-02-09T05:46:38.927Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="举例"><a class="markdownIt-Anchor" href="#举例"></a> 举例</h1><p><img src="/images/javawz/aa1581227107719.png" alt="1581227107719"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;举例&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#举例&quot;&gt;&lt;/a&gt; 举例&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/images/javawz/aa1581227107719.png&quot; alt=&quot;1581227107719&quot;&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>面向对象思想的概述</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/09/java00023%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E7%9A%84%E6%A6%82%E8%BF%B0/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/09/java00023面向对象思想的概述/</id>
+    <published>2020-02-09T05:29:23.000Z</published>
+    <updated>2020-02-09T05:41:57.338Z</updated>
+    
+    <content type="html"><![CDATA[<p>面向过程: 当需要实现一个功能的时候,每一个具体的步骤都要亲力亲为,详细处理每一个细节.</p><p>面向对象: 当需要实现一个功能的时候,不关心具体的步骤,而是找一个已经具有该功能的人,来帮我做事儿.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.banji;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = &#123;<span class="number">1</span>,<span class="number">23</span>,<span class="number">4</span>,<span class="number">15</span>,<span class="number">51</span>,<span class="number">2</span>,<span class="number">52</span>,<span class="number">23</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//要求打印格式为[123,,123,41,123,]</span></span><br><span class="line">        <span class="comment">//使用面向过程,每一个步骤细节都要亲力亲为</span></span><br><span class="line">        System.out.print(<span class="string">"["</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; array.length;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i == array.length - <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                System.out.println(array[i] + <span class="string">"]"</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.print(array[i] + <span class="string">", "</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"======================"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用面向对象</span></span><br><span class="line">        <span class="comment">//找一个JDK给我们提供好的Arrays类</span></span><br><span class="line">        <span class="comment">//其中有一个toString方法,直接就能把数组变成想要的格式字符串</span></span><br><span class="line">        System.out.println(Arrays.toString(array));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;面向过程: 当需要实现一个功能的时候,每一个具体的步骤都要亲力亲为,详细处理每一个细节.&lt;/p&gt;
+&lt;p&gt;面向对象: 当需要实现一个功能的时候,不关心具体的步骤,而是找一个已经具有该功能的人,来帮我做事儿.&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>数组作为方法的返回值返回</title>
@@ -111,30 +258,6 @@
   </entry>
   
   <entry>
-    <title>获取数组长度</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/08/java00017%E8%8E%B7%E5%8F%96%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/08/java00017获取数组长度/</id>
-    <published>2020-02-08T07:13:31.000Z</published>
-    <updated>2020-02-08T07:16:52.078Z</updated>
-    
-    <content type="html"><![CDATA[<h5 id="如何获取数组的长度格式"><a class="markdownIt-Anchor" href="#如何获取数组的长度格式"></a> 如何获取数组的长度,格式:</h5><h5 id="span-stylecolorred数组名称lengthspan"><a class="markdownIt-Anchor" href="#span-stylecolorred数组名称lengthspan"></a> <span style="color:red;">数组名称.length</span></h5><h5 id="这将会得到一个int数字代表数组的长度"><a class="markdownIt-Anchor" href="#这将会得到一个int数字代表数组的长度"></a> 这将会得到一个int数字,代表数组的长度.</h5><h5 id="数组一旦创建程序运行期间长度不可发生改变"><a class="markdownIt-Anchor" href="#数组一旦创建程序运行期间长度不可发生改变"></a> 数组一旦创建,程序运行期间,长度不可发生改变.</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">如何获取数组的长度,格式:</span></span><br><span class="line"><span class="comment">数组名称.length</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">这将会得到一个int数字,代表数组的长度.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">数组一旦创建,程序运行期间,长度不可发生改变.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test016</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arrayA = &#123;<span class="number">12</span>,<span class="number">12</span>,<span class="number">324</span>,<span class="number">5</span>,<span class="number">15</span>,<span class="number">12</span>,<span class="number">535</span>,<span class="number">13</span>&#125;;</span><br><span class="line">        <span class="comment">//获取数组arrayA的长度</span></span><br><span class="line">        System.out.println(<span class="string">"arrayA数组的长度:"</span> + arrayA.length);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] arrayB = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">        <span class="comment">//获取数组arrayB的长度</span></span><br><span class="line">        System.out.println(<span class="string">"arrayB数组的长度:"</span> + arrayB.length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h5 id=&quot;如何获取数组的长度格式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#如何获取数组的长度格式&quot;&gt;&lt;/a&gt; 如何获取数组的长度,格式:&lt;/h5&gt;
-&lt;h5 id=&quot;span-stylecolorred数组名称lengthspan&quot;&gt;&lt;a c
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>数组元素反转</title>
     <link href="https://xiaowuyoucy.github.io/2020/02/08/java00018%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E5%8F%8D%E8%BD%AC/"/>
     <id>https://xiaowuyoucy.github.io/2020/02/08/java00018数组元素反转/</id>
@@ -149,6 +272,30 @@
       
         &lt;p&gt;&lt;img src=&quot;/images/javawz/aa1581152650601.png&quot; alt=&quot;1581152650601&quot;&gt;&lt;/p&gt;
 &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>获取数组长度</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/08/java00017%E8%8E%B7%E5%8F%96%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/08/java00017获取数组长度/</id>
+    <published>2020-02-08T07:13:31.000Z</published>
+    <updated>2020-02-08T07:16:52.078Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="如何获取数组的长度格式"><a class="markdownIt-Anchor" href="#如何获取数组的长度格式"></a> 如何获取数组的长度,格式:</h5><h5 id="span-stylecolorred数组名称lengthspan"><a class="markdownIt-Anchor" href="#span-stylecolorred数组名称lengthspan"></a> <span style="color:red;">数组名称.length</span></h5><h5 id="这将会得到一个int数字代表数组的长度"><a class="markdownIt-Anchor" href="#这将会得到一个int数字代表数组的长度"></a> 这将会得到一个int数字,代表数组的长度.</h5><h5 id="数组一旦创建程序运行期间长度不可发生改变"><a class="markdownIt-Anchor" href="#数组一旦创建程序运行期间长度不可发生改变"></a> 数组一旦创建,程序运行期间,长度不可发生改变.</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">如何获取数组的长度,格式:</span></span><br><span class="line"><span class="comment">数组名称.length</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">这将会得到一个int数字,代表数组的长度.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">数组一旦创建,程序运行期间,长度不可发生改变.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test016</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arrayA = &#123;<span class="number">12</span>,<span class="number">12</span>,<span class="number">324</span>,<span class="number">5</span>,<span class="number">15</span>,<span class="number">12</span>,<span class="number">535</span>,<span class="number">13</span>&#125;;</span><br><span class="line">        <span class="comment">//获取数组arrayA的长度</span></span><br><span class="line">        System.out.println(<span class="string">"arrayA数组的长度:"</span> + arrayA.length);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] arrayB = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">        <span class="comment">//获取数组arrayB的长度</span></span><br><span class="line">        System.out.println(<span class="string">"arrayB数组的长度:"</span> + arrayB.length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h5 id=&quot;如何获取数组的长度格式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#如何获取数组的长度格式&quot;&gt;&lt;/a&gt; 如何获取数组的长度,格式:&lt;/h5&gt;
+&lt;h5 id=&quot;span-stylecolorred数组名称lengthspan&quot;&gt;&lt;a c
       
     
     </summary>
@@ -340,153 +487,6 @@
         &lt;h3 id=&quot;方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#方法&quot;&gt;&lt;/a&gt; 方法&lt;/h3&gt;
 &lt;h4 id=&quot;方法定义&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#方法定义&quot;&gt;&lt;/a&gt; 方法定义&lt;/h4&gt;
 &lt;p&gt;​
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>集成开发环境</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/06/java00008%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/06/java00008集成开发环境/</id>
-    <published>2020-02-05T20:49:36.000Z</published>
-    <updated>2020-02-05T21:13:05.461Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="集成开发软件"><a class="markdownIt-Anchor" href="#集成开发软件"></a> 集成开发软件</h3><h4 id="intellij-idea"><a class="markdownIt-Anchor" href="#intellij-idea"></a> IntelliJ IDEA</h4><p>​官方网站 <a href="http://www.jetbrains.com" target="_blank" rel="noopener">www.jetbrains.com</a><br>​先新建项目,再新建模块,然后新建包,最后新建源文件<br>​输入psvm 回车<br>​自动生成public static void main(String[] args) {<br>​会自动保存</p><h4 id="快捷键"><a class="markdownIt-Anchor" href="#快捷键"></a> 快捷键</h4><p>​alt + 4 显示输出框<br>​shift + f10  编译运行<br>​alt + enter 自动修复代码<br>​ctrl + y 删除光标所在行<br>​ctrl + d 复制光标当前行,插入光标位置下面<br>​ctrl+alt + L 格式化代码<br>​ctrl + / 单行注释,再按一次取消单行注释<br>​Ctrl+Shift +/ 多行注释<br>​alt+ins 自动生成代码<br>​alt+shift +上下箭头  移动当前代码行<br>​shift + f6 一个改全部改<br>​ctrl + 鼠标左键 转到方法定义处</p><h3 id="设置"><a class="markdownIt-Anchor" href="#设置"></a> 设置</h3><p>​设置字体<br>​file-&gt;settings…-&gt; editor-&gt; Font-&gt;size</p><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200206045408.png" alt></p><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200206045511.png" alt></p><h4 id="设置自动提示快捷键"><a class="markdownIt-Anchor" href="#设置自动提示快捷键"></a> 设置自动提示快捷键</h4><p>​file-&gt;settings…-&gt;点击齿轮-&gt;Duplicate 复制一份 -&gt;Main menu -&gt; code -&gt; completion -&gt;basic</p><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200206045408.png" alt></p><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200206045849.png" alt></p><h4 id="项目和模块的关闭和导入"><a class="markdownIt-Anchor" href="#项目和模块的关闭和导入"></a> 项目和模块的关闭和导入</h4><h5 id="关闭"><a class="markdownIt-Anchor" href="#关闭"></a> 关闭</h5><p>file -&gt;  close project</p><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200206045849.png" alt></p><h5 id="导入"><a class="markdownIt-Anchor" href="#导入"></a> 导入</h5><p>Open -&gt; 选择项目文件 有小黑块的</p><p>然后一直下一步</p><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200206050044.png" alt></p><h4 id="模块"><a class="markdownIt-Anchor" href="#模块"></a> 模块</h4><h5 id="移除"><a class="markdownIt-Anchor" href="#移除"></a> 移除</h5><p>​Remove Moudle</p><h5 id="导入-2"><a class="markdownIt-Anchor" href="#导入-2"></a> 导入</h5><p>​File -&gt; Project Structure -&gt; Import Moudle -&gt;一直选next -&gt;OK</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;集成开发软件&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#集成开发软件&quot;&gt;&lt;/a&gt; 集成开发软件&lt;/h3&gt;
-&lt;h4 id=&quot;intellij-idea&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#inte
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>基本结构</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/05/java00007%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/05/java00007基本结构/</id>
-    <published>2020-02-05T13:07:02.000Z</published>
-    <updated>2020-02-05T13:36:13.790Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="顺序结构"><a class="markdownIt-Anchor" href="#顺序结构"></a> 顺序结构</h3><p>​从上到下,顺序执行</p><hr><h3 id="选择结构"><a class="markdownIt-Anchor" href="#选择结构"></a> 选择结构</h3><h4 id="单if语句"><a class="markdownIt-Anchor" href="#单if语句"></a> 单if语句</h4><p>​if(条件表达式){语句块}</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> a = <span class="number">10</span>,b = <span class="number">11</span>;</span><br><span class="line">        <span class="keyword">if</span>(a &lt; b)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="标准if-else语句"><a class="markdownIt-Anchor" href="#标准if-else语句"></a> 标准if else语句</h4><p>​if(条件表达式){语句块;}else{语句块}</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>,b = <span class="number">11</span>;</span><br><span class="line">        <span class="keyword">if</span>(a &lt; b)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(a);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        System.out.println(b);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="多层if语句"><a class="markdownIt-Anchor" href="#多层if语句"></a> 多层if语句</h4><p>​if(条件表达式){语句块;}else if(条件表达式){语句块}else{语句块}</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">              <span class="keyword">int</span> a = <span class="number">10</span>,b = <span class="number">11</span>,c =<span class="number">12</span>;</span><br><span class="line">        <span class="keyword">if</span>(a &gt; b &amp;&amp; a &gt; c)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(a);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(b &gt; c &amp;&amp; b &gt; a)&#123;</span><br><span class="line">        System.out.println(b);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        System.out.println(c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="switch"><a class="markdownIt-Anchor" href="#switch"></a> switch</h4><p>​选择对应于的常量,并执行对应常量的语句<br>​ switch(表达式)<br>{<br>​case 常量1:<br>​  语句;<br>​  break;<br>​case 常量2:<br>​  语句;<br>​  break;<br>​default:<br>​  语句;<br>}</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">char</span> c = <span class="string">'A'</span>;</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">switch</span>(c)</span><br><span class="line">       &#123;</span><br><span class="line">       <span class="keyword">case</span> <span class="string">'A'</span>:</span><br><span class="line">  System.out.println(<span class="string">"X&gt;=90"</span>);</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="string">'B'</span>:</span><br><span class="line">  System.out.println(<span class="string">"80&gt;=X&lt;90"</span>);</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line"> System.out.println(<span class="string">"X&lt;79"</span>);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="常量类型"><a class="markdownIt-Anchor" href="#常量类型"></a> 常量类型</h5><h6 id="整型"><a class="markdownIt-Anchor" href="#整型"></a> 整型</h6><p>​byte,char,short,int</p><h6 id="引用数据类型"><a class="markdownIt-Anchor" href="#引用数据类型"></a> 引用数据类型</h6><p>​String,enum<br>​常量值不能重复</p><hr><h3 id="循环结构"><a class="markdownIt-Anchor" href="#循环结构"></a> 循环结构</h3><h4 id="for循环语句"><a class="markdownIt-Anchor" href="#for循环语句"></a> for循环语句</h4><p>for(变量初始化;条件判断;改变变量值)<br>{<br>语句块;<br>}</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="while循环语句"><a class="markdownIt-Anchor" href="#while循环语句"></a> while循环语句</h4><p>while(条件)<br>{<br>语句块;<br>}</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; <span class="number">10</span>)</span><br><span class="line">        &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">        i++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="do-while循环语句"><a class="markdownIt-Anchor" href="#do-while循环语句"></a> do while循环语句</h4><p>初始化表达式<br>do{</p><p>​语句块;</p><p>}while(条件表达式);</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">        </span><br><span class="line">        &#125;<span class="keyword">while</span>(i++ &lt; <span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="break"><a class="markdownIt-Anchor" href="#break"></a> break</h4><p>​中止循环</p><h4 id="continue"><a class="markdownIt-Anchor" href="#continue"></a> continue</h4><p>​结束本次循环</p><h4 id="死循环"><a class="markdownIt-Anchor" href="#死循环"></a> 死循环</h4><p>​java可以有死循环</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="comment">//我是死循环</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="循环嵌套"><a class="markdownIt-Anchor" href="#循环嵌套"></a> 循环嵌套</h4><p>​一个循环体嵌套着另一个循环体这就叫做循环嵌套</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                System.out.print(<span class="string">"*"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">""</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;顺序结构&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#顺序结构&quot;&gt;&lt;/a&gt; 顺序结构&lt;/h3&gt;
-&lt;p&gt;​	从上到下,顺序执行&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&quot;选择结构&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; hr
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>使用hexo+GitHub搭建的个人博客 文件备份</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/05/%E4%BD%BF%E7%94%A8hexo-GitHub%E6%90%AD%E5%BB%BA%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/05/使用hexo-GitHub搭建的个人博客-文件备份/</id>
-    <published>2020-02-05T12:10:54.000Z</published>
-    <updated>2020-02-05T12:19:28.220Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="使用hexogithub搭建的个人博客-文件备份"><a class="markdownIt-Anchor" href="#使用hexogithub搭建的个人博客-文件备份"></a> 使用hexo+GitHub搭建的个人博客 文件备份</h1><h3 id="1在github中创建-hexo-分支来存储本地-markdown-文件"><a class="markdownIt-Anchor" href="#1在github中创建-hexo-分支来存储本地-markdown-文件"></a> 1.在GitHub中创建 hexo 分支来存储本地 markdown 文件</h3><p>在本地文件根目录创建 <code>.gitignore</code> 文件，若存在修改为</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">*.log</span><br><span class="line">node_modules/</span><br><span class="line">.deploy*/</span><br><span class="line">public/</span><br><span class="line">db.json</span><br></pre></td></tr></table></figure><p>在本地文件根目录中初始化 git</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure><p>创建分支hexo</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b hexo</span><br></pre></td></tr></table></figure><p>提交到仓库，需要注意的事在提交之前要把themes目录下主题中的 <code>.git</code> 文件夹重命名或者删除，不然的话 git 会把主题当做子模块来处理。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &apos;init&apos;</span><br></pre></td></tr></table></figure><p>添加远程仓库</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:MrWangwj/MrWangwj.github.io.git</span><br></pre></td></tr></table></figure><p>push 到远程分支</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin hexo</span><br></pre></td></tr></table></figure><h3 id="2在另一台电脑上使用"><a class="markdownIt-Anchor" href="#2在另一台电脑上使用"></a> 2.在另一台电脑上使用</h3><p>首先要克隆下这个项目</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:MrWangwj/MrWangwj.github.io.git</span><br></pre></td></tr></table></figure><p>进入博客目录</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd MrWangwj.github.io.git</span><br></pre></td></tr></table></figure><p>切换到博客文件分支</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b hexo origin/hexo</span><br></pre></td></tr></table></figure><p>安装hexo</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo --save</span><br></pre></td></tr></table></figure><p>然后编辑、查看</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g    //编译</span><br><span class="line">hexo s    //浏览器查看 localhost:4000</span><br></pre></td></tr></table></figure><p>提交 git，若在提交过程中出现 <code>ERROR Deployer not found: git</code> 可执行 <code>npm install hexo-deployer-git --save</code> 后重新提交。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>在写了新 markdown 文件后提交 git</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &apos;新增博客&apos;</span><br><span class="line">git push origin hexo</span><br></pre></td></tr></table></figure><p>到此，我们以后只要写完博客发布后记得 push 一下就能实现备份了。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;使用hexogithub搭建的个人博客-文件备份&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#使用hexogithub搭建的个人博客-文件备份&quot;&gt;&lt;/a&gt; 使用hexo+GitHub搭建的个人博客 文件备份&lt;/h1&gt;
-&lt;h3 id=&quot;
-      
-    
-    </summary>
-    
-      <category term="githubHexo" scheme="https://xiaowuyoucy.github.io/categories/githubHexo/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>自动备份Hexo源文件</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/05/%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDHexo%E6%BA%90%E6%96%87%E4%BB%B6/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/05/自动备份Hexo源文件/</id>
-    <published>2020-02-05T10:16:47.000Z</published>
-    <updated>2020-02-05T11:11:10.150Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="自动备份hexo源文件"><a class="markdownIt-Anchor" href="#自动备份hexo源文件"></a> 自动备份Hexo源文件</h1><h3 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h3><p>配置一个<span style="color:red"><code>Hexo</code></span>博客往往需要作者倾注大量心血，而如果哪天电脑坏了或者换电脑导致<span style="color:red"><code>Hexo</code></span>源文件丢失的话就是一件比较杯具的事。因此本文给出了一种自动备份<span style="color:red"><code>Hexo</code></span>源文件到<span style="color:red"><code>Github</code></span>的方法，能够在执行<span style="color:red"><code>hexo deploy</code></span>命令后自动执行<span style="color:red"><code>Git</code></span>命令以推送<span style="color:red"><code>Hexo</code></span>源文件到<span style="color:red"><code>Github</code></span>仓库。</p><h4 id="原理"><a class="markdownIt-Anchor" href="#原理"></a> 原理</h4><p><span style="color:red"><code>NodeJS</code></span>的事件监听机制能够监听<span style="color:red"><code>Hexo</code></span>的事件。通过查询<a href="https://hexo.io/zh-cn/api/events.html" target="_blank" rel="noopener">Hexo文档</a>，找到了<span style="color:red"><code>Hexo</code></span>的主要事件，见下表：</p><table><thead><tr><th>事件名</th><th>描述</th></tr></thead><tbody><tr><td><code>deployBefore</code></td><td>在部署完成前发布。</td></tr><tr><td><code>deployAfter</code></td><td>在部署成功后发布。</td></tr><tr><td><code>exit</code></td><td>在<code>Hexo</code> 结束前发布。</td></tr><tr><td><code>generateBefore</code></td><td>在静态文件生成前发布。</td></tr><tr><td><code>generateAfter</code></td><td>在静态文件生成后发布。</td></tr><tr><td><code>new</code></td><td>在文章文件建立后发布。该事件返回文章参数。</td></tr><tr><td><code>processBefore</code></td><td>在处理原始文件前发布。此事件会返回一个地址，代表 Box（Box）的根目录。</td></tr><tr><td><code>processAfter</code></td><td>在原始文件处理后发布。此事件会返回一个地址，代表 Box（Box）的根目录。</td></tr><tr><td><code>ready</code></td><td>在初始化完成后发布。</td></tr></tbody></table><p>通过查询上表发现，我们可以通过监听<span style="color:red"><code>Hexo</code></span>的<span style="color:red"><code>deployAfter</code></span>事件，待部署成功后自动运行<span style="color:red"><code>Git</code></span>备份命令，从而达到自动备份的目的。</p><h3 id="实现"><a class="markdownIt-Anchor" href="#实现"></a> 实现</h3><h4 id="将span-stylecolorredhexospan目录加入span-stylecolorredgitspan仓库"><a class="markdownIt-Anchor" href="#将span-stylecolorredhexospan目录加入span-stylecolorredgitspan仓库"></a> 将<span style="color:red"><code>Hexo</code></span>目录加入<span style="color:red"><code>Git</code></span>仓库</h4><p>首先需要在<span style="color:red"><code>Github</code></span>创建一个新的<span style="color:red"><code>repository</code></span>,名字与本地<span style="color:red"><code>Hexo</code></span>文件夹同名即可。然后进入本地<span style="color:red"><code>Hexo</code></span>文件夹，按顺序执行以下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git remote add origin git@github.com:yourname/hexo.git</span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure><p>再每次执行<span style="color:red"><code>hexo generate</code></span>命令时，<span style="color:red"><code>public/、.deploy、\*.log</code></span>文件夹会重写更新，因此需要在<span style="color:red"><code>.gitignore</code></span>文件（如果没有，手动创建一个）中写入<span style="color:red"><code>public/、</code></span><span style="color:red"><code>.deploy、</code></span><span style="color:red"><code>\*.log</code></span>以忽略这几个目录，加快备份的速度。</p><p>然后再顺序执行以下命令，将文件推送到<span style="color:red"><code>Github</code></span>：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;备份hexo源码文件&quot;</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure><p>这三行命令便是手动推送本地文件到<span style="color:red"><code>Github</code></span>的命令,我们接下来要做的是让<span style="color:red"><code>NodeJS</code></span>监听到<span style="color:red"><code>Hexo</code></span>的<span style="color:red"><code>deployAfter</code></span>事件后自动执行上述命令。</p><h3 id="安装span-stylecolorredshelljsspan模块"><a class="markdownIt-Anchor" href="#安装span-stylecolorredshelljsspan模块"></a> 安装<span style="color:red"><code>shelljs</code></span>模块</h3><p>键入以下命令即可</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save shelljs</span><br></pre></td></tr></table></figure><h5 id="加入自动执行脚本"><a class="markdownIt-Anchor" href="#加入自动执行脚本"></a> 加入自动执行脚本</h5><p>在<span style="color:red"><code>Hexo</code></span>根目录的<span style="color:red"><code>scripts</code></span>文件夹（没有就自己创建一个）下新建一个<span style="color:red"><code>js</code></span>文件，文件名随意。然后加入以下代码：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'shelljs/global'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">hexo.on(<span class="string">'deployAfter'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="comment">//当deploy完成后执行备份</span></span><br><span class="line">run();</span><br><span class="line">&#125;);</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"产生了一个错误&lt;(￣3￣)&gt; !，错误详情为："</span> + e.toString());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="keyword">if</span> (!which(<span class="string">'git'</span>)) &#123;</span><br><span class="line">echo(<span class="string">'Sorry, this script requires git'</span>);</span><br><span class="line">exit(<span class="number">1</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">echo(<span class="string">"======================Auto Backup Begin==========================="</span>);</span><br><span class="line">cd(<span class="string">'path to hexo'</span>);    <span class="comment">//此处修改为Hexo根目录路径</span></span><br><span class="line"><span class="keyword">if</span> (exec(<span class="string">'git add --all'</span>).code !== <span class="number">0</span>) &#123;</span><br><span class="line">echo(<span class="string">'Error: Git add failed'</span>);</span><br><span class="line">exit(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (exec(<span class="string">'git commit -am "Form auto backup script\'s commit"'</span>).code !== <span class="number">0</span>) &#123;</span><br><span class="line">echo(<span class="string">'Error: Git commit failed'</span>);</span><br><span class="line">exit(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (exec(<span class="string">'git push origin master'</span>).code !== <span class="number">0</span>) &#123;</span><br><span class="line">echo(<span class="string">'Error: Git push failed'</span>);</span><br><span class="line">exit(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">echo(<span class="string">"==================Auto Backup Complete============================"</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>注意上述代码中第29行需要修改为自己<span style="color:red"><code>Hexo</code></span>文件夹的绝对路径。</p><h4 id="效果"><a class="markdownIt-Anchor" href="#效果"></a> 效果</h4><p>如果脚本运行成功，会得到类似以下的效果：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">======================Auto Backup Begin===========================</span><br><span class="line">cd: no such file or directory: C:/Users/17810/OneDrive/hexo</span><br><span class="line">warning: LF will be replaced by CRLF in source/_posts/自动备份Hexo源文件.md.</span><br><span class="line">The file will have its original line endings in your working directory.</span><br><span class="line">warning: LF will be replaced by CRLF in source/_posts/自动备份Hexo源文件.md.</span><br><span class="line">The file will have its original line endings in your working directory.</span><br><span class="line">[master a6cb4c7] Form auto backup script&apos;s commit</span><br><span class="line"> 1 file changed, 153 insertions(+)</span><br><span class="line">warning: LF will be replaced by CRLF in source/_posts/自动备份Hexo源文件.md.</span><br><span class="line">The file will have its original line endings in your working directory.</span><br><span class="line">To git@github.com:JacobZjw/hexo.git</span><br><span class="line">   0beaf4c..a6cb4c7  master -&gt; master</span><br><span class="line">==================Auto Backup Complete============================</span><br></pre></td></tr></table></figure><h3 id="懒癌患者的小福利"><a class="markdownIt-Anchor" href="#懒癌患者的小福利"></a> 懒癌患者的小福利</h3><p>在<span style="color:red"><code>hexo</code></span>中，我们常常使用<span style="color:red"><code>hexo new</code></span>命令来新建文章。然鹅，当我们的文章较多时，我们往往需要在成堆的文章中找到刚刚生成的文件，然后使用<span style="color:red"><code>Markdown</code></span>编辑器打开。作为一名懒癌患者怎么可能让自己如此受累。</p><p>于是，我找到了<span style="color:red"><code>Hexo</code></span>作者给出的解决办法</p><p>和上面类似，在<span style="color:red"><code>scripts</code></span>文件夹中创建一个<span style="color:red"><code>js</code></span>文件，添加以下代码：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> spawn = <span class="built_in">require</span>(<span class="string">'child_process'</span>).exec;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Hexo 2.x 用户复制这段</span></span><br><span class="line">hexo.on(<span class="string">'new'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">path</span>)</span>&#123;</span><br><span class="line">  spawn(<span class="string">'start  "markdown编辑器绝对路径.exe" '</span> + path);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Hexo 3 用户复制这段</span></span><br><span class="line">hexo.on(<span class="string">'new'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  spawn(<span class="string">'start  "markdown编辑器绝对路径.exe" '</span> + data.path);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>保存并退出脚本之后，在命令行中键入：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;auto open editor test&quot;</span><br></pre></td></tr></table></figure><p>是不是就顺利的自动打开了自动生成的md文件啦~</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;自动备份hexo源文件&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#自动备份hexo源文件&quot;&gt;&lt;/a&gt; 自动备份Hexo源文件&lt;/h1&gt;
-&lt;h3 id=&quot;前言&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#
-      
-    
-    </summary>
-    
-      <category term="githubHexo" scheme="https://xiaowuyoucy.github.io/categories/githubHexo/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>JDK9的JShell-编译器的两点优化</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/04/java00006JDK9%E7%9A%84JShell-%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%B8%A4%E7%82%B9%E4%BC%98%E5%8C%96/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/04/java00006JDK9的JShell-编译器的两点优化/</id>
-    <published>2020-02-04T00:17:40.000Z</published>
-    <updated>2020-02-04T00:36:20.957Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="jdk9的jshell"><a class="markdownIt-Anchor" href="#jdk9的jshell"></a> JDK9的JShell</h1><p>什么时候会用到 JShell 工具呢，当我们编写的代码非常少的时候，而又不愿意编写类，main方法，也不愿意去编译和运 行，这个时候可以使用JShell工具。 启动JShell工具，在DOS命令行直接输入JShell命令。</p><p>打开cmd</p><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200204082417.png" alt></p><p>​</p><p>输入jshell</p><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200204082552.png" alt></p><p>​</p><p>退出/exit</p><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200204082647.png" alt></p><h1 id="编译器的两点优化"><a class="markdownIt-Anchor" href="#编译器的两点优化"></a> 编译器的两点优化</h1><p>byte,short,char类型右侧没有超过本身范围,会自动强制转换类型<br>byte a = 12<br>常量优化<br>1 + 1常量表达式 在编译时会计算结果,而不是在运行时计算</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span> a = <span class="number">12</span> <span class="comment">//隐式的把12从int类型转换为byte类型</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;jdk9的jshell&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#jdk9的jshell&quot;&gt;&lt;/a&gt; JDK9的JShell&lt;/h1&gt;
-&lt;p&gt;什么时候会用到 JShell 工具呢，当我们编写的代码非常少的时候，而又不愿意编写类，ma
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>java方法</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/04/java00005%E6%96%B9%E6%B3%95/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/04/java00005方法/</id>
-    <published>2020-02-04T00:02:04.000Z</published>
-    <updated>2020-02-04T00:15:05.122Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h1><h4 id="定义"><a class="markdownIt-Anchor" href="#定义"></a> 定义</h4><p>​public static void 方法名称(){语句块}</p><p>​方法的定义是无序性的<br>​不能嵌套定义方法</p><h4 id="命名方法"><a class="markdownIt-Anchor" href="#命名方法"></a> 命名方法</h4><p>​小驼峰式法</p><h4 id="方法调用"><a class="markdownIt-Anchor" href="#方法调用"></a> 方法调用</h4><h5 id="格式"><a class="markdownIt-Anchor" href="#格式"></a> 格式</h5><p>​方法名称();</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class test009 &#123;</span><br><span class="line">    </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(intAdd(10,20));//方法调用</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    //方法定义</span><br><span class="line">    public static int intAdd(int a,int b)</span><br><span class="line">    &#123;</span><br><span class="line">        return a + b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#方法&quot;&gt;&lt;/a&gt; 方法&lt;/h1&gt;
-&lt;h4 id=&quot;定义&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#定义&quot;&gt;&lt;/a&gt; 定义&lt;/h4&gt;
-&lt;p&gt;​		publ
       
     
     </summary>
