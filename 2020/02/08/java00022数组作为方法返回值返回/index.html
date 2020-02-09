@@ -18,18 +18,18 @@
   
   
   <title>数组作为方法的返回值返回 | YanChen</title>
-  <meta name="description" content="一个方法可以有1个或多个参数;但是只能有0个或1个返回值,不能有个多返回值.  如果希望一个方法当中产生了多个结果数据进行返回 , 怎么办 ?  解决方案:使用一个数组作为返回值类型即可.  如何数据类型都能作为方法的参数类型,或者返回值类型.  数组作为方法的参数,传递进去的其实是数组的地址值  数组作为方法的返回值,返回的其实是数组的地址值 1234567891011121314151617">
+  <meta name="description" content="一个方法可以有1个或多个参数;但是只能有0个或1个返回值,不能有个多返回值.  如果希望一个方法当中产生了多个结果数据进行返回 , 怎么办 ?  解决方案:使用一个数组作为返回值类型即可.  任何数据类型都能作为方法的参数类型,或者返回值类型.  数组作为方法的参数,传递进去的其实是数组的地址值  数组作为方法的返回值,返回的其实是数组的地址值 1234567891011121314151617">
 <meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数组作为方法的返回值返回">
 <meta property="og:url" content="https://xiaowuyoucy.github.io/2020/02/08/java00022数组作为方法返回值返回/index.html">
 <meta property="og:site_name" content="YanChen">
-<meta property="og:description" content="一个方法可以有1个或多个参数;但是只能有0个或1个返回值,不能有个多返回值.  如果希望一个方法当中产生了多个结果数据进行返回 , 怎么办 ?  解决方案:使用一个数组作为返回值类型即可.  如何数据类型都能作为方法的参数类型,或者返回值类型.  数组作为方法的参数,传递进去的其实是数组的地址值  数组作为方法的返回值,返回的其实是数组的地址值 1234567891011121314151617">
+<meta property="og:description" content="一个方法可以有1个或多个参数;但是只能有0个或1个返回值,不能有个多返回值.  如果希望一个方法当中产生了多个结果数据进行返回 , 怎么办 ?  解决方案:使用一个数组作为返回值类型即可.  任何数据类型都能作为方法的参数类型,或者返回值类型.  数组作为方法的参数,传递进去的其实是数组的地址值  数组作为方法的返回值,返回的其实是数组的地址值 1234567891011121314151617">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-08T10:32:38.973Z">
+<meta property="og:updated_time" content="2020-02-09T04:59:23.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数组作为方法的返回值返回">
-<meta name="twitter:description" content="一个方法可以有1个或多个参数;但是只能有0个或1个返回值,不能有个多返回值.  如果希望一个方法当中产生了多个结果数据进行返回 , 怎么办 ?  解决方案:使用一个数组作为返回值类型即可.  如何数据类型都能作为方法的参数类型,或者返回值类型.  数组作为方法的参数,传递进去的其实是数组的地址值  数组作为方法的返回值,返回的其实是数组的地址值 1234567891011121314151617">
+<meta name="twitter:description" content="一个方法可以有1个或多个参数;但是只能有0个或1个返回值,不能有个多返回值.  如果希望一个方法当中产生了多个结果数据进行返回 , 怎么办 ?  解决方案:使用一个数组作为返回值类型即可.  任何数据类型都能作为方法的参数类型,或者返回值类型.  数组作为方法的参数,传递进去的其实是数组的地址值  数组作为方法的返回值,返回的其实是数组的地址值 1234567891011121314151617">
   <!-- Canonical links -->
   <link rel="canonical" href="https://xiaowuyoucy.github.io/2020/02/08/java00022数组作为方法返回值返回/index.html">
   
@@ -423,7 +423,7 @@
         <h5 id="一个方法可以有1个或多个参数但是只能有0个或1个返回值不能有个多返回值"><a class="markdownIt-Anchor" href="#一个方法可以有1个或多个参数但是只能有0个或1个返回值不能有个多返回值"></a> 一个方法可以有1个或多个参数;但是只能有0个或1个返回值,不能有个多返回值.</h5>
 <h5 id="如果希望一个方法当中产生了多个结果数据进行返回-怎么办"><a class="markdownIt-Anchor" href="#如果希望一个方法当中产生了多个结果数据进行返回-怎么办"></a> 如果希望一个方法当中产生了多个结果数据进行返回 , 怎么办 ?</h5>
 <h5 id="解决方案使用一个数组作为返回值类型即可"><a class="markdownIt-Anchor" href="#解决方案使用一个数组作为返回值类型即可"></a> 解决方案:使用一个数组作为返回值类型即可.</h5>
-<h5 id="如何数据类型都能作为方法的参数类型或者返回值类型"><a class="markdownIt-Anchor" href="#如何数据类型都能作为方法的参数类型或者返回值类型"></a> 如何数据类型都能作为方法的参数类型,或者返回值类型.</h5>
+<h5 id="任何数据类型都能作为方法的参数类型或者返回值类型"><a class="markdownIt-Anchor" href="#任何数据类型都能作为方法的参数类型或者返回值类型"></a> 任何数据类型都能作为方法的参数类型,或者返回值类型.</h5>
 <h5 id="数组作为方法的参数传递进去的其实是数组的地址值"><a class="markdownIt-Anchor" href="#数组作为方法的参数传递进去的其实是数组的地址值"></a> 数组作为方法的参数,传递进去的其实是数组的地址值</h5>
 <h5 id="数组作为方法的返回值返回的其实是数组的地址值"><a class="markdownIt-Anchor" href="#数组作为方法的返回值返回的其实是数组的地址值"></a> 数组作为方法的返回值,返回的其实是数组的地址值</h5>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test020</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = sumAndPingJunShu(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : array) &#123;</span><br><span class="line">            System.out.println(i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] sumAndPingJunShu(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> sum = a + b + c;</span><br><span class="line">        <span class="keyword">int</span> pjs = (a + b + c) / <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">int</span> cj  = a * b * c;</span><br><span class="line">        <span class="keyword">int</span>[] array = &#123;sum,pjs,cj&#125;;</span><br><span class="line">        <span class="keyword">return</span>  array;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
