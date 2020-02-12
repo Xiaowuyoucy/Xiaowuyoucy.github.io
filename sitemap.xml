@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/12/java00041Scanner%E7%9A%84%E6%A6%82%E8%BF%B0%E5%8F%8A%E4%BD%BF%E7%94%A8/</loc>
+    
+    <lastmod>2020-02-12T12:01:30.001Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaowuyoucy.github.io/2020/02/12/java00040%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E6%A0%87%E5%87%86%E7%9A%84%E7%B1%BB%E5%92%8C%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%8Esetter%E6%96%B9%E6%B3%95-getter%E6%96%B9%E6%B3%95/</loc>
     
     <lastmod>2020-02-12T00:52:06.153Z</lastmod>
@@ -779,7 +786,7 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/categories/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
@@ -793,7 +800,7 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/categories/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
