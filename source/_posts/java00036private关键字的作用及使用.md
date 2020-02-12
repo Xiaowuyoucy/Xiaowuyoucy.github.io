@@ -16,6 +16,28 @@ doc:
 
 #### 但是!超出了本类范围之外就不能再直接访问了.
 
+##### private成员变量的获取和设置方法规范格式:
+
+##### 获取:`getXxxx`开头,小驼峰式法,Xxxx代表私有的成员变量名
+
+##### 设置:`setXxxx`开头,小驼峰式法,Xxxx代表私有的成员变量名
+
+public void setXxxx(int a)
+
+{
+
+​	xxxx = a;
+
+}
+
+public int getXxxx()
+
+{
+
+return xxxx;
+
+}
+
 ```java
 
 public class Main01{
