@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-02-12T12:01:30.001Z</updated>
+  <updated>2020-02-12T14:32:41.990Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -15,6 +15,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>标签的属性</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/12/html-css00003%E6%A0%87%E7%AD%BE%E7%9A%84%E5%B1%9E%E6%80%A7/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/12/html-css00003标签的属性/</id>
+    <published>2020-02-12T14:25:03.000Z</published>
+    <updated>2020-02-12T14:32:41.990Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="标签的属性"><a class="markdownIt-Anchor" href="#标签的属性"></a> 标签的属性</h3><p>属性:</p><p>可以通过属性来设置标签如何处理标签中的内容</p><p>在<code>开始标签</code>中添加属性</p><p>属性需要写在<code>开始标签</code>中,实际上就是一个<code>名值对</code>的<code>结构</code></p><p><code>属性名 = &quot;属性值&quot;</code>,一个标签中可以同时设置多个属性,属性之间需要使用<code>空格隔开</code></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 我是注释--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--通过font标签中的color属性来改变字体颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">"red"</span>&gt;</span>第一个<span class="tag">&lt;/<span class="name">font</span>&gt;</span>网站</span><br><span class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;标签的属性&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#标签的属性&quot;&gt;&lt;/a&gt; 标签的属性&lt;/h3&gt;
+&lt;p&gt;属性:&lt;/p&gt;
+&lt;p&gt;可以通过属性来设置标签如何处理标签中的内容&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;开始标签&lt;/code&gt;中添加属性
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>HTML注释</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/12/html-css00002HTML%E6%B3%A8%E9%87%8A/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/12/html-css00002HTML注释/</id>
+    <published>2020-02-12T14:17:06.000Z</published>
+    <updated>2020-02-12T14:20:28.931Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="html注释"><a class="markdownIt-Anchor" href="#html注释"></a> HTML注释</h1><p>有时候需要对程序的说明,这时候就需要用到注释.</p><p>注释语法: <code>&lt;!-- 内容 --&gt;</code></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 我是注释--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;html注释&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#html注释&quot;&gt;&lt;/a&gt; HTML注释&lt;/h1&gt;
+&lt;p&gt;有时候需要对程序的说明,这时候就需要用到注释.&lt;/p&gt;
+&lt;p&gt;注释语法: &lt;code&gt;&amp;lt;!-- 内容 --&amp;gt;
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>HTML/CSS基础</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/12/html-css00001HTML-CSS%E5%9F%BA%E7%A1%80/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/12/html-css00001HTML-CSS基础/</id>
+    <published>2020-02-12T13:45:47.000Z</published>
+    <updated>2020-02-12T14:15:33.801Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="htmlcss基础"><a class="markdownIt-Anchor" href="#htmlcss基础"></a> HTML/CSS基础</h1><h2 id="软件架构"><a class="markdownIt-Anchor" href="#软件架构"></a> 软件架构</h2><h3 id="cs客户端服务器端"><a class="markdownIt-Anchor" href="#cs客户端服务器端"></a> <code>C/S</code>,客户端/服务器端</h3><p>  1.一般我们使用的软件都是<code>C/S</code>架构</p><p>  2.比如系统中的软件QQ,360,office等等</p><p>  3.<code>C</code>表示客户端,用户通过客户端来使用软件</p><p>  4.<code>S</code>表示服务器,服务器负责处理软件的业务逻辑</p><h4 id="特点"><a class="markdownIt-Anchor" href="#特点"></a>   特点:</h4><p>   1.软件使用前必须得安装</p><p>   2.软件更新时,服务器和客户端得同时更新</p><p>   3.<code>C/S</code>架构的软件不能跨平台使用</p><p>   4.<code>C/S</code>架构的软件客户端和服务器通信采用的是自有协议,相对来说比较安全</p><h3 id="bs浏览器服务器"><a class="markdownIt-Anchor" href="#bs浏览器服务器"></a> B/S,浏览器/服务器</h3><p>  1.<code>B/S</code>本质上也是<code>C/S</code>,只不过<code>B/S</code>架构的软件,使用浏览器作为软件客户端</p><p>  2.<code>B/S</code>架构软件通过使用浏览器访问网页的形式,来使用软件,比如:京东,淘宝,知乎等等</p><h4 id="特点-2"><a class="markdownIt-Anchor" href="#特点-2"></a>   特点:</h4><p>   1.软件不需要安装,直接使用浏览器访问指定的网址即可</p><p>   2.软件更新时,客户端不需要更新</p><p>   3.软件可以跨平台,只要系统中有浏览器,就可以使用.</p><p>   4.B/S架构的软件,客户端和服务器之间通信采用的是通用的<code>HTTP</code>协议,相对来说不安全,一般采取<code>https</code>协议</p><h2 id="w3c标准"><a class="markdownIt-Anchor" href="#w3c标准"></a> W3C标准:</h2><p>一个网页主要由三部分组成:<code>结构</code>,<code>表现</code>,<code>行为</code>.</p><p>结构:对应的是<code>html</code>  ,用于描述页面的结构</p><p>表现:对应的是<code>CSS</code>, 用于控制页面中元素的样式</p><p>行为:对应的是<code>JavaScript</code> , 用于响应用户操作</p><h2 id="html简介"><a class="markdownIt-Anchor" href="#html简介"></a> HTML简介</h2><p><code>HTML</code>(Hypertext Markup Language)</p><p><code>超文本标记语言</code></p><p>负责网页的三个要素中的<code>结构</code></p><p>HTML使用<code>标签</code>的形式来标识网页中的不同组成部分</p><p>所谓超文本指的是<code>超链接</code>,使用超链接可以让我们从一个页面跳转到另一个页面.</p><p>扩展名: <code>.html</code></p><p>标准格式:</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;htmlcss基础&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#htmlcss基础&quot;&gt;&lt;/a&gt; HTML/CSS基础&lt;/h1&gt;
+&lt;h2 id=&quot;软件架构&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#软件架
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Scanner的概述及使用</title>
@@ -416,79 +491,6 @@
       
         &lt;h1 id=&quot;类和对象&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#类和对象&quot;&gt;&lt;/a&gt; 类和对象&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&quot;/images/javawz/aa1581227347621.png&quot; alt=&quot;1581227347621&quot;&gt;
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>面向对象思想的举例</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/09/java00024%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E7%9A%84%E4%B8%BE%E4%BE%8B/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/09/java00024面向对象思想的举例/</id>
-    <published>2020-02-09T05:44:02.000Z</published>
-    <updated>2020-02-09T05:46:38.927Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="举例"><a class="markdownIt-Anchor" href="#举例"></a> 举例</h1><p><img src="/images/javawz/aa1581227107719.png" alt="1581227107719"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;举例&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#举例&quot;&gt;&lt;/a&gt; 举例&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&quot;/images/javawz/aa1581227107719.png&quot; alt=&quot;1581227107719&quot;&gt;&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>面向对象思想的概述</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/09/java00023%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E7%9A%84%E6%A6%82%E8%BF%B0/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/09/java00023面向对象思想的概述/</id>
-    <published>2020-02-09T05:29:23.000Z</published>
-    <updated>2020-02-09T05:41:57.338Z</updated>
-    
-    <content type="html"><![CDATA[<p>面向过程: 当需要实现一个功能的时候,每一个具体的步骤都要亲力亲为,详细处理每一个细节.</p><p>面向对象: 当需要实现一个功能的时候,不关心具体的步骤,而是找一个已经具有该功能的人,来帮我做事儿.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.banji;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = &#123;<span class="number">1</span>,<span class="number">23</span>,<span class="number">4</span>,<span class="number">15</span>,<span class="number">51</span>,<span class="number">2</span>,<span class="number">52</span>,<span class="number">23</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//要求打印格式为[123,,123,41,123,]</span></span><br><span class="line">        <span class="comment">//使用面向过程,每一个步骤细节都要亲力亲为</span></span><br><span class="line">        System.out.print(<span class="string">"["</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; array.length;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i == array.length - <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                System.out.println(array[i] + <span class="string">"]"</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.print(array[i] + <span class="string">", "</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"======================"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用面向对象</span></span><br><span class="line">        <span class="comment">//找一个JDK给我们提供好的Arrays类</span></span><br><span class="line">        <span class="comment">//其中有一个toString方法,直接就能把数组变成想要的格式字符串</span></span><br><span class="line">        System.out.println(Arrays.toString(array));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;面向过程: 当需要实现一个功能的时候,每一个具体的步骤都要亲力亲为,详细处理每一个细节.&lt;/p&gt;
-&lt;p&gt;面向对象: 当需要实现一个功能的时候,不关心具体的步骤,而是找一个已经具有该功能的人,来帮我做事儿.&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>数组作为方法的返回值返回</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/08/java00022%E6%95%B0%E7%BB%84%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E5%80%BC%E8%BF%94%E5%9B%9E/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/08/java00022数组作为方法返回值返回/</id>
-    <published>2020-02-08T10:20:21.000Z</published>
-    <updated>2020-02-09T04:59:23.096Z</updated>
-    
-    <content type="html"><![CDATA[<h5 id="一个方法可以有1个或多个参数但是只能有0个或1个返回值不能有个多返回值"><a class="markdownIt-Anchor" href="#一个方法可以有1个或多个参数但是只能有0个或1个返回值不能有个多返回值"></a> 一个方法可以有1个或多个参数;但是只能有0个或1个返回值,不能有个多返回值.</h5><h5 id="如果希望一个方法当中产生了多个结果数据进行返回-怎么办"><a class="markdownIt-Anchor" href="#如果希望一个方法当中产生了多个结果数据进行返回-怎么办"></a> 如果希望一个方法当中产生了多个结果数据进行返回 , 怎么办 ?</h5><h5 id="解决方案使用一个数组作为返回值类型即可"><a class="markdownIt-Anchor" href="#解决方案使用一个数组作为返回值类型即可"></a> 解决方案:使用一个数组作为返回值类型即可.</h5><h5 id="任何数据类型都能作为方法的参数类型或者返回值类型"><a class="markdownIt-Anchor" href="#任何数据类型都能作为方法的参数类型或者返回值类型"></a> 任何数据类型都能作为方法的参数类型,或者返回值类型.</h5><h5 id="数组作为方法的参数传递进去的其实是数组的地址值"><a class="markdownIt-Anchor" href="#数组作为方法的参数传递进去的其实是数组的地址值"></a> 数组作为方法的参数,传递进去的其实是数组的地址值</h5><h5 id="数组作为方法的返回值返回的其实是数组的地址值"><a class="markdownIt-Anchor" href="#数组作为方法的返回值返回的其实是数组的地址值"></a> 数组作为方法的返回值,返回的其实是数组的地址值</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test020</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = sumAndPingJunShu(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : array) &#123;</span><br><span class="line">            System.out.println(i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] sumAndPingJunShu(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> sum = a + b + c;</span><br><span class="line">        <span class="keyword">int</span> pjs = (a + b + c) / <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">int</span> cj  = a * b * c;</span><br><span class="line">        <span class="keyword">int</span>[] array = &#123;sum,pjs,cj&#125;;</span><br><span class="line">        <span class="keyword">return</span>  array;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h5 id=&quot;一个方法可以有1个或多个参数但是只能有0个或1个返回值不能有个多返回值&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#一个方法可以有1个或多个参数但是只能有0个或1个返回值不能有个多返回值&quot;&gt;&lt;/a&gt; 一个方法可以有1个或多个参数;但是
       
     
     </summary>
