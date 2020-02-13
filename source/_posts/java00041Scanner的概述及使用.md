@@ -20,6 +20,8 @@ doc:
 
 &emsp;&emsp;在`java.lang`包下的内容不需要导包,其他的包都需要import语句;
 
+&emsp;&emsp;在集成环境中输入`Scanner`按下`回车`会自动进行`导包`;
+
 ##### 2.创建
 
 &emsp;&emsp;`类名称 对象名 = new 类名称();`
