@@ -3,7 +3,7 @@ title: JavaScript基础
 date: 2020-02-13 20:57:22
 tags:
 categories: JavaScript
-doc: true
+doc:
 ---
 
 # JavaScript基础
