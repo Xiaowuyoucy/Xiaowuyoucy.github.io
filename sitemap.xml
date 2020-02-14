@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/13/JS00001JavaScript%E5%9F%BA%E7%A1%80/</loc>
+    
+    <lastmod>2020-02-14T03:17:28.009Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaowuyoucy.github.io/2020/02/14/JS00010Null%E5%92%8CUndefined/</loc>
     
-    <lastmod>2020-02-14T01:38:11.392Z</lastmod>
+    <lastmod>2020-02-14T03:17:06.020Z</lastmod>
     
   </url>
   
@@ -61,13 +68,6 @@
     <loc>https://xiaowuyoucy.github.io/2020/02/13/JS00002%E7%AC%AC%E4%B8%80%E4%B8%AAJavaScript%E7%A8%8B%E5%BA%8F/</loc>
     
     <lastmod>2020-02-13T15:00:08.214Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xiaowuyoucy.github.io/2020/02/13/JS00001JavaScript%E5%9F%BA%E7%A1%80/</loc>
-    
-    <lastmod>2020-02-13T13:16:10.473Z</lastmod>
     
   </url>
   
