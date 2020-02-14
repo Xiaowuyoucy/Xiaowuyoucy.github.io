@@ -2,7 +2,7 @@
 title: Null和Undefined
 date: 2020-02-14 09:22:09
 tags: [Null和Undefined]
-categories: JavaScript
+categories: JS
 doc: 
 ---
 

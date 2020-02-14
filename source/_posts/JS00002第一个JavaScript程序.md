@@ -2,7 +2,7 @@
 title: 第一个JavaScript程序
 date: 2020-02-13 22:43:38
 tags:
-categories: JavaScript
+categories: JS
 doc:
 ---
 

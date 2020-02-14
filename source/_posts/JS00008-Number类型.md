@@ -2,7 +2,7 @@
 title: JS_Number类型
 date: 2020-02-14 08:29:49
 tags:
-categories: JavaScript
+categories: JS
 doc:
 ---
 

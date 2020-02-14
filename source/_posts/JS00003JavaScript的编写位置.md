@@ -2,7 +2,7 @@
 title: JavaScript的编写位置
 date: 2020-02-14 00:32:04
 tags:
-categories: JavaScript
+categories: JS
 doc:
 ---
 

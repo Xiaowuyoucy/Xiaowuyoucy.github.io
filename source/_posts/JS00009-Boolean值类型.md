@@ -2,7 +2,7 @@
 title: JS_Boolean类型
 date: 2020-02-14 09:12:57
 tags:
-categories: JavaScript
+categories: JS
 doc:
 ---
 
