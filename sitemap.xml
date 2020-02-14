@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/14/test/</loc>
+    
+    <lastmod>2020-02-14T04:01:28.150Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaowuyoucy.github.io/2020/02/13/JS00001JavaScript%E5%9F%BA%E7%A1%80/</loc>
     
     <lastmod>2020-02-14T03:46:26.164Z</lastmod>
@@ -828,13 +835,6 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/tags/index.html</loc>
-    
-    <lastmod>2018-10-04T14:11:17.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://xiaowuyoucy.github.io/categories/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
@@ -843,6 +843,13 @@
   
   <url>
     <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
+    
+    <lastmod>2018-10-04T14:11:17.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/tags/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
