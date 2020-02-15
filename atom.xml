@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-02-15T02:45:34.126Z</updated>
+  <updated>2020-02-15T14:11:15.184Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -15,6 +15,178 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>字符串的构造和直接创建</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/15/java00053%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9E%84%E9%80%A0%E5%92%8C%E7%9B%B4%E6%8E%A5%E5%88%9B%E5%BB%BA/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/15/java00053字符串的构造和直接创建/</id>
+    <published>2020-02-15T14:01:21.000Z</published>
+    <updated>2020-02-15T14:11:15.184Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="字符串的构造和直接创建"><a class="markdownIt-Anchor" href="#字符串的构造和直接创建"></a> 字符串的构造和直接创建</h1><h2 id="创建字符串的常见31种方式"><a class="markdownIt-Anchor" href="#创建字符串的常见31种方式"></a> 创建字符串的常见3+1种方式.</h2><h3 id="三种构造方法"><a class="markdownIt-Anchor" href="#三种构造方法"></a> 三种构造方法:</h3><p>1.创建一个空白字符串,不含有任何内容.</p><p><code>public String();</code></p><br><p>2.根据字符数组的内容,来创建对呀的字符串.</p><p><code>public String(char[] array);</code></p><br><p>3.根据字节数组的内容,来创建对应的字符串.</p><p><code>public String(byte[] array);</code></p><br><br><h3 id="一种直接创建"><a class="markdownIt-Anchor" href="#一种直接创建"></a> 一种直接创建:</h3><p><code>String str = &quot;abc&quot;; //右边直接用双引号</code></p><br><br><h3 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意:</h3><p>直接写上双引号,就是字符串对象了</p><br><br><hr><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo06</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//直接创建</span></span><br><span class="line">        String str1 = <span class="string">"qqqqq"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建一个空白字符串</span></span><br><span class="line">        String str2 = <span class="keyword">new</span> String();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据字符数组创建</span></span><br><span class="line">        <span class="keyword">char</span>[] charv  = &#123;<span class="string">'w'</span>,<span class="string">'w'</span>,<span class="string">'w'</span>,<span class="string">'w'</span>&#125;;</span><br><span class="line">        String str3 = <span class="keyword">new</span> String(charv);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据byte数组创建</span></span><br><span class="line">        <span class="keyword">byte</span>[] bt = &#123;(<span class="keyword">int</span>)<span class="string">'a'</span>,<span class="number">65</span>,<span class="number">67</span>,<span class="number">77</span>,<span class="number">69</span>&#125;;</span><br><span class="line">        String str4 = <span class="keyword">new</span> String(bt);</span><br><span class="line"></span><br><span class="line">        System.out.println(str1);</span><br><span class="line">        System.out.println(str2);</span><br><span class="line">        System.out.println(str3);</span><br><span class="line">        System.out.println(str4);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;字符串的构造和直接创建&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字符串的构造和直接创建&quot;&gt;&lt;/a&gt; 字符串的构造和直接创建&lt;/h1&gt;
+&lt;h2 id=&quot;创建字符串的常见31种方式&quot;&gt;&lt;a class=&quot;markdownIt-Anch
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>字符串概述和特点</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/15/java00052%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A6%82%E8%BF%B0%E5%92%8C%E7%89%B9%E7%82%B9/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/15/java00052字符串概述和特点/</id>
+    <published>2020-02-15T13:53:47.000Z</published>
+    <updated>2020-02-15T14:00:14.121Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="字符串概述和特点"><a class="markdownIt-Anchor" href="#字符串概述和特点"></a> 字符串概述和特点</h1><h3 id="字符串概述"><a class="markdownIt-Anchor" href="#字符串概述"></a> 字符串概述</h3><p>java.lang.String类代表字符串</p><p>API当中说,Java程序中所有的字符串字面值(如 “abcd”) 都作为此类的实例实现.</p><p>其实就是说:程序当中所有的双引号字符串,都是String类的对象.(就算没有 nwe,也照样是.)</p><h3 id="字符串的特点"><a class="markdownIt-Anchor" href="#字符串的特点"></a> 字符串的特点</h3><p>1.字符串的内容永不可变.【重点】</p><p>2.因为字符串不可以改变，所以字符串是可以共享使用的。</p><p>3.字符串效果上相当于是char[]字符数组，但是底层原理是byte[]字节数组.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;字符串概述和特点&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字符串概述和特点&quot;&gt;&lt;/a&gt; 字符串概述和特点&lt;/h1&gt;
+&lt;h3 id=&quot;字符串概述&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字符串概述&quot;
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>用ArrayList类型做函数返回类型</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/15/java00051%E7%94%A8ArrayList%E7%B1%BB%E5%9E%8B%E5%81%9A%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/15/java00051用ArrayList类型做函数返回类型/</id>
+    <published>2020-02-15T13:44:45.000Z</published>
+    <updated>2020-02-15T13:51:01.494Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="用arraylist类型做函数返回类型"><a class="markdownIt-Anchor" href="#用arraylist类型做函数返回类型"></a> 用ArrayList类型做函数返回类型</h1><h3 id="格式"><a class="markdownIt-Anchor" href="#格式"></a> 格式:</h3><p><code>public static ArrayList&lt;引用类型&gt; 函数名(类型名 变量名 )</code></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">随机存储20位数到ArrayList中,通过函数调用筛选偶数出来,并存储在一个集合中,然后返回一个只装有偶数的集合.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo05</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; intList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Integer&gt; smallList;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">            intList.add(r.nextInt(<span class="number">1000</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        smallList = isOuShu(intList);</span><br><span class="line">        System.out.println(<span class="string">"偶数总个数: "</span> + smallList.size());</span><br><span class="line">        System.out.println(smallList);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//用 ArrayList&lt;Integer&gt;做函数返回类型</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ArrayList&lt;Integer&gt; <span class="title">isOuShu</span><span class="params">(ArrayList&lt;Integer&gt; intList)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; smallList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; intList.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> num = intList.get(i);</span><br><span class="line">            <span class="keyword">if</span>(num % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                smallList.add(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> smallList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;用arraylist类型做函数返回类型&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#用arraylist类型做函数返回类型&quot;&gt;&lt;/a&gt; 用ArrayList类型做函数返回类型&lt;/h1&gt;
+&lt;h3 id=&quot;格式&quot;&gt;&lt;a class=&quot;ma
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>用ArrayList类型做函数参数</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/15/java00050%E7%94%A8ArrayList%E7%B1%BB%E5%9E%8B%E5%81%9A%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/15/java00050用ArrayList类型做函数参数/</id>
+    <published>2020-02-15T13:29:09.000Z</published>
+    <updated>2020-02-15T13:46:00.025Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="用arraylist类型做函数参数"><a class="markdownIt-Anchor" href="#用arraylist类型做函数参数"></a> 用ArrayList类型做函数参数</h1><h3 id="格式"><a class="markdownIt-Anchor" href="#格式"></a> 格式:</h3><p><code>public static 返回值类型 函数名(ArrayList&lt;引用类型&gt; 变量名 )</code></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo04</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Student&gt; std = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        std.add(<span class="keyword">new</span> Student(<span class="string">"张三丰"</span>,<span class="number">99</span>));</span><br><span class="line">        std.add(<span class="keyword">new</span> Student(<span class="string">"张无忌"</span>,<span class="number">19</span>));</span><br><span class="line">        std.add(<span class="keyword">new</span> Student(<span class="string">"宋远桥"</span>,<span class="number">39</span>));</span><br><span class="line">        std.add(<span class="keyword">new</span> Student(<span class="string">"张翠山"</span>,<span class="number">44</span>));</span><br><span class="line">        printArrayList(std);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//用ArrayList&lt;Student&gt;做函数参数,传递过来的是一个引用的地址</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArrayList</span><span class="params">(ArrayList&lt;Student&gt; std)</span></span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"&#123;"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; std.size(); i++) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(i == std.size() - <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                System.out.print(std.get(i).getName() + <span class="string">"&#125;"</span>);</span><br><span class="line"></span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"></span><br><span class="line">                System.out.print(std.get(i).getName() + <span class="string">"@"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;用arraylist类型做函数参数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#用arraylist类型做函数参数&quot;&gt;&lt;/a&gt; 用ArrayList类型做函数参数&lt;/h1&gt;
+&lt;h3 id=&quot;格式&quot;&gt;&lt;a class=&quot;markdown
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ArrayList集合存储基本数据</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/15/java00049ArrayList%E9%9B%86%E5%90%88%E5%AD%98%E5%82%A8%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/15/java00049ArrayList集合存储基本数据/</id>
+    <published>2020-02-15T13:10:36.000Z</published>
+    <updated>2020-02-15T13:25:16.632Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="arraylist集合存储基本数据"><a class="markdownIt-Anchor" href="#arraylist集合存储基本数据"></a> ArrayList集合存储基本数据</h1><p>泛型只能是引用类型,不能是基本类型</p><p>如果希望向集合ArrayList当中存储基本类型对应的&quot;包装类&quot;。</p><table><thead><tr><th style="text-align:center">基本类型</th><th style="text-align:center">包装类(引用类型,包装类都位于java.lang包下)</th></tr></thead><tbody><tr><td style="text-align:center">byte</td><td style="text-align:center">Byte</td></tr><tr><td style="text-align:center">short</td><td style="text-align:center">Short</td></tr><tr><td style="text-align:center">int</td><td style="text-align:center">Integer</td></tr><tr><td style="text-align:center">long</td><td style="text-align:center">Long</td></tr><tr><td style="text-align:center">float</td><td style="text-align:center">Float</td></tr><tr><td style="text-align:center">double</td><td style="text-align:center">Double</td></tr><tr><td style="text-align:center">char</td><td style="text-align:center">Character</td></tr><tr><td style="text-align:center">boolean</td><td style="text-align:center">Boolean</td></tr></tbody></table><p>从JDK 1.5+开始,支持自动装箱和自动拆箱</p><p>自动装箱:基本类型自动转换到包装类型</p><p>自动拆箱:包装类型自动转换到基本类型</p><p>使用格式:</p><p><code>ArrayList&lt;Integer&gt; intVal = new ArrayList&lt;&gt;();</code></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo01</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//使用包装类</span></span><br><span class="line">        ArrayList&lt;Integer&gt; intList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="comment">//向列表加入元素</span></span><br><span class="line">        intList.add(<span class="number">888</span>);</span><br><span class="line">        intList.add(<span class="number">89</span>);</span><br><span class="line">        intList.add(sc.nextInt());</span><br><span class="line">        <span class="comment">//输出列表</span></span><br><span class="line">        System.out.println(intList);</span><br><span class="line">        System.out.println(intList.get(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;arraylist集合存储基本数据&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#arraylist集合存储基本数据&quot;&gt;&lt;/a&gt; ArrayList集合存储基本数据&lt;/h1&gt;
+&lt;p&gt;泛型只能是引用类型,不能是基本类型&lt;/p&gt;
+&lt;p&gt;如果
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>图片的格式</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/15/html-css00010%E5%9B%BE%E7%89%87%E7%9A%84%E6%A0%BC%E5%BC%8F/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/15/html-css00010图片的格式/</id>
+    <published>2020-02-15T03:21:22.000Z</published>
+    <updated>2020-02-15T03:43:08.487Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="图片的格式"><a class="markdownIt-Anchor" href="#图片的格式"></a> 图片的格式</h1><p>常用的图片格式有三种,分别是：JPG、GIF、PNG.</p><h2 id="jpegjpg"><a class="markdownIt-Anchor" href="#jpegjpg"></a> JPEG(JPG)</h2><p>JPEG图片支持的颜色比较多,图片可以压缩,但是不支持透明</p><p>一般使用JPEG来保存颜色比较丰富的图片.</p><br><br><h2 id="gif"><a class="markdownIt-Anchor" href="#gif"></a> GIF</h2><p>GIF支持的颜色少,只支持简单的透明,支持动态图</p><p>图片颜色单一或者是动态图时可以使用gif</p><br><br><h2 id="png"><a class="markdownIt-Anchor" href="#png"></a> PNG</h2><p>PNG支持的颜色多,并且支持复杂的透明</p><p>可以用来显示颜色复杂的透明的图片</p><br><br><h2 id="图片的使用原则"><a class="markdownIt-Anchor" href="#图片的使用原则"></a> 图片的使用原则</h2><p>效果不一致,使用效果好的.</p><p>效果一致,使用内存小的.</p><p><img src="/images/javawz/PS000001A-1581738121596.png" alt="PS000001A"></p><br><br><br><br><br>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;图片的格式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#图片的格式&quot;&gt;&lt;/a&gt; 图片的格式&lt;/h1&gt;
+&lt;p&gt;常用的图片格式有三种,分别是：JPG、GIF、PNG.&lt;/p&gt;
+&lt;h2 id=&quot;jpegjpg&quot;&gt;&lt;a class=&quot;mark
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>相对路径</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/15/html-css00009%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/15/html-css00009相对路径/</id>
+    <published>2020-02-15T03:05:21.000Z</published>
+    <updated>2020-02-15T03:52:44.737Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="相对路径"><a class="markdownIt-Anchor" href="#相对路径"></a> 相对路径</h1><p><code>src</code>属性配置的是图片的路径,目前我们所要使用的路径全都是相对路径.</p><p>相对路径:</p><p>相对路径指相对于当前资源所在目录的位置.</p><br><p>当前文件目录的文件直接写文件名</p><p><code>&lt;img src=&quot;1.jpg&quot; alt=&quot;哈哈哈&quot;&gt;</code></p><br><p>可以使用<code>../</code>来返回上一级目录.</p><p><code>&lt;img src=&quot;../1.jpg&quot; alt=&quot;哈哈哈&quot;&gt;</code></p><br><p>返回上上级目录.</p><p><code>&lt;img src=&quot;../../1.jpg&quot; alt=&quot;哈哈哈&quot;&gt;</code></p><p>返回几级目录就用几个<code>../</code></p><br><p>当前文件的下一级目录.</p><p><code>&lt;img src=&quot;abc/123.jpg&quot; alt=&quot;老师&quot;&gt;</code></p><br><br><br><br>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;相对路径&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#相对路径&quot;&gt;&lt;/a&gt; 相对路径&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;src&lt;/code&gt;属性配置的是图片的路径,目前我们所要使用的路径全都是相对路径.&lt;/p&gt;
+&lt;p&gt;相对路径:&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>图片标签</title>
@@ -329,174 +501,6 @@
     </summary>
     
       <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>第一个JavaScript程序</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/13/JS00002%E7%AC%AC%E4%B8%80%E4%B8%AAJavaScript%E7%A8%8B%E5%BA%8F/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/13/JS00002第一个JavaScript程序/</id>
-    <published>2020-02-13T14:43:38.000Z</published>
-    <updated>2020-02-14T04:38:37.197Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="第一个javascript程序"><a class="markdownIt-Anchor" href="#第一个javascript程序"></a> 第一个JavaScript程序</h1><h5 id="javascript程序以script开头并以script结尾"><a class="markdownIt-Anchor" href="#javascript程序以script开头并以script结尾"></a> <code>JavaScript</code>程序以<code>&lt;script&gt;</code>开头,并以<code>&lt;/script&gt;</code>结尾</h5><h5 id="script-typetextjavascript等价于script"><a class="markdownIt-Anchor" href="#script-typetextjavascript等价于script"></a> <code>&lt;script type=&quot;text/javascript&quot;&gt;等价于&lt;script&gt;</code></h5><h5 id="弹出一个警告框用alert内容函数"><a class="markdownIt-Anchor" href="#弹出一个警告框用alert内容函数"></a> 弹出一个警告框:用<code>alert(&quot;内容&quot;);</code>函数</h5><h5 id="在文本写内容用documentwrite内容"><a class="markdownIt-Anchor" href="#在文本写内容用documentwrite内容"></a> 在文本写内容用:<code>document.write(&quot;内容&quot;)</code>;</h5><h5 id="在控制台显示内容用-consolelog内容"><a class="markdownIt-Anchor" href="#在控制台显示内容用-consolelog内容"></a> 在控制台显示内容用: <code>console.log(&quot;内容&quot;);</code></h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">alert(<span class="string">"我爱你"</span>);</span></span><br><span class="line"><span class="javascript"><span class="built_in">document</span>.write(<span class="string">"我爱你"</span>);</span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(<span class="string">"get out!"</span>);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;第一个javascript程序&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第一个javascript程序&quot;&gt;&lt;/a&gt; 第一个JavaScript程序&lt;/h1&gt;
-&lt;h5 id=&quot;javascript程序以script开头并以scrip
-      
-    
-    </summary>
-    
-      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript基础</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/13/JS00001JavaScript%E5%9F%BA%E7%A1%80/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/13/JS00001JavaScript基础/</id>
-    <published>2020-02-13T12:57:22.000Z</published>
-    <updated>2020-02-14T04:41:12.482Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="javascript基础"><a class="markdownIt-Anchor" href="#javascript基础"></a> JavaScript基础</h1><h2 id="起源"><a class="markdownIt-Anchor" href="#起源"></a> 起源</h2><p><code>JavaScript</code>诞生于1995年,它的出现主要用于处理网页中的前端验证.</p><p>所谓的前端验证,就是指检查用户输入的内容是否符合一定的规则.</p><p>比如:用户名的长度,密码的长度,邮箱的格式等.</p><h2 id="简史"><a class="markdownIt-Anchor" href="#简史"></a> 简史</h2><ul><li><h4 id="javascript是由网景公司发明的起初命名为livescrip后来由sun公司的介入更名为了javascript"><a class="markdownIt-Anchor" href="#javascript是由网景公司发明的起初命名为livescrip后来由sun公司的介入更名为了javascript"></a> JavaScript是由<code>网景</code>公司发明的,起初命名为<code>LiveScrip</code>,后来由<code>SUN</code>公司的介入更名为了<code>JavaScript</code>.</h4></li><li><h4 id="1996年微软公司在其最新的ie3浏览器中引入了自己对javascript的实现jscript"><a class="markdownIt-Anchor" href="#1996年微软公司在其最新的ie3浏览器中引入了自己对javascript的实现jscript"></a> <code>1996年</code>微软公司在其最新的IE3浏览器中引入了自己对<code>JavaScript</code>的实现<code>JScript</code>.</h4></li><li><h4 id="于是在市面上存在两个版本的javascript一个网景公司的javascript和微软的jscript"><a class="markdownIt-Anchor" href="#于是在市面上存在两个版本的javascript一个网景公司的javascript和微软的jscript"></a> 于是在市面上存在两个版本的<code>JavaScript</code>,一个网景公司的<code>JavaScript</code>和微软的<code>JScript.</code></h4></li><li><h4 id="为了确保不同的浏览器上运行的javascript标准一致所以几个公司共同定制了js的标准名命名为ecmascript"><a class="markdownIt-Anchor" href="#为了确保不同的浏览器上运行的javascript标准一致所以几个公司共同定制了js的标准名命名为ecmascript"></a> 为了确保不同的浏览器上运行的<code>JavaScript</code>标准一致,所以几个公司共同定制了JS的标准名命名为<code>ECMAScript</code>.</h4></li></ul><h2 id="实现"><a class="markdownIt-Anchor" href="#实现"></a> 实现</h2><p>ECMAScript是一个标准,而这个标准需要由各个厂商去实现.</p><p>不同的浏览器厂商对该标准会有不同的实现.</p><table><thead><tr><th>浏览器</th><th>JavaScript实现方式</th></tr></thead><tbody><tr><td>Firefox</td><td>SpiderMonkey</td></tr><tr><td>Internet Explorer</td><td>JScript/Chakra</td></tr><tr><td>Safari</td><td>JavaScriptCore</td></tr><tr><td>Chrome</td><td>v8</td></tr><tr><td>Carakan</td><td>Carakan</td></tr></tbody></table><p><img src="/images/javawz/1581599560003-1581599580310.png" alt="1581599560003"></p><h4 id="学习javascript就是学习三个部分"><a class="markdownIt-Anchor" href="#学习javascript就是学习三个部分"></a> 学习JavaScript就是学习三个部分:</h4><h5 id="ecmascript"><a class="markdownIt-Anchor" href="#ecmascript"></a>  ECMAScript</h5><h5 id="dom"><a class="markdownIt-Anchor" href="#dom"></a>  DOM</h5><h5 id="bom"><a class="markdownIt-Anchor" href="#bom"></a>  BOM</h5>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;javascript基础&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#javascript基础&quot;&gt;&lt;/a&gt; JavaScript基础&lt;/h1&gt;
-&lt;h2 id=&quot;起源&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href
-      
-    
-    </summary>
-    
-      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ArrayList集合的常用方法和遍历</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/13/java00048ArrayList%E9%9B%86%E5%90%88%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E5%92%8C%E9%81%8D%E5%8E%86/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/13/java00048ArrayList集合的常用方法和遍历/</id>
-    <published>2020-02-13T08:08:58.000Z</published>
-    <updated>2020-02-13T08:25:48.734Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="arraylist集合的常用方法和遍历"><a class="markdownIt-Anchor" href="#arraylist集合的常用方法和遍历"></a> ArrayList集合的常用方法和遍历</h1><h4 id="public-boolean-adde方法向集合中添加一个元素"><a class="markdownIt-Anchor" href="#public-boolean-adde方法向集合中添加一个元素"></a> <code>public boolean add(E)</code>方法:向集合中添加一个元素</h4><h4 id="public-e-removeint-index方法在集合中移除一个元素"><a class="markdownIt-Anchor" href="#public-e-removeint-index方法在集合中移除一个元素"></a> <code>public E remove(int index)</code>方法:在集合中移除一个元素</h4><h4 id="public-e-getint-index方法获取指定的集合元素"><a class="markdownIt-Anchor" href="#public-e-getint-index方法获取指定的集合元素"></a> <code>public E get(int index)</code>方法:获取指定的集合元素</h4><h4 id="public-int-size方法获取集合的长度"><a class="markdownIt-Anchor" href="#public-int-size方法获取集合的长度"></a> <code>public int size()</code>方法:获取集合的长度</h4><h4 id="索引从0开始"><a class="markdownIt-Anchor" href="#索引从0开始"></a> 索引从0开始</h4><h4 id="小技巧"><a class="markdownIt-Anchor" href="#小技巧"></a> 小技巧:</h4><h5 id="输入对象数组名fori再按下tab键会自动生成一个"><a class="markdownIt-Anchor" href="#输入对象数组名fori再按下tab键会自动生成一个"></a>  输入<code>对象数组名.fori</code>再按下tab键,会自动生成一个</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ;i &lt; 对象名.size();i++)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main14</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Dog&gt; dog = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">//向dog集合添加元素</span></span><br><span class="line">        dog.add(<span class="keyword">new</span> Dog(<span class="string">"小黑"</span>,<span class="number">1</span>,<span class="string">"黑色"</span>));</span><br><span class="line">        dog.add(<span class="keyword">new</span> Dog(<span class="string">"小黄"</span>,<span class="number">2</span>,<span class="string">"黄色"</span>));</span><br><span class="line">        dog.add(<span class="keyword">new</span> Dog(<span class="string">"小白"</span>,<span class="number">3</span>,<span class="string">"白色"</span>));</span><br><span class="line">        dog.add(<span class="keyword">new</span> Dog(<span class="string">"小pi"</span>,<span class="number">4</span>,<span class="string">"黑白色"</span>));</span><br><span class="line">        printAll(dog);</span><br><span class="line">        <span class="comment">//移除dog集合中的第2号元素,索引从0开始;</span></span><br><span class="line">        dog.remove(<span class="number">2</span>);</span><br><span class="line">        printAll(dog);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printAll</span><span class="params">(ArrayList&lt;Dog&gt; dog)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//获取dog集合的长度</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dog.size(); i++) &#123;</span><br><span class="line">            <span class="comment">//获取dog集合中指定第i个元素,从索引0开始</span></span><br><span class="line">            dog.get(i).printAll();</span><br><span class="line">            System.out.println(<span class="string">"============================================"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;<span class="comment">//姓名</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">    <span class="keyword">private</span> String color;<span class="comment">//毛色</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dog</span><span class="params">(String name, <span class="keyword">int</span> age, String color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dog</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getColor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(String color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"名字: "</span> + name);</span><br><span class="line">        System.out.println(<span class="string">"年龄 "</span> + age);</span><br><span class="line">        System.out.println(<span class="string">"毛色: "</span> + color);</span><br><span class="line">    &#125; <span class="comment">//打印所有成员变量</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;arraylist集合的常用方法和遍历&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#arraylist集合的常用方法和遍历&quot;&gt;&lt;/a&gt; ArrayList集合的常用方法和遍历&lt;/h1&gt;
-&lt;h4 id=&quot;public-boolean-a
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ArrayList集合概述和基本使用</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/13/java00047ArrayList%E9%9B%86%E5%90%88%E6%A6%82%E8%BF%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/13/java00047ArrayList集合概述和基本使用/</id>
-    <published>2020-02-13T07:54:03.000Z</published>
-    <updated>2020-02-13T08:06:57.084Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="arraylist集合概述和基本使用"><a class="markdownIt-Anchor" href="#arraylist集合概述和基本使用"></a> ArrayList集合概述和基本使用</h1><h4 id="arraylist集合的长度是可以变化的"><a class="markdownIt-Anchor" href="#arraylist集合的长度是可以变化的"></a> <code>ArrayList</code>集合的长度是可以变化的</h4><h4 id="在javautil包中"><a class="markdownIt-Anchor" href="#在javautil包中"></a> 在<code>java.util</code>包中</h4><h4 id="arraylist有一个尖括号e代表泛型"><a class="markdownIt-Anchor" href="#arraylist有一个尖括号e代表泛型"></a> <code>ArrayList</code>有一个尖括号<code>&lt;E&gt;</code>,代表泛型;</h4><h4 id="泛型也就是代表集合中每一个元素中的类型统一化-其中的e要替换为引用类型"><a class="markdownIt-Anchor" href="#泛型也就是代表集合中每一个元素中的类型统一化-其中的e要替换为引用类型"></a> 泛型也就是代表集合中每一个元素中的类型统一化 ,其中的<code>E</code>要<code>替换</code>为引用类型</h4><h4 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意:</h4><h4 id="泛型只能是引用类型不能是基本类型"><a class="markdownIt-Anchor" href="#泛型只能是引用类型不能是基本类型"></a>  泛型只能是引用类型,不能是基本类型.</h4><h4 id="在arraylist类中直接打印对象名字显示的不是地址而是内容"><a class="markdownIt-Anchor" href="#在arraylist类中直接打印对象名字显示的不是地址而是内容"></a>  在<code>ArrayList</code>类中直接打印对象名字显示的不是地址,而是内容</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main13</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ArrayList&lt;String&gt;代表strList集合中的元素全部都是String类型</span></span><br><span class="line">        <span class="comment">//new ArrayList&lt;String&gt;() 等价于 new ArrayList&lt;&gt;()</span></span><br><span class="line">        <span class="comment">//从java1.7开始,右侧的尖括号中的内容可以不写,但是&lt;&gt;本身不能省略</span></span><br><span class="line">        ArrayList&lt;String&gt; strList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        System.out.println(strList);<span class="comment">//[]</span></span><br><span class="line">        strList.add(<span class="string">"张无忌"</span>);</span><br><span class="line">        strList.add(<span class="string">"张三丰"</span>);</span><br><span class="line">        <span class="comment">//直接打印对象名</span></span><br><span class="line">        System.out.println(strList);<span class="comment">//["张无忌","张三丰"]</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;arraylist集合概述和基本使用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#arraylist集合概述和基本使用&quot;&gt;&lt;/a&gt; ArrayList集合概述和基本使用&lt;/h1&gt;
-&lt;h4 id=&quot;arraylist集合的长度是可以变化
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>对象数组</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/13/java00046%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/13/java00046对象数组/</id>
-    <published>2020-02-13T07:41:16.000Z</published>
-    <updated>2020-02-13T07:52:54.312Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="对象数组"><a class="markdownIt-Anchor" href="#对象数组"></a> 对象数组</h1><h3 id="对象数组的创建格式"><a class="markdownIt-Anchor" href="#对象数组的创建格式"></a> 对象数组的创建格式:</h3><h5 id="第一种方式"><a class="markdownIt-Anchor" href="#第一种方式"></a>  第一种方式:</h5><h5 id="类名-对象名-new-类名n其中n代表数组的长度"><a class="markdownIt-Anchor" href="#类名-对象名-new-类名n其中n代表数组的长度"></a>   <code>类名[] 对象名 = new 类名[n];</code>其中<code>n</code>代表数组的长度.</h5><h5 id="第二种方式"><a class="markdownIt-Anchor" href="#第二种方式"></a>  第二种方式:</h5><h5 id="类名-对象名-new-类名-初始值-new-类名-初始值"><a class="markdownIt-Anchor" href="#类名-对象名-new-类名-初始值-new-类名-初始值"></a>   <code>类名[] 对象名 = {new 类名( [初始值] ) ,...,new 类名( [初始值] )}</code></h5><h5 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> 注意事项:</h5><h5 id="创建了一个对象数组之后不能直接使用因为还没有为数组分配对象"><a class="markdownIt-Anchor" href="#创建了一个对象数组之后不能直接使用因为还没有为数组分配对象"></a>  创建了一个对象数组之后不能直接使用,因为还没有为数组分配对象.</h5><h5 id="第二种创建的对象数组可以直接使用因为它一开始就给对象数组分配了对象"><a class="markdownIt-Anchor" href="#第二种创建的对象数组可以直接使用因为它一开始就给对象数组分配了对象"></a>  第二种创建的对象数组可以直接使用,因为它一开始就给对象数组分配了对象</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main12</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建对象数组,并对对象数组初始化</span></span><br><span class="line">        Dog[] dogArray = &#123;<span class="keyword">new</span> Dog(),<span class="keyword">new</span> Dog(),<span class="keyword">new</span> Dog(),<span class="keyword">new</span> Dog()&#125;;</span><br><span class="line">        dogArray[<span class="number">0</span>].setName(<span class="string">"小黑"</span>);</span><br><span class="line">        dogArray[<span class="number">0</span>].setAge(<span class="number">1</span>);</span><br><span class="line">        dogArray[<span class="number">0</span>].setColor(<span class="string">"黑色"</span>);</span><br><span class="line"></span><br><span class="line">        dogArray[<span class="number">1</span>].setName(<span class="string">"小白"</span>);</span><br><span class="line">        dogArray[<span class="number">1</span>].setAge(<span class="number">1</span>);</span><br><span class="line">        dogArray[<span class="number">1</span>].setColor(<span class="string">"白色"</span>);</span><br><span class="line"></span><br><span class="line">        dogArray[<span class="number">2</span>].setName(<span class="string">"小黄"</span>);</span><br><span class="line">        dogArray[<span class="number">2</span>].setAge(<span class="number">1</span>);</span><br><span class="line">        dogArray[<span class="number">2</span>].setColor(<span class="string">"黄色"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dogArray.length; i++) &#123;</span><br><span class="line">           dogArray[i].printAll();</span><br><span class="line">            System.out.println(<span class="string">"======================="</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;<span class="comment">//姓名</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">    <span class="keyword">private</span> String color;<span class="comment">//毛色</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dog</span><span class="params">(String name, <span class="keyword">int</span> age, String color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dog</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getColor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(String color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"名字: "</span> + name);</span><br><span class="line">        System.out.println(<span class="string">"年龄 "</span> + age);</span><br><span class="line">        System.out.println(<span class="string">"毛色: "</span> + color);</span><br><span class="line">    &#125; <span class="comment">//打印所有成员变量</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;对象数组&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#对象数组&quot;&gt;&lt;/a&gt; 对象数组&lt;/h1&gt;
-&lt;h3 id=&quot;对象数组的创建格式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#对象数组的创建格式&quot;&gt;&lt;/a
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>java生成一个1-n的随机数</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/13/java00045%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA1-n%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/13/java00045生成一个1-n的随机数/</id>
-    <published>2020-02-13T02:02:25.000Z</published>
-    <updated>2020-02-13T02:11:23.967Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="生成一个1-n的随机数"><a class="markdownIt-Anchor" href="#生成一个1-n的随机数"></a> 生成一个1-n的随机数</h1><h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路:</h3><h5 id="1定义一个int变量n随意赋值"><a class="markdownIt-Anchor" href="#1定义一个int变量n随意赋值"></a>  1.定义一个<code>int</code>变量n,随意赋值.</h5><h5 id="2要使用random三个步骤导包创建使用"><a class="markdownIt-Anchor" href="#2要使用random三个步骤导包创建使用"></a>  2.要使用<code>Random</code>:三个步骤,导包,创建,使用</h5><h5 id="3如果写10那么就是0~9然而想要的是1-10可以发现整体1randnextintn-1既可"><a class="markdownIt-Anchor" href="#3如果写10那么就是0~9然而想要的是1-10可以发现整体1randnextintn-1既可"></a>  3.如果写10,那么就是0~9,然而想要的是1-10,可以发现:<code>整体+1:rand.nextInt(n) + 1</code>既可.</h5><h5 id="4打印随机数字"><a class="markdownIt-Anchor" href="#4打印随机数字"></a>  4.打印随机数字.</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main10</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = <span class="number">5</span>; <span class="comment">//第一步</span></span><br><span class="line">        Random rand = <span class="keyword">new</span> Random();<span class="comment">//第二步</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> num = rand.nextInt(n) + <span class="number">1</span>; <span class="comment">//第三步</span></span><br><span class="line">            System.out.println(num);<span class="comment">//第四步</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;生成一个1-n的随机数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#生成一个1-n的随机数&quot;&gt;&lt;/a&gt; 生成一个1-n的随机数&lt;/h1&gt;
-&lt;h3 id=&quot;思路&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Random概述和基本使用</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/13/java00044Random%E6%A6%82%E8%BF%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/13/java00044Random概述和基本使用/</id>
-    <published>2020-02-13T01:36:07.000Z</published>
-    <updated>2020-02-13T01:54:36.195Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="random概述和基本使用"><a class="markdownIt-Anchor" href="#random概述和基本使用"></a> Random概述和基本使用</h1><p><code>Random</code>类是用来生成随机数字的.使用起来也是三个步骤:</p><h4 id="1导包"><a class="markdownIt-Anchor" href="#1导包"></a> 1.导包</h4><p><code>import java.util.Random</code></p><h4 id="2创建"><a class="markdownIt-Anchor" href="#2创建"></a> 2.创建</h4><p><code>Random rand = new Random();</code>一般括号留空即可</p><h4 id="3使用"><a class="markdownIt-Anchor" href="#3使用"></a> 3.使用</h4><p>获取一个随机<code>int</code>数字(范围是<code>int</code>所有范围,有正负两种)</p><p><code>int num = rand.nextInt();</code></p><p>获取一个<code>指定范围</code>的随机<code>int</code>数字(获取范围: [ 0 ,<code>int</code>  )   闭合区间 ) 打印范围是<code>0 ~ (int -1)</code></p><p><code>int num = rand.nextInt(int);</code></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main09</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Random rand = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="comment">//范围是负的int最大值~正的int最大值</span></span><br><span class="line">        System.out.println(<span class="string">"随机数是: "</span> + rand.nextInt());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(rand.nextInt(<span class="number">100</span>)); <span class="comment">// 打印范围是0~99</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;random概述和基本使用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#random概述和基本使用&quot;&gt;&lt;/a&gt; Random概述和基本使用&lt;/h1&gt;
-&lt;p&gt;&lt;code&gt;Random&lt;/code&gt;类是用来生成随机数字的.使用起来也是三个
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
     
     
   </entry>
