@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-02-14T04:39:21.635Z</updated>
+  <updated>2020-02-15T02:45:34.126Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -15,6 +15,129 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>图片标签</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/15/html-css00008%E5%9B%BE%E7%89%87%E6%A0%87%E7%AD%BE/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/15/html-css00008图片标签/</id>
+    <published>2020-02-15T02:28:07.000Z</published>
+    <updated>2020-02-15T02:45:34.126Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="图片标签"><a class="markdownIt-Anchor" href="#图片标签"></a> 图片标签</h1><p>使用<code>img</code>标签来向网页中引入一个外部图片.</p><p><code>img</code>标签也是一个自结束标签</p><h2 id="属性"><a class="markdownIt-Anchor" href="#属性"></a> 属性</h2><p><code>src</code>: 设置一个外部图片的路径</p><p><code>&lt;img src=&quot;图片路径&quot; /&gt;</code></p><br><p><code>alt</code>: <code>&lt;img src=&quot;图片路径&quot; alt=&quot;描述信息&quot; /&gt;</code></p><p>  1.可以用来设置在图片不能显示时,对图片的描述</p><p>  2.搜索引擎可以通过<code>alt</code>属性来识别不同的图片.</p><p>  3如果不写<code>alt</code>属性,则搜索引擎不会对<code>img</code>中的图片进行收录</p><br><p><code>width</code>:可以用来修改图片宽度</p><p><code>&lt;img src=&quot;图片路径&quot; alt=&quot;描述信息&quot; width=&quot;100px&quot;/&gt;</code></p><br><p><code>height</code>:可以用来修改图片的高度</p><p><code>&lt;img src=&quot;图片路径&quot; alt=&quot;描述信息&quot; height=&quot;100px&quot; /&gt;</code></p><br><p><code>注意</code>:</p><p>1.如果宽度和高度两个属性只设置一个,另一个也会同时等比例调整大小.</p><p>2.如果两个值同时指定,则按照你指定的值来设置.</p><p>3.一般开发中除了自适应的页面,不建议设置<code>width</code>和<code>height</code>.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;图片标签&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#图片标签&quot;&gt;&lt;/a&gt; 图片标签&lt;/h1&gt;
+&lt;p&gt;使用&lt;code&gt;img&lt;/code&gt;标签来向网页中引入一个外部图片.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;img&lt;/code&gt;标签也是一个自结
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>实体</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/15/html-css00007%E5%AE%9E%E4%BD%93/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/15/html-css00007实体/</id>
+    <published>2020-02-15T02:15:49.000Z</published>
+    <updated>2020-02-15T02:26:21.630Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="实体"><a class="markdownIt-Anchor" href="#实体"></a> 实体</h1><p>在<code>HTML</code>中,一些如&lt;&gt;这种特殊字符是不能直接使用的,需要使用一些特殊的符号来表示这些特殊字符,这些特殊符号,我们称为<code>实体(转义字符)</code>.</p><p>浏览器解析到<code>实体</code>时,会自动将实体转换为对应的字符.</p><h2 id="实体语法"><a class="markdownIt-Anchor" href="#实体语法"></a> 实体语法</h2><p><code>&amp;实体名字;</code></p><p>&lt; 对应的实体是:<code>&amp;lt;</code></p><p>&gt;对应的实体是:<code>&amp;gt;</code></p><p>空格实体: <code>&amp;nbsp;</code></p><p>版权符号:<code>&amp;copy;</code></p><p>tab制表符实体: <code>&amp;emsp;</code></p><p>其余的可以去查看一些官方的手册.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;实体&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#实体&quot;&gt;&lt;/a&gt; 实体&lt;/h1&gt;
+&lt;p&gt;在&lt;code&gt;HTML&lt;/code&gt;中,一些如&amp;lt;&amp;gt;这种特殊字符是不能直接使用的,需要使用一些特殊的符号来表示这些特殊字符,这些特殊符
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>常用的标签</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/14/html-css00006%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A0%87%E7%AD%BE/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/14/html-css00006常用的标签/</id>
+    <published>2020-02-14T13:59:23.000Z</published>
+    <updated>2020-02-15T01:05:16.646Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="常用的标签"><a class="markdownIt-Anchor" href="#常用的标签"></a> 常用的标签</h1><h2 id="标签"><a class="markdownIt-Anchor" href="#标签"></a> 标签</h2><p><code>HTML</code>中的标记指的就是标签.</p><p><code>HTML</code>使用标记标签来描述网页</p><h3 id="结构"><a class="markdownIt-Anchor" href="#结构"></a> 结构:</h3><p><code>&lt;标签名&gt; 标签内容 &lt;/标签名&gt;</code></p><p><code>&lt;标签名 /&gt;</code></p><h3 id="元素"><a class="markdownIt-Anchor" href="#元素"></a> 元素:</h3><p>元素和标签都是等价的,说白了元素就是标签…</p><p>但我们也可以理解成一个完整的标签称为<code>元素</code>.</p><p>如上面的结构所述的就是完整的标签</p><p>例如:<code>&lt;h1&gt;我是一个完整的元素&lt;/h1&gt;</code></p><h3 id="属性"><a class="markdownIt-Anchor" href="#属性"></a> 属性:</h3><p>可以为<code>HTML</code>标签设置属性</p><p>通过属性为<code>HTML</code>元素提供附加信息</p><p>属性需要设置在<code>开始标签</code>或<code>自结束标签</code>中</p><p>属性总是以<code>名称/值对</code>的形式出现的</p><p>比如:<code>name =&quot;value&quot;</code></p><p><code>&lt;img src=&quot;&quot; alt=&quot;&quot; /&gt;</code></p><h2 id="标题标签"><a class="markdownIt-Anchor" href="#标题标签"></a> 标题标签</h2><p>在<code>HTML</code>中一共有6级标题标签</p><p><code>h1~h6</code>,其中h1最大,<code>h6</code>最小</p><p>使用<code>html</code>标签时,关心的是标签的语义,我们使用的标签都是语义化标签.</p><p>6级标题中,<code>h1</code>的最重要,h1的重要性仅次于<code>title</code>,搜索引擎检索完<code>title</code>之后,会立即查看<code>h1</code>中的内容</p><p><code>h1</code>标签非常重要,他会影响到页面在搜索引擎中的排名,页面只能写一个<code>h1</code></p><p>一般页面中标题标签只使用<code>h1~h3</code>标题标签,<code>h3</code>以后的基本不使用</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是1级标签<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>我是2级标签<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>我是3级标签<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>我是4级标签<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h5</span>&gt;</span>我是5级标签<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h6</span>&gt;</span>我是6级标签<span class="tag">&lt;/<span class="name">h6</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="段落标签"><a class="markdownIt-Anchor" href="#段落标签"></a> 段落标签</h2><p>段落标签,段落标签用于表示内容中的一个自然段</p><p>使用<code>p</code>标签来表示一个段落</p><p><code>p</code>标签中的文字,默认会独占一行,并且段与段之间会有一个间距</p><p><code>&lt;p&gt;我是一个段落标签,用来表示一个自然段.&lt;/p&gt;</code></p><p>在<code>HTML</code>中,字符之间写再多的空格,浏览器也会当成一个空格解析,换行也会当成一个空格解析</p><h2 id="br换行标签"><a class="markdownIt-Anchor" href="#br换行标签"></a> &lt;br&gt;换行标签</h2><p>在页面中使用<code>br</code>标签来表示一个换行,br标签是一个自结束标签.</p><p><code>&lt;br /&gt;</code></p><h2 id="hr水平标签"><a class="markdownIt-Anchor" href="#hr水平标签"></a> &lt;hr&gt;水平标签</h2><p><code>hr</code>也是一个自结束标签,可以在页面中生成一条水平线.</p><p><code>&lt;hr /&gt;</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;常用的标签&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#常用的标签&quot;&gt;&lt;/a&gt; 常用的标签&lt;/h1&gt;
+&lt;h2 id=&quot;标签&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#标签&quot;&gt;&lt;/a&gt; 标签&lt;/h2&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>乱码问题</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/14/html-css00005%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/14/html-css00005乱码问题/</id>
+    <published>2020-02-14T13:08:01.000Z</published>
+    <updated>2020-02-14T13:26:46.712Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="乱码问题"><a class="markdownIt-Anchor" href="#乱码问题"></a> 乱码问题</h1><h3 id="编码"><a class="markdownIt-Anchor" href="#编码"></a> 编码:</h3><p>依据一定的规则,将字符转换为二进制编码的过程称之为编码.</p><h3 id="解码"><a class="markdownIt-Anchor" href="#解码"></a> 解码:</h3><p>依据一定的规则,将二进制编码转换为字符的过程称之为解码.</p><h3 id="字符集"><a class="markdownIt-Anchor" href="#字符集"></a> 字符集:</h3><p>编码和解码所采用的规则,我们称之为字符集</p><h5 id="常见字符集"><a class="markdownIt-Anchor" href="#常见字符集"></a>   常见字符集:</h5><h5 id="1ascii"><a class="markdownIt-Anchor" href="#1ascii"></a>     1.ASCII</h5><h5 id="2iso-8859-1"><a class="markdownIt-Anchor" href="#2iso-8859-1"></a>     2.ISO-8859-1</h5><h5 id="3gbk"><a class="markdownIt-Anchor" href="#3gbk"></a>     3.GBK</h5><h5 id="4gb2312-中文系统默认编码"><a class="markdownIt-Anchor" href="#4gb2312-中文系统默认编码"></a>     4.GB2312 中文系统默认编码</h5><h5 id="5utf-8-万国码支持地球上所有的文字"><a class="markdownIt-Anchor" href="#5utf-8-万国码支持地球上所有的文字"></a>     5.UTF-8 万国码,支持地球上所有的文字</h5><h3 id="乱码原因"><a class="markdownIt-Anchor" href="#乱码原因"></a> 乱码原因:</h3><p>产生乱码的根本原因是,编码和解码所采用的字符集不同</p><p>在中文系统的浏览器中,默认都是使用GB2312进行解码的</p><h3 id="解决"><a class="markdownIt-Anchor" href="#解决"></a> 解决:</h3><p>用<code>&lt;meta charset=&quot;字符集&quot; /&gt;</code>标签告诉浏览器网页所采用的编码字符集</p><p>meta标签用来设置网页的一些元数据,比如网页的字符集,关键字,简介等…</p><p>meta是一个自结束标签,编写一个自结束标签时,可以在开始标签中添加一个 /</p><h3 id="ansi"><a class="markdownIt-Anchor" href="#ansi"></a> ANSI</h3><p>ANSI代表智能字符集,会跟随操作系统默认选择的字符集</p><p>例如中文操作系统默认的字符集是GB2312</p><p><img src="/images/javawz/1581686657431-1581686663189.png" alt="1581686657431"></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--告诉浏览器,使用UTF-8进行解码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;乱码问题&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#乱码问题&quot;&gt;&lt;/a&gt; 乱码问题&lt;/h1&gt;
+&lt;h3 id=&quot;编码&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#编码&quot;&gt;&lt;/a&gt; 编码:&lt;/h3&gt;
+&lt;p&gt;
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS文档声明</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/14/html-css00004%E6%96%87%E6%A1%A3%E5%A3%B0%E6%98%8E/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/14/html-css00004文档声明/</id>
+    <published>2020-02-14T12:17:28.000Z</published>
+    <updated>2020-02-14T13:07:30.471Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="js文档声明"><a class="markdownIt-Anchor" href="#js文档声明"></a> JS文档声明</h1><p><img src="/images/javawz/1581682714388-1581682719928.png" alt="1581682714388"></p><h3 id="我们需要告诉浏览器我们编写的html是使用哪个版本的"><a class="markdownIt-Anchor" href="#我们需要告诉浏览器我们编写的html是使用哪个版本的"></a> 我们需要告诉浏览器我们编写的html是使用哪个版本的</h3><p><img src="/images/javawz/1581682756531-1581682761895.png" alt="1581682756531"></p><p><img src="/images/javawz/1581682965391-1581682971863.png" alt="1581682965391"></p><h3 id="html5版本的文档声明很简单只需要在顶部添加doctype-html既可"><a class="markdownIt-Anchor" href="#html5版本的文档声明很简单只需要在顶部添加doctype-html既可"></a> HTML5版本的文档声明很简单,只需要在顶部添加<code>&lt;!DOCTYPE html&gt;</code>既可.</h3><h3 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> <code>注意事项</code></h3><h5 id="如果不添加文档声明则会导致有些浏览器会进入一个怪异模式进入怪异模式以后浏览器解析页面会导致页面无法正常显示所以为了避免进入该模式一定要写文档声明"><a class="markdownIt-Anchor" href="#如果不添加文档声明则会导致有些浏览器会进入一个怪异模式进入怪异模式以后浏览器解析页面会导致页面无法正常显示所以为了避免进入该模式一定要写文档声明"></a> 如果不添加文档声明,则会导致有些浏览器会进入一个怪异模式,进入怪异模式以后,浏览器解析页面会导致页面无法正常显示,所以为了避免进入该模式,一定要写文档声明</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--我是文档声明--&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;js文档声明&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js文档声明&quot;&gt;&lt;/a&gt; JS文档声明&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/images/javawz/1581682714388-1581682719928.png&quot; al
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Null和Undefined</title>
@@ -374,129 +497,6 @@
     </summary>
     
       <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>匿名对象作为方法的参数及返回值</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/13/java00043%E5%8C%BF%E5%90%8D%E5%AF%B9%E8%B1%A1%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E5%8F%8A%E8%BF%94%E5%9B%9E%E5%80%BC/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/13/java00043匿名对象作为方法的参数及返回值/</id>
-    <published>2020-02-13T01:06:43.000Z</published>
-    <updated>2020-02-13T01:21:31.332Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="匿名对象作为方法的参数及返回值"><a class="markdownIt-Anchor" href="#匿名对象作为方法的参数及返回值"></a> 匿名对象作为方法的参数及返回值</h1><h4 id="快速生成局部变量的快捷键"><a class="markdownIt-Anchor" href="#快速生成局部变量的快捷键"></a> 快速生成局部变量的快捷键:</h4><h5 id="想快速生成一个-dog-dog-new-dog的局部变量只需要输入new-dog-并按下alt-entter"><a class="markdownIt-Anchor" href="#想快速生成一个-dog-dog-new-dog的局部变量只需要输入new-dog-并按下alt-entter"></a> 想快速生成一个 <code>Dog dog = new Dog();</code>的<code>局部变量</code>只需要输入<code>new Dog();</code> 并按下<code>ALT + Entter</code></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main08</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        scanInt(<span class="keyword">new</span> Scanner(System.in));</span><br><span class="line">        Dog dog = reDog(<span class="string">"小黑"</span>, <span class="number">1</span>, <span class="string">"黑色"</span>);</span><br><span class="line">        System.out.println(<span class="string">"====================================="</span>);</span><br><span class="line">        dog.printAll();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//使用匿名对象作为参数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">scanInt</span><span class="params">(Scanner sc)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"请输入一个数: "</span>);</span><br><span class="line">        <span class="keyword">int</span> num = sc.nextInt();</span><br><span class="line">        System.out.println(<span class="string">"你输入的数是: "</span> + num);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">//使用匿名对象作为返回值</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Dog <span class="title">reDog</span><span class="params">(String name,<span class="keyword">int</span> age,String color)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Dog(name,age,color);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;<span class="comment">//姓名</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">    <span class="keyword">private</span> String color;<span class="comment">//毛色</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dog</span><span class="params">(String name, <span class="keyword">int</span> age, String color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dog</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getColor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(String color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"名字: "</span> + name);</span><br><span class="line">        System.out.println(<span class="string">"年龄 "</span> + age);</span><br><span class="line">        System.out.println(<span class="string">"毛色: "</span> + color);</span><br><span class="line">    &#125; <span class="comment">//打印所有成员变量</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;匿名对象作为方法的参数及返回值&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#匿名对象作为方法的参数及返回值&quot;&gt;&lt;/a&gt; 匿名对象作为方法的参数及返回值&lt;/h1&gt;
-&lt;h4 id=&quot;快速生成局部变量的快捷键&quot;&gt;&lt;a class=&quot;mark
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>匿名对象的说明</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/13/java00042%E5%8C%BF%E5%90%8D%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AF%B4%E6%98%8E/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/13/java00042匿名对象的说明/</id>
-    <published>2020-02-13T00:52:33.000Z</published>
-    <updated>2020-02-13T01:05:22.186Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="匿名对象的说明"><a class="markdownIt-Anchor" href="#匿名对象的说明"></a> 匿名对象的说明</h1><h5 id="没有名称的对象称为匿名对象格式"><a class="markdownIt-Anchor" href="#没有名称的对象称为匿名对象格式"></a> 没有名称的对象称为匿名对象,格式:</h5><p><code>new 类名();</code></p><h5 id="可以直接使用匿名对象来调用类方法格式"><a class="markdownIt-Anchor" href="#可以直接使用匿名对象来调用类方法格式"></a> 可以直接使用匿名对象来调用类方法,格式:</h5><p><code>new 类名().方法名();</code></p><h5 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> 注意事项:</h5><h5 id="匿名对象只能使用一次下次继续使用需要从新new一个原来那个会自动回收掉"><a class="markdownIt-Anchor" href="#匿名对象只能使用一次下次继续使用需要从新new一个原来那个会自动回收掉"></a> 匿名对象只能使用一次,下次继续使用需要从新new一个,原来那个会自动回收掉.</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main07</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.print(<span class="string">"请输入一个数:"</span>);</span><br><span class="line">        <span class="keyword">int</span> num = <span class="keyword">new</span> Scanner(System.in).nextInt();<span class="comment">//我是匿名对象</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Dog(<span class="string">"小黄"</span>,<span class="number">1</span>,<span class="string">"黄色"</span>).printAll();<span class="comment">//我是匿名对象</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"=================================="</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Dog(<span class="string">"小黑"</span>,<span class="number">2</span>,<span class="string">"黑白"</span>).printAll();<span class="comment">//我是匿名对象</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;<span class="comment">//姓名</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">    <span class="keyword">private</span> String color;<span class="comment">//毛色</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dog</span><span class="params">(String name, <span class="keyword">int</span> age, String color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dog</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getColor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(String color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"名字: "</span> + name);</span><br><span class="line">        System.out.println(<span class="string">"年龄 "</span> + age);</span><br><span class="line">        System.out.println(<span class="string">"毛色: "</span> + color);</span><br><span class="line">    &#125; <span class="comment">//打印所有成员变量</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;匿名对象的说明&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#匿名对象的说明&quot;&gt;&lt;/a&gt; 匿名对象的说明&lt;/h1&gt;
-&lt;h5 id=&quot;没有名称的对象称为匿名对象格式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>标签的属性</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/12/html-css00003%E6%A0%87%E7%AD%BE%E7%9A%84%E5%B1%9E%E6%80%A7/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/12/html-css00003标签的属性/</id>
-    <published>2020-02-12T14:25:03.000Z</published>
-    <updated>2020-02-12T14:32:41.990Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="标签的属性"><a class="markdownIt-Anchor" href="#标签的属性"></a> 标签的属性</h3><p>属性:</p><p>可以通过属性来设置标签如何处理标签中的内容</p><p>在<code>开始标签</code>中添加属性</p><p>属性需要写在<code>开始标签</code>中,实际上就是一个<code>名值对</code>的<code>结构</code></p><p><code>属性名 = &quot;属性值&quot;</code>,一个标签中可以同时设置多个属性,属性之间需要使用<code>空格隔开</code></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 我是注释--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--通过font标签中的color属性来改变字体颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">"red"</span>&gt;</span>第一个<span class="tag">&lt;/<span class="name">font</span>&gt;</span>网站</span><br><span class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;标签的属性&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#标签的属性&quot;&gt;&lt;/a&gt; 标签的属性&lt;/h3&gt;
-&lt;p&gt;属性:&lt;/p&gt;
-&lt;p&gt;可以通过属性来设置标签如何处理标签中的内容&lt;/p&gt;
-&lt;p&gt;在&lt;code&gt;开始标签&lt;/code&gt;中添加属性
-      
-    
-    </summary>
-    
-      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>HTML注释</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/12/html-css00002HTML%E6%B3%A8%E9%87%8A/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/12/html-css00002HTML注释/</id>
-    <published>2020-02-12T14:17:06.000Z</published>
-    <updated>2020-02-12T14:20:28.931Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="html注释"><a class="markdownIt-Anchor" href="#html注释"></a> HTML注释</h1><p>有时候需要对程序的说明,这时候就需要用到注释.</p><p>注释语法: <code>&lt;!-- 内容 --&gt;</code></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 我是注释--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;html注释&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#html注释&quot;&gt;&lt;/a&gt; HTML注释&lt;/h1&gt;
-&lt;p&gt;有时候需要对程序的说明,这时候就需要用到注释.&lt;/p&gt;
-&lt;p&gt;注释语法: &lt;code&gt;&amp;lt;!-- 内容 --&amp;gt;
-      
-    
-    </summary>
-    
-      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>HTML/CSS基础</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/12/html-css00001HTML-CSS%E5%9F%BA%E7%A1%80/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/12/html-css00001HTML-CSS基础/</id>
-    <published>2020-02-12T13:45:47.000Z</published>
-    <updated>2020-02-12T14:15:33.801Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="htmlcss基础"><a class="markdownIt-Anchor" href="#htmlcss基础"></a> HTML/CSS基础</h1><h2 id="软件架构"><a class="markdownIt-Anchor" href="#软件架构"></a> 软件架构</h2><h3 id="cs客户端服务器端"><a class="markdownIt-Anchor" href="#cs客户端服务器端"></a> <code>C/S</code>,客户端/服务器端</h3><p>  1.一般我们使用的软件都是<code>C/S</code>架构</p><p>  2.比如系统中的软件QQ,360,office等等</p><p>  3.<code>C</code>表示客户端,用户通过客户端来使用软件</p><p>  4.<code>S</code>表示服务器,服务器负责处理软件的业务逻辑</p><h4 id="特点"><a class="markdownIt-Anchor" href="#特点"></a>   特点:</h4><p>   1.软件使用前必须得安装</p><p>   2.软件更新时,服务器和客户端得同时更新</p><p>   3.<code>C/S</code>架构的软件不能跨平台使用</p><p>   4.<code>C/S</code>架构的软件客户端和服务器通信采用的是自有协议,相对来说比较安全</p><h3 id="bs浏览器服务器"><a class="markdownIt-Anchor" href="#bs浏览器服务器"></a> B/S,浏览器/服务器</h3><p>  1.<code>B/S</code>本质上也是<code>C/S</code>,只不过<code>B/S</code>架构的软件,使用浏览器作为软件客户端</p><p>  2.<code>B/S</code>架构软件通过使用浏览器访问网页的形式,来使用软件,比如:京东,淘宝,知乎等等</p><h4 id="特点-2"><a class="markdownIt-Anchor" href="#特点-2"></a>   特点:</h4><p>   1.软件不需要安装,直接使用浏览器访问指定的网址即可</p><p>   2.软件更新时,客户端不需要更新</p><p>   3.软件可以跨平台,只要系统中有浏览器,就可以使用.</p><p>   4.B/S架构的软件,客户端和服务器之间通信采用的是通用的<code>HTTP</code>协议,相对来说不安全,一般采取<code>https</code>协议</p><h2 id="w3c标准"><a class="markdownIt-Anchor" href="#w3c标准"></a> W3C标准:</h2><p>一个网页主要由三部分组成:<code>结构</code>,<code>表现</code>,<code>行为</code>.</p><p>结构:对应的是<code>html</code>  ,用于描述页面的结构</p><p>表现:对应的是<code>CSS</code>, 用于控制页面中元素的样式</p><p>行为:对应的是<code>JavaScript</code> , 用于响应用户操作</p><h2 id="html简介"><a class="markdownIt-Anchor" href="#html简介"></a> HTML简介</h2><p><code>HTML</code>(Hypertext Markup Language)</p><p><code>超文本标记语言</code></p><p>负责网页的三个要素中的<code>结构</code></p><p>HTML使用<code>标签</code>的形式来标识网页中的不同组成部分</p><p>所谓超文本指的是<code>超链接</code>,使用超链接可以让我们从一个页面跳转到另一个页面.</p><p>扩展名: <code>.html</code></p><p>标准格式:</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;htmlcss基础&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#htmlcss基础&quot;&gt;&lt;/a&gt; HTML/CSS基础&lt;/h1&gt;
-&lt;h2 id=&quot;软件架构&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#软件架
-      
-    
-    </summary>
-    
-      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
     
     
   </entry>
