@@ -5558,11 +5558,12 @@ p>code{
     text-shadow: 0 1px #fff;
   padding: 0.2em 0.4em;
   margin: 0 0.3em;
-  color: #EA0000;
+  color: #FF4500;
   background: #eee;
   border-radius: 3px;
   font-size: 95%;
   font-weight:bold;
+  font-family: 微软雅黑;
 }
 p>span>code {
   text-shadow: 0 1px #fff;
