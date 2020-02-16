@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-02-15T14:11:15.184Z</updated>
+  <updated>2020-02-16T18:01:08.023Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -17,13 +17,87 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>字符串的获取相关方法</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/17/java00056%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%8E%B7%E5%8F%96%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/17/java00056字符串的获取相关方法/</id>
+    <published>2020-02-16T17:44:12.000Z</published>
+    <updated>2020-02-16T18:01:08.023Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="字符串的获取相关方法"><a class="markdownIt-Anchor" href="#字符串的获取相关方法"></a> 字符串的获取相关方法</h1><h3 id="常用方法有"><a class="markdownIt-Anchor" href="#常用方法有"></a> 常用方法有:</h3><p><code>public int lenght();</code> 获取字符串长度</p><p><code>public String concat(String str);</code>拼接两个字符串</p><p><code>public char charAt(int index);</code>返回指定索引的字符</p><p><code>public int indexOf(String str);</code>查找子字符串出现在本字符串的首字符索引值,如果没有则返回-1</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo09</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line">        String str1;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> ch;</span><br><span class="line"></span><br><span class="line">        len = str.length();<span class="comment">//获取字符串长度</span></span><br><span class="line">        ch = str.charAt(<span class="number">0</span>);<span class="comment">//获取str的第0个索引的字符</span></span><br><span class="line">        str1 = str.concat(<span class="string">"def"</span>);<span class="comment">//拼接两个字符串</span></span><br><span class="line">        index = str.indexOf(<span class="string">"ab"</span>);<span class="comment">//查找子字符串第一次出现的索引值</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"字符串长度:"</span> + len);</span><br><span class="line">        System.out.println(<span class="string">"第0个字符是:"</span> + ch);</span><br><span class="line">        System.out.println(<span class="string">"拼接字符:"</span> + str1);</span><br><span class="line">        System.out.println(<span class="string">"字符串出现的"</span> + index);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;字符串的获取相关方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字符串的获取相关方法&quot;&gt;&lt;/a&gt; 字符串的获取相关方法&lt;/h1&gt;
+&lt;h3 id=&quot;常用方法有&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>字符串的比较方法</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/17/java00055%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%AF%94%E8%BE%83%E6%96%B9%E6%B3%95/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/17/java00055字符串的比较方法/</id>
+    <published>2020-02-16T17:14:16.000Z</published>
+    <updated>2020-02-16T17:42:58.762Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="字符串的比较方法"><a class="markdownIt-Anchor" href="#字符串的比较方法"></a> 字符串的比较方法</h1><p>想让两个字符串进行比较,就用:</p><p><code>public boolean equals(Object obj);</code>方法,区分大小写</p><p><code>public boolean equalsIgnoreCase(Object obj);</code>不区分字母大小写</p><p>参数可以是任何对象,只有参数是一个字符串并且内容相同的才会返回一个true,否者返回false.</p><p>1.任何对象都可以用Object来接收.</p><p>2.equals方法具有对称性,也就是<code>a.equals(b)</code>和<code>b.equals(a)</code>是一样的</p><p>3.如果比较两个字符串一个是字符串常量,另一个是字符串变量,推荐把字符串常量写在前面.</p><p>推荐:<code>&quot;zzz&quot;.equals(str);</code> 不推荐 <code>abc.equals(&quot;zzz&quot;);</code></p><p>因为如果<code>abc</code>是一个<code>null</code>又调用<code>equals()</code>就会抛出异常.</p><p>如果是<code>zzz.equals(str)</code>则会返回一个<code>false</code>;</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo08</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str1 = <span class="keyword">new</span> String(<span class="string">"123"</span>);</span><br><span class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">"123"</span>);</span><br><span class="line">        String str3 = <span class="keyword">new</span> String(<span class="string">"456"</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(str1.equals(str2));<span class="comment">//true</span></span><br><span class="line">        System.out.println(str1.equals(str3));<span class="comment">//false</span></span><br><span class="line">System.out.println(<span class="string">"ABC"</span>.equalsIgnoreCase(<span class="string">"abc"</span>));<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;字符串的比较方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字符串的比较方法&quot;&gt;&lt;/a&gt; 字符串的比较方法&lt;/h1&gt;
+&lt;p&gt;想让两个字符串进行比较,就用:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;public boolean equals(Obj
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>字符串的常量池</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/17/java00054%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%B8%B8%E9%87%8F%E6%B1%A0/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/17/java00054字符串的常量池/</id>
+    <published>2020-02-16T16:51:33.000Z</published>
+    <updated>2020-02-16T17:24:17.046Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="字符串的常量池"><a class="markdownIt-Anchor" href="#字符串的常量池"></a> 字符串的常量池</h1><p>字符串常量池:程序当中直接写上的双引号字符串,就在字符串常量池中.</p><p>对于基本类型来说, == 是用来进行数值比较的.</p><p>对于引用类型来说,== 是进行<code>地址值</code>的比较.</p><p>String引用声明出来的字符串是不能直接修改的,修改的只是是地址值.</p><p><img src="/images/javawz/1581872109494-1581872125024.png" alt="1581872109494"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;字符串的常量池&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字符串的常量池&quot;&gt;&lt;/a&gt; 字符串的常量池&lt;/h1&gt;
+&lt;p&gt;字符串常量池:程序当中直接写上的双引号字符串,就在字符串常量池中.&lt;/p&gt;
+&lt;p&gt;对于基本类型来说, == 是用来
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>字符串的构造和直接创建</title>
     <link href="https://xiaowuyoucy.github.io/2020/02/15/java00053%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9E%84%E9%80%A0%E5%92%8C%E7%9B%B4%E6%8E%A5%E5%88%9B%E5%BB%BA/"/>
     <id>https://xiaowuyoucy.github.io/2020/02/15/java00053字符串的构造和直接创建/</id>
     <published>2020-02-15T14:01:21.000Z</published>
-    <updated>2020-02-15T14:11:15.184Z</updated>
+    <updated>2020-02-15T14:20:47.169Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="字符串的构造和直接创建"><a class="markdownIt-Anchor" href="#字符串的构造和直接创建"></a> 字符串的构造和直接创建</h1><h2 id="创建字符串的常见31种方式"><a class="markdownIt-Anchor" href="#创建字符串的常见31种方式"></a> 创建字符串的常见3+1种方式.</h2><h3 id="三种构造方法"><a class="markdownIt-Anchor" href="#三种构造方法"></a> 三种构造方法:</h3><p>1.创建一个空白字符串,不含有任何内容.</p><p><code>public String();</code></p><br><p>2.根据字符数组的内容,来创建对呀的字符串.</p><p><code>public String(char[] array);</code></p><br><p>3.根据字节数组的内容,来创建对应的字符串.</p><p><code>public String(byte[] array);</code></p><br><br><h3 id="一种直接创建"><a class="markdownIt-Anchor" href="#一种直接创建"></a> 一种直接创建:</h3><p><code>String str = &quot;abc&quot;; //右边直接用双引号</code></p><br><br><h3 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意:</h3><p>直接写上双引号,就是字符串对象了</p><br><br><hr><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo06</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//直接创建</span></span><br><span class="line">        String str1 = <span class="string">"qqqqq"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建一个空白字符串</span></span><br><span class="line">        String str2 = <span class="keyword">new</span> String();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据字符数组创建</span></span><br><span class="line">        <span class="keyword">char</span>[] charv  = &#123;<span class="string">'w'</span>,<span class="string">'w'</span>,<span class="string">'w'</span>,<span class="string">'w'</span>&#125;;</span><br><span class="line">        String str3 = <span class="keyword">new</span> String(charv);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据byte数组创建</span></span><br><span class="line">        <span class="keyword">byte</span>[] bt = &#123;(<span class="keyword">int</span>)<span class="string">'a'</span>,<span class="number">65</span>,<span class="number">67</span>,<span class="number">77</span>,<span class="number">69</span>&#125;;</span><br><span class="line">        String str4 = <span class="keyword">new</span> String(bt);</span><br><span class="line"></span><br><span class="line">        System.out.println(str1);</span><br><span class="line">        System.out.println(str2);</span><br><span class="line">        System.out.println(str3);</span><br><span class="line">        System.out.println(str4);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="字符串的构造和直接创建"><a class="markdownIt-Anchor" href="#字符串的构造和直接创建"></a> 字符串的构造和直接创建</h1><h2 id="创建字符串的常见31种方式"><a class="markdownIt-Anchor" href="#创建字符串的常见31种方式"></a> 创建字符串的常见3+1种方式.</h2><h3 id="三种构造方法"><a class="markdownIt-Anchor" href="#三种构造方法"></a> 三种构造方法:</h3><p>1.创建一个空白字符串,不含有任何内容.</p><p><code>public String();</code></p><br><p>2.根据字符数组的内容,来创建对应的字符串.</p><p><code>public String(char[] array);</code></p><br><p>3.根据字节数组的内容,来创建对应的字符串.</p><p><code>public String(byte[] array);</code></p><br><br><h3 id="一种直接创建"><a class="markdownIt-Anchor" href="#一种直接创建"></a> 一种直接创建:</h3><p><code>String str = &quot;abc&quot;; //右边直接用双引号</code></p><br><br><h4 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意:</h4><p>直接写上双引号,就是字符串对象了</p><br><br><hr><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo06</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//直接创建</span></span><br><span class="line">        String str1 = <span class="string">"qqqqq"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建一个空白字符串</span></span><br><span class="line">        String str2 = <span class="keyword">new</span> String();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据字符数组创建</span></span><br><span class="line">        <span class="keyword">char</span>[] charv  = &#123;<span class="string">'w'</span>,<span class="string">'w'</span>,<span class="string">'w'</span>,<span class="string">'w'</span>&#125;;</span><br><span class="line">        String str3 = <span class="keyword">new</span> String(charv);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据byte数组创建</span></span><br><span class="line">        <span class="keyword">byte</span>[] bt = &#123;(<span class="keyword">int</span>)<span class="string">'a'</span>,<span class="number">65</span>,<span class="number">67</span>,<span class="number">77</span>,<span class="number">69</span>&#125;;</span><br><span class="line">        String str4 = <span class="keyword">new</span> String(bt);</span><br><span class="line"></span><br><span class="line">        System.out.println(str1);</span><br><span class="line">        System.out.println(str2);</span><br><span class="line">        System.out.println(str3);</span><br><span class="line">        System.out.println(str4);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -424,78 +498,6 @@
       
         &lt;h1 id=&quot;js标识符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js标识符&quot;&gt;&lt;/a&gt; JS标识符&lt;/h1&gt;
 &lt;h3 id=&quot;标识符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#标识符&quot;&gt;&lt;/a&gt; 标识符&lt;/h3
-      
-    
-    </summary>
-    
-      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>JS字面常量和变量</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/14/JS00005%E5%AD%97%E9%9D%A2%E5%B8%B8%E9%87%8F%E5%92%8C%E5%8F%98%E9%87%8F/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/14/JS00005字面常量和变量/</id>
-    <published>2020-02-13T23:32:00.000Z</published>
-    <updated>2020-02-14T04:38:55.168Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="js字面常量和变量"><a class="markdownIt-Anchor" href="#js字面常量和变量"></a> JS字面常量和变量</h1><h3 id="字面常量"><a class="markdownIt-Anchor" href="#字面常量"></a> 字面常量:</h3><p>字面常量 都是一些不能改变的值,例如1,2,3,4;</p><p>字面常量都是可以直接使用的,但是我们一般不会直接使用;</p><h3 id="变量"><a class="markdownIt-Anchor" href="#变量"></a> 变量:</h3><p>变量可以用来保存字面量,而且变量的值是可以任意改变的.</p><p>变量在<code>JS</code>中使用<code>var</code>关键字来声明一个变量;</p><p>变量声明格式:<code>var 变量名 = 初始值;</code></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript"><span class="comment">//声明一个变量</span></span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> a;</span></span><br><span class="line"><span class="actionscript"><span class="comment">//声明一个变量,并赋初始值</span></span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> age = <span class="number">11</span>;</span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> height = <span class="number">168.8</span>;</span></span><br><span class="line"><span class="actionscript"><span class="comment">//对变量进行修改</span></span></span><br><span class="line"><span class="undefined">age = 14;</span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(age);</span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(height);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;js字面常量和变量&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js字面常量和变量&quot;&gt;&lt;/a&gt; JS字面常量和变量&lt;/h1&gt;
-&lt;h3 id=&quot;字面常量&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字面常量
-      
-    
-    </summary>
-    
-      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>JS基本语法</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/14/JS00004%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/14/JS00004基本语法/</id>
-    <published>2020-02-13T23:07:44.000Z</published>
-    <updated>2020-02-14T04:38:50.703Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="js基本语法"><a class="markdownIt-Anchor" href="#js基本语法"></a> JS基本语法</h1><h2 id="js注释"><a class="markdownIt-Anchor" href="#js注释"></a> JS注释</h2><p>多行注释: 用  /*  */</p><p>单行注释: 用  //</p><h2 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意</h2><h5 id="1js中严格区分大小写"><a class="markdownIt-Anchor" href="#1js中严格区分大小写"></a> 1.JS中严格区分大小写</h5><h5 id="2js中每一条语句以分号-结尾"><a class="markdownIt-Anchor" href="#2js中每一条语句以分号-结尾"></a> 2.JS中每一条语句以分号（ ；）结尾</h5><h6 id="如果不写分号浏览器会自动添加但是会消耗一些系统资源而且有些时候浏览器会加错分号所以在开发中分号必须要写"><a class="markdownIt-Anchor" href="#如果不写分号浏览器会自动添加但是会消耗一些系统资源而且有些时候浏览器会加错分号所以在开发中分号必须要写"></a>   如果不写分号,浏览器会自动添加,但是会消耗一些系统资源,而且有些时候,浏览器会加错分号,所以在开发中分号必须要写</h6><h5 id="3js中会忽略多个空格和换行所以我们可以利用空格和换行对代码进行格式化"><a class="markdownIt-Anchor" href="#3js中会忽略多个空格和换行所以我们可以利用空格和换行对代码进行格式化"></a> 3.JS中会忽略多个空格和换行，所以我们可以利用空格和换行对代码进行格式化。</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//年龄</span></span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> age = <span class="number">11</span>;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//身高</span></span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> height = <span class="number">168.8</span>;</span></span><br><span class="line"><span class="actionscript"><span class="comment">//在控制台上输出年龄</span></span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(age);</span></span><br><span class="line"><span class="actionscript">            <span class="comment">/* 在控制台上输出身高*/</span></span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(height);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;js基本语法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js基本语法&quot;&gt;&lt;/a&gt; JS基本语法&lt;/h1&gt;
-&lt;h2 id=&quot;js注释&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js注释&quot;&gt;&lt;/a&gt; JS
-      
-    
-    </summary>
-    
-      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript的编写位置</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/14/JS00003JavaScript%E7%9A%84%E7%BC%96%E5%86%99%E4%BD%8D%E7%BD%AE/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/14/JS00003JavaScript的编写位置/</id>
-    <published>2020-02-13T16:32:04.000Z</published>
-    <updated>2020-02-14T04:38:46.177Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="javascript的编写位置"><a class="markdownIt-Anchor" href="#javascript的编写位置"></a> JavaScript的编写位置</h1><h5 id="可以将js代码写在button标签中的onclick属性中"><a class="markdownIt-Anchor" href="#可以将js代码写在button标签中的onclick属性中"></a> 可以将js代码写在button标签中的onclick属性中</h5><p><code>&lt;button onclick=&quot;alert('我爱你');&quot; &gt;点我一下&lt;/button&gt;</code></p><h5 id="可以将js代码写在超链接的href属性中这样当点击超链接时就会执行js代码"><a class="markdownIt-Anchor" href="#可以将js代码写在超链接的href属性中这样当点击超链接时就会执行js代码"></a> 可以将js代码写在超链接的href属性中,这样当点击超链接时,就会执行js代码.</h5><p><code>&lt;a href=&quot;javascript:alert('我太爱你了');&quot;&gt;1234&lt;/a&gt;</code></p><p><code>&lt;a href=&quot;javascript:;&quot;&gt;1234&lt;/a&gt;</code></p><h5 id="可以将js代码写到script标签-推荐使用的方式"><a class="markdownIt-Anchor" href="#可以将js代码写到script标签-推荐使用的方式"></a> 可以将js代码写到script标签 ( 推荐使用的方式 )</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"><span class="comment">/*代码块*/</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure><h5 id="可以将js-代码编写到外部js文件中然后通过script标签引入"><a class="markdownIt-Anchor" href="#可以将js-代码编写到外部js文件中然后通过script标签引入"></a> 可以将js 代码编写到外部js文件中,然后通过script标签引入</h5><h5 id="外部文件后缀名以js结尾"><a class="markdownIt-Anchor" href="#外部文件后缀名以js结尾"></a> 外部文件后缀名以.js结尾</h5><h5 id="js代码写到外部文件中可以在不同的页面中同时引用也可以利用浏览器的缓存机制"><a class="markdownIt-Anchor" href="#js代码写到外部文件中可以在不同的页面中同时引用也可以利用浏览器的缓存机制"></a> js代码写到外部文件中可以在不同的页面中同时引用,也可以利用浏览器的缓存机制.</h5><h5 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意:</h5><h5 id="script标签一旦用于引入外部文件了就不能再编写代码在标签内部了即使编写了浏览器也会忽略"><a class="markdownIt-Anchor" href="#script标签一旦用于引入外部文件了就不能再编写代码在标签内部了即使编写了浏览器也会忽略"></a> <code>&lt;Script&gt;</code>标签一旦用于引入外部文件了,就不能再编写代码在标签内部了,即使编写了浏览器也会忽略</h5><h5 id="如果需要插入其他js代码则可以再创建一个新的script标签用于编写内部代码"><a class="markdownIt-Anchor" href="#如果需要插入其他js代码则可以再创建一个新的script标签用于编写内部代码"></a> 如果需要插入其他js代码,则可以再创建一个新的<code>script</code>标签用于编写内部代码</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"demo001.js"</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;javascript的编写位置&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#javascript的编写位置&quot;&gt;&lt;/a&gt; JavaScript的编写位置&lt;/h1&gt;
-&lt;h5 id=&quot;可以将js代码写在button标签中的onclick属性
       
     
     </summary>
