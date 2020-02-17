@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-02-17T09:47:55.146Z</updated>
+  <updated>2020-02-17T22:39:32.645Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -15,6 +15,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>内联框架</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/18/html-css00013%E5%86%85%E8%81%94%E6%A1%86%E6%9E%B6/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/18/html-css00013内联框架/</id>
+    <published>2020-02-17T22:29:31.000Z</published>
+    <updated>2020-02-17T22:39:32.645Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="内联框架"><a class="markdownIt-Anchor" href="#内联框架"></a> 内联框架</h1><h5 id="使用内联框架可以引入一个外部的页面"><a class="markdownIt-Anchor" href="#使用内联框架可以引入一个外部的页面"></a> 使用内联框架可以引入一个外部的页面.</h5><p>使用iframe来创建一个内联框架</p><br><h5 id="属性"><a class="markdownIt-Anchor" href="#属性"></a> 属性:</h5><p> src:指向一个外部页面的路径,可以使用相对路径</p><p> width:设置宽度</p><p> height:设置高度</p><p>不会按比例缩放</p><p> name:可以为内联框架指定一个name属性(给框架起名字)</p><br><br><br><p><code>在现实开发中不推荐使用内联框架</code>,因为内联框架中的内容不会被搜索引擎所检索,但可以在内网使用;</p><p>一般放在body标签内</p><br><br><p>格式:<code>&lt;iframe scr=&quot;目标路径&quot; name=&quot;名字&quot;&gt;</code></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">scr</span>=<span class="string">"demo.html"</span> <span class="attr">name</span>=<span class="string">"tom"</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;内联框架&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#内联框架&quot;&gt;&lt;/a&gt; 内联框架&lt;/h1&gt;
+&lt;h5 id=&quot;使用内联框架可以引入一个外部的页面&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#使用内联框架
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>xHtml的语法规范</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/18/html-css00012xHtml%E7%9A%84%E8%AF%AD%E6%B3%95%E8%A7%84%E8%8C%83/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/18/html-css00012xHtml的语法规范/</id>
+    <published>2020-02-17T21:25:32.000Z</published>
+    <updated>2020-02-17T22:20:46.608Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="xhtml的语法规范"><a class="markdownIt-Anchor" href="#xhtml的语法规范"></a> xHtml的语法规范</h1><h5 id="浏览器会尽最大的努力正确解析错误的语法你所有的不符合语法规范的内容浏览器都会为你自动修正但是有些情况会修正错误"><a class="markdownIt-Anchor" href="#浏览器会尽最大的努力正确解析错误的语法你所有的不符合语法规范的内容浏览器都会为你自动修正但是有些情况会修正错误"></a> 浏览器会尽最大的努力正确解析错误的语法,你所有的不符合语法规范的内容,浏览器都会为你自动修正,但是有些情况会修正错误.</h5><br><br><p>1.HTML中不区分大小写,但是我们一般都使用小写</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaaaaaaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure><p>2.HTML中的注释不能嵌套</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">--正确写法--</span>&gt;</span></span><br><span class="line"></span><br><span class="line">=================================================</span><br><span class="line">错误写法</span><br><span class="line"><span class="tag">&lt;<span class="name">--</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line">&lt;--</span><br><span class="line"></span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure><p>3.HTML标签必须结构完整,要么成对出现,要么自结束标签.</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">--正确写法--</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">--错误写法--</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>asdfdsf</span><br></pre></td></tr></table></figure><p>4.HTML标签可以嵌套,但是不能交叉嵌套.</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">--正确写法--</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaa<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">"red;"</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">font</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">--错误写法--</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaa<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">"red;"</span>&gt;</span>aaaaaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br></pre></td></tr></table></figure><p>5.HTML标签中的属性必须有值,且值必须加引号(双引号,单引号都可以)</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">--正确写法--</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaa<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">"red;"</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">font</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">--错误写法--</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaa<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">font</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;xhtml的语法规范&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#xhtml的语法规范&quot;&gt;&lt;/a&gt; xHtml的语法规范&lt;/h1&gt;
+&lt;h5 id=&quot;浏览器会尽最大的努力正确解析错误的语法你所有的不符合语法规范的内容浏览器都会为你自动修
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>meta标签</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/18/html-css00011meta%E6%A0%87%E7%AD%BE/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/18/html-css00011meta标签/</id>
+    <published>2020-02-17T21:09:02.000Z</published>
+    <updated>2020-02-17T21:24:26.467Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="meta标签"><a class="markdownIt-Anchor" href="#meta标签"></a> meta标签</h1><h3 id="使用meta标签还可以用来设置网页的关键字"><a class="markdownIt-Anchor" href="#使用meta标签还可以用来设置网页的关键字"></a> 使用meta标签还可以用来设置网页的关键字</h3><h5 id="格式meta-namekeywords-content-关键字"><a class="markdownIt-Anchor" href="#格式meta-namekeywords-content-关键字"></a> 格式:<code>&lt;meta name=&quot;keywords&quot; content = &quot;关键字&quot; /&gt;</code></h5><p>如果是多个关键字,就用逗号隔开.</p><p>关键字是被搜索引擎识别的.</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"HTML5,JavaScript,前端,Java"</span> /&gt;</span></span><br></pre></td></tr></table></figure><h3 id="使用meta标签用来指定网页的描述"><a class="markdownIt-Anchor" href="#使用meta标签用来指定网页的描述"></a> 使用meta标签用来指定网页的描述</h3><p>搜索引擎在检索页面时,会同时检索页面中的关键字和描述,但是这两个值不会影响页面在搜索引擎中的排名.</p><h3 id="格式meta-namedescription-content描述信息"><a class="markdownIt-Anchor" href="#格式meta-namedescription-content描述信息"></a> 格式:<code>&lt;meta name=&quot;description&quot; content=&quot;描述信息&quot; /&gt;</code></h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"发布h5,js前端等相关信息"</span> /&gt;</span></span><br></pre></td></tr></table></figure><h3 id="使用meta可以用来做请求重定向页面跳转"><a class="markdownIt-Anchor" href="#使用meta可以用来做请求重定向页面跳转"></a> 使用meta可以用来做请求重定向(页面跳转).</h3><h5 id="格式meta-http-equivrefresh-content秒数url目标路径"><a class="markdownIt-Anchor" href="#格式meta-http-equivrefresh-content秒数url目标路径"></a> 格式:<code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;秒数;url=目标路径&quot; /&gt;</code></h5><p>目标路径可以是相对地址</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span>=<span class="string">"5;http://www.baidu.com"</span>  /&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;meta标签&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#meta标签&quot;&gt;&lt;/a&gt; meta标签&lt;/h1&gt;
+&lt;h3 id=&quot;使用meta标签还可以用来设置网页的关键字&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; hre
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>算数运算符</title>
@@ -427,80 +499,6 @@
       
         &lt;h1 id=&quot;实体&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#实体&quot;&gt;&lt;/a&gt; 实体&lt;/h1&gt;
 &lt;p&gt;在&lt;code&gt;HTML&lt;/code&gt;中,一些如&amp;lt;&amp;gt;这种特殊字符是不能直接使用的,需要使用一些特殊的符号来表示这些特殊字符,这些特殊符
-      
-    
-    </summary>
-    
-      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>常用的标签</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/14/html-css00006%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A0%87%E7%AD%BE/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/14/html-css00006常用的标签/</id>
-    <published>2020-02-14T13:59:23.000Z</published>
-    <updated>2020-02-15T01:05:16.646Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="常用的标签"><a class="markdownIt-Anchor" href="#常用的标签"></a> 常用的标签</h1><h2 id="标签"><a class="markdownIt-Anchor" href="#标签"></a> 标签</h2><p><code>HTML</code>中的标记指的就是标签.</p><p><code>HTML</code>使用标记标签来描述网页</p><h3 id="结构"><a class="markdownIt-Anchor" href="#结构"></a> 结构:</h3><p><code>&lt;标签名&gt; 标签内容 &lt;/标签名&gt;</code></p><p><code>&lt;标签名 /&gt;</code></p><h3 id="元素"><a class="markdownIt-Anchor" href="#元素"></a> 元素:</h3><p>元素和标签都是等价的,说白了元素就是标签…</p><p>但我们也可以理解成一个完整的标签称为<code>元素</code>.</p><p>如上面的结构所述的就是完整的标签</p><p>例如:<code>&lt;h1&gt;我是一个完整的元素&lt;/h1&gt;</code></p><h3 id="属性"><a class="markdownIt-Anchor" href="#属性"></a> 属性:</h3><p>可以为<code>HTML</code>标签设置属性</p><p>通过属性为<code>HTML</code>元素提供附加信息</p><p>属性需要设置在<code>开始标签</code>或<code>自结束标签</code>中</p><p>属性总是以<code>名称/值对</code>的形式出现的</p><p>比如:<code>name =&quot;value&quot;</code></p><p><code>&lt;img src=&quot;&quot; alt=&quot;&quot; /&gt;</code></p><h2 id="标题标签"><a class="markdownIt-Anchor" href="#标题标签"></a> 标题标签</h2><p>在<code>HTML</code>中一共有6级标题标签</p><p><code>h1~h6</code>,其中h1最大,<code>h6</code>最小</p><p>使用<code>html</code>标签时,关心的是标签的语义,我们使用的标签都是语义化标签.</p><p>6级标题中,<code>h1</code>的最重要,h1的重要性仅次于<code>title</code>,搜索引擎检索完<code>title</code>之后,会立即查看<code>h1</code>中的内容</p><p><code>h1</code>标签非常重要,他会影响到页面在搜索引擎中的排名,页面只能写一个<code>h1</code></p><p>一般页面中标题标签只使用<code>h1~h3</code>标题标签,<code>h3</code>以后的基本不使用</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是1级标签<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>我是2级标签<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>我是3级标签<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>我是4级标签<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h5</span>&gt;</span>我是5级标签<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h6</span>&gt;</span>我是6级标签<span class="tag">&lt;/<span class="name">h6</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="段落标签"><a class="markdownIt-Anchor" href="#段落标签"></a> 段落标签</h2><p>段落标签,段落标签用于表示内容中的一个自然段</p><p>使用<code>p</code>标签来表示一个段落</p><p><code>p</code>标签中的文字,默认会独占一行,并且段与段之间会有一个间距</p><p><code>&lt;p&gt;我是一个段落标签,用来表示一个自然段.&lt;/p&gt;</code></p><p>在<code>HTML</code>中,字符之间写再多的空格,浏览器也会当成一个空格解析,换行也会当成一个空格解析</p><h2 id="br换行标签"><a class="markdownIt-Anchor" href="#br换行标签"></a> &lt;br&gt;换行标签</h2><p>在页面中使用<code>br</code>标签来表示一个换行,br标签是一个自结束标签.</p><p><code>&lt;br /&gt;</code></p><h2 id="hr水平标签"><a class="markdownIt-Anchor" href="#hr水平标签"></a> &lt;hr&gt;水平标签</h2><p><code>hr</code>也是一个自结束标签,可以在页面中生成一条水平线.</p><p><code>&lt;hr /&gt;</code></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;常用的标签&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#常用的标签&quot;&gt;&lt;/a&gt; 常用的标签&lt;/h1&gt;
-&lt;h2 id=&quot;标签&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#标签&quot;&gt;&lt;/a&gt; 标签&lt;/h2&gt;
-&lt;
-      
-    
-    </summary>
-    
-      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>乱码问题</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/14/html-css00005%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/14/html-css00005乱码问题/</id>
-    <published>2020-02-14T13:08:01.000Z</published>
-    <updated>2020-02-14T13:26:46.712Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="乱码问题"><a class="markdownIt-Anchor" href="#乱码问题"></a> 乱码问题</h1><h3 id="编码"><a class="markdownIt-Anchor" href="#编码"></a> 编码:</h3><p>依据一定的规则,将字符转换为二进制编码的过程称之为编码.</p><h3 id="解码"><a class="markdownIt-Anchor" href="#解码"></a> 解码:</h3><p>依据一定的规则,将二进制编码转换为字符的过程称之为解码.</p><h3 id="字符集"><a class="markdownIt-Anchor" href="#字符集"></a> 字符集:</h3><p>编码和解码所采用的规则,我们称之为字符集</p><h5 id="常见字符集"><a class="markdownIt-Anchor" href="#常见字符集"></a>   常见字符集:</h5><h5 id="1ascii"><a class="markdownIt-Anchor" href="#1ascii"></a>     1.ASCII</h5><h5 id="2iso-8859-1"><a class="markdownIt-Anchor" href="#2iso-8859-1"></a>     2.ISO-8859-1</h5><h5 id="3gbk"><a class="markdownIt-Anchor" href="#3gbk"></a>     3.GBK</h5><h5 id="4gb2312-中文系统默认编码"><a class="markdownIt-Anchor" href="#4gb2312-中文系统默认编码"></a>     4.GB2312 中文系统默认编码</h5><h5 id="5utf-8-万国码支持地球上所有的文字"><a class="markdownIt-Anchor" href="#5utf-8-万国码支持地球上所有的文字"></a>     5.UTF-8 万国码,支持地球上所有的文字</h5><h3 id="乱码原因"><a class="markdownIt-Anchor" href="#乱码原因"></a> 乱码原因:</h3><p>产生乱码的根本原因是,编码和解码所采用的字符集不同</p><p>在中文系统的浏览器中,默认都是使用GB2312进行解码的</p><h3 id="解决"><a class="markdownIt-Anchor" href="#解决"></a> 解决:</h3><p>用<code>&lt;meta charset=&quot;字符集&quot; /&gt;</code>标签告诉浏览器网页所采用的编码字符集</p><p>meta标签用来设置网页的一些元数据,比如网页的字符集,关键字,简介等…</p><p>meta是一个自结束标签,编写一个自结束标签时,可以在开始标签中添加一个 /</p><h3 id="ansi"><a class="markdownIt-Anchor" href="#ansi"></a> ANSI</h3><p>ANSI代表智能字符集,会跟随操作系统默认选择的字符集</p><p>例如中文操作系统默认的字符集是GB2312</p><p><img src="/images/javawz/1581686657431-1581686663189.png" alt="1581686657431"></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--告诉浏览器,使用UTF-8进行解码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;乱码问题&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#乱码问题&quot;&gt;&lt;/a&gt; 乱码问题&lt;/h1&gt;
-&lt;h3 id=&quot;编码&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#编码&quot;&gt;&lt;/a&gt; 编码:&lt;/h3&gt;
-&lt;p&gt;
-      
-    
-    </summary>
-    
-      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>JS文档声明</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/14/html-css00004%E6%96%87%E6%A1%A3%E5%A3%B0%E6%98%8E/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/14/html-css00004文档声明/</id>
-    <published>2020-02-14T12:17:28.000Z</published>
-    <updated>2020-02-14T13:07:30.471Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="js文档声明"><a class="markdownIt-Anchor" href="#js文档声明"></a> JS文档声明</h1><p><img src="/images/javawz/1581682714388-1581682719928.png" alt="1581682714388"></p><h3 id="我们需要告诉浏览器我们编写的html是使用哪个版本的"><a class="markdownIt-Anchor" href="#我们需要告诉浏览器我们编写的html是使用哪个版本的"></a> 我们需要告诉浏览器我们编写的html是使用哪个版本的</h3><p><img src="/images/javawz/1581682756531-1581682761895.png" alt="1581682756531"></p><p><img src="/images/javawz/1581682965391-1581682971863.png" alt="1581682965391"></p><h3 id="html5版本的文档声明很简单只需要在顶部添加doctype-html既可"><a class="markdownIt-Anchor" href="#html5版本的文档声明很简单只需要在顶部添加doctype-html既可"></a> HTML5版本的文档声明很简单,只需要在顶部添加<code>&lt;!DOCTYPE html&gt;</code>既可.</h3><h3 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> <code>注意事项</code></h3><h5 id="如果不添加文档声明则会导致有些浏览器会进入一个怪异模式进入怪异模式以后浏览器解析页面会导致页面无法正常显示所以为了避免进入该模式一定要写文档声明"><a class="markdownIt-Anchor" href="#如果不添加文档声明则会导致有些浏览器会进入一个怪异模式进入怪异模式以后浏览器解析页面会导致页面无法正常显示所以为了避免进入该模式一定要写文档声明"></a> 如果不添加文档声明,则会导致有些浏览器会进入一个怪异模式,进入怪异模式以后,浏览器解析页面会导致页面无法正常显示,所以为了避免进入该模式,一定要写文档声明</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--我是文档声明--&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;js文档声明&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js文档声明&quot;&gt;&lt;/a&gt; JS文档声明&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&quot;/images/javawz/1581682714388-1581682719928.png&quot; al
       
     
     </summary>
