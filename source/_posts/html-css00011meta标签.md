@@ -38,6 +38,8 @@ doc:
 
 目标路径可以是相对地址
 
+绝对路径要在开头加上`https://`或`http://`
+
 ```html
 <meta http-equiv="refresh" content="5;http://www.baidu.com"  />
 ```
