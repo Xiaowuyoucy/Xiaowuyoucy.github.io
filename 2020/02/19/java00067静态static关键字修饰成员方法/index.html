@@ -17,20 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>归档: 2015/4 | YanChen</title>
-  <meta name="description" content="博客关注WEB网络安全、IT行业、网络资源、电脑技术、网络安全技术、网络安全知识、互联网安全知识、网站建设技术交流博、学习投资、金融理财">
+  <title>静态static关键字修饰成员方法 | YanChen</title>
+  <meta name="description" content="静态static关键字修饰成员方法 1.一旦使用static修饰成员方法,那么这就成为了静态方法. 2.静态方法不属于对象,而是属于类的. 3.如果没有用static关键字,那么首先必须先创建对象,然后通过对象才能使用成员方法. 4.对于静态方法来说,可以通过对象名进行调用,也可以通过类名来调用.但推荐使用类名来调用. 5.如果是使用对象名来调用静态成员变量,在编译之后也会被javac翻译成为类">
 <meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
-<meta property="og:type" content="website">
-<meta property="og:title" content="YanChen">
-<meta property="og:url" content="https://xiaowuyoucy.github.io/archives/2015/04/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="静态static关键字修饰成员方法">
+<meta property="og:url" content="https://xiaowuyoucy.github.io/2020/02/19/java00067静态static关键字修饰成员方法/index.html">
 <meta property="og:site_name" content="YanChen">
-<meta property="og:description" content="博客关注WEB网络安全、IT行业、网络资源、电脑技术、网络安全技术、网络安全知识、互联网安全知识、网站建设技术交流博、学习投资、金融理财">
+<meta property="og:description" content="静态static关键字修饰成员方法 1.一旦使用static修饰成员方法,那么这就成为了静态方法. 2.静态方法不属于对象,而是属于类的. 3.如果没有用static关键字,那么首先必须先创建对象,然后通过对象才能使用成员方法. 4.对于静态方法来说,可以通过对象名进行调用,也可以通过类名来调用.但推荐使用类名来调用. 5.如果是使用对象名来调用静态成员变量,在编译之后也会被javac翻译成为类">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-19T00:37:04.747Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YanChen">
-<meta name="twitter:description" content="博客关注WEB网络安全、IT行业、网络资源、电脑技术、网络安全技术、网络安全知识、互联网安全知识、网站建设技术交流博、学习投资、金融理财">
+<meta name="twitter:title" content="静态static关键字修饰成员方法">
+<meta name="twitter:description" content="静态static关键字修饰成员方法 1.一旦使用static修饰成员方法,那么这就成为了静态方法. 2.静态方法不属于对象,而是属于类的. 3.如果没有用static关键字,那么首先必须先创建对象,然后通过对象才能使用成员方法. 4.对于静态方法来说,可以通过对象名进行调用,也可以通过类名来调用.但推荐使用类名来调用. 5.如果是使用对象名来调用静态成员变量,在编译之后也会被javac翻译成为类">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://xiaowuyoucy.github.io/archives/2015/04/index.html">
+  <link rel="canonical" href="https://xiaowuyoucy.github.io/2020/02/19/java00067静态static关键字修饰成员方法/index.html">
   
     <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
   
@@ -369,78 +370,201 @@
   
   
 <main class="main" role="main">
-  	<article class="content article article-archives article-type-list" itemscope>
-	    <header class="article-header">
-	      <h1 itemprop="title">归档: 2015/4</h1>
-	      <p class="text-muted">共 4 篇文章</p>
-	    </header>
-	    <div class="article-body">
-	      
+  <div class="content">
+  <article id="post-java00067静态static关键字修饰成员方法" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
   
+    <h1 class="article-title" itemprop="name">
+      静态static关键字修饰成员方法
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/02/19/java00067静态static关键字修饰成员方法/" class="article-date">
+	  <time datetime="2020-02-18T23:57:16.000Z" itemprop="datePublished">2020-02-19</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </span>
+
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/02/19/java00067静态static关键字修饰成员方法/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 521(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 2(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="静态static关键字修饰成员方法"><a class="markdownIt-Anchor" href="#静态static关键字修饰成员方法"></a> 静态static关键字修饰成员方法</h1>
+<p>1.一旦使用<code>static</code>修饰成员方法,那么这就成为了静态方法.</p>
+<p>2.静态方法不属于对象,而是属于类的.</p>
+<p>3.如果没有用<code>static</code>关键字,那么首先必须先创建对象,然后通过对象才能使用成员方法.</p>
+<p>4.对于静态方法来说,可以通过对象名进行调用,也可以通过类名来调用.但推荐使用类名来调用.</p>
+<p>5.如果是使用对象名来调用静态成员变量,在编译之后也会被<code>javac</code>翻译成为<code>类名.静态方法名</code></p>
+<p>6.如果有了<code>static</code>关键字,那么不需要创建对象,直接就能通过类名称来使用它</p>
+<p>7.无论是成员变量还是成员方法,如果有了<code>static</code>,都推荐使用<code>类名称</code>进行调用.</p>
+<p>8.静态成员变量:<code>类名称.静态变量;</code></p>
+<p>9.静态方法:<code>类名称.静态方法();</code></p>
+<p>10.对于在本类当中的静态方法,可以省略类名称.</p>
+<br>
+<br>
+<h5 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意:</h5>
+<p>1.静态不能直接访问非静态.</p>
+<p>原因:因为在内存当中,是先有的静态内容,后有的非静态内容.</p>
+<br>
+<p>2.静态方法不能使用this.</p>
+<p>原因:this代表当前对象,通过谁调用的方法,谁就是对象.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main16</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Student2 stu = <span class="keyword">new</span> Student2(<span class="string">"小明"</span>);</span><br><span class="line">        Student2.room = <span class="string">"101课室"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用成员方法</span></span><br><span class="line">        stu.showVar();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用静态成员方法</span></span><br><span class="line">        Student2.showStaticVar();</span><br><span class="line">        stu.showStaticVar();<span class="comment">//不推荐使用对象名调用静态成员方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个Student2类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student2</span></span>&#123;</span><br><span class="line">    String name;</span><br><span class="line"><span class="comment">/*====================================================================*/</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String room;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student2</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*====================================================================*/</span></span><br><span class="line">    <span class="comment">//非静态成员方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showVar</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"名字: "</span> + <span class="keyword">this</span>.name);</span><br><span class="line">        System.out.println(<span class="string">"年龄: "</span> + Student2.room);</span><br><span class="line"></span><br><span class="line">        showStaticVar(); <span class="comment">//在本类中可以直接使用静态成员方法,不用加类名</span></span><br><span class="line">        Student2.showStaticVar(); <span class="comment">//加类名使用静态成员方法</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//静态成员方法</span></span><br><span class="line">    <span class="comment">//属于类,不属于对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">showStaticVar</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"年龄: "</span> + Student2.room);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xiaowuyoucy.github.io/2020/02/19/java00067静态static关键字修饰成员方法/" title="静态static关键字修饰成员方法" target="_blank" rel="external">https://xiaowuyoucy.github.io/2020/02/19/java00067静态static关键字修饰成员方法/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
   
     
+  <section id="comments">
+  	
+		  
+
     
-      
-      
-      <section class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2015" aria-expanded="true">
-              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
-              2015
-            </a>
-            <!-- <a href="/archives/2015" class="archive-year">2015</a> -->
-          </h3>
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/02/19/java00066静态static关键字修饰成员变量/" title="静态static关键字修饰成员变量"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div id="collapse2015" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2015">
-        <div class="panel-body">
-          <div class="collection">
-    
-    
-<a href="/2015/04/09/201504091559/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2015-04-09T07:59:18.000Z" itemprop="datePublished">2015-04-09</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> js-this方法
-</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-  
-    
-    
-    
-<a href="/2015/04/07/201504072316/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2015-04-07T15:16:20.000Z" itemprop="datePublished">2015-04-07</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> javascript函数
-</a>
 
-
-  
-    
-    
-    
-<a href="/2015/04/05/201804051318/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2015-04-04T20:13:18.000Z" itemprop="datePublished">2015-04-05</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> js布尔类型的隐私转换
-</a>
-
-
-  
-    
-    
-    
-<a href="/2015/04/05/201504051853/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2015-04-04T20:13:18.000Z" itemprop="datePublished">2015-04-05</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> while和dowhile循环
-</a>
-
-
-  
-  
-    </div></div></div></section>
-  
-
-	    </div>
-  	</article>
-  	 	
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -487,6 +611,33 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '032928647cd59bc9f443',
+    clientSecret: '82a11fd93e4d0779655af6dc4b73942a03e95276',
+    repo: 'Xiaowuyoucy.github.io',
+    owner: 'Xiaowuyoucy',
+    admin: ['Xiaowuyoucy'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
 
 
 
