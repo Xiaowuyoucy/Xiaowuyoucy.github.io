@@ -53,6 +53,7 @@ public class Main15{
         Student two = new Student("张无极",23);
         Student three = new Student("赵敏",18);
         Student four = new Student("周芷若",18);
+        //使用静态成员变量
         Student.room = "101教师";
         System.out.println("名字:" + one.getName() + "  年龄:"
                 + one.getAge() + "  课室" + one.room
@@ -80,9 +81,9 @@ public class Main15{
 public class Student{
     private String name;
     private int    age;
-    public static String  room;
+    public static String  room;//公开的静态成员变量
     private int id;
-    private static int countIdNumber;
+    private static int countIdNumber;//私有的静态成员变量
 
     public int getId() {
         return id;
@@ -117,3 +118,78 @@ public class Student{
 
 ```
 
+
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+
+
+### `快捷键:`
+
+​	`数字.fori`按下回车或tab键之后,会自动生成一个循环6次的for循环语句
+
+```java
+for(int i = 0;i < 6;i++)
+{
+
+}
+```
+
+<br>
+
+<br>
+
+<br>
+
+`数组名.fori`
+
+```java
+for(int i = 0;i < 数组名.lenght;i++)
+{
+
+}
+```
+
+<br>
+
+<br>
+
+`变量名.sout`
+
+```java
+System.out.println(变量名);
+```
+
+<br>
+
+<br>`对象.sout`
+
+```java
+System.out.println(对象名);
+```
+
+<br>
+
+<br>`对象名.成员变量.sout`
+
+```java
+System.out.println(对象名.成员变量);
+```
+
+<br>
+
+<br>
+
+`数组名[i].sout`
+
+```java
+System.out.println(数组名[i]);
+```
+
+<br><br><br>
