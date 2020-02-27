@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-02-24T02:04:20.976Z</updated>
+  <updated>2020-02-27T13:29:52.382Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -17,9 +17,156 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>静态static的内存图</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/27/java00068%E9%9D%99%E6%80%81static%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/27/java00068静态static的内存图/</id>
+    <published>2020-02-27T13:28:50.000Z</published>
+    <updated>2020-02-27T13:29:52.382Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="静态static的内存图"><a class="markdownIt-Anchor" href="#静态static的内存图"></a> 静态static的内存图</h1><p><img src="/images/javawz/1582810135585.png" alt="1582810135585"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;静态static的内存图&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#静态static的内存图&quot;&gt;&lt;/a&gt; 静态static的内存图&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/images/javawz/1582810135585.png
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MYSQL常见命令</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/27/mysql006MYSQL%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/27/mysql006MYSQL常见命令/</id>
+    <published>2020-02-26T23:03:01.000Z</published>
+    <updated>2020-02-26T23:20:14.392Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mysql常见命令"><a class="markdownIt-Anchor" href="#mysql常见命令"></a> MYSQL常见命令</h1><p>1.查看当前所有的数据库</p><p><code>show databases;</code></p><br><br><p>2.打开指定的库</p><p><code>use 库名;</code></p><br><br><p>3.查看当前库的所有表</p><p><code>show tables;</code></p><br><br><p>4.查看其他库的所有表</p><p><code>show tables from 库名;</code></p><br><br><p>5.创建表</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">列名 列类型,</span><br><span class="line">列名 列类型,</span><br><span class="line">...</span><br><span class="line">);</span><br></pre></td></tr></table></figure><br><br><p>6.查看表结构</p><p><code>desc 表名;</code></p><br><br><p>7.查看数据库版本</p><p>方式一:登录到<code>mysql</code>服务端</p><p><code>select version();</code></p><br><p>方式二:没有登录到<code>mysql</code>服务端</p><p><code>mysql --version</code>或者<code>mysql -V</code></p><br><br><p><br><br></p><br><br>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;mysql常见命令&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#mysql常见命令&quot;&gt;&lt;/a&gt; MYSQL常见命令&lt;/h1&gt;
+&lt;p&gt;1.查看当前所有的数据库&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;show databases;&lt;/code&gt;&lt;/p
+      
+    
+    </summary>
+    
+      <category term="MYSQL" scheme="https://xiaowuyoucy.github.io/categories/MYSQL/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MYSQL服务端的登录和退出</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/27/mysql005MYSQL%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/27/mysql005MYSQL服务端的登录和退出/</id>
+    <published>2020-02-26T22:49:57.000Z</published>
+    <updated>2020-02-26T23:01:19.621Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mysql服务端的登录和退出"><a class="markdownIt-Anchor" href="#mysql服务端的登录和退出"></a> MYSQL服务端的登录和退出</h1><p>1.用<code>mysql</code>自带的客户端</p><p><img src="/images/javawz/1582757475054.png" alt="1582757475054"></p><p>直接输入密码就可以进入数据库管理系统了</p><p>2.使用<code>cmd</code>登录</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//   -h 连接的主机  -P 代表端口号</span><br><span class="line"></span><br><span class="line">//第一种方式</span><br><span class="line"></span><br><span class="line">mysql -h 主机名 -P 端口号 -u 用户名 -p</span><br><span class="line"></span><br><span class="line">// mysql -h localhost -P 3306 -u root -p</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//第二种方式</span><br><span class="line">mysql -h 主机名 -P 端口号 -u 用户名 -p密码</span><br><span class="line">//mysql -h localhost -P 3306 -u root -p123</span><br><span class="line">//-p后面没有空格</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//第三种方式</span><br><span class="line">//在服务端本机登录可以省略</span><br><span class="line">mysql -u 用户名 -p</span><br><span class="line"></span><br><span class="line">mysql -u 用户名 -p密码</span><br></pre></td></tr></table></figure><h3 id="退出"><a class="markdownIt-Anchor" href="#退出"></a> 退出</h3><p>用<code>exit</code>命令或者<code>Ctrl + C</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;mysql服务端的登录和退出&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#mysql服务端的登录和退出&quot;&gt;&lt;/a&gt; MYSQL服务端的登录和退出&lt;/h1&gt;
+&lt;p&gt;1.用&lt;code&gt;mysql&lt;/code&gt;自带的客户端&lt;/p&gt;
+&lt;p&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="MYSQL" scheme="https://xiaowuyoucy.github.io/categories/MYSQL/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MYSQL服务的启动和停止</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/27/mysql004MYSQL%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%90%AF%E5%8A%A8%E5%92%8C%E5%81%9C%E6%AD%A2/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/27/mysql004MYSQL服务的启动和停止/</id>
+    <published>2020-02-26T22:43:46.000Z</published>
+    <updated>2020-02-26T22:49:09.711Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mysql服务的启动和停止"><a class="markdownIt-Anchor" href="#mysql服务的启动和停止"></a> MYSQL服务的启动和停止</h1><h3 id="用管理员身份打开cmd命令"><a class="markdownIt-Anchor" href="#用管理员身份打开cmd命令"></a> 用管理员身份打开CMD命令</h3><h5 id="停止服务"><a class="markdownIt-Anchor" href="#停止服务"></a> 停止服务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net stop 数据库服务名</span><br></pre></td></tr></table></figure><h5 id="开启服务"><a class="markdownIt-Anchor" href="#开启服务"></a> 开启服务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start 数据库服务名</span><br></pre></td></tr></table></figure><h3 id="第二种方式"><a class="markdownIt-Anchor" href="#第二种方式"></a> 第二种方式:</h3><p>在图形服务管理中找到服务名,设置为开启状态</p><p><img src="/images/javawz/1582757260070.png" alt="1582757260070"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;mysql服务的启动和停止&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#mysql服务的启动和停止&quot;&gt;&lt;/a&gt; MYSQL服务的启动和停止&lt;/h1&gt;
+&lt;h3 id=&quot;用管理员身份打开cmd命令&quot;&gt;&lt;a class=&quot;markdownI
+      
+    
+    </summary>
+    
+      <category term="MYSQL" scheme="https://xiaowuyoucy.github.io/categories/MYSQL/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>配置文件介绍</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/27/mysql003%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/27/mysql003配置文件介绍/</id>
+    <published>2020-02-26T22:29:44.000Z</published>
+    <updated>2020-02-26T22:42:43.192Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="配置文件介绍"><a class="markdownIt-Anchor" href="#配置文件介绍"></a> 配置文件介绍</h1><h3 id="myini文件是数据库配置文件"><a class="markdownIt-Anchor" href="#myini文件是数据库配置文件"></a> my.ini文件是数据库配置文件</h3><h5 id="客户端字符集"><a class="markdownIt-Anchor" href="#客户端字符集"></a> 客户端字符集</h5><center><p><img src="/images/javawz/1582756240035.png" alt="1582756240035"></p></center><h5 id="服务端配置"><a class="markdownIt-Anchor" href="#服务端配置"></a> 服务端配置:</h5><center><p>服务端端口</p><p><img src="/images/javawz/1582756279596.png" alt="1582756279596"></p><p>服务端安装目录</p><p><img src="/images/javawz/1582756338813.png" alt="1582756338813"></p><p>数据库的管理文件目录</p><p><img src="/images/javawz/1582756393381-1582756609737.png" alt="1582756393381"></p><p>字符集</p><p><img src="/images/javawz/1582756426364-1582756605372.png" alt="1582756426364"></p><p>数据库存储引擎</p><p><img src="/images/javawz/1582756474933.png" alt="1582756474933"></p><p>语法模式</p><p><img src="/images/javawz/1582756510505-1582756527371.png" alt="1582756510505"></p><p>最大连接数</p><p><img src="/images/javawz/1582756584436.png" alt="1582756584436"></p></center><h3 id="修改完之后数据库服务要重启"><a class="markdownIt-Anchor" href="#修改完之后数据库服务要重启"></a> 修改完之后,数据库服务要重启</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;配置文件介绍&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#配置文件介绍&quot;&gt;&lt;/a&gt; 配置文件介绍&lt;/h1&gt;
+&lt;h3 id=&quot;myini文件是数据库配置文件&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#my
+      
+    
+    </summary>
+    
+      <category term="MYSQL" scheme="https://xiaowuyoucy.github.io/categories/MYSQL/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MYSQL软件安装</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/27/mysql002MYSQL%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/27/mysql002MYSQL软件安装/</id>
+    <published>2020-02-26T21:26:20.000Z</published>
+    <updated>2020-02-26T21:32:01.056Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mysql软件安装"><a class="markdownIt-Anchor" href="#mysql软件安装"></a> MYSQL软件安装</h1><center><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051512.png" alt="微信截图_20200227051512"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051531.png" alt="微信截图_20200227051531"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051608.png" alt="微信截图_20200227051608"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051622.png" alt="微信截图_20200227051622"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051808.png" alt="微信截图_20200227051808"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051845.png" alt="微信截图_20200227051845"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051912.png" alt="微信截图_20200227051912"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051948.png" alt="微信截图_20200227051948"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052049.png" alt="微信截图_20200227052049"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052145.png" alt="微信截图_20200227052145"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052210.png" alt="微信截图_20200227052210"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052254.png" alt="微信截图_20200227052254"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052329.png" alt="微信截图_20200227052329"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052403.png" alt="微信截图_20200227052403"></p></center>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;mysql软件安装&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#mysql软件安装&quot;&gt;&lt;/a&gt; MYSQL软件安装&lt;/h1&gt;
+&lt;center&gt;
+&lt;p&gt;&lt;img src=&quot;/images/javawz/%E5%BE%AE%E4%BF%A
+      
+    
+    </summary>
+    
+      <category term="MYSQL" scheme="https://xiaowuyoucy.github.io/categories/MYSQL/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>数据库的相关概念</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/24/数据库的相关概念/</id>
+    <link href="https://xiaowuyoucy.github.io/2020/02/24/mysql001%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/24/mysql001数据库的相关概念/</id>
     <published>2020-02-24T01:59:40.000Z</published>
     <updated>2020-02-24T02:04:20.976Z</updated>
     
@@ -352,154 +499,6 @@
     </summary>
     
       <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>转换为Boolean</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/17/JS00014%E8%BD%AC%E6%8D%A2%E4%B8%BABoolean/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/17/JS00014转换为Boolean/</id>
-    <published>2020-02-17T08:58:33.000Z</published>
-    <updated>2020-02-17T09:10:07.684Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="转换为boolean"><a class="markdownIt-Anchor" href="#转换为boolean"></a> 转换为Boolean</h1><h3 id="将其他类型转换为boolean"><a class="markdownIt-Anchor" href="#将其他类型转换为boolean"></a> 将其他类型转换为Boolean</h3><p>使用<code>Boolean()函数</code></p><p>除了0和NaN,其他的都为<code>true</code></p><p>字符串转布尔,除了空串,其余的都是<code>true.</code></p><p><code>null</code>和<code>undefined</code>都会转换为<code>false</code></p><p>对象也会转换为<code>true</code></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">123</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="literal">NaN</span>;</span><br><span class="line"><span class="keyword">var</span> d = <span class="string">""</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(a));<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(b);<span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(c));<span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(d));<span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">null</span>));<span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">undefined</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure><br><br><br><br><br>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;转换为boolean&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#转换为boolean&quot;&gt;&lt;/a&gt; 转换为Boolean&lt;/h1&gt;
-&lt;h3 id=&quot;将其他类型转换为boolean&quot;&gt;&lt;a class=&quot;markdownIt-Ancho
-      
-    
-    </summary>
-    
-      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>其他进制的数字</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/17/JS00013%E5%85%B6%E4%BB%96%E8%BF%9B%E5%88%B6%E7%9A%84%E6%95%B0%E5%AD%97/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/17/JS00013其他进制的数字/</id>
-    <published>2020-02-17T08:33:11.000Z</published>
-    <updated>2020-02-17T08:57:07.851Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="其他进制的数字"><a class="markdownIt-Anchor" href="#其他进制的数字"></a> 其他进制的数字</h1><p>在JS中,如果需要表示16进制的数字,则需要以0x开头.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">0x12334</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure><p>如果需要表示8进制,则用0开头</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">010</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure><p>如果需要表示二进制,用0b开头.但不是所有浏览器都支持.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">0b010</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure><p>有些浏览器会把&quot;070&quot;这种字符串当成10进制</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">"070"</span>;</span><br><span class="line"><span class="built_in">parseInt</span>(a);<span class="comment">//有些浏览器会把这种字符串当成10进制</span></span><br><span class="line"><span class="comment">//解决方法</span></span><br><span class="line"><span class="built_in">parseInt</span>(a,<span class="number">8</span>);</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;其他进制的数字&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#其他进制的数字&quot;&gt;&lt;/a&gt; 其他进制的数字&lt;/h1&gt;
-&lt;p&gt;在JS中,如果需要表示16进制的数字,则需要以0x开头.&lt;/p&gt;
-&lt;figure class=&quot;highlight
-      
-    
-    </summary>
-    
-      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>强制类型转换-Number</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/17/JS00012%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2Number/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/17/JS00012强制类型转换Number/</id>
-    <published>2020-02-17T07:48:04.000Z</published>
-    <updated>2020-02-17T08:20:46.379Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="强制类型转换-number"><a class="markdownIt-Anchor" href="#强制类型转换-number"></a> 强制类型转换-Number</h1><p>将其他数据类型转换为``Number`</p><p>字符串----&gt;数字</p><h4 id="转换方式一"><a class="markdownIt-Anchor" href="#转换方式一"></a> 转换方式一:</h4><p>使用<code>Number()</code>函数;</p><p><code>Number(变量)</code></p><p>1.如果是纯数字的字符串,则直接将其转换为数字</p><p>2.如果是字符串中有非数字的内容,则转换为NaN</p><p>3.如果字符串是一个空串或者是一个全空格的字符串,则转换为0</p><p>4.布尔类型转Number,true会转换为1,false转换为0</p><p>5.null ----&gt; 数字0</p><p>6.Undefined —&gt; 数字:NaN</p><h4 id="转换方式二"><a class="markdownIt-Anchor" href="#转换方式二"></a> 转换方式二:</h4><p>这种方式专门用来转换字符串</p><p><code>parseInt()</code>把一个字符串转换为一个整数.</p><p><code>parseInt()</code>可以将一个字符串中的有效的整数内容取出来.</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">"1234px"</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="built_in">parseInt</span>(a);<span class="comment">//1234</span></span><br></pre></td></tr></table></figure><p><code>parseFloat()</code>把一个字符串转换为一个浮点数.</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">"1234.111px"</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="built_in">parseInt</span>(a);<span class="comment">//1234.111</span></span><br></pre></td></tr></table></figure><p>如果对非<code>String`使用`parseInt()</code>或``parseFloat()`,他会先将其转换为String,然后在操作</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">var</span> b = perseInt(<span class="literal">true</span>);<span class="comment">//返回NaN</span></span><br></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">            /</span><span class="regexp">/Number()</span></span><br><span class="line"><span class="regexp">var a = "123";</span></span><br><span class="line"><span class="regexp">a = Number(a);</span></span><br><span class="line"><span class="regexp">console.log(a); /</span><span class="regexp">/123</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">a = true;</span></span><br><span class="line"><span class="regexp">a = Number(a);</span></span><br><span class="line"><span class="regexp">console.log(a);/</span><span class="regexp">/1</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">a = NaN;</span></span><br><span class="line"><span class="regexp">a = Number(a);</span></span><br><span class="line"><span class="regexp">console.log(a);/</span><span class="regexp">/NaN</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">a = undefined;</span></span><br><span class="line"><span class="regexp">a = Number(a);</span></span><br><span class="line"><span class="regexp">console.log(a);/</span><span class="regexp">/NaN</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">a = null;</span></span><br><span class="line"><span class="regexp">a = Number(a);</span></span><br><span class="line"><span class="regexp">console.log(a);/</span><span class="regexp">/ 0</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/parseInt() || parseFloat();</span></span><br><span class="line"><span class="regexp">console.log("=========================");</span></span><br><span class="line"><span class="regexp">var a = "123a";</span></span><br><span class="line"><span class="regexp">a = parseInt(a);</span></span><br><span class="line"><span class="regexp">console.log(a);/</span><span class="regexp">/123</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">var a = "123";</span></span><br><span class="line"><span class="regexp">a = Number(a);</span></span><br><span class="line"><span class="regexp">console.log(a);/</span><span class="regexp">/123</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">a = true;</span></span><br><span class="line"><span class="regexp">a = Number(a);</span></span><br><span class="line"><span class="regexp">console.log(a);/</span><span class="regexp">/1</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">a = NaN;</span></span><br><span class="line"><span class="regexp">a = Number(a);</span></span><br><span class="line"><span class="regexp">console.log(a);/</span><span class="regexp">/NaN</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">a = undefined;</span></span><br><span class="line"><span class="regexp">a = Number(a);</span></span><br><span class="line"><span class="regexp">console.log(a);/</span><span class="regexp">/NaN</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">a = null;</span></span><br><span class="line"><span class="regexp">a = Number(a);</span></span><br><span class="line"><span class="regexp">console.log(a);/</span><span class="regexp">/0</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;强制类型转换-number&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#强制类型转换-number&quot;&gt;&lt;/a&gt; 强制类型转换-Number&lt;/h1&gt;
-&lt;p&gt;将其他数据类型转换为``Number`&lt;/p&gt;
-&lt;p&gt;字符串----&amp;gt;数
-      
-    
-    </summary>
-    
-      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>强制类型转换-String</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/17/JS00011%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2-String/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/17/JS00011强制类型转换-String/</id>
-    <published>2020-02-17T07:30:25.000Z</published>
-    <updated>2020-02-17T07:48:42.013Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="强制类型转换-string"><a class="markdownIt-Anchor" href="#强制类型转换-string"></a> 强制类型转换-String</h1><p>强制转换类型是指将一个数据类型强制转换为其他的数据类型</p><p>类型转换主要指,将其他的数据类型,转换为</p><p>String   Number    Boolean</p><h3 id="方式一"><a class="markdownIt-Anchor" href="#方式一"></a> 方式一:</h3><p>调用被转换数据类型的toString()方法</p><p>例如 :</p><p><code>a.toString()</code></p><p>该方法不会影响到原变量,他会将转换结果返回.</p><h4 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意:</h4><p>如果将null和Undefined这两个值用转换toString()方法就会出错</p><h3 id="方式二"><a class="markdownIt-Anchor" href="#方式二"></a> 方式二</h3><p>调用String()函数,并将转换的数据作为参数传递函数</p><p>例如:<code>String(123);</code>----<code>String(123);</code></p><p>使用String();函数做强制转换时:</p><p>对于Number和Boolean实际上就是调用toString()方法</p><p>但是对于null和undefined,就不会调用toString()方法</p><p>他会将null直接转换为&quot;null&quot;</p><p>将Undefined直接转换为&quot;Undefined&quot;</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">var str = 123; </span></span><br><span class="line"><span class="regexp">console.log(str.toString()); </span></span><br><span class="line"><span class="regexp">/</span><span class="comment">///str = null; 出错</span></span><br><span class="line"><span class="comment">//console.log(str.toString());</span></span><br><span class="line"><span class="comment">//str = undefined;出错</span></span><br><span class="line"><span class="comment">//console.log(str.toString());</span></span><br><span class="line">str = <span class="number">123.3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.toString());</span><br><span class="line">str = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.toString());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">str = <span class="number">1231</span>;</span><br><span class="line">str = <span class="built_in">String</span>(str);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"================="</span>);</span><br><span class="line">str = <span class="number">123.2</span>;</span><br><span class="line">str = <span class="built_in">String</span>(str);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">str = <span class="literal">null</span>;</span><br><span class="line">str = <span class="built_in">String</span>(str);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">str = <span class="literal">undefined</span>;</span><br><span class="line">str = <span class="built_in">String</span>(str);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">str = <span class="literal">null</span>;</span><br><span class="line">str = <span class="built_in">String</span>(str);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">str = <span class="literal">true</span>;</span><br><span class="line">str = <span class="built_in">String</span>(str);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;强制类型转换-string&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#强制类型转换-string&quot;&gt;&lt;/a&gt; 强制类型转换-String&lt;/h1&gt;
-&lt;p&gt;强制转换类型是指将一个数据类型强制转换为其他的数据类型&lt;/p&gt;
-&lt;p&gt;类型转换
-      
-    
-    </summary>
-    
-      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>字符串的获取相关方法</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/17/java00056%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%8E%B7%E5%8F%96%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/17/java00056字符串的获取相关方法/</id>
-    <published>2020-02-16T17:44:12.000Z</published>
-    <updated>2020-02-16T18:01:08.023Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="字符串的获取相关方法"><a class="markdownIt-Anchor" href="#字符串的获取相关方法"></a> 字符串的获取相关方法</h1><h3 id="常用方法有"><a class="markdownIt-Anchor" href="#常用方法有"></a> 常用方法有:</h3><p><code>public int lenght();</code> 获取字符串长度</p><p><code>public String concat(String str);</code>拼接两个字符串</p><p><code>public char charAt(int index);</code>返回指定索引的字符</p><p><code>public int indexOf(String str);</code>查找子字符串出现在本字符串的首字符索引值,如果没有则返回-1</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo09</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line">        String str1;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> ch;</span><br><span class="line"></span><br><span class="line">        len = str.length();<span class="comment">//获取字符串长度</span></span><br><span class="line">        ch = str.charAt(<span class="number">0</span>);<span class="comment">//获取str的第0个索引的字符</span></span><br><span class="line">        str1 = str.concat(<span class="string">"def"</span>);<span class="comment">//拼接两个字符串</span></span><br><span class="line">        index = str.indexOf(<span class="string">"ab"</span>);<span class="comment">//查找子字符串第一次出现的索引值</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"字符串长度:"</span> + len);</span><br><span class="line">        System.out.println(<span class="string">"第0个字符是:"</span> + ch);</span><br><span class="line">        System.out.println(<span class="string">"拼接字符:"</span> + str1);</span><br><span class="line">        System.out.println(<span class="string">"字符串出现的"</span> + index);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;字符串的获取相关方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字符串的获取相关方法&quot;&gt;&lt;/a&gt; 字符串的获取相关方法&lt;/h1&gt;
-&lt;h3 id=&quot;常用方法有&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>字符串的比较方法</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/17/java00055%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%AF%94%E8%BE%83%E6%96%B9%E6%B3%95/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/17/java00055字符串的比较方法/</id>
-    <published>2020-02-16T17:14:16.000Z</published>
-    <updated>2020-02-16T17:42:58.762Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="字符串的比较方法"><a class="markdownIt-Anchor" href="#字符串的比较方法"></a> 字符串的比较方法</h1><p>想让两个字符串进行比较,就用:</p><p><code>public boolean equals(Object obj);</code>方法,区分大小写</p><p><code>public boolean equalsIgnoreCase(Object obj);</code>不区分字母大小写</p><p>参数可以是任何对象,只有参数是一个字符串并且内容相同的才会返回一个true,否者返回false.</p><p>1.任何对象都可以用Object来接收.</p><p>2.equals方法具有对称性,也就是<code>a.equals(b)</code>和<code>b.equals(a)</code>是一样的</p><p>3.如果比较两个字符串一个是字符串常量,另一个是字符串变量,推荐把字符串常量写在前面.</p><p>推荐:<code>&quot;zzz&quot;.equals(str);</code> 不推荐 <code>abc.equals(&quot;zzz&quot;);</code></p><p>因为如果<code>abc</code>是一个<code>null</code>又调用<code>equals()</code>就会抛出异常.</p><p>如果是<code>zzz.equals(str)</code>则会返回一个<code>false</code>;</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo08</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str1 = <span class="keyword">new</span> String(<span class="string">"123"</span>);</span><br><span class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">"123"</span>);</span><br><span class="line">        String str3 = <span class="keyword">new</span> String(<span class="string">"456"</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(str1.equals(str2));<span class="comment">//true</span></span><br><span class="line">        System.out.println(str1.equals(str3));<span class="comment">//false</span></span><br><span class="line">System.out.println(<span class="string">"ABC"</span>.equalsIgnoreCase(<span class="string">"abc"</span>));<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;字符串的比较方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字符串的比较方法&quot;&gt;&lt;/a&gt; 字符串的比较方法&lt;/h1&gt;
-&lt;p&gt;想让两个字符串进行比较,就用:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;public boolean equals(Obj
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
     
     
   </entry>
