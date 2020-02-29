@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-02-27T13:29:52.382Z</updated>
+  <updated>2020-02-29T12:31:17.494Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>静态代码块</title>
+    <link href="https://xiaowuyoucy.github.io/2020/02/29/java00069%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97/"/>
+    <id>https://xiaowuyoucy.github.io/2020/02/29/java00069静态代码块/</id>
+    <published>2020-02-29T12:20:39.000Z</published>
+    <updated>2020-02-29T12:31:17.494Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="静态代码块"><a class="markdownIt-Anchor" href="#静态代码块"></a> 静态代码块</h1><h3 id="静态代码块格式"><a class="markdownIt-Anchor" href="#静态代码块格式"></a> 静态代码块格式:</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 类名</span>&#123;</span><br><span class="line"><span class="keyword">static</span>&#123;</span><br><span class="line"><span class="comment">//静态代码块内容</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="特点"><a class="markdownIt-Anchor" href="#特点"></a> 特点:</h3><p>当第一次用到本类时,静态代码块执行唯一的一次</p><p>静态内容总是优先于非静态,所以静态代码块比构造方法先执行.</p><h3 id="静态代码块用途"><a class="markdownIt-Anchor" href="#静态代码块用途"></a> 静态代码块用途:</h3><p>用来一次性的对静态成员变量进行赋值.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo01</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        JinTaiDaiMaKuai one = <span class="keyword">new</span> JinTaiDaiMaKuai();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JinTaiDaiMaKuai</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"我是静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JinTaiDaiMaKuai</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"我是构造函数"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;静态代码块&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#静态代码块&quot;&gt;&lt;/a&gt; 静态代码块&lt;/h1&gt;
+&lt;h3 id=&quot;静态代码块格式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#静态代码块格式&quot;&gt;&lt;/a&gt;
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>静态static的内存图</title>
@@ -473,32 +497,6 @@
     </summary>
     
       <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>算数运算符</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/17/JS00015%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/17/JS00015算数运算符/</id>
-    <published>2020-02-17T09:11:12.000Z</published>
-    <updated>2020-02-17T09:47:55.146Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="算数运算符"><a class="markdownIt-Anchor" href="#算数运算符"></a> 算数运算符</h1><p>运算符也叫操作符</p><p>通过运算符可以对一个或多个值进行运算,并获取运算结果</p><p>比如:<code>typeof</code>就是运算符,可以来获得一个值的类型,它会将该值的类型以字符串的形式返回<code>number string boolean undefined object</code></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(<span class="string">"123"</span>));<span class="comment">//string</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(<span class="number">1</span>));<span class="comment">//number</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(<span class="number">1.6</span>));<span class="comment">//number</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(<span class="literal">null</span>));<span class="comment">//object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(<span class="literal">undefined</span>));<span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(<span class="literal">NaN</span>));<span class="comment">//NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(<span class="literal">true</span>));<span class="comment">//boolean</span></span><br></pre></td></tr></table></figure><p>算数运算符: <code>+ - * / %</code></p><p>当对非<code>Number</code>类型的值进行运算时,会将这些值转换为<code>Number</code>然后在运算.</p><p>任何值和<code>NaN</code>做运算都得<code>NaN</code></p><p>1.  <code>+</code>可以对两个值进行加法运算,并将结果返回.</p><p>如果对两个字符串做加法,则会拼接在一起</p><p>任何值和字符串做加法运算,都会先转换为字符串,然后再拼接</p><p>我们可以利用这一点特性来为任何数据类型做String转换.</p><p>这是一种隐式类型转换,实际上也是调用了<code>String()</code></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">123</span>;</span><br><span class="line">a = <span class="number">123</span> + <span class="number">2</span>;<span class="comment">//125</span></span><br><span class="line"></span><br><span class="line">a = <span class="literal">true</span> + <span class="number">1</span>;<span class="comment">//2</span></span><br><span class="line"></span><br><span class="line">a = <span class="literal">true</span> + <span class="literal">false</span>;<span class="comment">//1</span></span><br><span class="line"></span><br><span class="line">a = <span class="number">2</span> + <span class="literal">null</span>;<span class="comment">//2</span></span><br><span class="line"></span><br><span class="line">a = <span class="number">2</span> + <span class="literal">NaN</span>;<span class="comment">//NaN</span></span><br><span class="line"></span><br><span class="line">a = <span class="string">"aaa"</span> + <span class="string">"bbb"</span>;<span class="comment">//aaabbb</span></span><br><span class="line"></span><br><span class="line">a = <span class="number">100</span> + <span class="string">"aa"</span>;<span class="comment">//100aa</span></span><br></pre></td></tr></table></figure><p>2.  <code>-</code>可以对两个值进行减法运算,并将结果返回</p><p>任何数据类型和数字做减法都会先转换为<code>Number</code></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</span><br><span class="line">a = <span class="number">100</span> - <span class="number">1</span>;<span class="comment">//99</span></span><br><span class="line">a = <span class="number">100</span> - <span class="string">"1"</span>;<span class="comment">//99</span></span><br><span class="line"><span class="built_in">console</span>.log(a - <span class="literal">NaN</span>);<span class="comment">//NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(a - <span class="literal">null</span>);<span class="comment">//100</span></span><br><span class="line"><span class="built_in">console</span>.log(a - <span class="literal">undefined</span>);<span class="comment">//NaN</span></span><br></pre></td></tr></table></figure><p>3.  <code>*</code>可以对两个值进行乘法运算,并将结果返回</p><p>任何数据类型和数字做乘法都会先转换为<code>Number</code></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</span><br><span class="line">a = <span class="number">100</span> * <span class="number">1</span>;<span class="comment">//99</span></span><br><span class="line">a = <span class="number">100</span> * <span class="string">"1"</span>;<span class="comment">//99</span></span><br><span class="line"><span class="built_in">console</span>.log(a * <span class="literal">NaN</span>);<span class="comment">//NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(a * <span class="literal">null</span>);<span class="comment">//100</span></span><br><span class="line"><span class="built_in">console</span>.log(a * <span class="literal">undefined</span>);<span class="comment">//NaN</span></span><br></pre></td></tr></table></figure><p>4.  <code>/</code>可以对两个值进行除法运算,并将结果返回</p><p>任何数据类型和数字做除法都会先转换为<code>Number</code></p><p>可以通过为一个值<code>0 *1 /1</code>来将其转换为<code>Number</code></p><p>原理和<code>Number()</code>函数一样,使用起来更加简单</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</span><br><span class="line">a = <span class="number">100</span> * <span class="number">1</span>;<span class="comment">//99</span></span><br><span class="line">a = <span class="number">100</span> * <span class="string">"1"</span>;<span class="comment">//99</span></span><br><span class="line"><span class="built_in">console</span>.log(a * <span class="literal">NaN</span>);<span class="comment">//NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(a * <span class="literal">null</span>);<span class="comment">//100</span></span><br><span class="line"><span class="built_in">console</span>.log(a * <span class="literal">undefined</span>);<span class="comment">//NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(a + <span class="string">"1"</span>);<span class="comment">//101</span></span><br></pre></td></tr></table></figure><p>5.<code>%</code>取模运算符(取余数)</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line">a = a % <span class="number">9</span>;<span class="comment">//1</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;算数运算符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#算数运算符&quot;&gt;&lt;/a&gt; 算数运算符&lt;/h1&gt;
-&lt;p&gt;运算符也叫操作符&lt;/p&gt;
-&lt;p&gt;通过运算符可以对一个或多个值进行运算,并获取运算结果&lt;/p&gt;
-&lt;p&gt;比如:&lt;code&gt;type
-      
-    
-    </summary>
-    
-      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
     
     
   </entry>
