@@ -8,7 +8,7 @@ doc:
 
 # 强制类型转换-Number
 
-将其他数据类型转换为``Number`
+将其他数据类型转换为`Number`
 
 字符串---->数字
 
@@ -50,7 +50,7 @@ var a = "1234.111px";
 var b = parseInt(a);//1234.111
 ```
 
-如果对非``String`使用`parseInt()``或``parseFloat()`,他会先将其转换为String,然后在操作
+如果对非`String`使用`parseInt()`或`parseFloat()`,他会先将其转换为`String`,然后在操作
 
 ```javascript
 var a = true;
