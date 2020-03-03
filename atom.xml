@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-02-29T12:31:17.494Z</updated>
+  <updated>2020-03-03T11:48:07.188Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -15,6 +15,252 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java继承中方法的覆盖重写</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/java00079%E7%BB%A7%E6%89%BF%E4%B8%AD%E6%96%B9%E6%B3%95%E7%9A%84%E8%A6%86%E7%9B%96%E9%87%8D%E5%86%99/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/java00079继承中方法的覆盖重写/</id>
+    <published>2020-03-03T11:27:05.000Z</published>
+    <updated>2020-03-03T11:48:07.188Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java继承中方法的覆盖重写"><a class="markdownIt-Anchor" href="#java继承中方法的覆盖重写"></a> java继承中方法的覆盖重写</h1><p>重写(Override)</p><p>概念:在继承关系当中,方法的名称一样,参数列表也一样.</p><h5 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> 注意事项:</h5><p>1.必须保证父子类之间方法的名称相同,参数也相同.</p><p>@Override:写在方法前面,用来检测是不是有效的正确覆盖重写.</p><p>@Override就算不写只要满足要求,也是正确的方法覆盖重写.</p><p>2.子类方法的返回值必须小于等于父类方法的返回值范围</p><p>java.lang.Object类是所有类的公共最高父类(祖宗类),java.lang.String就是Object的子类.</p><p>3.子类方法的权限必须大于等于父类方法的权限修饰符.</p><p>public &gt; protected &gt; default &gt; private</p><p>(default)不是关键字default,而是什么都不写,留空</p><p><img src="/images/javawz/1583235628032.png" alt="1583235628032"></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo001;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main01</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Fu fu = <span class="keyword">new</span> Fu();</span><br><span class="line">        Zi zi = <span class="keyword">new</span> Zi();</span><br><span class="line"></span><br><span class="line">        System.out.println(fu.num);<span class="comment">//100</span></span><br><span class="line">        System.out.println(zi.num);<span class="comment">//200</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"============================================="</span>);</span><br><span class="line"></span><br><span class="line">        zi.show();</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        100</span></span><br><span class="line"><span class="comment">        10</span></span><br><span class="line"><span class="comment">        200</span></span><br><span class="line"><span class="comment">        100</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo001;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    Zi()&#123;</span><br><span class="line">        num = <span class="number">200</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.show();<span class="comment">//保持父类的原内容不变,添加自己的新功能</span></span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">10</span>;</span><br><span class="line">        System.out.println(num);</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.num);</span><br><span class="line">        System.out.println(<span class="keyword">super</span>.num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo001;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    Fu()&#123;</span><br><span class="line">        num = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;java继承中方法的覆盖重写&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java继承中方法的覆盖重写&quot;&gt;&lt;/a&gt; java继承中方法的覆盖重写&lt;/h1&gt;
+&lt;p&gt;重写(Override)&lt;/p&gt;
+&lt;p&gt;概念:在继承关系当中,方法的名称
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java区分子类方法中重名的三种变量</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/java00078%E5%8C%BA%E5%88%86%E5%AD%90%E7%B1%BB%E6%96%B9%E6%B3%95%E4%B8%AD%E9%87%8D%E5%90%8D%E7%9A%84%E4%B8%89%E7%A7%8D%E5%8F%98%E9%87%8F/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/java00078区分子类方法中重名的三种变量/</id>
+    <published>2020-03-03T06:10:51.000Z</published>
+    <updated>2020-03-03T06:19:30.597Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java区分子类方法中重名的三种变量"><a class="markdownIt-Anchor" href="#java区分子类方法中重名的三种变量"></a> java区分子类方法中重名的三种变量</h1><p>局部变量:       <code>直接写成员变量</code></p><p>本类的成员变量:   <code>this.成员变量</code></p><p>父类的成员变量:   <code>super.成员变量名</code></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo001;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    Fu()&#123;</span><br><span class="line">        num = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo001;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    Zi()&#123;</span><br><span class="line">        num = <span class="number">200</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">10</span>;</span><br><span class="line">        System.out.println(num);<span class="comment">//使用局部num</span></span><br><span class="line">        System.out.println(<span class="keyword">this</span>.num);<span class="comment">//使用本类num</span></span><br><span class="line">        System.out.println(<span class="keyword">super</span>.num);<span class="comment">//使用父类num</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;java区分子类方法中重名的三种变量&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java区分子类方法中重名的三种变量&quot;&gt;&lt;/a&gt; java区分子类方法中重名的三种变量&lt;/h1&gt;
+&lt;p&gt;局部变量:       &lt;code&gt;直接写成员变
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java继承中成员变量的访问特点</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/java00077%E7%BB%A7%E6%89%BF%E4%B8%AD%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E7%9A%84%E8%AE%BF%E9%97%AE%E7%89%B9%E7%82%B9/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/java00077继承中成员变量的访问特点/</id>
+    <published>2020-03-03T05:53:10.000Z</published>
+    <updated>2020-03-03T06:05:40.494Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java继承中成员变量的访问特点"><a class="markdownIt-Anchor" href="#java继承中成员变量的访问特点"></a> java继承中成员变量的访问特点</h1><h3 id="如果父类和子类的成员变量重名"><a class="markdownIt-Anchor" href="#如果父类和子类的成员变量重名"></a> 如果父类和子类的成员变量重名.</h3><p>直接通过子类对象访问成员变量:</p><p>子类名.成员变量名(优先使用子类的重名成员变量)</p><p>间接通过成员方法访问成员变量:</p><p>方法属于A类的方法,就优先使用A类重名的成员变量</p><h5 id="在父类和子类中只要有方法或变量重名的对象属于a类就优先使用a类对象重名的变量或方法"><a class="markdownIt-Anchor" href="#在父类和子类中只要有方法或变量重名的对象属于a类就优先使用a类对象重名的变量或方法"></a> 在父类和子类中,只要有方法或变量重名的,对象属于A类,就优先使用A类对象重名的变量或方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo001;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main01</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Fu fu = <span class="keyword">new</span> Fu();</span><br><span class="line">        Zi zi = <span class="keyword">new</span> Zi();</span><br><span class="line"></span><br><span class="line">        System.out.println(fu.num);<span class="comment">//100</span></span><br><span class="line">        System.out.println(zi.num);<span class="comment">//200</span></span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="string">"==========================="</span>);</span><br><span class="line"></span><br><span class="line">        fu.show();<span class="comment">//100</span></span><br><span class="line">        zi.show();<span class="comment">//200;</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    Fu()&#123;</span><br><span class="line">        num = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo001;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">    Zi()&#123;</span><br><span class="line">        num = <span class="number">200</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;java继承中成员变量的访问特点&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java继承中成员变量的访问特点&quot;&gt;&lt;/a&gt; java继承中成员变量的访问特点&lt;/h1&gt;
+&lt;h3 id=&quot;如果父类和子类的成员变量重名&quot;&gt;&lt;a class=
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java继承格式</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/java00076%E7%BB%A7%E6%89%BF%E6%A0%BC%E5%BC%8F/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/java00076继承格式/</id>
+    <published>2020-03-03T04:52:58.000Z</published>
+    <updated>2020-03-03T05:08:19.975Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java继承格式"><a class="markdownIt-Anchor" href="#java继承格式"></a> java继承格式</h1><h5 id="子类定义语法"><a class="markdownIt-Anchor" href="#子类定义语法"></a> 子类定义语法:</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 子类名 <span class="keyword">extends</span> 父类名称</span>&#123;</span><br><span class="line"><span class="comment">//代码块</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.fuZiLei;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo01</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Teacher xiaoMing = <span class="keyword">new</span> Teacher();</span><br><span class="line"></span><br><span class="line">        xiaoMing.setAge(<span class="number">23</span>);</span><br><span class="line">        xiaoMing.setName(<span class="string">"XiaoMing"</span>);</span><br><span class="line">        xiaoMing.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>子类会继承父类的公有成员函数或公有变量.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.fuZiLei;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">YuanGong</span></span>&#123;</span><br><span class="line">    Teacher()&#123;</span><br><span class="line">        show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="父类"><a class="markdownIt-Anchor" href="#父类"></a> 父类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.fuZiLei;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">YuanGong</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">YuanGong</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">YuanGong</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        name = <span class="keyword">null</span>;</span><br><span class="line">        age = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//输出公有成员变量</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"姓名:"</span>+name);</span><br><span class="line">        System.out.println(<span class="string">"年龄:"</span>+age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;java继承格式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java继承格式&quot;&gt;&lt;/a&gt; java继承格式&lt;/h1&gt;
+&lt;h5 id=&quot;子类定义语法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#子类定义语
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java继承的概述</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/java00075%E7%BB%A7%E6%89%BF%E7%9A%84%E6%A6%82%E8%BF%B0/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/java00075继承的概述/</id>
+    <published>2020-03-03T04:44:09.000Z</published>
+    <updated>2020-03-03T04:46:28.854Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java继承的概述"><a class="markdownIt-Anchor" href="#java继承的概述"></a> java继承的概述</h1><img src="/images/javawz/1583210658468.png">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;java继承的概述&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java继承的概述&quot;&gt;&lt;/a&gt; java继承的概述&lt;/h1&gt;
+&lt;img src=&quot;/images/javawz/1583210658468.png&quot;&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java小学数学真题</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/java00074%E5%B0%8F%E5%AD%A6%E6%95%B0%E5%AD%A6%E7%9C%9F%E9%A2%98/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/java00074小学数学真题/</id>
+    <published>2020-03-03T04:25:46.000Z</published>
+    <updated>2020-03-03T04:36:55.974Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java小学数学真题"><a class="markdownIt-Anchor" href="#java小学数学真题"></a> java小学数学真题</h1><p>计算从-10.8到5.9之间,绝对值大于6或者小于2.1的整数有多少个?</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main21</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">double</span> min = -<span class="number">10.8</span>;</span><br><span class="line">        <span class="keyword">double</span> max = <span class="number">5.9</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">double</span> i = min; i &lt; max; i++) &#123;</span><br><span class="line">            <span class="keyword">double</span> num = Math.ceil(i);</span><br><span class="line">            <span class="keyword">double</span> abS = Math.abs(num);</span><br><span class="line">            <span class="keyword">if</span> (abS &gt; <span class="number">6</span> || abS &lt; <span class="number">2.1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                ++count;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;java小学数学真题&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java小学数学真题&quot;&gt;&lt;/a&gt; java小学数学真题&lt;/h1&gt;
+&lt;p&gt;计算从-10.8到5.9之间,绝对值大于6或者小于2.1的整数有多少个?&lt;/p&gt;
+&lt;figure
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java数学工具类Math</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/java00073%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E7%B1%BBMath/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/java00073数学工具类Math/</id>
+    <published>2020-03-03T04:10:55.000Z</published>
+    <updated>2020-03-03T04:24:18.410Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java数学工具类math"><a class="markdownIt-Anchor" href="#java数学工具类math"></a> java数学工具类Math</h1><p><code>java.lang.Math</code>类是数学相关的工具类,里面提供了大量的静态方法,完成与数学运算的操作.</p><p><code>public static double abs(double num)</code>:获取绝对值.</p><p><code>public static double ceil(double num)</code>:向上取整.</p><p><code>public static double floor(double num)</code>:向下取整.</p><p><code>public static long round(double num)</code>:四舍五入.</p><p><code>Math.PI</code>代表圆周率</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main20</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> a = <span class="number">31.2</span>;</span><br><span class="line">        <span class="keyword">double</span> b = <span class="number">31.9</span>;</span><br><span class="line">        <span class="keyword">double</span> c = <span class="number">31.0</span>;</span><br><span class="line">        <span class="comment">//取绝对值</span></span><br><span class="line">        System.out.println(Math.abs(-<span class="number">31</span>));<span class="comment">//32</span></span><br><span class="line">        System.out.println(<span class="string">"=========================================="</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//向上取整</span></span><br><span class="line">        System.out.println(Math.ceil(a));<span class="comment">//32</span></span><br><span class="line">        System.out.println(Math.ceil(b));<span class="comment">//32</span></span><br><span class="line">        System.out.println(Math.ceil(c));<span class="comment">//32</span></span><br><span class="line">        <span class="comment">//向下取整</span></span><br><span class="line">        System.out.println(<span class="string">"=========================================="</span>);</span><br><span class="line">        System.out.println(Math.floor(a));<span class="comment">//31</span></span><br><span class="line">        System.out.println(Math.floor(b));<span class="comment">//31</span></span><br><span class="line">        System.out.println(Math.floor(c));<span class="comment">//31</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"=========================================="</span>);</span><br><span class="line">        <span class="comment">//四舍五入</span></span><br><span class="line">        System.out.println(Math.round(a));<span class="comment">//31</span></span><br><span class="line">        System.out.println(Math.round(b));<span class="comment">//32</span></span><br><span class="line">        System.out.println(Math.round(c));<span class="comment">//31</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"=========================================="</span>);</span><br><span class="line">        <span class="comment">//圆周率</span></span><br><span class="line">        System.out.println(Math.PI);<span class="comment">//3.141592653589793</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;java数学工具类math&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java数学工具类math&quot;&gt;&lt;/a&gt; java数学工具类Math&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;java.lang.Math&lt;/code&gt;类是数学相关的工具类,里
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java将字符串转换为字符数组</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/java00072%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/java00072将字符串转换为字符数组/</id>
+    <published>2020-03-03T04:02:50.000Z</published>
+    <updated>2020-03-03T04:09:06.916Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java将字符串转换为字符数组"><a class="markdownIt-Anchor" href="#java将字符串转换为字符数组"></a> java将字符串转换为字符数组</h1><p>格式:</p><p><code>字符串.toCharArray()</code> 返回一个字符数组</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main19</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str = <span class="string">"agsagasfsdtahsa"</span>;</span><br><span class="line">        <span class="comment">//将字符串转换为字符数组</span></span><br><span class="line">        <span class="keyword">char</span>[] chars = str.toCharArray();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">            System.out.println(chars[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;java将字符串转换为字符数组&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java将字符串转换为字符数组&quot;&gt;&lt;/a&gt; java将字符串转换为字符数组&lt;/h1&gt;
+&lt;p&gt;格式:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;字符串.toCharArray(
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java字符串倒序</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/java00071%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%92%E5%BA%8F/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/java00071字符串倒序/</id>
+    <published>2020-03-03T03:57:23.000Z</published>
+    <updated>2020-03-03T04:01:34.019Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java字符串倒序"><a class="markdownIt-Anchor" href="#java字符串倒序"></a> java字符串倒序</h1><p>快捷键技巧:</p><p>数组倒序遍历</p><p><code>数组名.forr</code>自动生成:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = arrayName.length-<span class="number">1</span>; i &gt;= <span class="number">0</span> ; i--) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main17</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String[] str = &#123;<span class="string">"aaa"</span>,<span class="string">"ddd"</span>,<span class="string">"ccc"</span>,<span class="string">"bbb"</span>&#125;;</span><br><span class="line">        <span class="comment">//先将字符串升序</span></span><br><span class="line">        Arrays.sort(str);</span><br><span class="line">        <span class="comment">//然后从后往前遍历数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = str.length-<span class="number">1</span>; i &gt;= <span class="number">0</span> ; i--) &#123;</span><br><span class="line">            System.out.println(str[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;java字符串倒序&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java字符串倒序&quot;&gt;&lt;/a&gt; java字符串倒序&lt;/h1&gt;
+&lt;p&gt;快捷键技巧:&lt;/p&gt;
+&lt;p&gt;数组倒序遍历&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;数组名.forr&lt;/code&gt;自动
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java数组工具类Arrays</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/java00070%E6%95%B0%E7%BB%84%E5%B7%A5%E5%85%B7%E7%B1%BBArrays/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/java00070数组工具类Arrays/</id>
+    <published>2020-03-03T03:44:05.000Z</published>
+    <updated>2020-03-03T03:56:38.395Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java数组工具类arrays"><a class="markdownIt-Anchor" href="#java数组工具类arrays"></a> java数组工具类Arrays</h1><p><code>java.util.Arrays</code>是一个与数组相关的工具类,里面提供了大量静态方法,用来实现数组常见的操作.</p><p><code>public static String toString(数组):</code></p><p>将参数数组变成字符串(按照默认格式: [元素1,元素2,元素3,…])</p><p><code>public static void sort(数组)</code>,按照默认升序(从小到大)对数组元素进行排序.</p><h3 id="备注"><a class="markdownIt-Anchor" href="#备注"></a> 备注:</h3><p>1.如果是数组,sort默认按照升序从小到大</p><p>2.如果是字符串,sort默认按照字母升序</p><p>3.如果是自定义的类型,那么这个自定义的类需要有Comparable或者Comparator接口支持.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main18</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String[] str = &#123;<span class="string">"aaa"</span>,<span class="string">"ccc"</span>,<span class="string">"bbb"</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] num = &#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">34</span>,<span class="number">24</span>&#125;;</span><br><span class="line">        <span class="comment">//str数组排序</span></span><br><span class="line">        Arrays.sort(str);</span><br><span class="line">        <span class="comment">//将str数组转换为字符串</span></span><br><span class="line">        System.out.println(Arrays.toString(str));</span><br><span class="line">        <span class="comment">//int数组排序</span></span><br><span class="line">        Arrays.sort(num);</span><br><span class="line">        <span class="comment">//将int数组转换为字符串</span></span><br><span class="line">        System.out.println(Arrays.toString(num));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;java数组工具类arrays&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java数组工具类arrays&quot;&gt;&lt;/a&gt; java数组工具类Arrays&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;java.util.Arrays&lt;/code&gt;是一个与
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>静态代码块</title>
@@ -255,248 +501,6 @@
     </summary>
     
       <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>静态static关键字概述</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/19/java00065%E9%9D%99%E6%80%81static%E5%85%B3%E9%94%AE%E5%AD%97%E6%A6%82%E8%BF%B0/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/19/java00065静态static关键字概述/</id>
-    <published>2020-02-18T22:52:09.000Z</published>
-    <updated>2020-02-18T23:08:07.752Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="静态static关键字概述"><a class="markdownIt-Anchor" href="#静态static关键字概述"></a> 静态static关键字概述</h1><p><code>static</code>关键字表示多个对象共用一个静态成员变量</p><p>这个成员变量属于类.</p><img src="/images/javawz/1582066345955-1582066358483.png" width="1350">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;静态static关键字概述&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#静态static关键字概述&quot;&gt;&lt;/a&gt; 静态static关键字概述&lt;/h1&gt;
-&lt;p&gt;&lt;code&gt;static&lt;/code&gt;关键字表示多个对象共用一个静态成员变量&lt;
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>按指定格式拼接字符练习</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/19/java00064%E6%8C%89%E6%8C%87%E5%AE%9A%E6%A0%BC%E5%BC%8F%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6-%E7%BB%83%E4%B9%A0/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/19/java00064按指定格式拼接字符-练习/</id>
-    <published>2020-02-18T21:26:59.000Z</published>
-    <updated>2020-02-18T21:31:44.331Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="按指定格式拼接字符练习"><a class="markdownIt-Anchor" href="#按指定格式拼接字符练习"></a> 按指定格式拼接字符练习</h1><img src="/images/javawz/1582061235278-1582061253044.png" width="900px"><br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo13</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] intArray = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">        String str = pingJieZiFuChuan(intArray);</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">pingJieZiFuChuan</span><span class="params">(<span class="keyword">int</span>[] intArray)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        String str = <span class="string">"["</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; intArray.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(i == intArray.length - <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                str += <span class="string">"word"</span> + intArray[i] + <span class="string">"]"</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                str += <span class="string">"word"</span> + intArray[i] +<span class="string">"#"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;按指定格式拼接字符练习&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#按指定格式拼接字符练习&quot;&gt;&lt;/a&gt; 按指定格式拼接字符练习&lt;/h1&gt;
-&lt;img src=&quot;/images/javawz/1582061235278-158206125
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>统计输入的字符串中的各种字符次数</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/19/java00063%E7%BB%9F%E8%AE%A1%E8%BE%93%E5%85%A5%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E5%AD%97%E7%AC%A6%E6%AC%A1%E6%95%B0/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/19/java00063统计输入的字符串中的各种字符次数/</id>
-    <published>2020-02-18T21:02:24.000Z</published>
-    <updated>2020-02-18T21:09:27.250Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="统计输入的字符串中的各种字符次数"><a class="markdownIt-Anchor" href="#统计输入的字符串中的各种字符次数"></a> 统计输入的字符串中的各种字符次数</h1><img src="/images/javawz/1582059879441-1582059886295.png" width="900px"><br><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class demo14&#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String str ;</span><br><span class="line">        int countNumber = 0;</span><br><span class="line">        int countOther = 0;</span><br><span class="line">        int countLower = 0;</span><br><span class="line">        int countUpper = 0;</span><br><span class="line"></span><br><span class="line">        Scanner sc = new Scanner(System.in);</span><br><span class="line">        System.out.println(&quot;请输入字符串:&quot;);</span><br><span class="line">        str = sc.next();</span><br><span class="line">        char[] chs = str.toCharArray();</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; chs.length; i++) &#123;</span><br><span class="line">            char ch = chs[i];</span><br><span class="line"></span><br><span class="line">            if(ch &gt;= &apos;a&apos; &amp;&amp; ch &lt;= &apos;z&apos;)</span><br><span class="line">            &#123;</span><br><span class="line">                countLower++;</span><br><span class="line">            &#125;else if(ch &gt;= &apos;A&apos; &amp;&amp; ch &lt;= &apos;Z&apos; )</span><br><span class="line">            &#123;</span><br><span class="line">                countUpper++;</span><br><span class="line">            &#125;else if(ch &gt;= &apos;0&apos; &amp;&amp; ch &lt;= &apos;9&apos; )&#123;</span><br><span class="line">                countNumber++;</span><br><span class="line">            &#125;else</span><br><span class="line">            &#123;</span><br><span class="line">                countOther++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;大写字母个数:&quot; + countUpper);</span><br><span class="line">        System.out.println(&quot;小写字母个数:&quot; + countLower);</span><br><span class="line">        System.out.println(&quot;数字个数:&quot; + countNumber);</span><br><span class="line">        System.out.println(&quot;其他字符个数:&quot; + countOther);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;统计输入的字符串中的各种字符次数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#统计输入的字符串中的各种字符次数&quot;&gt;&lt;/a&gt; 统计输入的字符串中的各种字符次数&lt;/h1&gt;
-&lt;img src=&quot;/images/javawz/15820598
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>字符串的分割方法</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/19/java00059%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%86%E5%89%B2%E6%96%B9%E6%B3%95/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/19/java00059字符串的分割方法/</id>
-    <published>2020-02-18T20:17:16.000Z</published>
-    <updated>2020-02-18T20:26:55.295Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="字符串的分割方法"><a class="markdownIt-Anchor" href="#字符串的分割方法"></a> 字符串的分割方法</h1><h5 id="分割字符串的方法"><a class="markdownIt-Anchor" href="#分割字符串的方法"></a> 分割字符串的方法:</h5><p><code>public String[] split(String regex);</code>按照参数的规则,将字符串切分成为若干部分.</p><h5 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> 注意事项:</h5><p><code>split</code>方法的参数其实是一个&quot;正则表达式&quot;.</p><p>如果用英文句点<code>&quot;.&quot;</code>进行切分,必须写<code>&quot;\\.&quot;</code>(两个反斜杠)</p><br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo12</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str1 = <span class="string">"123,123,12w"</span>;</span><br><span class="line">        String str2 = <span class="string">"aaa.bbb.ccc"</span>;</span><br><span class="line">        String[] strArray = str1.split(<span class="string">","</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strArray.length; i++) &#123;</span><br><span class="line">            System.out.println(strArray[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"========================="</span>);</span><br><span class="line"></span><br><span class="line">        String[] str2Array = str2.split(<span class="string">"\\."</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str2Array.length; i++) &#123;</span><br><span class="line">            System.out.println(str2Array[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;字符串的分割方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字符串的分割方法&quot;&gt;&lt;/a&gt; 字符串的分割方法&lt;/h1&gt;
-&lt;h5 id=&quot;分割字符串的方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#分割字
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>字符串的转换相关方法</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/19/java00058%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BD%AC%E6%8D%A2%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/19/java00058字符串的转换相关方法/</id>
-    <published>2020-02-18T20:05:25.000Z</published>
-    <updated>2020-02-18T20:10:56.491Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="字符串的转换相关方法"><a class="markdownIt-Anchor" href="#字符串的转换相关方法"></a> 字符串的转换相关方法</h1><p>String当中与转换相关的常用方法:</p><p><code>public char[] toCharArray();</code>将当前字符串拆分成为字符数组作为返回值.</p><p><code>public byte[] getBytes();</code>获得当前字符串底层的字节数组</p><p><code>public String replace(CharSequence oldString,CharSequence newString);</code></p><p>将所有出现的老字符串替换成为新的字符串,返回替换之后的结果为新字符串.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo11</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str1 = <span class="string">"我爱你"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">char</span>[] chArray = str1.toCharArray();<span class="comment">//将str1转换为char[]数组</span></span><br><span class="line">        <span class="keyword">byte</span>[] by = str1.getBytes();<span class="comment">//将str1转换为byte[]数组;</span></span><br><span class="line"></span><br><span class="line">        System.out.println(chArray[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; by.length; i++) &#123;</span><br><span class="line">            System.out.println(by[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"========================"</span>);</span><br><span class="line">        String str2 = <span class="string">"你麻痹的,你会不会啊"</span>;</span><br><span class="line">        String str3 = str2.replace(<span class="string">"麻痹"</span>, <span class="string">"**"</span>);<span class="comment">//str2.replace(要替换的字符串,替换的字符);</span></span><br><span class="line">        System.out.println(str3);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;字符串的转换相关方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字符串的转换相关方法&quot;&gt;&lt;/a&gt; 字符串的转换相关方法&lt;/h1&gt;
-&lt;p&gt;String当中与转换相关的常用方法:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;public char[] t
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>字符串的截取方法</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/19/java00057%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%88%AA%E5%8F%96%E6%96%B9%E6%B3%95/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/19/java00057字符串的截取方法/</id>
-    <published>2020-02-18T19:26:50.000Z</published>
-    <updated>2020-02-18T19:46:16.714Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="字符串的截取方法"><a class="markdownIt-Anchor" href="#字符串的截取方法"></a> 字符串的截取方法</h1><p><code>public String substring(int index);</code>截取从参数位置一直到字符串末尾,返回新字符串.</p><br><p><code>public String substring(int begin,int end);</code> 截取从begin开始,一直到end结束.</p><p>备注:<code>[begin,end)</code>,包含左边,不包含右边</p><p><br><br></p><h5 id="快捷键"><a class="markdownIt-Anchor" href="#快捷键"></a> 快捷键:</h5><p>按住<code>ctrl + shift + 方向左右键</code>可以多选字符串</p><p>按住<code>shift + 方向左右键</code>可以单选多个字符</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//改变String 对象的内容,其实是改变字符串的地址</span></span><br><span class="line">String str1 = <span class="string">"123"</span>;</span><br><span class="line">str1 = <span class="string">"456"</span>;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo10</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str1 = <span class="string">"123456"</span>;</span><br><span class="line"></span><br><span class="line">        String str2 = str1.substring(<span class="number">2</span>);<span class="comment">//从第2号元素开始截取,一直到结束</span></span><br><span class="line">        System.out.println(str2);</span><br><span class="line"></span><br><span class="line">        str2 = str1.substring(<span class="number">3</span>,<span class="number">6</span>);</span><br><span class="line">        System.out.println(str2);<span class="comment">//从第3号元素开始,一直到第6号元素.不包含第6号元素;</span></span><br><span class="line"></span><br><span class="line">        str1 = <span class="string">"11111"</span>; <span class="comment">//0x1111</span></span><br><span class="line">        str1 = <span class="string">"22222"</span>; <span class="comment">//0x8888</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;字符串的截取方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#字符串的截取方法&quot;&gt;&lt;/a&gt; 字符串的截取方法&lt;/h1&gt;
-&lt;p&gt;&lt;code&gt;public String substring(int index);&lt;/code&gt;截取从参数位
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>超链接</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/18/html-css00014%E8%B6%85%E9%93%BE%E6%8E%A5/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/18/html-css00014超链接/</id>
-    <published>2020-02-18T01:46:04.000Z</published>
-    <updated>2020-02-18T13:44:51.929Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="超链接"><a class="markdownIt-Anchor" href="#超链接"></a> 超链接</h1><p>使用超链接可以让我们从一个页面跳转到另一个页面</p><h5 id="使用a标签来创建一个超链接"><a class="markdownIt-Anchor" href="#使用a标签来创建一个超链接"></a> 使用a标签来创建一个超链接:</h5><h5 id="属性"><a class="markdownIt-Anchor" href="#属性"></a> 属性:</h5><p><code>href</code>:指向链接跳转的目标地址,可以写一个相对路径也可以写一个完整地址.</p><p><code>target</code>:可以用来指定打开链接的位置</p><p> 可选值:</p><p>   <code>_self</code>:表示在当前窗口中打开(默认值)</p><p>   <code>_blank</code>:在新的窗口中打开链接</p><p>​<br></p><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 超链接 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.baidu.com"</span>&gt;</span>我是一个超链接<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"demo.html"</span>&gt;</span> 我是一个超链接<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><br><p>在新窗口打开页面</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 在本窗口跳转 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.baidu.com"</span> <span class="attr">target</span>=<span class="string">"_self"</span>&gt;</span>我是一个超链接<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">--</span> 在新窗口打开 <span class="attr">--</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"demo.html"</span> <span class="attr">target</span>=<span class="string">"_blank"</span>&gt;</span> 我是一个超链接<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><br><p>可以在内联框架标签中设置一个<code>name</code>属性值,链接将会在指定的内联框架中打开</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 内联框架中打开 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"demo.html name="</span><span class="attr">tom</span>"&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"demo.html"</span> <span class="attr">target</span>=<span class="string">"tom"</span>&gt;</span>我在内联框架显示<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><p><code>center</code>标签中的内容,会默认在页面中居中显示</p><p>如果我们要内容居中显示,要把内容都放到center标签中</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 居中显示 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">center</span>&gt;</span></span><br><span class="line">    a</span><br><span class="line">    aaaaaa</span><br><span class="line">    aaaaaa</span><br><span class="line"><span class="tag">&lt;/<span class="name">center</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><p>如果<code>href</code>中地址不确定,可以先用<code>#</code>代替</p><p>如果将链接地址设置为#,点击后会自动回到页面顶部</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--回到页面顶部--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">target</span>=<span class="string">"tom"</span>&gt;</span>我在内联框架显示<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><p>html中有一个属性,每一个元素都可以设置,该属性可以作为标签的唯一标识</p><p>这个属性就是<code>id</code>,id属性在同一个页面中只能有一个,<code>不能有重复</code></p><br><p>跳转到id为bottom的元素所在的位置</p><p>直接在<code>href</code>中写 <code>#id</code>属性值</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span>  <span class="attr">href</span>=<span class="string">"#bottom"</span>&gt;</span>回到底部<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--跳到这里--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">"bottom"</span> <span class="attr">href</span>=<span class="string">"https://www.baidu.com"</span>&gt;</span>哈哈哈<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><br><p>发送邮件的超链接,点击链接以后可以自动打开计算机中默认的邮件客户端</p><p>当点击这个链接时会自动打开计算机中默认的邮件客户端,并且将收件人设置为``mailto`后的邮箱地址.</p><h5 id="格式"><a class="markdownIt-Anchor" href="#格式"></a> 格式:</h5><p><code>&lt;a href=&quot;mailto:邮箱地址&quot; &gt;联系我们&lt;a&gt;</code></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"mailto:123@qq.com"</span> &gt;</span>联系我们<span class="tag">&lt;<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;超链接&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#超链接&quot;&gt;&lt;/a&gt; 超链接&lt;/h1&gt;
-&lt;p&gt;使用超链接可以让我们从一个页面跳转到另一个页面&lt;/p&gt;
-&lt;h5 id=&quot;使用a标签来创建一个超链接&quot;&gt;&lt;a class=&quot;markdown
-      
-    
-    </summary>
-    
-      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>内联框架</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/18/html-css00013%E5%86%85%E8%81%94%E6%A1%86%E6%9E%B6/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/18/html-css00013内联框架/</id>
-    <published>2020-02-17T22:29:31.000Z</published>
-    <updated>2020-02-17T22:39:32.645Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="内联框架"><a class="markdownIt-Anchor" href="#内联框架"></a> 内联框架</h1><h5 id="使用内联框架可以引入一个外部的页面"><a class="markdownIt-Anchor" href="#使用内联框架可以引入一个外部的页面"></a> 使用内联框架可以引入一个外部的页面.</h5><p>使用iframe来创建一个内联框架</p><br><h5 id="属性"><a class="markdownIt-Anchor" href="#属性"></a> 属性:</h5><p> src:指向一个外部页面的路径,可以使用相对路径</p><p> width:设置宽度</p><p> height:设置高度</p><p>不会按比例缩放</p><p> name:可以为内联框架指定一个name属性(给框架起名字)</p><br><br><br><p><code>在现实开发中不推荐使用内联框架</code>,因为内联框架中的内容不会被搜索引擎所检索,但可以在内网使用;</p><p>一般放在body标签内</p><br><br><p>格式:<code>&lt;iframe scr=&quot;目标路径&quot; name=&quot;名字&quot;&gt;</code></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">scr</span>=<span class="string">"demo.html"</span> <span class="attr">name</span>=<span class="string">"tom"</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;内联框架&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#内联框架&quot;&gt;&lt;/a&gt; 内联框架&lt;/h1&gt;
-&lt;h5 id=&quot;使用内联框架可以引入一个外部的页面&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#使用内联框架
-      
-    
-    </summary>
-    
-      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>xHtml的语法规范</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/18/html-css00012xHtml%E7%9A%84%E8%AF%AD%E6%B3%95%E8%A7%84%E8%8C%83/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/18/html-css00012xHtml的语法规范/</id>
-    <published>2020-02-17T21:25:32.000Z</published>
-    <updated>2020-02-18T02:26:50.768Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="xhtml的语法规范"><a class="markdownIt-Anchor" href="#xhtml的语法规范"></a> xHtml的语法规范</h1><h5 id="浏览器会尽最大的努力正确解析错误的语法你所有的不符合语法规范的内容浏览器都会为你自动修正但是有些情况会修正错误"><a class="markdownIt-Anchor" href="#浏览器会尽最大的努力正确解析错误的语法你所有的不符合语法规范的内容浏览器都会为你自动修正但是有些情况会修正错误"></a> 浏览器会尽最大的努力正确解析错误的语法,你所有的不符合语法规范的内容,浏览器都会为你自动修正,但是有些情况会修正错误.</h5><br><br><p>1.HTML中不区分大小写,但是我们一般都使用小写</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaaaaaaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure><p>2.HTML中的注释不能嵌套</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--正确写法--&gt;</span></span><br><span class="line"></span><br><span class="line">=================================================</span><br><span class="line">错误写法</span><br><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"></span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure><p>3.HTML标签必须结构完整,要么成对出现,要么自结束标签.</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--正确写法--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--错误写法--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>asdfdsf</span><br></pre></td></tr></table></figure><p>4.HTML标签可以嵌套,但是不能交叉嵌套.</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--正确写法--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaa<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">"red;"</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">font</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--错误写法--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaa<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">"red;"</span>&gt;</span>aaaaaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br></pre></td></tr></table></figure><p>5.HTML标签中的属性必须有值,且值必须加引号(双引号,单引号都可以)</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--正确写法--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaa<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">"red;"</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">font</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--错误写法--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aaaa<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">font</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;xhtml的语法规范&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#xhtml的语法规范&quot;&gt;&lt;/a&gt; xHtml的语法规范&lt;/h1&gt;
-&lt;h5 id=&quot;浏览器会尽最大的努力正确解析错误的语法你所有的不符合语法规范的内容浏览器都会为你自动修
-      
-    
-    </summary>
-    
-      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>meta标签</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/18/html-css00011meta%E6%A0%87%E7%AD%BE/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/18/html-css00011meta标签/</id>
-    <published>2020-02-17T21:09:02.000Z</published>
-    <updated>2020-02-18T02:23:00.419Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="meta标签"><a class="markdownIt-Anchor" href="#meta标签"></a> meta标签</h1><h3 id="使用meta标签还可以用来设置网页的关键字"><a class="markdownIt-Anchor" href="#使用meta标签还可以用来设置网页的关键字"></a> 使用meta标签还可以用来设置网页的关键字</h3><h5 id="格式meta-namekeywords-content-关键字"><a class="markdownIt-Anchor" href="#格式meta-namekeywords-content-关键字"></a> 格式:<code>&lt;meta name=&quot;keywords&quot; content = &quot;关键字&quot; /&gt;</code></h5><p>如果是多个关键字,就用逗号隔开.</p><p>关键字是被搜索引擎识别的.</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"HTML5,JavaScript,前端,Java"</span> /&gt;</span></span><br></pre></td></tr></table></figure><h3 id="使用meta标签用来指定网页的描述"><a class="markdownIt-Anchor" href="#使用meta标签用来指定网页的描述"></a> 使用meta标签用来指定网页的描述</h3><p>搜索引擎在检索页面时,会同时检索页面中的关键字和描述,但是这两个值不会影响页面在搜索引擎中的排名.</p><h3 id="格式meta-namedescription-content描述信息"><a class="markdownIt-Anchor" href="#格式meta-namedescription-content描述信息"></a> 格式:<code>&lt;meta name=&quot;description&quot; content=&quot;描述信息&quot; /&gt;</code></h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"发布h5,js前端等相关信息"</span> /&gt;</span></span><br></pre></td></tr></table></figure><h3 id="使用meta可以用来做请求重定向页面跳转"><a class="markdownIt-Anchor" href="#使用meta可以用来做请求重定向页面跳转"></a> 使用meta可以用来做请求重定向(页面跳转).</h3><h5 id="格式meta-http-equivrefresh-content秒数url目标路径"><a class="markdownIt-Anchor" href="#格式meta-http-equivrefresh-content秒数url目标路径"></a> 格式:<code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;秒数;url=目标路径&quot; /&gt;</code></h5><p>目标路径可以是相对地址</p><p>绝对路径要在开头加上<code>https://</code>或<code>http://</code></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span>=<span class="string">"5;http://www.baidu.com"</span>  /&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;meta标签&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#meta标签&quot;&gt;&lt;/a&gt; meta标签&lt;/h1&gt;
-&lt;h3 id=&quot;使用meta标签还可以用来设置网页的关键字&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; hre
-      
-    
-    </summary>
-    
-      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
     
     
   </entry>
