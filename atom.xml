@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-03-03T12:04:54.837Z</updated>
+  <updated>2020-03-04T10:44:14.901Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -15,6 +15,251 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>css简介</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/04/html-css00015css%E7%AE%80%E4%BB%8B/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/04/html-css00015css简介/</id>
+    <published>2020-03-04T10:18:17.000Z</published>
+    <updated>2020-03-04T10:44:14.901Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="css简介"><a class="markdownIt-Anchor" href="#css简介"></a> css简介</h1><p><img src="/images/javawz/1583317143356.png" alt="1583317143356"></p><h3 id="网页分成三个部分"><a class="markdownIt-Anchor" href="#网页分成三个部分"></a> 网页分成三个部分：</h3><p>  结构<code>(HTML)</code><br>  表现<code>(CSS)</code><br>  行为<code>(JavaScript)</code><br><code>CSS</code></p><h5 id="层叠样式表"><a class="markdownIt-Anchor" href="#层叠样式表"></a>  层叠样式表</h5><p> 网页实际上是一个多层的结构，通过<code>CSS</code>可以分别为网页的每一个层来设置样式<br> 而最终我们能看到只是网页的最上边一层<br> 总之一句话，<code>CSS</code>用来设置网页中元素的样式</p><h3 id="使用css来修改元素的样式"><a class="markdownIt-Anchor" href="#使用css来修改元素的样式"></a> 使用CSS来修改元素的样式</h3><h3 id="第一种方式内联样式行内样式"><a class="markdownIt-Anchor" href="#第一种方式内联样式行内样式"></a> 第一种方式(内联样式，行内样式)：</h3><p>在标签内部通过style属性来设置元素的样式</p><h5 id="问题"><a class="markdownIt-Anchor" href="#问题"></a> 问题：</h5><p>使用内联样式，样式只能对一个标签生效，<br>如果希望影响到多个元素必须在每一个元素中都复制一遍<br>并且当样式发生变化时，我们必须要一个一个的修改，非常的不方便</p><h5 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意：</h5><p>开发时绝对不要使用内联样式</p><p><code>&lt;p style=&quot;color:red; font-size: 60px;&quot;&gt;少小离家老大回，乡音无改鬓毛衰&lt;/p&gt;</code></p><p><code>&lt;p style=&quot;color: red; font-size: 60px;&quot;&gt;今天天气真不错！&lt;/p&gt;</code></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">我是内联样式</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red; font-size: 60px;"</span>&gt;</span>少小离家老大回，乡音无改鬓毛衰<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red; font-size: 60px;"</span>&gt;</span>少小离家老大回，乡音无改鬓毛衰<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red; font-size: 60px;"</span>&gt;</span>少小离家老大回，乡音无改鬓毛衰<span class="tag">&lt;/<span class="name">p</span>&gt;</span>    </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="第二种方式内部样式表"><a class="markdownIt-Anchor" href="#第二种方式内部样式表"></a> 第二种方式（内部样式表）</h3><h5 id="将样式编写到head中的style标签里"><a class="markdownIt-Anchor" href="#将样式编写到head中的style标签里"></a> 将样式编写到head中的style标签里</h5><p>然后通过<code>CSS</code>的选择器来选中元素并为其设置各种样式<br>可以同时为多个标签设置样式，并且修改时只需要修改一处即可全部应用<br>内部样式表更加方便对样式进行复用</p><h5 id="问题-2"><a class="markdownIt-Anchor" href="#问题-2"></a> 问题：</h5><p>我们的内部样式表只能对一个网页起作用，<br>它里边的样式不能跨页面进行复用</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    p&#123;</span></span><br><span class="line"><span class="undefined">        color: green;</span></span><br><span class="line"><span class="undefined">        font-size: 50px;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>少小离家老大回，乡音无改鬓毛衰<span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="第三种方式-外部样式表-最佳实践"><a class="markdownIt-Anchor" href="#第三种方式-外部样式表-最佳实践"></a> 第三种方式 （外部样式表） 最佳实践</h3><p>可以将<code>CSS</code>样式编写到一个外部的<code>CSS</code>文件中,<br>然后通过<code>link</code>标签来引入外部的<code>CSS</code>文件<br>外部样式表需要通过<code>link</code>标签进行引入，<br>意味着只要想使用这些样式的网页都可以对其进行引用<br>使样式可以在不同页面之间进行复用<br>将样式编写到外部的<code>CSS</code>文件中，可以使用到浏览器的缓存机制，<br>从而加快网页的加载速度，提高用户的体验。</p><p>例如有一个网站X,一个网站通常有多个页面,如果多个页面共用一个css样式文件时,当用户打开A页面时,需要加载css文件,但当用户打开B页面或C页面时就不需要加载了.这就是缓存</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./style.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span> 少小离家老大回，乡音无改鬓毛衰 <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="stylecss"><a class="markdownIt-Anchor" href="#stylecss"></a> style.css</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="selector-tag">p</span>&#123;</span><br><span class="line">   <span class="attribute">color</span>: green;</span><br><span class="line">   <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;css简介&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#css简介&quot;&gt;&lt;/a&gt; css简介&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/images/javawz/1583317143356.png&quot; alt=&quot;1583317143356&quot;
+      
+    
+    </summary>
+    
+      <category term="HTML/CSS" scheme="https://xiaowuyoucy.github.io/categories/HTML-CSS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS条件运算符</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/04/JS00024%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/04/JS00024条件运算符/</id>
+    <published>2020-03-04T09:35:31.000Z</published>
+    <updated>2020-03-04T09:41:48.361Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="js条件运算符"><a class="markdownIt-Anchor" href="#js条件运算符"></a> JS条件运算符</h1><h3 id="条件运算符也叫三元运算符"><a class="markdownIt-Anchor" href="#条件运算符也叫三元运算符"></a> 条件运算符也叫三元运算符</h3><h5 id="语法"><a class="markdownIt-Anchor" href="#语法"></a> 语法：</h5><p>  <code>条件表达式?语句1:语句2;</code></p><h5 id="执行的流程"><a class="markdownIt-Anchor" href="#执行的流程"></a> 执行的流程：</h5><p> 条件运算符在执行时，首先对条件表达式进行求值，<br> 如果该值为<code>true</code>，则执行语句1，并返回执行结果<br> 如果该值为<code>false</code>，则执行语句2，并返回执行结果<br> 如果条件的表达式的求值结果是一个<code>非布尔值</code>，<br> 会将其转换为<code>布尔值</code>然后在运算</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//false?alert("语句1"):alert("语句2");</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">300</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">143</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//a &gt; b ? alert("a大"):alert("b大");</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//获取a和b中的最大值</span></span><br><span class="line"><span class="comment">//var max = a &gt; b ? a : b;</span></span><br><span class="line"><span class="comment">//获取a b c 中的大值</span></span><br><span class="line"><span class="comment">//max = max &gt; c ? max : c;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//这种写法不推荐使用，不方便阅读</span></span><br><span class="line"><span class="keyword">var</span> max = a &gt; b ? (a &gt; c ? a :c) : (b &gt; c ? b : c);</span><br><span class="line"></span><br><span class="line"><span class="comment">//console.log("max = "+max);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//"hello"?alert("语句1"):alert("语句2");</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;js条件运算符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js条件运算符&quot;&gt;&lt;/a&gt; JS条件运算符&lt;/h1&gt;
+&lt;h3 id=&quot;条件运算符也叫三元运算符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#条件
+      
+    
+    </summary>
+    
+      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS相等运算符</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/04/JS00023%E7%9B%B8%E7%AD%89%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/04/JS00023相等运算符/</id>
+    <published>2020-03-04T07:51:43.000Z</published>
+    <updated>2020-03-04T08:12:42.267Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="js相等运算符"><a class="markdownIt-Anchor" href="#js相等运算符"></a> JS相等运算符</h1><h3 id="相等运算符用来比较两个值是否相等"><a class="markdownIt-Anchor" href="#相等运算符用来比较两个值是否相等"></a> 相等运算符用来比较两个值是否相等，</h3><h3 id="如果相等会返回true否则返回false"><a class="markdownIt-Anchor" href="#如果相等会返回true否则返回false"></a> 如果相等会返回<code>true</code>，否则返回<code>false</code></h3><h4 id="使用-来做相等运算"><a class="markdownIt-Anchor" href="#使用-来做相等运算"></a> 使用 <code>==</code> 来做相等运算</h4><p>当使用<code>==</code>来比较两个值时，如果值的类型不同，</p><p>则会自动进行类型转换，将其转换为相同的类型</p><p>然后在比较</p><h4 id="不相等"><a class="markdownIt-Anchor" href="#不相等"></a> 不相等<code>!=</code></h4><p>不相等用来判断两个值是否不相等，如果不相等返回<code>true</code>，否则返回<code>false</code></p><p>使用<code>!=</code>来做不相等运算</p><p>不相等也会对变量进行自动的类型转换，如果转换后相等它也会返回<code>false</code></p><h4 id="全等"><a class="markdownIt-Anchor" href="#全等"></a> 全等<code>===</code></h4><p>- 用来判断两个值是否全等，它和相等类似，不同的是它不会做自动的类型转换</p><p>如果两个值的类型不同，直接返回<code>false</code></p><h4 id="不全等"><a class="markdownIt-Anchor" href="#不全等"></a> 不全等<code>!==</code></h4><p>- 用来判断两个值是否不全等，和不等类似，不同的是它不会做自动的类型转换</p><p>如果两个值的类型不同，直接返回<code>true</code></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//console.log(1 == 1); //true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//console.log(a == 4); //false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//console.log("1" == 1); //true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//console.log(true == "1"); //true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//console.log(null == 0); //false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * undefined 衍生自 null</span></span><br><span class="line"><span class="comment"> * 所以这两个值做相等判断时，会返回true</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//console.log(undefined == null);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * NaN不和任何值相等，包括他本身</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//console.log(NaN == NaN); //false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="literal">NaN</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断b的值是否是NaN</span></span><br><span class="line"><span class="comment">//console.log(b == NaN);</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 可以通过isNaN()函数来判断一个值是否是NaN</span></span><br><span class="line"><span class="comment"> * 如果该值是NaN则返回true，否则返回false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//console.log(isNaN(b));</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//console.log(10 != 5); //true</span></span><br><span class="line"><span class="comment">//console.log(10 != 10); //false</span></span><br><span class="line"><span class="comment">//console.log("abcd" != "abcd"); //false</span></span><br><span class="line"><span class="comment">//console.log("1" != 1);//false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//console.log("123" === 123);//false</span></span><br><span class="line"><span class="comment">//console.log(null === undefined);//false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span> !== <span class="string">"1"</span>); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;js相等运算符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js相等运算符&quot;&gt;&lt;/a&gt; JS相等运算符&lt;/h1&gt;
+&lt;h3 id=&quot;相等运算符用来比较两个值是否相等&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=
+      
+    
+    </summary>
+    
+      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS中Unicode编码使用</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/04/JS00022Unicode%E7%BC%96%E7%A0%81%E4%BD%BF%E7%94%A8/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/04/JS00022Unicode编码使用/</id>
+    <published>2020-03-04T07:20:38.000Z</published>
+    <updated>2020-03-04T07:27:01.794Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="js中unicode编码使用"><a class="markdownIt-Anchor" href="#js中unicode编码使用"></a> JS中Unicode编码使用</h1><h3 id="在js中使用unicode编码"><a class="markdownIt-Anchor" href="#在js中使用unicode编码"></a> 在JS中使用Unicode编码.</h3><p>格式: <code>\u编码</code>(十六进制)</p><p>编码一般都是十六进制的</p><h3 id="在html中使用unicode编码"><a class="markdownIt-Anchor" href="#在html中使用unicode编码"></a> 在html中使用unicode编码.</h3><p>格式: <code>&amp;#编码;</code>(十进制)</p><p>后面一定要有分号.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 在字符串中使用转义字符输入Unicode编码</span></span><br><span class="line"><span class="comment"> * \u四位编码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"\u2620"</span>);</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--在网页中使用Unicode编码</span><br><span class="line">&amp;#编码; 这里的编码需要的是10进制</span><br><span class="line">--&gt;</span><br><span class="line">&lt;h1 style="font-size: 200px;"&gt;&amp;#9760;&lt;/h1&gt;</span><br><span class="line">&lt;h1 style="font-size: 200px;"&gt;&amp;#9856;&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;js中unicode编码使用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js中unicode编码使用&quot;&gt;&lt;/a&gt; JS中Unicode编码使用&lt;/h1&gt;
+&lt;h3 id=&quot;在js中使用unicode编码&quot;&gt;&lt;a class=&quot;mark
+      
+    
+    </summary>
+    
+      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS关系运算符</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/04/JS00021%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/04/JS00021关系运算符/</id>
+    <published>2020-03-04T06:58:02.000Z</published>
+    <updated>2020-03-04T07:05:39.386Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="js关系运算符"><a class="markdownIt-Anchor" href="#js关系运算符"></a> JS关系运算符</h1><h5 id="通过关系运算符可以比较两个值之间的大小关系"><a class="markdownIt-Anchor" href="#通过关系运算符可以比较两个值之间的大小关系"></a> 通过关系运算符可以比较两个值之间的大小关系，</h5><h5 id="如果关系成立它会返回true如果关系不成立则返回false"><a class="markdownIt-Anchor" href="#如果关系成立它会返回true如果关系不成立则返回false"></a> 如果关系成立它会返回<code>true</code>，如果关系不成立则返回<code>false</code></h5><h5 id="大于号"><a class="markdownIt-Anchor" href="#大于号"></a> &gt; 大于号</h5><h5 id="-判断符号左侧的值是否大于右侧的值"><a class="markdownIt-Anchor" href="#-判断符号左侧的值是否大于右侧的值"></a> - 判断符号左侧的值是否大于右侧的值</h5><h5 id="-如果关系成立返回true如果关系不成立则返回false"><a class="markdownIt-Anchor" href="#-如果关系成立返回true如果关系不成立则返回false"></a> - 如果关系成立，返回<code>true</code>，如果关系不成立则返回<code>false</code></h5><h5 id="大于等于"><a class="markdownIt-Anchor" href="#大于等于"></a> &gt;= 大于等于</h5><h5 id="-判断符号左侧的值是否大于或等于右侧的值"><a class="markdownIt-Anchor" href="#-判断符号左侧的值是否大于或等于右侧的值"></a> - 判断符号左侧的值是否大于或等于右侧的值</h5><h5 id="小于号"><a class="markdownIt-Anchor" href="#小于号"></a> &lt; 小于号</h5><h5 id="小于等于"><a class="markdownIt-Anchor" href="#小于等于"></a> &lt;= 小于等于</h5><h5 id="非数值的情况"><a class="markdownIt-Anchor" href="#非数值的情况"></a> 非数值的情况</h5><h5 id="-对于非数值进行比较时会将其转换为数字然后在比较"><a class="markdownIt-Anchor" href="#-对于非数值进行比较时会将其转换为数字然后在比较"></a> - 对于非数值进行比较时，会将其转换为数字然后在比较</h5><h5 id="-如果符号两侧的值都是字符串时不会将其转换为数字进行比较"><a class="markdownIt-Anchor" href="#-如果符号两侧的值都是字符串时不会将其转换为数字进行比较"></a> - 如果符号两侧的值都是字符串时，不会将其转换为数字进行比较</h5><h5 id="而会分别比较字符串中字符的unicode编码"><a class="markdownIt-Anchor" href="#而会分别比较字符串中字符的unicode编码"></a> 而会分别比较字符串中字符的<code>Unicode</code>编码</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = <span class="number">5</span> &gt; <span class="number">10</span>;<span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">result = <span class="number">5</span> &gt; <span class="number">4</span>; <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">result = <span class="number">5</span> &gt; <span class="number">5</span>; <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">result = <span class="number">5</span> &gt;= <span class="number">5</span>; <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">result = <span class="number">5</span> &gt;= <span class="number">4</span>; <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">result = <span class="number">5</span> &lt; <span class="number">4</span>; <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">result = <span class="number">4</span> &lt;= <span class="number">4</span>; <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//console.log("result = "+result);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//console.log(1 &gt; true); //false</span></span><br><span class="line"><span class="comment">//console.log(1 &gt;= true); //true</span></span><br><span class="line"><span class="comment">//console.log(1 &gt; "0"); //true</span></span><br><span class="line"><span class="comment">//console.log(10 &gt; null); //true</span></span><br><span class="line"><span class="comment">//任何值和NaN做任何比较都是false</span></span><br><span class="line"><span class="comment">//console.log(10 &lt;= "hello"); //false</span></span><br><span class="line"><span class="comment">//console.log(true &gt; false); //true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//console.log("1" &lt; "5"); //true</span></span><br><span class="line"><span class="comment">//console.log("11" &lt; "5"); //true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//比较两个字符串时，比较的是字符串的字符编码</span></span><br><span class="line"><span class="comment">//console.log("a" &lt; "b");//true</span></span><br><span class="line"><span class="comment">//比较字符编码时是一位一位进行比较</span></span><br><span class="line"><span class="comment">//如果两位一样，则比较下一位，所以借用它来对英文进行排序</span></span><br><span class="line"><span class="comment">//console.log("abc" &lt; "bcd");//true</span></span><br><span class="line"><span class="comment">//比较中文时没有意义</span></span><br><span class="line"><span class="comment">//console.log("戒" &gt; "我"); //true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//如果比较的两个字符串型的数字，可能会得到不可预期的结果</span></span><br><span class="line"><span class="comment">//注意：在比较两个字符串型的数字时，一定一定一定要转型</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"11123123123123123123"</span> &lt; +<span class="string">"5"</span>); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;js关系运算符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js关系运算符&quot;&gt;&lt;/a&gt; JS关系运算符&lt;/h1&gt;
+&lt;h5 id=&quot;通过关系运算符可以比较两个值之间的大小关系&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; 
+      
+    
+    </summary>
+    
+      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS赋值运算符</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/04/JS00020%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/04/JS00020赋值运算符/</id>
+    <published>2020-03-04T06:39:30.000Z</published>
+    <updated>2020-03-04T06:44:47.029Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="js赋值运算符"><a class="markdownIt-Anchor" href="#js赋值运算符"></a> JS赋值运算符</h1><h4 id><a class="markdownIt-Anchor" href="#"></a> =</h4><pre><code>可以将符号右侧的值赋值给符号左侧的变量</code></pre><h4 id="-2"><a class="markdownIt-Anchor" href="#-2"></a> +=</h4><pre><code>a += 5 等价于 a = a + 5</code></pre><h4 id="-"><a class="markdownIt-Anchor" href="#-"></a> -=</h4><pre><code>a -= 5 等价于 a = a - 5</code></pre><h4 id="-3"><a class="markdownIt-Anchor" href="#-3"></a> *=</h4><pre><code>a \*= 5 等价于 a = a \* 5</code></pre><h4 id="-4"><a class="markdownIt-Anchor" href="#-4"></a> /=</h4><pre><code>a /= 5 等价于 a = a / 5 </code></pre><h4 id="-5"><a class="markdownIt-Anchor" href="#-5"></a> %=</h4><pre><code>a %= 5 等价于 a = a % 5</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt; <span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//a = a + 5;</span></span><br><span class="line"><span class="comment">//a += 5;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//a -= 5;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//a *= 5;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// a = a%3;</span></span><br><span class="line">a %= <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"a = "</span>+a);</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;js赋值运算符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js赋值运算符&quot;&gt;&lt;/a&gt; JS赋值运算符&lt;/h1&gt;
+&lt;h4 id&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#&quot;&gt;&lt;/a&gt; =&lt;/h4&gt;
+&lt;pr
+      
+    
+    </summary>
+    
+      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS非布尔值的与或运算</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/04/JS00019%E9%9D%9E%E5%B8%83%E5%B0%94%E5%80%BC%E7%9A%84%E4%B8%8E%E6%88%96%E8%BF%90%E7%AE%97/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/04/JS00019非布尔值的与或运算/</id>
+    <published>2020-03-04T06:30:12.000Z</published>
+    <updated>2020-03-04T06:35:58.138Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="js非布尔值的与或运算"><a class="markdownIt-Anchor" href="#js非布尔值的与或运算"></a> JS非布尔值的与或运算</h1><h3 id="非布尔值的情况"><a class="markdownIt-Anchor" href="#非布尔值的情况"></a> &amp;&amp; || 非布尔值的情况</h3><p>​- 对于非布尔值进行与或运算时，<br>​会先将其转换为布尔值，然后再运算，并且返回原值<br>​- 与运算：<br>​- 如果第一个值为<code>true</code>，则必然返回第二个值<br>​- 如果第一个值为<code>false</code>，则直接返回第一个值</p><h3 id="-或运算"><a class="markdownIt-Anchor" href="#-或运算"></a> - 或运算</h3><p>​- 如果第一个值为<code>true</code>，则直接返回第一个值</p><p>​- 如果第一个值为<code>false</code>，则返回第二个值</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript"><span class="comment">//true &amp;&amp; true</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">//与运算：如果两个值都为true，则返回后边的</span></span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> result = <span class="number">5</span> &amp;&amp; <span class="number">6</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript"><span class="comment">//与运算：如果两个值中有false，则返回靠前的false</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">//false &amp;&amp; true</span></span></span><br><span class="line"><span class="undefined">result = 0 &amp;&amp; 2;</span></span><br><span class="line"><span class="undefined">result = 2 &amp;&amp; 0;</span></span><br><span class="line"><span class="actionscript"><span class="comment">//false &amp;&amp;　false</span></span></span><br><span class="line"><span class="javascript">result = <span class="literal">NaN</span> &amp;&amp; <span class="number">0</span>;</span></span><br><span class="line"><span class="javascript">result = <span class="number">0</span> &amp;&amp; <span class="literal">NaN</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript"><span class="comment">//true || true</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">//如果第一个值为true，则直接返回第一个值</span></span></span><br><span class="line"><span class="undefined">result = 2 || 1;</span></span><br><span class="line"><span class="javascript">result = <span class="number">2</span> || <span class="literal">NaN</span>;</span></span><br><span class="line"><span class="undefined">result = 2 || 0;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript"><span class="comment">//如果第一个值为false，则直接返回第二个值</span></span></span><br><span class="line"><span class="javascript">result = <span class="literal">NaN</span> || <span class="number">1</span>;</span></span><br><span class="line"><span class="javascript">result = <span class="literal">NaN</span> || <span class="number">0</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">result = <span class="string">""</span> || <span class="string">"hello"</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">result = <span class="number">-1</span> || <span class="string">"你好"</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(<span class="string">"result = "</span>+result);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;js非布尔值的与或运算&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js非布尔值的与或运算&quot;&gt;&lt;/a&gt; JS非布尔值的与或运算&lt;/h1&gt;
+&lt;h3 id=&quot;非布尔值的情况&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; hr
+      
+    
+    </summary>
+    
+      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS逻辑运算符</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/04/JS00018%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/04/JS00018逻辑运算符/</id>
+    <published>2020-03-04T05:57:47.000Z</published>
+    <updated>2020-03-04T06:20:25.112Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="js逻辑运算符"><a class="markdownIt-Anchor" href="#js逻辑运算符"></a> JS逻辑运算符</h1><h5 id="js中为我们提供了三种逻辑运算符"><a class="markdownIt-Anchor" href="#js中为我们提供了三种逻辑运算符"></a> JS中为我们提供了三种逻辑运算符</h5><h5 id="非"><a class="markdownIt-Anchor" href="#非"></a> ! 非</h5><p>- <code>!</code>可以用来对一个值进行非运算</p><p>- 所谓非运算就是值对一个布尔值进行取反操作，<br>变<code>false</code>，<code>false</code>变<code>true</code><br>- 如果对一个值进行两次取反，它不会变化<br>- 如果对非布尔值进行元素，则会将其转换为布尔值，然后再取反<br>所以我们可以利用该特点，来将一个其他的数据类型转换为布尔值<br>可以为一个任意数据类型取两次反，来将其转换为布尔值，<br>原理和<code>Boolean()</code>函数一样</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/取反</span></span><br><span class="line"><span class="regexp">var a = true;</span></span><br><span class="line"><span class="regexp">a = !a;</span></span><br><span class="line"><span class="regexp">console.log("a:" + a);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/不会变化</span></span><br><span class="line"><span class="regexp">var b = true;</span></span><br><span class="line"><span class="regexp">console.log("b:" + !!b);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">var c = 1;</span></span><br><span class="line"><span class="regexp">console.log("c:" + !!c);</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure><h5 id="与"><a class="markdownIt-Anchor" href="#与"></a> &amp;&amp; 与</h5><p>- <code>&amp;&amp;</code>可以对符号两侧的值进行与运算并返回结果<br>- 运算规则<br>- 两个值中只要有一个值为<code>false</code>就返回<code>false</code>，<br>只有两个值都为<code>true</code>时，才会返回<code>true</code><br>- JS中的“与”属于短路的与，<br>如果第一个值为<code>false</code>，则不会看第二个值</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">var a = true &amp;&amp; true;</span></span><br><span class="line"><span class="regexp">console.log("a:" + a);/</span><span class="regexp">/true</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">a = true &amp;&amp; false;</span></span><br><span class="line"><span class="regexp">console.log("a:" + a);/</span><span class="regexp">/true</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">a = true &amp;&amp; alert("我出来了");</span></span><br><span class="line"><span class="regexp">a = false &amp;&amp; alert("我不出来了");</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure><h5 id="或"><a class="markdownIt-Anchor" href="#或"></a> || 或</h5><p>- <code>||</code>可以对符号两侧的值进行或运算并返回结果<br>- 运算规则：<br>- 两个值中只要有一个<code>true</code>，就返回<code>true</code><br>如果两个值都为<code>false</code>，才返回<code>false</code><br>- JS中的“或”属于短路的或<br>如果第一个值为<code>true</code>，则不会检查第二个值</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">var a = true || false;</span></span><br><span class="line"><span class="regexp">console.log("a:" + a);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">a = false || false;</span></span><br><span class="line"><span class="regexp">console.log("a:" + a);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">false || alert("我出来了");</span></span><br><span class="line"><span class="regexp">true || alert("我不出来");</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;js逻辑运算符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js逻辑运算符&quot;&gt;&lt;/a&gt; JS逻辑运算符&lt;/h1&gt;
+&lt;h5 id=&quot;js中为我们提供了三种逻辑运算符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=
+      
+    
+    </summary>
+    
+      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS自增自减运算符</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/JS00017%E8%87%AA%E5%A2%9E%E8%87%AA%E5%87%8F%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/JS00017自增自减运算符/</id>
+    <published>2020-03-03T14:12:16.000Z</published>
+    <updated>2020-03-03T14:30:44.900Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="js自增自减运算符"><a class="markdownIt-Anchor" href="#js自增自减运算符"></a> JS自增自减运算符</h1><p><code>++</code></p><p>分为<code>前++(++a)</code>和<code>后++ (a++)</code></p><p><code>前++ (++a)</code>,先加1,再使用.</p><p><code>后++ (a++)</code>,先使用,再加1.</p><p><code>--</code></p><p>分为<code>前-- (--a)</code>和<code>后-- (a--)</code></p><p><code>前-- (--a)</code>,先减1,再使用.</p><p><code>后-- (a--)</code>,先使用,再减1.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">var a = 10;</span></span><br><span class="line"><span class="regexp">console.log(a++);/</span><span class="regexp">/10</span></span><br><span class="line"><span class="regexp">console.log(++a);/</span><span class="regexp">/12</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">var b = 10;</span></span><br><span class="line"><span class="regexp">console.log(b--);/</span><span class="regexp">/10</span></span><br><span class="line"><span class="regexp">console.log(--b);/</span><span class="regexp">/8</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;js自增自减运算符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js自增自减运算符&quot;&gt;&lt;/a&gt; JS自增自减运算符&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;++&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;分为&lt;code&gt;前++(++a)&lt;/code&gt;和&lt;cod
+      
+    
+    </summary>
+    
+      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS一元运算符</title>
+    <link href="https://xiaowuyoucy.github.io/2020/03/03/JS00016%E4%B8%80%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>https://xiaowuyoucy.github.io/2020/03/03/JS00016一元运算符/</id>
+    <published>2020-03-03T14:02:44.000Z</published>
+    <updated>2020-03-03T14:10:19.467Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="js一元运算符"><a class="markdownIt-Anchor" href="#js一元运算符"></a> JS一元运算符</h1><p>正号: +</p><p>负号: -</p><p>如果是非Number,会自动转换为Number类型</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"a = "</span> + -a); </span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"a = "</span> + +a);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"123"</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">1</span> + +str;</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"></span><br><span class="line">b = <span class="number">124</span> + -str;</span><br><span class="line"><span class="built_in">console</span>.log(b); </span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;js一元运算符&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#js一元运算符&quot;&gt;&lt;/a&gt; JS一元运算符&lt;/h1&gt;
+&lt;p&gt;正号: +&lt;/p&gt;
+&lt;p&gt;负号: -&lt;/p&gt;
+&lt;p&gt;如果是非Number,会自动转换为Number类型&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="JS" scheme="https://xiaowuyoucy.github.io/categories/JS/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>hexo常用命令</title>
@@ -253,249 +498,6 @@
 &lt;p&gt;快捷键技巧:&lt;/p&gt;
 &lt;p&gt;数组倒序遍历&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;数组名.forr&lt;/code&gt;自动
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>java数组工具类Arrays</title>
-    <link href="https://xiaowuyoucy.github.io/2020/03/03/java00070%E6%95%B0%E7%BB%84%E5%B7%A5%E5%85%B7%E7%B1%BBArrays/"/>
-    <id>https://xiaowuyoucy.github.io/2020/03/03/java00070数组工具类Arrays/</id>
-    <published>2020-03-03T03:44:05.000Z</published>
-    <updated>2020-03-03T03:56:38.395Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="java数组工具类arrays"><a class="markdownIt-Anchor" href="#java数组工具类arrays"></a> java数组工具类Arrays</h1><p><code>java.util.Arrays</code>是一个与数组相关的工具类,里面提供了大量静态方法,用来实现数组常见的操作.</p><p><code>public static String toString(数组):</code></p><p>将参数数组变成字符串(按照默认格式: [元素1,元素2,元素3,…])</p><p><code>public static void sort(数组)</code>,按照默认升序(从小到大)对数组元素进行排序.</p><h3 id="备注"><a class="markdownIt-Anchor" href="#备注"></a> 备注:</h3><p>1.如果是数组,sort默认按照升序从小到大</p><p>2.如果是字符串,sort默认按照字母升序</p><p>3.如果是自定义的类型,那么这个自定义的类需要有Comparable或者Comparator接口支持.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xiaochenyan.top.Demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main18</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String[] str = &#123;<span class="string">"aaa"</span>,<span class="string">"ccc"</span>,<span class="string">"bbb"</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] num = &#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">34</span>,<span class="number">24</span>&#125;;</span><br><span class="line">        <span class="comment">//str数组排序</span></span><br><span class="line">        Arrays.sort(str);</span><br><span class="line">        <span class="comment">//将str数组转换为字符串</span></span><br><span class="line">        System.out.println(Arrays.toString(str));</span><br><span class="line">        <span class="comment">//int数组排序</span></span><br><span class="line">        Arrays.sort(num);</span><br><span class="line">        <span class="comment">//将int数组转换为字符串</span></span><br><span class="line">        System.out.println(Arrays.toString(num));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;java数组工具类arrays&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java数组工具类arrays&quot;&gt;&lt;/a&gt; java数组工具类Arrays&lt;/h1&gt;
-&lt;p&gt;&lt;code&gt;java.util.Arrays&lt;/code&gt;是一个与
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>静态代码块</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/29/java00069%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/29/java00069静态代码块/</id>
-    <published>2020-02-29T12:20:39.000Z</published>
-    <updated>2020-02-29T12:31:17.494Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="静态代码块"><a class="markdownIt-Anchor" href="#静态代码块"></a> 静态代码块</h1><h3 id="静态代码块格式"><a class="markdownIt-Anchor" href="#静态代码块格式"></a> 静态代码块格式:</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 类名</span>&#123;</span><br><span class="line"><span class="keyword">static</span>&#123;</span><br><span class="line"><span class="comment">//静态代码块内容</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="特点"><a class="markdownIt-Anchor" href="#特点"></a> 特点:</h3><p>当第一次用到本类时,静态代码块执行唯一的一次</p><p>静态内容总是优先于非静态,所以静态代码块比构造方法先执行.</p><h3 id="静态代码块用途"><a class="markdownIt-Anchor" href="#静态代码块用途"></a> 静态代码块用途:</h3><p>用来一次性的对静态成员变量进行赋值.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo01</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        JinTaiDaiMaKuai one = <span class="keyword">new</span> JinTaiDaiMaKuai();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JinTaiDaiMaKuai</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"我是静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JinTaiDaiMaKuai</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"我是构造函数"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;静态代码块&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#静态代码块&quot;&gt;&lt;/a&gt; 静态代码块&lt;/h1&gt;
-&lt;h3 id=&quot;静态代码块格式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#静态代码块格式&quot;&gt;&lt;/a&gt;
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>静态static的内存图</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/27/java00068%E9%9D%99%E6%80%81static%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/27/java00068静态static的内存图/</id>
-    <published>2020-02-27T13:28:50.000Z</published>
-    <updated>2020-02-27T13:29:52.382Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="静态static的内存图"><a class="markdownIt-Anchor" href="#静态static的内存图"></a> 静态static的内存图</h1><p><img src="/images/javawz/1582810135585.png" alt="1582810135585"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;静态static的内存图&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#静态static的内存图&quot;&gt;&lt;/a&gt; 静态static的内存图&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&quot;/images/javawz/1582810135585.png
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MYSQL常见命令</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/27/mysql006MYSQL%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/27/mysql006MYSQL常见命令/</id>
-    <published>2020-02-26T23:03:01.000Z</published>
-    <updated>2020-02-26T23:20:14.392Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="mysql常见命令"><a class="markdownIt-Anchor" href="#mysql常见命令"></a> MYSQL常见命令</h1><p>1.查看当前所有的数据库</p><p><code>show databases;</code></p><br><br><p>2.打开指定的库</p><p><code>use 库名;</code></p><br><br><p>3.查看当前库的所有表</p><p><code>show tables;</code></p><br><br><p>4.查看其他库的所有表</p><p><code>show tables from 库名;</code></p><br><br><p>5.创建表</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">列名 列类型,</span><br><span class="line">列名 列类型,</span><br><span class="line">...</span><br><span class="line">);</span><br></pre></td></tr></table></figure><br><br><p>6.查看表结构</p><p><code>desc 表名;</code></p><br><br><p>7.查看数据库版本</p><p>方式一:登录到<code>mysql</code>服务端</p><p><code>select version();</code></p><br><p>方式二:没有登录到<code>mysql</code>服务端</p><p><code>mysql --version</code>或者<code>mysql -V</code></p><br><br><p><br><br></p><br><br>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;mysql常见命令&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#mysql常见命令&quot;&gt;&lt;/a&gt; MYSQL常见命令&lt;/h1&gt;
-&lt;p&gt;1.查看当前所有的数据库&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;show databases;&lt;/code&gt;&lt;/p
-      
-    
-    </summary>
-    
-      <category term="MYSQL" scheme="https://xiaowuyoucy.github.io/categories/MYSQL/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MYSQL服务端的登录和退出</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/27/mysql005MYSQL%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/27/mysql005MYSQL服务端的登录和退出/</id>
-    <published>2020-02-26T22:49:57.000Z</published>
-    <updated>2020-02-26T23:01:19.621Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="mysql服务端的登录和退出"><a class="markdownIt-Anchor" href="#mysql服务端的登录和退出"></a> MYSQL服务端的登录和退出</h1><p>1.用<code>mysql</code>自带的客户端</p><p><img src="/images/javawz/1582757475054.png" alt="1582757475054"></p><p>直接输入密码就可以进入数据库管理系统了</p><p>2.使用<code>cmd</code>登录</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//   -h 连接的主机  -P 代表端口号</span><br><span class="line"></span><br><span class="line">//第一种方式</span><br><span class="line"></span><br><span class="line">mysql -h 主机名 -P 端口号 -u 用户名 -p</span><br><span class="line"></span><br><span class="line">// mysql -h localhost -P 3306 -u root -p</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//第二种方式</span><br><span class="line">mysql -h 主机名 -P 端口号 -u 用户名 -p密码</span><br><span class="line">//mysql -h localhost -P 3306 -u root -p123</span><br><span class="line">//-p后面没有空格</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//第三种方式</span><br><span class="line">//在服务端本机登录可以省略</span><br><span class="line">mysql -u 用户名 -p</span><br><span class="line"></span><br><span class="line">mysql -u 用户名 -p密码</span><br></pre></td></tr></table></figure><h3 id="退出"><a class="markdownIt-Anchor" href="#退出"></a> 退出</h3><p>用<code>exit</code>命令或者<code>Ctrl + C</code></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;mysql服务端的登录和退出&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#mysql服务端的登录和退出&quot;&gt;&lt;/a&gt; MYSQL服务端的登录和退出&lt;/h1&gt;
-&lt;p&gt;1.用&lt;code&gt;mysql&lt;/code&gt;自带的客户端&lt;/p&gt;
-&lt;p&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="MYSQL" scheme="https://xiaowuyoucy.github.io/categories/MYSQL/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MYSQL服务的启动和停止</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/27/mysql004MYSQL%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%90%AF%E5%8A%A8%E5%92%8C%E5%81%9C%E6%AD%A2/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/27/mysql004MYSQL服务的启动和停止/</id>
-    <published>2020-02-26T22:43:46.000Z</published>
-    <updated>2020-02-26T22:49:09.711Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="mysql服务的启动和停止"><a class="markdownIt-Anchor" href="#mysql服务的启动和停止"></a> MYSQL服务的启动和停止</h1><h3 id="用管理员身份打开cmd命令"><a class="markdownIt-Anchor" href="#用管理员身份打开cmd命令"></a> 用管理员身份打开CMD命令</h3><h5 id="停止服务"><a class="markdownIt-Anchor" href="#停止服务"></a> 停止服务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net stop 数据库服务名</span><br></pre></td></tr></table></figure><h5 id="开启服务"><a class="markdownIt-Anchor" href="#开启服务"></a> 开启服务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start 数据库服务名</span><br></pre></td></tr></table></figure><h3 id="第二种方式"><a class="markdownIt-Anchor" href="#第二种方式"></a> 第二种方式:</h3><p>在图形服务管理中找到服务名,设置为开启状态</p><p><img src="/images/javawz/1582757260070.png" alt="1582757260070"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;mysql服务的启动和停止&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#mysql服务的启动和停止&quot;&gt;&lt;/a&gt; MYSQL服务的启动和停止&lt;/h1&gt;
-&lt;h3 id=&quot;用管理员身份打开cmd命令&quot;&gt;&lt;a class=&quot;markdownI
-      
-    
-    </summary>
-    
-      <category term="MYSQL" scheme="https://xiaowuyoucy.github.io/categories/MYSQL/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>配置文件介绍</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/27/mysql003%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/27/mysql003配置文件介绍/</id>
-    <published>2020-02-26T22:29:44.000Z</published>
-    <updated>2020-02-26T22:42:43.192Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="配置文件介绍"><a class="markdownIt-Anchor" href="#配置文件介绍"></a> 配置文件介绍</h1><h3 id="myini文件是数据库配置文件"><a class="markdownIt-Anchor" href="#myini文件是数据库配置文件"></a> my.ini文件是数据库配置文件</h3><h5 id="客户端字符集"><a class="markdownIt-Anchor" href="#客户端字符集"></a> 客户端字符集</h5><center><p><img src="/images/javawz/1582756240035.png" alt="1582756240035"></p></center><h5 id="服务端配置"><a class="markdownIt-Anchor" href="#服务端配置"></a> 服务端配置:</h5><center><p>服务端端口</p><p><img src="/images/javawz/1582756279596.png" alt="1582756279596"></p><p>服务端安装目录</p><p><img src="/images/javawz/1582756338813.png" alt="1582756338813"></p><p>数据库的管理文件目录</p><p><img src="/images/javawz/1582756393381-1582756609737.png" alt="1582756393381"></p><p>字符集</p><p><img src="/images/javawz/1582756426364-1582756605372.png" alt="1582756426364"></p><p>数据库存储引擎</p><p><img src="/images/javawz/1582756474933.png" alt="1582756474933"></p><p>语法模式</p><p><img src="/images/javawz/1582756510505-1582756527371.png" alt="1582756510505"></p><p>最大连接数</p><p><img src="/images/javawz/1582756584436.png" alt="1582756584436"></p></center><h3 id="修改完之后数据库服务要重启"><a class="markdownIt-Anchor" href="#修改完之后数据库服务要重启"></a> 修改完之后,数据库服务要重启</h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;配置文件介绍&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#配置文件介绍&quot;&gt;&lt;/a&gt; 配置文件介绍&lt;/h1&gt;
-&lt;h3 id=&quot;myini文件是数据库配置文件&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#my
-      
-    
-    </summary>
-    
-      <category term="MYSQL" scheme="https://xiaowuyoucy.github.io/categories/MYSQL/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MYSQL软件安装</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/27/mysql002MYSQL%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/27/mysql002MYSQL软件安装/</id>
-    <published>2020-02-26T21:26:20.000Z</published>
-    <updated>2020-02-26T21:32:01.056Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="mysql软件安装"><a class="markdownIt-Anchor" href="#mysql软件安装"></a> MYSQL软件安装</h1><center><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051512.png" alt="微信截图_20200227051512"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051531.png" alt="微信截图_20200227051531"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051608.png" alt="微信截图_20200227051608"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051622.png" alt="微信截图_20200227051622"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051808.png" alt="微信截图_20200227051808"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051845.png" alt="微信截图_20200227051845"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051912.png" alt="微信截图_20200227051912"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227051948.png" alt="微信截图_20200227051948"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052049.png" alt="微信截图_20200227052049"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052145.png" alt="微信截图_20200227052145"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052210.png" alt="微信截图_20200227052210"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052254.png" alt="微信截图_20200227052254"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052329.png" alt="微信截图_20200227052329"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200227052403.png" alt="微信截图_20200227052403"></p></center>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;mysql软件安装&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#mysql软件安装&quot;&gt;&lt;/a&gt; MYSQL软件安装&lt;/h1&gt;
-&lt;center&gt;
-&lt;p&gt;&lt;img src=&quot;/images/javawz/%E5%BE%AE%E4%BF%A
-      
-    
-    </summary>
-    
-      <category term="MYSQL" scheme="https://xiaowuyoucy.github.io/categories/MYSQL/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>数据库的相关概念</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/24/mysql001%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/24/mysql001数据库的相关概念/</id>
-    <published>2020-02-24T01:59:40.000Z</published>
-    <updated>2020-02-24T02:04:20.976Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="数据库的相关概念"><a class="markdownIt-Anchor" href="#数据库的相关概念"></a> 数据库的相关概念</h1><p><img src="/images/javawz/QQ%E6%88%AA%E5%9B%BE20200220173032.png" alt="QQ截图20200220173032"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200220172652.png" alt="微信截图_20200220172652"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200220172743.png" alt="微信截图_20200220172743"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200220172851.png" alt="微信截图_20200220172851"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200220172906.png" alt="微信截图_20200220172906"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200220172926.png" alt="微信截图_20200220172926"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200220173137.png" alt="微信截图_20200220173137"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200220173234.png" alt="微信截图_20200220173234"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200220173249.png" alt="微信截图_20200220173249"></p><br><br><br><p><img src="/images/javawz/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200220173304.png" alt="微信截图_20200220173304"></p><br><br><br><br><br>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;数据库的相关概念&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#数据库的相关概念&quot;&gt;&lt;/a&gt; 数据库的相关概念&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&quot;/images/javawz/QQ%E6%88%AA%E5%9B%BE202002201
-      
-    
-    </summary>
-    
-      <category term="MYSQL" scheme="https://xiaowuyoucy.github.io/categories/MYSQL/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>静态static关键字修饰成员方法</title>
-    <link href="https://xiaowuyoucy.github.io/2020/02/19/java00067%E9%9D%99%E6%80%81static%E5%85%B3%E9%94%AE%E5%AD%97%E4%BF%AE%E9%A5%B0%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95/"/>
-    <id>https://xiaowuyoucy.github.io/2020/02/19/java00067静态static关键字修饰成员方法/</id>
-    <published>2020-02-18T23:57:16.000Z</published>
-    <updated>2020-02-19T00:37:04.747Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="静态static关键字修饰成员方法"><a class="markdownIt-Anchor" href="#静态static关键字修饰成员方法"></a> 静态static关键字修饰成员方法</h1><p>1.一旦使用<code>static</code>修饰成员方法,那么这就成为了静态方法.</p><p>2.静态方法不属于对象,而是属于类的.</p><p>3.如果没有用<code>static</code>关键字,那么首先必须先创建对象,然后通过对象才能使用成员方法.</p><p>4.对于静态方法来说,可以通过对象名进行调用,也可以通过类名来调用.但推荐使用类名来调用.</p><p>5.如果是使用对象名来调用静态成员变量,在编译之后也会被<code>javac</code>翻译成为<code>类名.静态方法名</code></p><p>6.如果有了<code>static</code>关键字,那么不需要创建对象,直接就能通过类名称来使用它</p><p>7.无论是成员变量还是成员方法,如果有了<code>static</code>,都推荐使用<code>类名称</code>进行调用.</p><p>8.静态成员变量:<code>类名称.静态变量;</code></p><p>9.静态方法:<code>类名称.静态方法();</code></p><p>10.对于在本类当中的静态方法,可以省略类名称.</p><br><br><h5 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意:</h5><p>1.静态不能直接访问非静态.</p><p>原因:因为在内存当中,是先有的静态内容,后有的非静态内容.</p><br><p>2.静态方法不能使用this.</p><p>原因:this代表当前对象,通过谁调用的方法,谁就是对象.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main16</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Student2 stu = <span class="keyword">new</span> Student2(<span class="string">"小明"</span>);</span><br><span class="line">        Student2.room = <span class="string">"101课室"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用成员方法</span></span><br><span class="line">        stu.showVar();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用静态成员方法</span></span><br><span class="line">        Student2.showStaticVar();</span><br><span class="line">        stu.showStaticVar();<span class="comment">//不推荐使用对象名调用静态成员方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个Student2类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student2</span></span>&#123;</span><br><span class="line">    String name;</span><br><span class="line"><span class="comment">/*====================================================================*/</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String room;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student2</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*====================================================================*/</span></span><br><span class="line">    <span class="comment">//非静态成员方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showVar</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"名字: "</span> + <span class="keyword">this</span>.name);</span><br><span class="line">        System.out.println(<span class="string">"年龄: "</span> + Student2.room);</span><br><span class="line"></span><br><span class="line">        showStaticVar(); <span class="comment">//在本类中可以直接使用静态成员方法,不用加类名</span></span><br><span class="line">        Student2.showStaticVar(); <span class="comment">//加类名使用静态成员方法</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//静态成员方法</span></span><br><span class="line">    <span class="comment">//属于类,不属于对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">showStaticVar</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"年龄: "</span> + Student2.room);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;静态static关键字修饰成员方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#静态static关键字修饰成员方法&quot;&gt;&lt;/a&gt; 静态static关键字修饰成员方法&lt;/h1&gt;
-&lt;p&gt;1.一旦使用&lt;code&gt;static&lt;/code&gt;修饰
       
     
     </summary>
