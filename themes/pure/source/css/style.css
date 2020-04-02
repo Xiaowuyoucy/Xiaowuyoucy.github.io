@@ -5575,6 +5575,9 @@ p>span>code {
   font-size: 95%;
   font-weight:bold;
 }
+article>div>ul>li{
+  font-size: 20px;
+}
 table>tbody>tr>td>code{
   text-shadow: 0 1px #fff;
   padding: 0.2em 0.4em;

@@ -20,7 +20,7 @@ E next() 返回迭代的下一个元素。
 取出集合中的下一个元素
 Iterator迭代器,是一个接口,我们无法直接使用,需要使用Iterator接口的实现类对象,获取实现类的方式比较特殊
 Collection接口中有一个方法,叫iterator(),这个方法返回的就是迭代器的实现类对象
-Iterator<E> iterator() 返回在此 collection 的元素上进行迭代的迭代器。
+Iterator\<E> iterator() 返回在此 collection 的元素上进行迭代的迭代器。
 
 ### 迭代器的使用步骤(重点):
 
