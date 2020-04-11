@@ -56,6 +56,10 @@ summary {
   display: block;
 }
 
+article>div>ol>li{
+	font-size: 19px;
+}
+
 audio,
 canvas,
 progress,
