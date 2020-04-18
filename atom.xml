@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2020-04-05T16:57:29.087Z</updated>
+  <updated>2020-04-18T08:24:12.235Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>计算机硬件系统</title>
+    <link href="https://xiaowuyoucy.github.io/2020/04/18/002%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://xiaowuyoucy.github.io/2020/04/18/002计算机硬件系统/</id>
+    <published>2020-04-18T07:54:42.000Z</published>
+    <updated>2020-04-18T08:24:12.235Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="计算机硬件系统"><a class="markdownIt-Anchor" href="#计算机硬件系统"></a> 计算机硬件系统</h1><p>以前冯诺依曼计算机结构以运算器为中心</p><p>现在以存储器为中心</p><p>计算机硬件系统主要包括:</p><ol><li>中央处理器</li><li>内存储器</li><li>输入输出设备</li></ol><p>它们通过总线相连接到一起</p><h5 id="中央处理器"><a class="markdownIt-Anchor" href="#中央处理器"></a> 中央处理器:</h5><ol><li>运算器:对数据进行算术运算符,逻辑运算</li><li>控制器:对指令分析,控制,协调输入输出,对内存访问</li></ol><h5 id="存储器"><a class="markdownIt-Anchor" href="#存储器"></a> 存储器:</h5><ol><li>存储程序和数据</li><li>内存储器</li><li>外存储器</li></ol><h5 id="输入设备"><a class="markdownIt-Anchor" href="#输入设备"></a> 输入设备:</h5><p>将程序和数据输入到计算机中</p><h5 id="输出设备"><a class="markdownIt-Anchor" href="#输出设备"></a> 输出设备:</h5><p>将用户信息(程序或数据)输出到外部输出设备供用户查看.</p><h2 id="中央处理器-2"><a class="markdownIt-Anchor" href="#中央处理器-2"></a> 中央处理器</h2><p>也叫CPU,计算机的核心部件。</p><p>负责执行软件指令将数据加工成信息。</p><p>CPU分为两部分：</p><ol><li>控制器</li><li>运算器（算术逻辑单元）</li></ol><p>它们都包含有寄存器和高速存储区域，用<code>总线连接</code>起来。</p><h5 id="控制器"><a class="markdownIt-Anchor" href="#控制器"></a> 控制器：</h5><p>计算机的控制中心和指挥中心</p><p>对于每个指令，控制单元都要执行4个基本操作</p><ol><li>取指令</li><li>分析指令</li><li>执行指令</li><li>存储结果</li></ol><h5 id="运算器"><a class="markdownIt-Anchor" href="#运算器"></a> 运算器:</h5><p>可以执行算数运算,逻辑运算</p><p>算数运算: +,-,*,/</p><p>逻辑运算: ＞,≥,＜,≤,=,≠</p><h5 id="寄存器"><a class="markdownIt-Anchor" href="#寄存器"></a> 寄存器:</h5><p>提高计算机性能</p><p>高速存储区域</p><p>临时存储数据和指令或内存地址</p><p>寄存器的大小和数量可以决定计算机的性能和速度</p><p>寄存器的类型</p><ol><li>指令寄存器</li><li>地址寄存器</li><li>存储寄存器</li><li>累加寄存器等</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;计算机硬件系统&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#计算机硬件系统&quot;&gt;&lt;/a&gt; 计算机硬件系统&lt;/h1&gt;
+&lt;p&gt;以前冯诺依曼计算机结构以运算器为中心&lt;/p&gt;
+&lt;p&gt;现在以存储器为中心&lt;/p&gt;
+&lt;p&gt;计算机硬件系统主要包括:&lt;/
+      
+    
+    </summary>
+    
+      <category term="计算机公共基础" scheme="https://xiaowuyoucy.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%85%AC%E5%85%B1%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>计算机的发展历程</title>
+    <link href="https://xiaowuyoucy.github.io/2020/04/18/001%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/"/>
+    <id>https://xiaowuyoucy.github.io/2020/04/18/001计算机的发展历程/</id>
+    <published>2020-04-18T06:53:12.000Z</published>
+    <updated>2020-04-18T07:53:21.591Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h1><h2 id="计算机的发展历程"><a class="markdownIt-Anchor" href="#计算机的发展历程"></a> 计算机的发展历程</h2><h3 id="eniac"><a class="markdownIt-Anchor" href="#eniac"></a> ENIAC:</h3><p>1946年</p><p>美国宾夕法尼亚大学</p><p>18000个电子管,1500个继电器</p><p>30吨</p><p>170㎡</p><p>耗电140kW</p><p>每秒加法计算5000次</p><p>发展分为4个阶段:</p><ol><li>电子管计算时代</li><li>晶体管计算机时代</li><li>集成电路计算机时代</li><li>大规模集成电路计算机时代</li></ol><h2 id="计算机体系结构"><a class="markdownIt-Anchor" href="#计算机体系结构"></a> 计算机体系结构</h2><p>存储程序控制的计算机结构.</p><p>EDSAC是第一台存储程序的计算机</p><p>存储程序思想是冯诺依曼提出的,概括了:</p><ol><li>计算机(硬件)由<code>运算器</code>,<code>存储器</code>,<code>控制器</code>,<code>输入输出设备</code>五大基本部件组成.</li><li>计算机内部采用<code>二进制</code>来表示<code>指令</code>和<code>数据</code></li><li>将编好的程序和源数据放在存储器中,再启动计算机工作.</li></ol><p>非冯诺依曼结构计算机:</p><ol><li>数据流计算机</li><li>归约计算机</li><li>智能计算机</li></ol><h2 id="计算机系统基本组成"><a class="markdownIt-Anchor" href="#计算机系统基本组成"></a> 计算机系统基本组成</h2><p>分为<code>硬件系统</code>和<code>软件系统</code>.</p><p>计算机软件: 在硬件设备上运行的各种<code>程序</code>、<code>数据</code>。</p><p>程序：指挥计算机完成各种任务的<code>指令集合</code>。</p><p>为了方便阅读和修改程序，会提供关于程序的说明和资料，称为<code>文档</code></p><p><code>裸机</code>（硬件系统），只能识别机器代码</p><p>硬件系统和软件系统是相互依赖，不可分割的。</p><p>软件系统：运行，管理，维护计算机编制的程序，数据和文档的总称。</p><h5 id="计算机软件分为"><a class="markdownIt-Anchor" href="#计算机软件分为"></a> 计算机软件分为：</h5><p><code>系统软件</code>（控制，协调计算机，外部设备，应用软件开发和运行）：主要负责调度，监控，维护计算机系统</p><ol><li><code>操作系统</code></li><li>语言处理系统</li><li>数据库管理系统</li><li>系统辅助处理程序</li></ol><p><code>应用软件</code></p><ol><li>信息管理软件</li><li>辅助设计软件</li><li>文字处理软件</li><li>图形软件</li><li>各种程序包</li></ol><p><img src="/images/javawz/1587196283812.png" alt="1587196283812"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;概述&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#概述&quot;&gt;&lt;/a&gt; 概述&lt;/h1&gt;
+&lt;h2 id=&quot;计算机的发展历程&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#计算机的发展历程&quot;&gt;&lt;/a&gt; 计算机的发展
+      
+    
+    </summary>
+    
+      <category term="计算机公共基础" scheme="https://xiaowuyoucy.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%85%AC%E5%85%B1%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>模拟斗地主洗牌发牌(有序版本)</title>
@@ -445,55 +495,6 @@ Map集合保证ke
       
       
         &lt;h1 id=&quot;collections集合工具类的方法_addall和shuffle&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#collections集合工具类的方法_addall和shuffle&quot;&gt;&lt;/a&gt; Collections集合工具类的方法
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>java_可变参数</title>
-    <link href="https://xiaowuyoucy.github.io/2020/03/22/java00177-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0/"/>
-    <id>https://xiaowuyoucy.github.io/2020/03/22/java00177-可变参数/</id>
-    <published>2020-03-21T17:41:38.000Z</published>
-    <updated>2020-03-21T17:46:02.048Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="可变参数"><a class="markdownIt-Anchor" href="#可变参数"></a> 可变参数:</h3><p>是JDK1.5之后出现的新特性</p><h3 id="使用前提"><a class="markdownIt-Anchor" href="#使用前提"></a> 使用前提:</h3><p>​        当方法的参数列表数据类型已经确定,但是参数的个数不确定,就可以使用可变参数.</p><h3 id="使用格式"><a class="markdownIt-Anchor" href="#使用格式"></a> 使用格式:</h3><p>定义方法时使用</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">修饰符 返回值类型 方法名(数据类型...变量名)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="可变参数的原理"><a class="markdownIt-Anchor" href="#可变参数的原理"></a> 可变参数的原理:</h3><p>​        可变参数底层就是一个数组,根据传递参数个数不同,会创建不同长度的数组,来存储这些参数<br>​        传递的参数个数,可以是0个(不传递),1,2…多个</p><h3 id="可变参数的注意事项"><a class="markdownIt-Anchor" href="#可变参数的注意事项"></a> 可变参数的注意事项</h3><p>1.一个方法的参数列表,只能有一个可变参数<br>2.如果方法的参数有多个,那么可变参数必须写在参数列表的末尾</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.demo04.VarArgs;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo01VarArgs</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//int i = add();</span></span><br><span class="line">        <span class="comment">//int i = add(10);</span></span><br><span class="line">        <span class="keyword">int</span> i = add(<span class="number">10</span>,<span class="number">20</span>);</span><br><span class="line">        <span class="comment">//int i = add(10,20,30,40,50,60,70,80,90,100);</span></span><br><span class="line">        System.out.println(i);</span><br><span class="line"></span><br><span class="line">        method(<span class="string">"abc"</span>,<span class="number">5.5</span>,<span class="number">10</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        可变参数的注意事项</span></span><br><span class="line"><span class="comment">            1.一个方法的参数列表,只能有一个可变参数</span></span><br><span class="line"><span class="comment">            2.如果方法的参数有多个,那么可变参数必须写在参数列表的末尾</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">/*public static void method(int...a,String...b)&#123;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*public static void method(String b,double c,int d,int...a)&#123;</span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//可变参数的特殊(终极)写法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Object...obj)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        定义计算(0-n)整数和的方法</span></span><br><span class="line"><span class="comment">        已知:计算整数的和,数据类型已经确定int</span></span><br><span class="line"><span class="comment">        但是参数的个数不确定,不知道要计算几个整数的和,就可以使用可变参数</span></span><br><span class="line"><span class="comment">        add(); 就会创建一个长度为0的数组, new int[0]</span></span><br><span class="line"><span class="comment">        add(10); 就会创建一个长度为1的数组,存储传递来过的参数 new int[]&#123;10&#125;;</span></span><br><span class="line"><span class="comment">        add(10,20); 就会创建一个长度为2的数组,存储传递来过的参数 new int[]&#123;10,20&#125;;</span></span><br><span class="line"><span class="comment">        add(10,20,30,40,50,60,70,80,90,100); 就会创建一个长度为10的数组,存储传递来过的参数 new int[]&#123;10,20,30,40,50,60,70,80,90,100&#125;;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span>...arr)</span></span>&#123;</span><br><span class="line">        <span class="comment">//System.out.println(arr);//[I@2ac1fdc4 底层是一个数组</span></span><br><span class="line">        <span class="comment">//System.out.println(arr.length);//0,1,2,10</span></span><br><span class="line">        <span class="comment">//定义一个初始化的变量,记录累加求和</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//遍历数组,获取数组中的每一个元素</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : arr) &#123;</span><br><span class="line">            <span class="comment">//累加求和</span></span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//把求和结果返回</span></span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义一个方法,计算三个int类型整数的和</span></span><br><span class="line">    <span class="comment">/*public static int add(int a,int b,int c)&#123;</span></span><br><span class="line"><span class="comment">        return a+b+c;</span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义一个方法,计算两个int类型整数的和</span></span><br><span class="line">    <span class="comment">/*public static int add(int a,int b)&#123;</span></span><br><span class="line"><span class="comment">        return a+b;</span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;可变参数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#可变参数&quot;&gt;&lt;/a&gt; 可变参数:&lt;/h3&gt;
-&lt;p&gt;是JDK1.5之后出现的新特性&lt;/p&gt;
-&lt;h3 id=&quot;使用前提&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; hr
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://xiaowuyoucy.github.io/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>java_LinkedHashSet集合</title>
-    <link href="https://xiaowuyoucy.github.io/2020/03/22/java00176-LinkedHashSet%E9%9B%86%E5%90%88/"/>
-    <id>https://xiaowuyoucy.github.io/2020/03/22/java00176-LinkedHashSet集合/</id>
-    <published>2020-03-21T17:39:08.000Z</published>
-    <updated>2020-03-21T17:40:21.083Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="linkedhashset集合"><a class="markdownIt-Anchor" href="#linkedhashset集合"></a> LinkedHashSet集合</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.demo02.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedHashSet;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    java.util.LinkedHashSet集合 extends HashSet集合</span></span><br><span class="line"><span class="comment">    LinkedHashSet集合特点:</span></span><br><span class="line"><span class="comment">        底层是一个哈希表(数组+链表/红黑树)+链表:多了一条链表(记录元素的存储顺序),保证元素有序</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo04LinkedHashSet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        HashSet&lt;String&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        set.add(<span class="string">"www"</span>);</span><br><span class="line">        set.add(<span class="string">"abc"</span>);</span><br><span class="line">        set.add(<span class="string">"abc"</span>);</span><br><span class="line">        set.add(<span class="string">"itcast"</span>);</span><br><span class="line">        System.out.println(set);<span class="comment">//[abc, www, itcast] 无序,不允许重复</span></span><br><span class="line"></span><br><span class="line">        LinkedHashSet&lt;String&gt; linked = <span class="keyword">new</span> LinkedHashSet&lt;&gt;();</span><br><span class="line">        linked.add(<span class="string">"www"</span>);</span><br><span class="line">        linked.add(<span class="string">"abc"</span>);</span><br><span class="line">        linked.add(<span class="string">"abc"</span>);</span><br><span class="line">        linked.add(<span class="string">"itcast"</span>);</span><br><span class="line">        System.out.println(linked);<span class="comment">//[www, abc, itcast] 有序,不允许重复</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;linkedhashset集合&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#linkedhashset集合&quot;&gt;&lt;/a&gt; LinkedHashSet集合&lt;/h1&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;tabl
       
     
     </summary>
