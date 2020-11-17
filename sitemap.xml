@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaowuyoucy.github.io/about/index.html</loc>
+    
+    <lastmod>2020-11-17T15:22:50.871Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/03/11/java00107%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%91%E4%B8%8A%E8%BD%AC%E5%9E%8B/</loc>
+    
+    <lastmod>2020-06-10T11:26:37.164Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaowuyoucy.github.io/2020/06/04/html-css00022%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8/</loc>
     
     <lastmod>2020-06-04T04:56:52.137Z</lastmod>
@@ -677,13 +691,6 @@
     <loc>https://xiaowuyoucy.github.io/2020/03/11/java00112%E5%85%B3%E9%94%AE%E5%AD%97%E8%AF%BB%E6%B3%95/</loc>
     
     <lastmod>2020-03-11T14:59:57.864Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xiaowuyoucy.github.io/2020/03/11/java00107%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%91%E4%B8%8A%E8%BD%AC%E5%9E%8B/</loc>
-    
-    <lastmod>2020-03-11T12:08:28.302Z</lastmod>
     
   </url>
   
@@ -1822,13 +1829,6 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/about/index.html</loc>
-    
-    <lastmod>2019-12-05T12:38:10.703Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://xiaowuyoucy.github.io/2019/11/15/201911152138/</loc>
     
     <lastmod>2019-12-04T17:07:39.006Z</lastmod>
@@ -2179,14 +2179,14 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/tags/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/tags/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
