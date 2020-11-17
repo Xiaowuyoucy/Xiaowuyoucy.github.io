@@ -12,9 +12,9 @@ sidebar: custom
 
 <br/>
 
-[**One.陈焱的人生事件纪要**](www.xiaochenyan.top)
+<a href="http://www.xiaochenyan.top"> [**One.陈焱的人生事件纪要**]</a>
 
-[**Two.Resesume of David Wei**](www.xiaochenyan.top) 
+<a href="http://www.xiaochenyan.top">[**Two.Resesume of YanChen**]</a>
 
 **[Three.Annual Summery of YanChen]()**
 
