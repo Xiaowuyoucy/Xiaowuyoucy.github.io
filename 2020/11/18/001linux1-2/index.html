@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="YanChen">
 <meta property="og:description" content="操作系统的作用: 使计算机系统易于使用 有效管理系统资源 方便用户开发、测试和引进新功能 向下封装硬件，向上提供操作接口 linux分为内核版本和发行版本 内核源码网站：www.kernel.org 发行版本就是给系统披上了UI  文件系统: 采用  “路径” + “文件名” linux 采用 ‘’/&amp;quot; 且没有盘符 路径分为:  绝对路径 相对路径 ./表示当前目录 ../表示上一级目">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-11-18T12:51:45.243Z">
+<meta property="og:updated_time" content="2020-11-18T16:24:21.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux1-2">
 <meta name="twitter:description" content="操作系统的作用: 使计算机系统易于使用 有效管理系统资源 方便用户开发、测试和引进新功能 向下封装硬件，向上提供操作接口 linux分为内核版本和发行版本 内核源码网站：www.kernel.org 发行版本就是给系统披上了UI  文件系统: 采用  “路径” + “文件名” linux 采用 ‘’/&amp;quot; 且没有盘符 路径分为:  绝对路径 相对路径 ./表示当前目录 ../表示上一级目">
@@ -475,9 +475,9 @@
 </table>
 <p>-rwxrwxrwx</p>
 <p>查看用户组信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /ect/gruop</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /ect/gruop</span><br></pre></td></tr></table></figure>
 <p>查看用户信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /ect/passwd</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /ect/passwd</span><br></pre></td></tr></table></figure>
 <p>用户名: x : 用户id : 组id</p>
 <p>文件目录的x权限代表可进入权限</p>
 <p>一般情况下linux/unix只允许文件所有者或超级用户(root)改变文件权限</p>
@@ -498,7 +498,7 @@
 <p>1代表命令</p>
 <p>2代表系统调用</p>
 <p>3代表库调用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man 3 printf //查询printf函数使用说明</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man 3 printf //查询printf函数使用说明</span><br></pre></td></tr></table></figure>
 <p>按tab键可以补全命令</p>
 <p>方向键可以查使用过的命令</p>
 <p><code>history</code> 命令</p>
@@ -524,7 +524,7 @@
 </tbody>
 </table>
 <p>使用方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ls -ahl</span><br><span class="line">ls -a</span><br><span class="line">ls -l</span><br><span class="line">ll  #等价于 ls -l</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ls -ahl</span><br><span class="line">ls -a</span><br><span class="line">ls -l</span><br><span class="line">ll  #等价于 ls -l</span><br></pre></td></tr></table></figure>
 <p>一个文件夹默认有两个目录,一个是<code>.</code>另一个是<code>..</code>   分别代表当前目录和上一级目录。</p>
 <table style="font-size:13px;">
 <tr>
@@ -540,7 +540,7 @@
 </table>
 <p>如果是文件夹,硬链接数目代表其下有多少子目录</p>
 <h3 id="touch-创建文件"><a class="markdownIt-Anchor" href="#touch-创建文件"></a> touch 创建文件</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch 文件名</span><br><span class="line">touch abc</span><br><span class="line">touch 文件名1  文件名2  文件名3...文件名n</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch 文件名</span><br><span class="line">touch abc</span><br><span class="line">touch 文件名1  文件名2  文件名3...文件名n</span><br></pre></td></tr></table></figure>
 <p>如果文件存在则修改日期时间为当下时间,否则则创建新文件</p>
 <table style="font-size:14px;">
 <tr>
@@ -556,7 +556,7 @@
 <td> \  转义字符</td>
 </tr>
 </table>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ls ?.c</span><br><span class="line">ls a.?</span><br><span class="line">ls [a~d]*</span><br><span class="line">ls [abc].?</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ls ?.c</span><br><span class="line">ls a.?</span><br><span class="line">ls [a~d]*</span><br><span class="line">ls [abc].?</span><br></pre></td></tr></table></figure>
 
       
     </div>
