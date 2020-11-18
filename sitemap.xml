@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaowuyoucy.github.io/2020/11/18/001linux1-2/</loc>
+    
+    <lastmod>2020-11-18T12:51:45.243Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaowuyoucy.github.io/about/index.html</loc>
     
     <lastmod>2020-11-17T15:32:01.437Z</lastmod>
@@ -2179,14 +2186,14 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/tags/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/tags/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
