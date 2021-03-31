@@ -18,13 +18,13 @@
   
   
   <title>第三章 数据链路层 | YanChen</title>
-  <meta name="description" content="计算网络原理 第三章 数据链路层  [数据链路层（一）](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#_1)   [3.1 使用点对点信道的数据链路层](file:///C:/Users/Shinelon/Desktop/资料">
+  <meta name="description" content="计算网络原理 第三章 数据链路层  数据链路层（一）   3.1 使用点对点信道的数据链路层   3.1.1 数据链路层和帧 3.1.2 三个基本问题     数据链路层的信道类型   3.2 点对点协议 PPP   3.2.1 PPP协议的特点 3.2.2 PPP协议的帧格式 3.2.3 PPP协议的工作状态   3.3 使用广播信道的数据链路层(局域网)   3.3.1 局域网的数据链路层">
 <meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第三章 数据链路层">
 <meta property="og:url" content="https://xiaowuyoucy.github.io/2021/04/01/计算机网络原理笔记-第三章-数据链路层/index.html">
 <meta property="og:site_name" content="YanChen">
-<meta property="og:description" content="计算网络原理 第三章 数据链路层  [数据链路层（一）](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#_1)   [3.1 使用点对点信道的数据链路层](file:///C:/Users/Shinelon/Desktop/资料">
+<meta property="og:description" content="计算网络原理 第三章 数据链路层  数据链路层（一）   3.1 使用点对点信道的数据链路层   3.1.1 数据链路层和帧 3.1.2 三个基本问题     数据链路层的信道类型   3.2 点对点协议 PPP   3.2.1 PPP协议的特点 3.2.2 PPP协议的帧格式 3.2.3 PPP协议的工作状态   3.3 使用广播信道的数据链路层(局域网)   3.3.1 局域网的数据链路层">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/20200425225800499.gif">
 <meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/20200425231742936.png">
@@ -39,10 +39,10 @@
 <meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/2020042708083468.png">
 <meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/20200427081935529.png">
 <meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/20200427082103326.png">
-<meta property="og:updated_time" content="2021-03-31T17:40:30.362Z">
+<meta property="og:updated_time" content="2021-03-31T18:00:00.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第三章 数据链路层">
-<meta name="twitter:description" content="计算网络原理 第三章 数据链路层  [数据链路层（一）](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#_1)   [3.1 使用点对点信道的数据链路层](file:///C:/Users/Shinelon/Desktop/资料">
+<meta name="twitter:description" content="计算网络原理 第三章 数据链路层  数据链路层（一）   3.1 使用点对点信道的数据链路层   3.1.1 数据链路层和帧 3.1.2 三个基本问题     数据链路层的信道类型   3.2 点对点协议 PPP   3.2.1 PPP协议的特点 3.2.2 PPP协议的帧格式 3.2.3 PPP协议的工作状态   3.3 使用广播信道的数据链路层(局域网)   3.3.1 局域网的数据链路层">
 <meta name="twitter:image" content="https://xiaowuyoucy.github.io/images/javawz/20200425225800499.gif">
   <!-- Canonical links -->
   <link rel="canonical" href="https://xiaowuyoucy.github.io/2021/04/01/计算机网络原理笔记-第三章-数据链路层/index.html">
@@ -424,10 +424,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/04/01/计算机网络原理笔记-第三章-数据链路层/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.7k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.1k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 13(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 11(分)</span>
 	
 
       </div>
@@ -436,33 +436,33 @@
       
         <h3 id="计算网络原理-第三章-数据链路层"><a class="markdownIt-Anchor" href="#计算网络原理-第三章-数据链路层"></a> 计算网络原理 第三章 数据链路层</h3>
 <ul>
-<li>[数据链路层（一）](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#_1)</li>
+<li><a href="#数据链路层（一）">数据链路层（一）</a></li>
 <li>
 <ul>
-<li>[3.1 使用点对点信道的数据链路层](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#31__2)</li>
+<li><a href="#3.1 使用点对点信道的数据链路层">3.1 使用点对点信道的数据链路层</a></li>
 <li>
 <ul>
-<li>[3.1.1 数据链路层和帧](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#311__4)</li>
-<li>[3.1.2 三个基本问题](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#312__29)</li>
+<li><a href="#3.1.1 数据链路层和帧">3.1.1 数据链路层和帧</a></li>
+<li><a href="#3.1.2 三个基本问题">3.1.2 三个基本问题</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>[数据链路层的信道类型](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#_144)</li>
+<li><a href="#数据链路层的信道类型">数据链路层的信道类型</a></li>
 <li>
 <ul>
-<li>[3.2 点对点协议 PPP](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#32__PPP_154)</li>
+<li><a href="#3.2 点对点协议 PPP">3.2 点对点协议 PPP</a></li>
 <li>
 <ul>
-<li>[3.2.1 PPP协议的特点](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#321_PPP_163)</li>
-<li>[3.2.2 PPP协议的帧格式](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#322_PPP_196)</li>
-<li>[3.2.3 PPP协议的工作状态](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#323_PPP_236)</li>
+<li><a href="#3.2.1 PPP协议的特点">3.2.1 PPP协议的特点</a></li>
+<li><a href="#3.2.2 PPP协议的帧格式">3.2.2 PPP协议的帧格式</a></li>
+<li><a href="#3.2.3 PPP协议的工作状态">3.2.3 PPP协议的工作状态</a></li>
 </ul>
 </li>
-<li>[3.3 使用广播信道的数据链路层(局域网)](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#33__247)</li>
+<li><a href="#3.3 使用广播信道的数据链路层(局域网)">3.3 使用广播信道的数据链路层(局域网)</a></li>
 <li>
 <ul>
-<li>[3.3.1 局域网的数据链路层](file:///C:/Users/Shinelon/Desktop/资料/计算机网络/计算机网络原理笔记/(4条消息) 计算机网络原理笔记 第三章 数据链路层（一）_JhonnyLee的博客-CSDN博客.html#331__248)</li>
+<li><a href="#3.3.1 局域网的数据链路层">3.3.1 局域网的数据链路层</a></li>
 </ul>
 </li>
 </ul>
@@ -472,7 +472,7 @@
 <h1 id="数据链路层一"><a class="markdownIt-Anchor" href="#数据链路层一"></a> 数据链路层（一）</h1>
 <p><span id="3.1 使用点对点信道的数据链路层"></span></p>
 <h2 id="31-使用点对点信道的数据链路层"><a class="markdownIt-Anchor" href="#31-使用点对点信道的数据链路层"></a> 3.1 使用点对点信道的数据链路层</h2>
-<p><span id=" 3.1.1 数据链路层和帧"></span></p>
+<p><span id="3.1.1 数据链路层和帧"></span></p>
 <h3 id="311-数据链路层和帧"><a class="markdownIt-Anchor" href="#311-数据链路层和帧"></a> 3.1.1 数据链路层和帧</h3>
 <p><em><strong>*数据发送模型*</strong></em><br>
 <img src="/images/javawz/20200425225800499.gif" alt><br>
@@ -707,7 +707,7 @@ OSI/RM模型的观点:数据链路层要做成无传输差错的!但这种理念
 .<br>
 .</li>
 </ul>
-<p><span id=" 3.3 使用广播信道的数据链路层(局域网)"></span></p>
+<p><span id="3.3 使用广播信道的数据链路层(局域网)"></span></p>
 <h2 id="33-使用广播信道的数据链路层局域网"><a class="markdownIt-Anchor" href="#33-使用广播信道的数据链路层局域网"></a> 3.3 使用广播信道的数据链路层(局域网)</h2>
 <p><span id="3.3.1 局域网的数据链路层"></span></p>
 <h3 id="331-局域网的数据链路层"><a class="markdownIt-Anchor" href="#331-局域网的数据链路层"></a> 3.3.1 局域网的数据链路层</h3>
