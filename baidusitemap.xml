@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://xiaowuyoucy.github.io/2021/04/22/cpp0008-%E5%BC%95%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</loc>
+    <lastmod>2021-04-22</lastmod>
+  </url>  <url>
     <loc>https://xiaowuyoucy.github.io/2021/04/23/cpp0015-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</loc>
     <lastmod>2021-04-22</lastmod>
   </url>  <url>
@@ -20,9 +23,6 @@
     <lastmod>2021-04-22</lastmod>
   </url>  <url>
     <loc>https://xiaowuyoucy.github.io/2021/04/22/cpp0009-%E5%BC%95%E7%94%A8%E7%9A%84%E6%9C%AC%E8%B4%A8/</loc>
-    <lastmod>2021-04-22</lastmod>
-  </url>  <url>
-    <loc>https://xiaowuyoucy.github.io/2021/04/22/cpp0008-%E5%BC%95%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</loc>
     <lastmod>2021-04-22</lastmod>
   </url>  <url>
     <loc>https://xiaowuyoucy.github.io/2021/04/15/cpp0007-%E6%9E%9A%E4%B8%BE%E7%9A%84%E5%A2%9E%E5%BC%BA/</loc>
