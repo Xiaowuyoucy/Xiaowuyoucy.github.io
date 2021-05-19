@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>Win32程序运行原理 | YanChen</title>
+  <meta name="description" content="Win32程序运行原理  CPU的保护模式和Windows系统 80386处理器有三种工作模式：实模式、保护模式和虚拟86模式 实模式和虚拟模式是为了和8086处理器兼容而设置的 Windows操作系统运行在保护模式中  Windows的多任务实现 多任务隔离技术：可以使每个任务都有独立的地址空间，就像每个任务独享一个CPU一样 在Windows中任务被进程取代 进程就是正在运行的应用程序的实例">
+<meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Win32程序运行原理">
+<meta property="og:url" content="https://xiaowuyoucy.github.io/2021/05/19/win0002-Win32程序运行原理/index.html">
+<meta property="og:site_name" content="YanChen">
+<meta property="og:description" content="Win32程序运行原理  CPU的保护模式和Windows系统 80386处理器有三种工作模式：实模式、保护模式和虚拟86模式 实模式和虚拟模式是为了和8086处理器兼容而设置的 Windows操作系统运行在保护模式中  Windows的多任务实现 多任务隔离技术：可以使每个任务都有独立的地址空间，就像每个任务独享一个CPU一样 在Windows中任务被进程取代 进程就是正在运行的应用程序的实例">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1621362607000.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1621363114545.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1621364048617.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1621369626292.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1621369983635.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1621378080153.png">
+<meta property="og:updated_time" content="2021-05-18T23:29:49.490Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Win32程序运行原理">
+<meta name="twitter:description" content="Win32程序运行原理  CPU的保护模式和Windows系统 80386处理器有三种工作模式：实模式、保护模式和虚拟86模式 实模式和虚拟模式是为了和8086处理器兼容而设置的 Windows操作系统运行在保护模式中  Windows的多任务实现 多任务隔离技术：可以使每个任务都有独立的地址空间，就像每个任务独享一个CPU一样 在Windows中任务被进程取代 进程就是正在运行的应用程序的实例">
+<meta name="twitter:image" content="https://xiaowuyoucy.github.io/images/javawz/1621362607000.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xiaowuyoucy.github.io/2021/05/19/win0002-Win32程序运行原理/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fonts2/iconfont.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xiaowuyoucy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">YanChen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> GuangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="https://www.xiaochenyan.top/navigation/index.html">
+            
+            <i class="icon icon-map-marker"></i>
+            
+            <span class="menu-title">导航</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon iconfont icon-video"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">格言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+				
+				<p id="hitokoto">:D 获取中...</p>
+				<p id="from" style="text-align: right"></p>
+                <script>
+					  var xhr = new XMLHttpRequest();
+					  xhr.open('get', 'https://v1.hitokoto.cn');
+					  xhr.onreadystatechange = function () {
+						if (xhr.readyState === 4) {
+						  var data = JSON.parse(xhr.responseText);
+						  var hitokoto = document.getElementById('hitokoto');
+						  hitokoto.innerText = data.hitokoto;
+						  var from = document.getElementById('from');
+						  from.innerText = "-- " + data.from;
+						}
+					  }
+					  xhr.send();
+				</script>
+				
+				
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">195</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KaliLinux/">KaliLinux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL/">MYSQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WEB安全渗透/">WEB安全渗透</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows命令/">Windows命令</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/apache/">apache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/c/">c++</a><span class="category-list-count">60</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp/">cpp</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/githubHexo/">githubHexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计/">windows程序设计</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于博主/">关于博主</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术资讯/">技术资讯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/易语言/">易语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/理财投资/">理财投资</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简谈计算机/">简谈计算机</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程词汇/">编程词汇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络爬虫/">网络爬虫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机公共基础/">计算机公共基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络原理/">计算机网络原理</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GET/">$_GET</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POST，-SERVER/">$_POST，$_SERVER</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REQUEST/">$_REQUEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOTO语句/">GOTO语句</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang函数/">Golang函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang匿名函数/">Golang匿名函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础/">Golang基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础类型占位符/">Golang基础类型占位符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang常量与变量里表达式/">Golang常量与变量里表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang循环结构/">Golang循环结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang指针/">Golang指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang标准输入与输出/">Golang标准输入与输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang流程控制/">Golang流程控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang程序运算/">Golang程序运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang类型转换及移位运算/">Golang类型转换及移位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang闭包函数/">Golang闭包函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ISO七层模型/">ISO七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java总结/">Java总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalinux/">Kalinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Null和Undefined/">Null和Undefined</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP两种定义常量的形式/">PHP两种定义常量的形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP常量/">PHP常量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python教程/">Python教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python笔记/">Python笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python运算符/">Python运算符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO网站优化/">SEO网站优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIR/">__DIR__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FILE/">__FILE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/">__LINE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache环境变量/">apache环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache配置/">apache配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beef劫持/">beef劫持</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dowhile循环/">dowhile循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iota定义常量组/">iota定义常量组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数/">javascript函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this方法/">js-this方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js布尔类型隐私转换/">js布尔类型隐私转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux目录结构/">linux目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php变量/">php变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urlib2/">urlib2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全渗透/">web安全渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web渗透/">web渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人生事记/">人生事记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/变量的操作/">变量的操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/延时执行defer/">延时执行defer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格狼日/">拉格狼日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间复杂度测试/">时间复杂度测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财，投资/">理财，投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简历/">简历</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络模型/">网络模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/顺序表/">顺序表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/GET/" style="font-size: 13px;">$_GET</a> <a href="/tags/POST，-SERVER/" style="font-size: 13px;">$_POST，$_SERVER</a> <a href="/tags/REQUEST/" style="font-size: 13px;">$_REQUEST</a> <a href="/tags/Cookie/" style="font-size: 13px;">Cookie</a> <a href="/tags/GOTO语句/" style="font-size: 13px;">GOTO语句</a> <a href="/tags/Golang/" style="font-size: 13px;">Golang</a> <a href="/tags/Golang函数/" style="font-size: 13px;">Golang函数</a> <a href="/tags/Golang匿名函数/" style="font-size: 13px;">Golang匿名函数</a> <a href="/tags/Golang基础/" style="font-size: 14px;">Golang基础</a> <a href="/tags/Golang基础类型占位符/" style="font-size: 13px;">Golang基础类型占位符</a> <a href="/tags/Golang常量与变量里表达式/" style="font-size: 13px;">Golang常量与变量里表达式</a> <a href="/tags/Golang循环结构/" style="font-size: 13px;">Golang循环结构</a> <a href="/tags/Golang指针/" style="font-size: 13px;">Golang指针</a> <a href="/tags/Golang标准输入与输出/" style="font-size: 13px;">Golang标准输入与输出</a> <a href="/tags/Golang流程控制/" style="font-size: 13px;">Golang流程控制</a> <a href="/tags/Golang程序运算/" style="font-size: 13px;">Golang程序运算</a> <a href="/tags/Golang类型转换及移位运算/" style="font-size: 13px;">Golang类型转换及移位运算</a> <a href="/tags/Golang闭包函数/" style="font-size: 13px;">Golang闭包函数</a> <a href="/tags/ISO七层模型/" style="font-size: 13px;">ISO七层模型</a> <a href="/tags/Java总结/" style="font-size: 13px;">Java总结</a> <a href="/tags/Kalinux/" style="font-size: 13px;">Kalinux</a> <a href="/tags/Null和Undefined/" style="font-size: 13px;">Null和Undefined</a> <a href="/tags/PHP两种定义常量的形式/" style="font-size: 13px;">PHP两种定义常量的形式</a> <a href="/tags/PHP常量/" style="font-size: 13px;">PHP常量</a> <a href="/tags/Python教程/" style="font-size: 13px;">Python教程</a> <a href="/tags/Python笔记/" style="font-size: 13px;">Python笔记</a> <a href="/tags/Python运算符/" style="font-size: 13px;">Python运算符</a> <a href="/tags/SEO网站优化/" style="font-size: 13px;">SEO网站优化</a> <a href="/tags/XSS/" style="font-size: 14px;">XSS</a> <a href="/tags/DIR/" style="font-size: 13px;">__DIR__</a> <a href="/tags/FILE/" style="font-size: 13px;">__FILE__</a> <a href="/tags/LINE/" style="font-size: 13px;">__LINE__</a> <a href="/tags/apache环境变量/" style="font-size: 13px;">apache环境变量</a> <a href="/tags/apache配置/" style="font-size: 13px;">apache配置</a> <a href="/tags/beef劫持/" style="font-size: 13px;">beef劫持</a> <a href="/tags/dowhile循环/" style="font-size: 13px;">dowhile循环</a> <a href="/tags/iota定义常量组/" style="font-size: 13px;">iota定义常量组</a> <a href="/tags/javascript函数/" style="font-size: 13px;">javascript函数</a> <a href="/tags/js-this方法/" style="font-size: 13px;">js-this方法</a> <a href="/tags/js布尔类型隐私转换/" style="font-size: 13px;">js布尔类型隐私转换</a> <a href="/tags/linux目录结构/" style="font-size: 13px;">linux目录结构</a> <a href="/tags/php变量/" style="font-size: 13px;">php变量</a> <a href="/tags/sql注入/" style="font-size: 13px;">sql注入</a> <a href="/tags/urlib2/" style="font-size: 13px;">urlib2</a> <a href="/tags/web安全渗透/" style="font-size: 13px;">web安全渗透</a> <a href="/tags/web渗透/" style="font-size: 13px;">web渗透</a> <a href="/tags/人生事记/" style="font-size: 13px;">人生事记</a> <a href="/tags/变量的操作/" style="font-size: 13px;">变量的操作</a> <a href="/tags/延时执行defer/" style="font-size: 13px;">延时执行defer</a> <a href="/tags/拉格狼日/" style="font-size: 13px;">拉格狼日</a> <a href="/tags/时间复杂度测试/" style="font-size: 13px;">时间复杂度测试</a> <a href="/tags/理财，投资/" style="font-size: 13px;">理财，投资</a> <a href="/tags/简历/" style="font-size: 13px;">简历</a> <a href="/tags/算法/" style="font-size: 13px;">算法</a> <a href="/tags/网络模型/" style="font-size: 13px;">网络模型</a> <a href="/tags/计算机基础/" style="font-size: 13px;">计算机基础</a> <a href="/tags/顺序表/" style="font-size: 13px;">顺序表</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">41</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">125</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">106</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/windows程序设计/">windows程序设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/19/win0002-Win32程序运行原理/" class="title">Win32程序运行原理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-18T18:02:51.000Z" itemprop="datePublished">2021-05-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/windows程序设计/">windows程序设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/19/win0001-windows程序设计基础/" class="title">windows程序设计基础</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-18T17:32:42.000Z" itemprop="datePublished">2021-05-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/14/cpp0060-面向抽象类编程实现计算程序员工资/" class="title">面向抽象类编程实现计算程序员工资</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-14T10:47:25.000Z" itemprop="datePublished">2021-05-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/14/cpp0059-C语言函数指针的锦囊妙计/" class="title">C语言函数指针的锦囊妙计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-13T18:17:04.000Z" itemprop="datePublished">2021-05-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/14/cpp0058-函数指针的语法和意义/" class="title">函数指针的语法和意义</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-13T17:50:06.000Z" itemprop="datePublished">2021-05-14</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-win0002-Win32程序运行原理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Win32程序运行原理
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/05/19/win0002-Win32程序运行原理/" class="article-date">
+	  <time datetime="2021-05-18T18:02:51.000Z" itemprop="datePublished">2021-05-19</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/windows程序设计/">windows程序设计</a>
+  </span>
+
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/05/19/win0002-Win32程序运行原理/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 5.3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 21(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="win32程序运行原理"><a class="markdownIt-Anchor" href="#win32程序运行原理"></a> Win32程序运行原理</h1>
+<h3 id="cpu的保护模式和windows系统"><a class="markdownIt-Anchor" href="#cpu的保护模式和windows系统"></a> CPU的保护模式和Windows系统</h3>
+<p>80386处理器有三种工作模式：实模式、保护模式和虚拟86模式</p>
+<p>实模式和虚拟模式是为了和8086处理器兼容而设置的</p>
+<p>Windows操作系统运行在保护模式中</p>
+<h4 id="windows的多任务实现"><a class="markdownIt-Anchor" href="#windows的多任务实现"></a> Windows的多任务实现</h4>
+<p>多任务隔离技术：可以使每个任务都有独立的地址空间，就像每个任务独享一个CPU一样</p>
+<p>在Windows中任务被进程取代</p>
+<p>进程就是正在运行的应用程序的实例（执行它的是线程，进程实则就是一块应用程序的空间）</p>
+<p>Windows是多任务操作系统 每个进程内的线程只能访问自己 线程的内存，不能访问其他进程的内存</p>
+<p>例如 有进程A，B</p>
+<p>A进程中的线程只能访问自己进程的内存，不能访问B进程中的地址</p>
+<h3 id="虚拟内存"><a class="markdownIt-Anchor" href="#虚拟内存"></a> 虚拟内存</h3>
+<p>Windows为每个进程分配4GB的地址空间主要依靠CPU支持</p>
+<p>CPU在保护模式下支持虚拟存储</p>
+<p>虚拟内存：将磁盘空间当做内存空间来使用</p>
+<p>页文件：包含了对所有进程都有效的虚拟内存</p>
+<p>4GB虚拟地址的前半部分留给系统，后半部分留给用户</p>
+<p><img src="/images/javawz/1621362607000.png" alt="1621362607000"></p>
+<p>系统空间：内核代码、设备驱动代码等等。部分空间是共享的</p>
+<h3 id="内核模式和用户模式"><a class="markdownIt-Anchor" href="#内核模式和用户模式"></a> 内核模式和用户模式：</h3>
+<p>80386处理器共定义了4中（0~3）特权级别 称为<code>环</code></p>
+<p><img src="/images/javawz/1621363114545.png" alt="1621363114545"></p>
+<p>0是特权级(最高级)</p>
+<p>3是用户级</p>
+<p>Windows有两种模式:</p>
+<p>内核模式是0级：系统程序（驱动等等）</p>
+<p>用户模式是3级</p>
+<p>当应用程序调用系统函数时，会从用户模式切换到内核模式去执行</p>
+<h3 id="内核对象"><a class="markdownIt-Anchor" href="#内核对象"></a> 内核对象</h3>
+<p>内核对象：系统提供用户模式下代码与内核模式下代码进行交互的基本接口。</p>
+<p><img src="/images/javawz/1621364048617.png" alt="1621364048617"></p>
+<p>对象句柄：</p>
+<p>调用函数创建一个内核对象时会返回一个此对象的句柄</p>
+<p>很多API函数都需要使用此句柄来辨别处理哪个内核对象，该句柄仅对创建该内核对象的进程有效</p>
+<p>也可以多个进程共享一个内核对象，调用<code>DuplicateHandle</code>复制一个进程句柄传给其他进程</p>
+<h3 id="使用计数"><a class="markdownIt-Anchor" href="#使用计数"></a> 使用计数</h3>
+<p>系统为进程分配内核对象资源时,会将内核对象使用计数属性初始化为1</p>
+<p>以后每次打开这个内核对象,系统就会将使用计数加1,关闭则减1</p>
+<p>使用计数为0时,说明这个内核对象所有引用都已经关闭,系统会释放该内核对象资源</p>
+<h3 id="进程的创建"><a class="markdownIt-Anchor" href="#进程的创建"></a> 进程的创建</h3>
+<h4 id="进程和线程"><a class="markdownIt-Anchor" href="#进程和线程"></a> 进程和线程:</h4>
+<p>进程:</p>
+<p>磁盘将可执行文件载入内存之后就变成了进程</p>
+<p>进程是一个正在运行的程序</p>
+<p>拥有自己的虚拟空间地址、代码、数据、其他系统资源</p>
+<p>有一个或多个线程</p>
+<p>一个进程要完成任何事情，必须拥有一个在它地址空间中运行的线程，此线程负责执行该进程地址空间的代码</p>
+<p>线程:</p>
+<p>进程内执行代码的独立实体</p>
+<p>系统创建一个进程后，会创建一个线程来执行进程内的代码，这个线程称为主线程</p>
+<p>主线程运行过程中可以创建其他线程，一般主线程创建的线程称为辅助线程或子线程</p>
+<p>组成Win32进程的两个部分</p>
+<p>1.进程内核对象：操作系统使用此内核对象进行管理该进程</p>
+<p>2.私有的虚拟地址空间：包含了所有可执行的或是DLL模块的代码和数据、程序动态申请内存的地方</p>
+<h3 id="应用程序的启动过程"><a class="markdownIt-Anchor" href="#应用程序的启动过程"></a> 应用程序的启动过程</h3>
+<h5 id="控制台应用程序的启动过程"><a class="markdownIt-Anchor" href="#控制台应用程序的启动过程"></a> 控制台应用程序的启动过程</h5>
+<p>1.操作系统会调用C/C<ins>运行期启动函数（会初始化C/C</ins>运行期库）</p>
+<p>2.C/C++运行期启动函数调用入口main函数</p>
+<h5 id="win32应用程序的启动过程"><a class="markdownIt-Anchor" href="#win32应用程序的启动过程"></a> Win32应用程序的启动过程</h5>
+<p>1.操作系统会调用CreateProcess函数来创建一个新的进程</p>
+<p>当一个线程调用CreateProcess函数的时候,系统会创建一个进程内核对象,初始化使用计数为1</p>
+<p>该进程内核对象是一个系统用来管理这个进程的数据结构</p>
+<p>2.为新的进程创建一个虚拟空间,加载应用程序运行时所需要的代码和数据</p>
+<p>3.为新的进程创建一个主线程</p>
+<p>4.主线程会执行C/C++运行期启动代码</p>
+<p>5.C/C++运行期启动代码会调用main函数</p>
+<p>如果系统成功创建一个进程和一个主线程,CreateProcess会返回TRUE,否者返回FALSE</p>
+<p>创建进程称为父进程,被创建进程称为子进程</p>
+<p>系统在创建新进程的时候会传递一个STARTUPINFO类型的变量,这个结构体包含了父进程传递给子进程的一些信息</p>
+<h4 id="startupinfo结构体定义如下"><a class="markdownIt-Anchor" href="#startupinfo结构体定义如下"></a> STARTUPINFO结构体定义如下</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">STARTUPINFO</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">	DWORD cb;			 	 <span class="comment">//包含STARTUPINFO结构中的字节数.如果Microsoft将来扩展该结构,它可用作版本控制手段.应用程序必须将cb初始化为sizeof(STARTUPINFO) </span></span><br><span class="line">    PSTR lpReserved;		 <span class="comment">//保留。必须初始化为NULL</span></span><br><span class="line">    PSTR lpDesktop;			 <span class="comment">//用于标识启动应用程序所在的桌面的名字。如果该桌面存在，新进程便与指定的桌面相关联。如果桌面不存在，便创建一个带有默认属性的桌面，并使用为新进程指定的名字。如果lpDesktop是NULL（这是最常见的情况 ),那么该进程将与当前桌面相关联 </span></span><br><span class="line">    PSTR lpTitle;			 <span class="comment">//用于设定控制台窗口的名称。如果lpTitle是NULL，则可执行文件的名字将用作窗口名.This parameter must be NULL for GUI or console processes that do not create a new console window.</span></span><br><span class="line">    DWORD dwX;				 <span class="comment">//用于设定应用程序窗口相对屏幕左上角位置的x 坐标（以像素为单位）。 </span></span><br><span class="line">    DWORD dwY;				 <span class="comment">//对于GUI processes用CW_USEDEFAULT作为CreateWindow的x、y参数，创建它的第一个重叠窗口。若是创建控制台窗口的应用程序，这些成员用于指明相对控制台窗口的左上角的位置</span></span><br><span class="line">    DWORD dwXSize;			 <span class="comment">//用于设定应用程序窗口的宽度（以像素为单位）</span></span><br><span class="line">    DWORD dwYSize;			 <span class="comment">//子进程将CW_USEDEFAULT 用作CreateWindow 的nWidth、nHeight参数来创建它的第一个重叠窗口。若是创建控制台窗口的应用程序，这些成员将用于指明控制台窗口的宽度 </span></span><br><span class="line">    DWORD dwXCountChars;	 <span class="comment">//用于设定子应用程序的控制台窗口的宽度（屏幕显示的字节列）和高度（字节行）（以字符为单位） </span></span><br><span class="line">    DWORD dwYCountChars; </span><br><span class="line">    DWORD dwFillAttribute;   <span class="comment">//用于设定子应用程序的控制台窗口使用的文本和背景颜色 </span></span><br><span class="line">    DWORD dwFlags;           <span class="comment">//请参见下一段和表4-7 的说明 </span></span><br><span class="line">    WORD wShowWindow;        <span class="comment">//用于设定如果子应用程序初次调用的ShowWindow 将SW_*作为nCmdShow 参数传递时，该应用程序的第一个重叠窗口应该如何出现。本成员可以是通常用于ShowWindow 函数的任何一个SW_*标识符，除了SW_SHOWDEFAULT. </span></span><br><span class="line">    WORD cbReserved2;        <span class="comment">//保留。必须被初始化为0 </span></span><br><span class="line">    PBYTE lpReserved2;       <span class="comment">//保留。必须被初始化为NULL</span></span><br><span class="line">    HANDLE hStdInput;        <span class="comment">//用于设定供控制台输入和输出用的缓存的句柄。按照默认设置，hStdInput 用于标识键盘缓存，hStdOutput 和hStdError用于标识控制台窗口的缓存 </span></span><br><span class="line">    HANDLE hStdOutput; </span><br><span class="line">    HANDLE hStdError; </span><br><span class="line">&#125; STARTUPINFO, *LPSTARTUPINFO;</span><br></pre></td></tr></table></figure>
+<h4 id="dwflags-使用标志及含义"><a class="markdownIt-Anchor" href="#dwflags-使用标志及含义"></a> dwFlags 使用标志及含义</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">STARTF_USESIZE <span class="comment">// 使用dwXSize和dwYSize成员</span></span><br><span class="line">STARTF_USESHOWWINDOW <span class="comment">//使用wShowWindow成员</span></span><br><span class="line">STARTF_USEPOSITION <span class="comment">//使用dwX和dwY成员</span></span><br><span class="line">STARTF_USECOUNTCHARS <span class="comment">//使用dwXCountChars和dwYCountChars成员</span></span><br><span class="line">STARTF_USEFILLATTRIBUTE <span class="comment">//使用dwFillAttribute成员</span></span><br><span class="line">STARTF_USESTDHANDLES <span class="comment">//使用hStdInput、hStdOutput和hStdError成员</span></span><br><span class="line">STARTF_RUN_FULLSCREEN <span class="comment">//强制在x 8 6 计算机上运行的控制台应用程序以全屏幕方式启动运行</span></span><br></pre></td></tr></table></figure>
+<h4 id="getstartupinfo函数"><a class="markdownIt-Anchor" href="#getstartupinfo函数"></a> GetStartupInfo函数</h4>
+<p>获取父进程创建自己时使用的STARTUPINFO结构</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">VOID <span class="title">GetStartupInfo</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">LPSTARTUPINFO lpStartupInfo <span class="comment">// STARTUPINFO指针</span></span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>定义一个STARTUPINFO结构体变量后要初始化cb成员</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">STARTUPINFO si = &#123;<span class="keyword">sizeof</span>(STARTUPINFO)&#125;;</span><br><span class="line">GetStartupInfo(&amp;si);</span><br></pre></td></tr></table></figure>
+<h4 id="createprocess函数"><a class="markdownIt-Anchor" href="#createprocess函数"></a> CreateProcess函数</h4>
+<p>用来创建一个新的进程和它的主线程，这个新进程运行指定的可执行文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function">BOOL <span class="title">CreateProcess</span><span class="params">(  </span></span></span><br><span class="line"><span class="function"><span class="params">　LPCTSTR lpApplicationName, <span class="comment">// 应用程序名称  </span></span></span></span><br><span class="line"><span class="function"><span class="params">　LPTSTR lpCommandLine, <span class="comment">// 命令行字符串  </span></span></span></span><br><span class="line"><span class="function"><span class="params">　LPSECURITY_ATTRIBUTES lpProcessAttributes, <span class="comment">// 进程的安全属性  NULL默认安全属性</span></span></span></span><br><span class="line"><span class="function"><span class="params">　LPSECURITY_ATTRIBUTES lpThreadAttributes, <span class="comment">// 线程的安全属性  NULL默认安全属性</span></span></span></span><br><span class="line"><span class="function"><span class="params">　BOOL bInheritHandles, <span class="comment">// 是否继承父进程的属性  </span></span></span></span><br><span class="line"><span class="function"><span class="params">　DWORD dwCreationFlags, <span class="comment">// 创建标志  </span></span></span></span><br><span class="line"><span class="function"><span class="params">　LPVOID lpEnvironment, <span class="comment">// 指向新的环境块的指针  </span></span></span></span><br><span class="line"><span class="function"><span class="params">　LPCTSTR lpCurrentDirectory, <span class="comment">// 指向当前目录名的指针  </span></span></span></span><br><span class="line"><span class="function"><span class="params">　LPSTARTUPINFO lpStartupInfo, <span class="comment">// 传递给新进程的信息  </span></span></span></span><br><span class="line"><span class="function"><span class="params">　LPPROCESS_INFORMATION lpProcessInformation <span class="comment">// 新进程返回的信息  </span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>lp开头代表是说明变量类型为指针变量</p>
+<p>LPCSTR 是 const char *</p>
+<p>WINDEF.h头文件包含了变量类型对应的宏名</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span>       DWORD;</span><br><span class="line"> <span class="keyword">typedef</span> <span class="keyword">int</span>                 BOOL;</span><br><span class="line"> <span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">char</span>       BYTE;</span><br><span class="line"> <span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">short</span>      WORD;</span><br><span class="line"> <span class="keyword">typedef</span> <span class="keyword">float</span>               FLOAT;</span><br><span class="line"> <span class="keyword">typedef</span> FLOAT               *PFLOAT;</span><br><span class="line"> <span class="keyword">typedef</span> BOOL near           *PBOOL;</span><br><span class="line"> <span class="keyword">typedef</span> BOOL far            *LPBOOL;</span><br><span class="line"> <span class="keyword">typedef</span> BYTE near           *PBYTE;</span><br><span class="line"> <span class="keyword">typedef</span> BYTE far            *LPBYTE;</span><br><span class="line"> <span class="keyword">typedef</span> <span class="keyword">int</span> near            *PINT;</span><br><span class="line"> <span class="keyword">typedef</span> <span class="keyword">int</span> far             *LPINT;</span><br><span class="line"> <span class="keyword">typedef</span> WORD near           *PWORD;</span><br><span class="line"> <span class="keyword">typedef</span> WORD far            *LPWORD;</span><br><span class="line"> <span class="keyword">typedef</span> <span class="keyword">long</span> far            *LPLONG;</span><br><span class="line"> <span class="keyword">typedef</span> DWORD near          *PDWORD;</span><br><span class="line"> <span class="keyword">typedef</span> DWORD far           *LPDWORD;</span><br><span class="line"> <span class="keyword">typedef</span> <span class="keyword">void</span> far            *LPVOID;</span><br><span class="line"> <span class="keyword">typedef</span> CONST <span class="keyword">void</span> far      *LPCVOID;</span><br><span class="line"> <span class="keyword">typedef</span> <span class="keyword">int</span>                 INT;</span><br><span class="line"> <span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">int</span>        UINT;</span><br><span class="line"> <span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">int</span>        *PUINT;</span><br></pre></td></tr></table></figure>
+<h4 id="创建一个新的进程打开记事本"><a class="markdownIt-Anchor" href="#创建一个新的进程打开记事本"></a> 创建一个新的进程打开记事本</h4>
+<p><img src="/images/javawz/1621369626292.png" alt="1621369626292"></p>
+<h4 id="process_information结构体"><a class="markdownIt-Anchor" href="#process_information结构体"></a> PROCESS_INFORMATION结构体</h4>
+<p><img src="/images/javawz/1621369983635.png" alt="1621369983635"></p>
+<p>创建了一个进程之后,如果不使用hProcess或hThread时就应该释放它</p>
+<p>父进程必须要有一个CloseHandle函数来关闭CreateProcess函数返回的两个内核对象句柄，否者基本子进程已经终止了,该进程的内核对象和主线程的内核对象仍然没有释放</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// 02CreateProcess.cpp文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> szCommandLine[] = <span class="string">"cmd"</span>;</span><br><span class="line">	STARTUPINFO si = &#123; <span class="keyword">sizeof</span>(si) &#125;;</span><br><span class="line">	PROCESS_INFORMATION pi;</span><br><span class="line"></span><br><span class="line">	si.dwFlags = STARTF_USESHOWWINDOW;	<span class="comment">// 指定wShowWindow成员有效</span></span><br><span class="line">	si.wShowWindow = TRUE;			<span class="comment">// 此成员设为TRUE的话则显示新建进程的主窗口，</span></span><br><span class="line">						<span class="comment">// 为FALSE的话则不显示</span></span><br><span class="line">	BOOL bRet = ::CreateProcess (</span><br><span class="line">		<span class="literal">NULL</span>,			<span class="comment">// 不在此指定可执行文件的文件名</span></span><br><span class="line">		szCommandLine,		<span class="comment">// 命令行参数</span></span><br><span class="line">		<span class="literal">NULL</span>,			<span class="comment">// 默认进程安全性</span></span><br><span class="line">		<span class="literal">NULL</span>,			<span class="comment">// 默认线程安全性</span></span><br><span class="line">		FALSE,			<span class="comment">// 指定当前进程内的句柄不可以被子进程继承</span></span><br><span class="line">		CREATE_NEW_CONSOLE,	<span class="comment">// 为新进程创建一个新的控制台窗口</span></span><br><span class="line">		<span class="literal">NULL</span>,			<span class="comment">// 使用本进程的环境变量</span></span><br><span class="line">		<span class="literal">NULL</span>,			<span class="comment">// 使用本进程的驱动器和目录</span></span><br><span class="line">		&amp;si,</span><br><span class="line">		&amp;pi);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(bRet)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 既然我们不使用两个句柄，最好是立刻将它们关闭</span></span><br><span class="line">		::CloseHandle (pi.hThread);</span><br><span class="line">		::CloseHandle (pi.hProcess);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">" 新进程的进程ID号：%d \n"</span>, pi.dwProcessId);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">" 新进程的主线程ID号：%d \n"</span>, pi.dwThreadId);	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>windows是通过dwFlags来查看STARTUPINFO变量中的哪一个成员有效，再去取那个成员的值</p>
+<p>使用wShowWindow成员用STARTF_USESHOWWINDOW</p>
+<p>使用dwXSize和dwXSize用STARTF_USESIZE</p>
+<p>使用dwX，dwY成员用STARTF_USEPOSITION</p>
+<p><code>dwFlags = STARTF_USESHOWWINDOW | STARTF_USESIZE | STARTF_USEPOSITION</code></p>
+<p>则wShowWindow,dwXSize,dwXSize,dwX，dwY成员都有效</p>
+<p>CREATE_NEW_CONSOLE 表示创建一个新的控制台</p>
+<h4 id="closehandle函数"><a class="markdownIt-Anchor" href="#closehandle函数"></a> CloseHandle函数</h4>
+<p>关闭一个内核对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BOOL CloseHandle(</span><br><span class="line"></span><br><span class="line">HANDLE hObject		//代表一个已打开对象handle。</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>TRUE：执行成功；</p>
+<p>FALSE：执行失败，可以调用GetLastError()获知失败原因。</p>
+<h3 id="进程控制"><a class="markdownIt-Anchor" href="#进程控制"></a> 进程控制</h3>
+<h4 id="获取系统进程"><a class="markdownIt-Anchor" href="#获取系统进程"></a> 获取系统进程</h4>
+<hr>
+<h4 id="processentry32-结构"><a class="markdownIt-Anchor" href="#processentry32-结构"></a> PROCESSENTRY32 结构</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span>   <span class="class"><span class="keyword">struct</span>  &#123;</span>    </span><br><span class="line">  DWORD   dwSize;   <span class="comment">//   结构大小；    </span></span><br><span class="line">  DWORD   cntUsage;   <span class="comment">//   此进程的引用计数；    </span></span><br><span class="line">  DWORD   th32ProcessID;   <span class="comment">//   进程ID;    </span></span><br><span class="line">  DWORD   th32DefaultHeapID;   <span class="comment">//   进程默认堆ID；    </span></span><br><span class="line">  DWORD   th32ModuleID;   <span class="comment">//   进程模块ID；    </span></span><br><span class="line">  DWORD   cntThreads;   <span class="comment">//   此进程开启的线程计数；    </span></span><br><span class="line">  DWORD   th32ParentProcessID;<span class="comment">//   父进程ID；    </span></span><br><span class="line">  LONG   pcPriClassBase;   <span class="comment">//   线程优先权；    </span></span><br><span class="line">  DWORD   dwFlags;   <span class="comment">//   保留；    </span></span><br><span class="line">  <span class="keyword">char</span>   szExeFile[MAX_PATH];   <span class="comment">//   进程全名；    </span></span><br><span class="line">  &#125;   PROCESSENTRY32;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="createtoolhelp32snapshot"><a class="markdownIt-Anchor" href="#createtoolhelp32snapshot"></a> CreateToolhelp32Snapshot</h4>
+<p>可以通过获取进程信息为指定的进程、进程使用的堆[HEAP]、模块[MODULE]、线程建立一个快照。</p>
+<p>头文件：<code>tlhelp32.h</code></p>
+<p>返回值： 调用成功，返回快照的句柄，调用失败，返回INVALID_HANDLE_VALUE**</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">**<span class="function">HANDLE WINAPI <span class="title">CreateToolhelp32Snapshot</span><span class="params">(**</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">*DWORD dwFlags,* <span class="comment">//用来指定“快照”中需要返回的对象，可以是TH32CS_SNAPPROCESS等</span></span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">*DWORD th32ProcessID* <span class="comment">//一个进程ID号，用来指定要获取哪一个进程的快照，当获取系统进程列表											   //获取 当前进程快照时可以设为0</span></span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>指定快照中包含的系统内容，dwFlags这个参数能够使用下列数值（常量）中的一个或多个。<br>
+<code>TH32CS_INHERIT</code>       声明快照句柄是可继承的。<br>
+<code>TH32CS_SNAPALL</code>        在快照中包含系统中所有的进程和线程。<br>
+<code>TH32CS_SNAPHEAPLIST</code>    在快照中包含在th32ProcessID中指定的进程的所有的堆。<br>
+<code>TH32CS_SNAPMODULE</code>    在快照中包含在th32ProcessID中指定的进程的所有的模块。<br>
+<code>TH32CS_SNAPPROCESS</code>    在快照中包含系统中所有的进程。<br>
+<code>TH32CS_SNAPTHREAD</code>     在快照中包含系统中所有的线程。<br>
+H32CS_SNAPALL = (TH32CS_SNAPHEAPLIST | TH32CS_SNAPPROCESS | TH32CS_SNAPTHREAD | TH32CS_SNAPMODULE)</p>
+<hr>
+<h4 id="process32first"><a class="markdownIt-Anchor" href="#process32first"></a> process32First</h4>
+<p>是一个进程获取函数，当我们利用函数CreateToolhelp32Snapshot()获得当前运行进程的快照后，我们可以利用process32First函数来获得第一个进程的句柄。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL WINAPI <span class="title">Process32First</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">   HANDLE hSnapshot, <span class="comment">//快照句柄</span></span></span></span><br><span class="line"><span class="function"><span class="params">   LPPROCESSENTRY32 lppe <span class="comment">//PROCESSENTRY32指针</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="process32next"><a class="markdownIt-Anchor" href="#process32next"></a> Process32Next</h4>
+<p>是一个进程获取函数，当我们利用函数CreateToolhelp32Snapshot()获得当前运行进程的快照后,我们可以利用Process32Next函数来获得下一个进程的句柄。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL WINAPI <span class="title">Process32Next</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">   HANDLE hSnapshot, <span class="comment">//快照句柄</span></span></span></span><br><span class="line"><span class="function"><span class="params">   LPPROCESSENTRY32 lppe <span class="comment">//PROCESSENTRY32指针</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+<br>
+<hr>
+<h4 id="获取系统进程的例子"><a class="markdownIt-Anchor" href="#获取系统进程的例子"></a> 获取系统进程的例子</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// 02ProcessList.cpp文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tlhelp32.h&gt; // 声明快照函数的头文件</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	PROCESSENTRY32 pe32;</span><br><span class="line">	<span class="comment">// 在使用这个结构之前，先设置它的大小</span></span><br><span class="line">	pe32.dwSize = <span class="keyword">sizeof</span>(pe32); </span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 给系统内的所有进程拍一个快照</span></span><br><span class="line">	HANDLE hProcessSnap = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span>(hProcessSnap == INVALID_HANDLE_VALUE)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">" CreateToolhelp32Snapshot调用失败！ \n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 遍历进程快照，轮流显示每个进程的信息</span></span><br><span class="line">	BOOL bMore = ::Process32First(hProcessSnap, &amp;pe32);</span><br><span class="line">	<span class="keyword">while</span>(bMore)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">" 进程名称：%s \n"</span>, pe32.szExeFile);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">" 进程ID号：%u \n\n"</span>, pe32.th32ProcessID);</span><br><span class="line"></span><br><span class="line">		bMore = ::Process32Next(hProcessSnap, &amp;pe32);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 不要忘记清除掉snapshot对象</span></span><br><span class="line">	::CloseHandle(hProcessSnap);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+<hr>
+<h4 id="终止当前进程"><a class="markdownIt-Anchor" href="#终止当前进程"></a> 终止当前进程</h4>
+<p>终止进程也就是结束程序的执行，让它从内存中卸载。进程终止的原因可能有4种:</p>
+<p>(1)主线程的入口函数返回。</p>
+<p>(2)进程中一个线程调用了ExitProcess 函数。</p>
+<p>(3)此进程中的所有线程都结束了。</p>
+<p>(4)其他进程中的一一个线程调 用了TerminateProcess 函数。</p>
+<h4 id="exitprocess结束当前进程函数"><a class="markdownIt-Anchor" href="#exitprocess结束当前进程函数"></a> Exitprocess结束当前进程函数</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void Exitprocess(UINT uExitCode);//uExitCode为退出代码</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="terminateprocess终止其他进程函数"><a class="markdownIt-Anchor" href="#terminateprocess终止其他进程函数"></a> TerminateProcess终止其他进程函数</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BOOL TerminateProcess(</span><br><span class="line">	HANDLE hprocess,	//要结束的进程句柄</span><br><span class="line">	UINT uExitCode		//指定目标进程的退出代码</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h4 id="openprocess-函数用来打开一个已存在的进程对象并返回进程的句柄"><a class="markdownIt-Anchor" href="#openprocess-函数用来打开一个已存在的进程对象并返回进程的句柄"></a> OpenProcess 函数用来打开一个已存在的进程对象，并返回进程的句柄。</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HANDLE OpenProcess(</span><br><span class="line">DWORD dwDesiredAccess, //渴望得到的访问权限（标志）</span><br><span class="line">BOOL bInheritHandle, // 是否继承句柄</span><br><span class="line">DWORD dwProcessId// 进程id</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>**dwDesiredAccess ：**获取的权限，可分为以下几种</p>
+<p>PROCESS_ALL_ACCESS：获取所有权限</p>
+<p>PROCESS_CREATE_PROCESS：创建进程</p>
+<p>PROCESS_CREATE_THREAD：创建线程</p>
+<p>PROCESS_DUP_HANDLE：使用DuplicateHandle()函数复制一个新句柄</p>
+<p>PROCESS_QUERY_INFORMATION：获取进程的令牌、退出码和优先级等信息</p>
+<p>PROCESS_QUERY_LIMITED_INFORMATION：获取进程特定的某个信息</p>
+<p>PROCESS_SET_INFORMATION：设置进程的某种信息</p>
+<p>PROCESS_SET_QUOTA：使用SetProcessWorkingSetSize函数设置内存限制</p>
+<p>PROCESS_SUSPEND_RESUME：暂停或者恢复一个进程</p>
+<p>PROCESS_TERMINATE：使用Terminate函数终止进程</p>
+<p>PROCESS_VM_OPERATION：在进程的地址空间执行操作</p>
+<p>PROCESS_VM_READ：使用ReadProcessMemory函数在进程中读取内存</p>
+<p>PROCESS_VM_WRITE：使用WriteProcessMemory函数在进程中写入内存</p>
+<p>SYNCHRONIZE：使用wait函数等待进程终止</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// 02TerminateProcess.cpp文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">BOOL <span class="title">TerminateProcessFromId</span><span class="params">(DWORD dwId)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	BOOL bRet = FALSE;</span><br><span class="line">	<span class="comment">// 打开目标进程，取得进程句柄</span></span><br><span class="line">	HANDLE hProcess = ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwId);</span><br><span class="line">	<span class="keyword">if</span>(hProcess != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 终止进程</span></span><br><span class="line">		bRet = ::TerminateProcess(hProcess, <span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	CloseHandle(hProcess);</span><br><span class="line">	<span class="keyword">return</span> bRet;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	DWORD dwId;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">" 请输入您要终止的进程的ID号： \n"</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%u"</span>, &amp;dwId);</span><br><span class="line">	<span class="keyword">if</span>(TerminateProcessFromId(dwId))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">" 终止进程成功！ \n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">" 终止进程失败！ \n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="getlasterror获取调用线程的最后出错代码"><a class="markdownIt-Anchor" href="#getlasterror获取调用线程的最后出错代码"></a> GetLastError获取调用线程的最后出错代码</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DWORD GetLastError(VOID);</span><br></pre></td></tr></table></figure>
+<h4 id="getexitcodeprocess-获取一个已中断进程的退出代码"><a class="markdownIt-Anchor" href="#getexitcodeprocess-获取一个已中断进程的退出代码"></a> GetExitCodeProcess 获取一个已中断进程的退出代码</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BOOL GetExitCodeProcess(</span><br><span class="line">HANDLE hProcess,		//想获取退出代码的一个进程的句柄</span><br><span class="line">LPDWORD lpExitCode		//用于装载进程退出代码的一个长整数变量。如进程尚未中止，则设为常数STILL_ACTIVE</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>一旦进程终止， 就会有下列事件发生:</p>
+<p>(1)所有被这个进程创建或打开的对象句柄就会关闭。</p>
+<p>(2)此进程内的所有线程将终止执行。</p>
+<p>(3)进程内核对象变成受信状态，所有等待在此对象上的线程开始运行，即WaitForSingleObject函数返回。</p>
+<p>(4)系统将进程对象中退出代码的值由STILL_ ACTIVE改为指定的退出码。</p>
+<hr>
+<h4 id="readprocessmemory是一个内存操作函数-其作用为根据进程句柄读入该进程的某个内存空间"><a class="markdownIt-Anchor" href="#readprocessmemory是一个内存操作函数-其作用为根据进程句柄读入该进程的某个内存空间"></a> ReadProcessMemory是一个内存操作函数， 其作用为根据进程句柄读入该进程的某个内存空间</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BOOL ReadProcessMemory(</span><br><span class="line">HANDLE hProcess,				//待读进程的句柄</span><br><span class="line">PVOID pvAddressRemote,			//目标进程中待读内容的起始位置</span><br><span class="line">PVOID pvBufferLocal, 			//用来接受读取数据的缓冲区</span><br><span class="line">DWORD dwSize, 					//要读取的字节数</span><br><span class="line">PDWORD pdwNumBytesRead			//用来供函数返回实际读取的字节数</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h4 id="writeprocessmemory是计算机语言中的一种函数-此函数能写入某一进程的内存区域直接写入会出access-violation错误故需此函数入口区必须可以访问否则操作将失败"><a class="markdownIt-Anchor" href="#writeprocessmemory是计算机语言中的一种函数-此函数能写入某一进程的内存区域直接写入会出access-violation错误故需此函数入口区必须可以访问否则操作将失败"></a> WriteProcessMemory是计算机语言中的一种函数。此函数能写入某一进程的内存区域（直接写入会出Access Violation错误），故需此函数入口区必须可以访问，否则操作将失败。</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BOOL WriteProcessMemory(</span><br><span class="line">HANDLE hProcess,			//由OpenProcess返回的进程句柄。</span><br><span class="line">LPVOID lpBaseAddress,		//要写的内存首地址</span><br><span class="line">LPVOID lpBuffer,			//指向要写的数据的指针。</span><br><span class="line">DWORD nSize,				//要写入的字节数。</span><br><span class="line">LPDWORD lpNumberOfBytesWritten	//用来供函数返回实际写入的字节数</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>应该在目标进程的整个用户地址空间进行搜索。在进程的整个4GB地址中，Windows 98系列的操作系统为应用程序预留的是4MB到2GB部分，Windows2000系列的操作系统预留的是64KB到2GB部分，所以在搜索前还要先判断操作系统的类型，以决定搜索的范围。</p>
+<h4 id="osversioninfo-操作系统的信息版本结构"><a class="markdownIt-Anchor" href="#osversioninfo-操作系统的信息版本结构"></a> OSVERSIONINFO 操作系统的信息版本结构</h4>
+<p><img src="/images/javawz/1621378080153.png" alt="1621378080153"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _OSVERSIONINFO &#123;</span><br><span class="line"></span><br><span class="line">DWORD dwOSVersionInfoSize; // 本结构的大小，必须在调用之前设置</span><br><span class="line"></span><br><span class="line">DWORD dwMajorVersion;//操作系统的主版本号</span><br><span class="line"></span><br><span class="line">DWORD dwMinorVersion;//操作系统的次版本号</span><br><span class="line"></span><br><span class="line">DWORD dwBuildNumber;//操作系统的编译版本号</span><br><span class="line"></span><br><span class="line">DWORD dwPlatformld;//操作系统平台。可以是VER_PLATFORM_WIN32_NT (2000系列)等</span><br><span class="line"></span><br><span class="line">TCHAR szCSDVersion[128];//指定安装在系统上的最新服务包，例如“Service Pack3&quot;等</span><br><span class="line"></span><br><span class="line">&#125; OSVERSIONINFO;</span><br></pre></td></tr></table></figure>
+<h4 id="getversionex返回当前操作系统的版本号在64位系统上是32位字节长度"><a class="markdownIt-Anchor" href="#getversionex返回当前操作系统的版本号在64位系统上是32位字节长度"></a> GetVersionEX返回当前操作系统的版本号（在64位系统上是32位字节长度）。</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BOOL GetVersionEx(</span><br><span class="line">LPOSVERSIONINFO lpVersionInformation // 指向版本信息结构体的指针</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="游戏修改器例子"><a class="markdownIt-Anchor" href="#游戏修改器例子"></a> 游戏修改器例子</h4>
+<p>Windows采用了分页机制来管理内存，每页的大小是4KB (在x86处理器上)。也就是说Windows是以4KB为单位来为应用程序分配内存的。所以可以按页来搜索目标内存，以提高搜索效率。下面的CompareAPage函数的功能就是比较目标进程内存中1页大小的内存。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// 02MemRepair.cpp文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"windows.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdio.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">BOOL <span class="title">FindFirst</span><span class="params">(DWORD dwValue)</span></span>;	<span class="comment">// 在目标进程空间进行第一次查找</span></span><br><span class="line"><span class="function">BOOL <span class="title">FindNext</span><span class="params">(DWORD dwValue)</span></span>;	<span class="comment">// 在目标进程地址空间进行第2、3、4……次查找</span></span><br><span class="line"></span><br><span class="line">DWORD g_arList[<span class="number">1024</span>];		<span class="comment">// 地址列表</span></span><br><span class="line"><span class="keyword">int</span> g_nListCnt;			<span class="comment">// 有效地址的个数</span></span><br><span class="line">HANDLE g_hProcess;		<span class="comment">// 目标进程句柄</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////////////</span></span><br><span class="line"></span><br><span class="line"><span class="function">BOOL <span class="title">WriteMemory</span><span class="params">(DWORD dwAddr, DWORD dwValue)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShowList</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 启动02testor进程</span></span><br><span class="line">	<span class="keyword">char</span> szFileName[] = <span class="string">"ConsoleApplication1.exe"</span>;</span><br><span class="line">	STARTUPINFO si = &#123; <span class="keyword">sizeof</span>(si) &#125;;</span><br><span class="line">	PROCESS_INFORMATION pi;</span><br><span class="line">	::CreateProcess(<span class="literal">NULL</span>, szFileName, <span class="literal">NULL</span>, <span class="literal">NULL</span>, FALSE, </span><br><span class="line">							CREATE_NEW_CONSOLE, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;si, &amp;pi);</span><br><span class="line">	<span class="comment">// 关闭线程句柄，既然我们不使用它</span></span><br><span class="line">	::CloseHandle(pi.hThread);</span><br><span class="line">	g_hProcess = pi.hProcess;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 输入要修改的值</span></span><br><span class="line">	<span class="keyword">int</span>	iVal;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">" Input val = "</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;iVal);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 进行第一次查找</span></span><br><span class="line">	FindFirst(iVal);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 打印出搜索的结果</span></span><br><span class="line">	ShowList();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(g_nListCnt &gt; <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">" Input val = "</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;iVal);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 进行下次搜索</span></span><br><span class="line">		FindNext(iVal);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 显示搜索结果</span></span><br><span class="line">		ShowList();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 取得新值</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">" New value = "</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;iVal);	     </span><br><span class="line"></span><br><span class="line">	<span class="comment">// 写入新值</span></span><br><span class="line">	<span class="keyword">if</span>(WriteMemory(g_arList[<span class="number">0</span>], iVal))</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">" Write data success \n"</span>);	</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	::CloseHandle(g_hProcess);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL <span class="title">CompareAPage</span><span class="params">(DWORD dwBaseAddr, DWORD dwValue)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 读取1页内存</span></span><br><span class="line">	BYTE arBytes[<span class="number">4096</span>];</span><br><span class="line">	<span class="keyword">if</span>(!::ReadProcessMemory(g_hProcess, (LPVOID)dwBaseAddr, arBytes, <span class="number">4096</span>, <span class="literal">NULL</span>))</span><br><span class="line">		<span class="keyword">return</span> FALSE;	<span class="comment">// 此页不可读</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 在这1页内存中查找</span></span><br><span class="line">	DWORD* pdw;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;(<span class="keyword">int</span>)<span class="number">4</span>*<span class="number">1024</span><span class="number">-3</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		pdw = (DWORD*)&amp;arBytes[i];</span><br><span class="line">		<span class="keyword">if</span>(pdw[<span class="number">0</span>] == dwValue)	<span class="comment">// 等于要查找的值？</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(g_nListCnt &gt;= <span class="number">1024</span>)</span><br><span class="line">				<span class="keyword">return</span> FALSE;</span><br><span class="line">			<span class="comment">// 添加到全局变量中</span></span><br><span class="line">			g_arList[g_nListCnt++] = dwBaseAddr + i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL <span class="title">FindFirst</span><span class="params">(DWORD dwValue)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">const</span> DWORD dwOneGB = <span class="number">1024</span>*<span class="number">1024</span>*<span class="number">1024</span>;	<span class="comment">// 1GB</span></span><br><span class="line">	<span class="keyword">const</span> DWORD dwOnePage = <span class="number">4</span>*<span class="number">1024</span>;		<span class="comment">// 4KB</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(g_hProcess == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> FALSE;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 查看操作系统类型，以决定开始地址</span></span><br><span class="line">	DWORD dwBase;</span><br><span class="line">	OSVERSIONINFO vi = &#123; <span class="keyword">sizeof</span>(vi) &#125;;</span><br><span class="line">	::GetVersionEx(&amp;vi);</span><br><span class="line">	<span class="keyword">if</span> (vi.dwPlatformId == VER_PLATFORM_WIN32_WINDOWS)</span><br><span class="line">		dwBase = <span class="number">4</span>*<span class="number">1024</span>*<span class="number">1024</span>;		<span class="comment">// Windows 98系列，4MB	</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		dwBase = <span class="number">64</span>*<span class="number">1024</span>;		<span class="comment">// Windows NT系列，64KB</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 在开始地址到2GB的地址空间进行查找</span></span><br><span class="line">	<span class="keyword">for</span>(; dwBase &lt;<span class="number">2</span>*dwOneGB; dwBase += dwOnePage)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 比较1页大小的内存</span></span><br><span class="line">		CompareAPage(dwBase, dwValue);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL <span class="title">FindNext</span><span class="params">(DWORD dwValue)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 保存m_arList数组中有效地址的个数，初始化新的m_nListCnt值</span></span><br><span class="line">	<span class="keyword">int</span> nOrgCnt = g_nListCnt;</span><br><span class="line">	g_nListCnt = <span class="number">0</span>;	</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 在m_arList数组记录的地址处查找</span></span><br><span class="line">	BOOL bRet = FALSE;	<span class="comment">// 假设失败	</span></span><br><span class="line">	DWORD dwReadValue;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nOrgCnt; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(::ReadProcessMemory(g_hProcess, (LPVOID)g_arList[i], &amp;dwReadValue, <span class="keyword">sizeof</span>(DWORD), <span class="literal">NULL</span>))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dwReadValue == dwValue)</span><br><span class="line">			&#123;</span><br><span class="line">				g_arList[g_nListCnt++] = g_arList[i];</span><br><span class="line">				bRet = TRUE;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> bRet;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印出搜索到的地址</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShowList</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt; g_nListCnt; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%08lX \n"</span>, g_arList[i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL <span class="title">WriteMemory</span><span class="params">(DWORD dwAddr, DWORD dwValue)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> ::WriteProcessMemory(g_hProcess, (LPVOID)dwAddr, &amp;dwValue, <span class="keyword">sizeof</span>(DWORD), <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// 02Testor.cpp文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局变量测试</span></span><br><span class="line"><span class="keyword">int</span> g_nNum;	</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">198</span>;	<span class="comment">// 局部变量测试</span></span><br><span class="line">	g_nNum = <span class="number">1003</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 输出个变量的值和地址</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">" i = %d, addr = %08lX;   g_nNum = %d, addr = %08lX \n"</span>,</span><br><span class="line">								++i, &amp;i, --g_nNum, &amp;g_nNum);</span><br><span class="line">		getchar();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xiaowuyoucy.github.io/2021/05/19/win0002-Win32程序运行原理/" title="Win32程序运行原理" target="_blank" rel="external">https://xiaowuyoucy.github.io/2021/05/19/win0002-Win32程序运行原理/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+		  
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2021/05/19/win0001-windows程序设计基础/" title="windows程序设计基础"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+	<span>More contact information</span>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '032928647cd59bc9f443',
+    clientSecret: '82a11fd93e4d0779655af6dc4b73942a03e95276',
+    repo: 'Xiaowuyoucy.github.io',
+    owner: 'Xiaowuyoucy',
+    admin: ['Xiaowuyoucy'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>
