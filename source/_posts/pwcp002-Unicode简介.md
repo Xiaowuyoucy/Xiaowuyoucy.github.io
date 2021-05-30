@@ -270,4 +270,4 @@ int CDECL MessageBoxPrintfW(wchar_t *szCaption, wchar_t *szFormat, ...) {
 
 ```
 
-![1622369585719](../../themes/pure/source/images/javawz/1622369585719.png)
+![1622369585719](/images/javawz/1622369585719.png)
