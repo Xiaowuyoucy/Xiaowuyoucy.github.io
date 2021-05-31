@@ -116,6 +116,7 @@ LRESULT CALLBACK WndProc(
 
 		//在指定的矩形里写入格式化的正文，根据指定的方法对正文格式化
 		//DrawText(hdc, 将要绘制的字符串,字符串的长度,指向矩形结构RECT的指针, 正文的绘制选项)
+            //-1代表全部输出
 		DrawText(hdc, TEXT("Hello Windows SDK"), -1, &rect,
 			DT_SINGLELINE | DT_CENTER | DT_VCENTER
 			);
