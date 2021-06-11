@@ -1,112 +1,72 @@
 ---
-title: 系统字体
-date: 2021-05-31 19:26:57
+title: 贝塞尔曲线
+date: 2021-06-07 21:26:23
 tags:
 categories: windows程序设计2
 doc:
 ---
 
-# 系统字体
+# 贝塞尔曲线
 
-![1622460534446](/images/javawz/1622460534446.png) 
-
-### TEXTMETRIC字体信息结构
-
-```c
-typedef struct tagTEXTMETRIC { 
-LONG tmHeight; //字符高度
-LONG tmAscent; //字符上部高度(基线以上)
-LONG tmDescent; //字符下部高度(基线以下)
-LONG tmInternalLeading, //由tmHeight定义的字符高度的顶部空间数目
-LONG tmExternalLeading, //夹在两行之间的空间数目
-LONG tmAveCharWidth, //平均字符宽度
-LONG tmMaxCharWidth, //最宽字符的宽度
-LONG tmWeight; //字体的粗细轻重程度
-LONG tmOverhang, //加入某些拼接字体上的附加高度
-LONG tmDigitizedAspectX, //字体设计所针对的设备水平方向
-LONG tmDigitizedAspectY, //字体设计所针对的设备垂直方向
-BCHAR tmFirstChar; //为字体定义的第一个字符
-BCHAR tmLastChar; //为字体定义的最后一个字符
-BCHAR tmDefaultChar; //字体中所没有字符的替代字符
-BCHAR tmBreakChar; //用于拆字的字符
-BYTE tmItalic, //字体为斜体时非零
-BYTE tmUnderlined, //字体为下划线时非零
-BYTE tmStruckOut, //字体被删去时非零
-BYTE tmPitchAndFamily, //字体间距(低4位)和族(高4位)
-BYTE tmCharSet; //字体的字符集
-} TEXTMETRIC;
-```
-
-
-
-
-
-### GetTextMetrics
-
- 把程序当前的字体信息，存放到[TEXTMETRIC](https://baike.baidu.com/item/TEXTMETRIC/10316529) 
+### PolyBezier
 
 ```
-BOOL GetTextMetrics(HDC hdc, LPTEXTMETRIC lptm)；
+BOOL PolyBezier(HDC hdc, CONST POINT *lppt, DWORD cPoints);
 ```
 
-hdc：设备环境句柄。
+● 参数
 
-lptm：指向结构TEXTMETRIC的[指针](https://baike.baidu.com/item/指针)，该结构用于获得字体信息。
+hdc：指定的设备环境句柄。
 
-```
-GetTextMetrics(hdc, &tm);
-```
+lppt：POINT结构[数组](https://baike.baidu.com/item/数组)的[指针](https://baike.baidu.com/item/指针)，包括了`样条端点和控制点的坐标，其顺序是起点的坐标、起点的控制点的坐标、终点的控制点的坐标和终点的坐标`。
 
-###  
+cPoints：指明[数组](https://baike.baidu.com/item/数组)中的点的个数。
 
-### GetSystemMetrics
+● 返回值
 
-
-
-```
-int WINAPI GetSystemMetrics( __in intnIndex);
-```
-
- 只有一个参数，称之为「索引」，这个索引有75个[标识符](https://baike.baidu.com/item/标识符/7105638)，通过设置不同的标识符就可以获取系统分辨率、[窗体](https://baike.baidu.com/item/窗体/4163553)显示区域的宽度和高度、滚动条的宽度和高度。 
-
-```c
-//获取屏幕宽度
-cxScreen = GetSystemMetrics(SM_CXSCREEN);
-//获取屏幕高度
-cyScreen = GetSystemMetrics(SM_CYSCREEN);
-```
+若[函数调用](https://baike.baidu.com/item/函数调用)成功，则返回非零，否则返回零。
 
 
-### SetTextAlign
 
- 为指定设备环境设置文字对齐标志 
+### PolyBezierTo
 
 ```
-UINT SetTextAlign(
-HDC hdc, // 设备环境句柄
-UINT fMode // 文本对齐选项
+BOOL PolyBezierTo(
+HDChdc,
+CONST POINT*lppt,
+DWORD cCount
 );
 ```
 
-设置对齐方式为左对齐
+hdc ------------ Long，要在其中绘图的设备场景
 
-	SetTextAlign(hdc, TA_LEFT | TA_TOP);
-设置对齐方式为右对齐
+lppt ----------- POINTAPI，指定一个POINTAPI结构[数组](https://baike.baidu.com/item/数组)。其中的第一个结构指定了起点。剩下的点三个一组——包括两个控件点和一个终点.
+
+cCount---------- lppt[数组](https://baike.baidu.com/item/数组)的总点数 
+
+
+
+
 
 ```
-SetTextAlign(hdc, TA_RIGHT | TA_TOP);
+//按下鼠标右键消息
+WM_RBUTTONDOWN:
+//按下鼠标左键消息
+WM_LBUTTONDOWN:
+//移动鼠标消息
+WM_MOUSEMOVE:
+
+wParam参数是按下了哪个键
 ```
 
 
-
-<hr>
 
 ```c
-// 系统字体.cpp : 定义应用程序的入口点。
+// 贝塞尔曲线.cpp : 定义应用程序的入口点。
 //
 
 #include "stdafx.h"
-#include "系统字体.h"
+#include "贝塞尔曲线.h"
 
 #define MAX_LOADSTRING 100
 
@@ -180,7 +140,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_MY));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-	wcex.lpszMenuName	= NULL;//MAKEINTRESOURCEW(IDC_MY);
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_MY);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -225,34 +185,86 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 发送退出消息并返回
 //
 //
+
+void DrawBezier(HDC hdc,POINT apt[]) {
+
+
+	PolyBezier(hdc,apt,4);
+
+	MoveToEx(hdc,apt[0].x, apt[0].y,NULL);
+	LineTo(hdc, apt[1].x, apt[1].y);
+
+	MoveToEx(hdc, apt[3].x, apt[3].y, NULL);
+	LineTo(hdc, apt[2].x, apt[2].y);
+
+}
+
+void DrawBezier2(HDC hdc, POINT apt[]) {
+
+
+	MoveToEx(hdc, apt[0].x, apt[0].y, NULL);
+	PolyBezierTo(hdc, apt + 1, 3);
+
+	MoveToEx(hdc, apt[0].x, apt[0].y, NULL);
+	LineTo(hdc, apt[1].x, apt[1].y);
+
+	MoveToEx(hdc, apt[3].x, apt[3].y, NULL);
+	LineTo(hdc, apt[2].x, apt[2].y);
+
+}
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	static TEXTMETRIC tm;
-	static int cxChar;	//字符宽度
-	static int cyChar;	//字符高度
-	static int cxCap;	//一个字符的宽度
-	static int cxScreen, cyScreen;//屏幕宽度和高度
-	TCHAR szBuffer[1024] = { 0 };
-	int len;	//字符串长度
+	static POINT apt[4];
 	HDC hdc;
     switch (message)
     {
-	case WM_CREATE:
-		hdc = GetDC(hWnd);
+	
+	case WM_RBUTTONDOWN:
+	case WM_LBUTTONDOWN:
+	case WM_MOUSEMOVE:
+		if (wParam & MK_RBUTTON || wParam & MK_LBUTTON )
+		{
+			hdc = GetDC(hWnd);
+            //用白色画笔还原
+			SelectObject(hdc,GetStockObject(WHITE_PEN));
+			DrawBezier(hdc, apt);
+			//如果按下鼠标左键
+			if (wParam & MK_LBUTTON) {
+				apt[1].x = LOWORD(lParam);
+				apt[1].y = HIWORD(lParam);
+			}
+            //如果按下鼠标右键
+			if (wParam & MK_RBUTTON) {
+				apt[2].x = LOWORD(lParam);
+				apt[2].y = HIWORD(lParam);
+			}
+			//用黑色画笔画
+			SelectObject(hdc, GetStockObject(BLACK_PEN));
+			DrawBezier(hdc, apt);
+			//DrawBezier2(hdc, apt);
+			ReleaseDC(hWnd,hdc);
+		}
 
-		//把程序当前的字体信息，存放到tm
-		GetTextMetrics(hdc, &tm);
-		//获取字符平均值
-		cxChar = tm.tmAveCharWidth;
-		//获取字符高度
-		cyChar = tm.tmHeight + tm.tmExternalLeading + 10;
-		//获取一个字符的宽度
-		cxCap = (tm.tmPitchAndFamily & 1 ? 3 : 2) * cxChar / 2;
-		//获取屏幕宽度
-		cxScreen = GetSystemMetrics(SM_CXSCREEN);
-		//获取屏幕高度
-		cyScreen = GetSystemMetrics(SM_CYSCREEN);
-		ReleaseDC(hWnd,hdc);
+	break;
+
+	
+	
+	case WM_SIZE:
+            //设置起点,起点控点,终点控点,终点
+		apt[0].x = LOWORD(lParam) / 5;
+		apt[0].y = HIWORD(lParam)/2;
+
+		apt[1].x = 0;
+		apt[1].y = 0;
+
+		apt[2].x = LOWORD(lParam) * 4 / 5;
+		apt[2].y = HIWORD(lParam)/2 - 200;
+
+		apt[3].x = LOWORD(lParam) * 4/ 5;
+		apt[3].y = HIWORD(lParam)/2;
+
+
 		break;
     case WM_COMMAND:
         {
@@ -276,25 +288,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 在此处添加使用 hdc 的任何绘图代码...
-			TextOut(hdc,0,0,TEXT("SM_CXSCREEN"),lstrlen(TEXT("SM_CXSCREEN")));
-
-			TextOut(hdc, cxCap * 30, 0, TEXT("屏幕宽度"), lstrlen(TEXT("屏幕宽度")));
-			//设置对齐方式为右对齐
-			SetTextAlign(hdc,TA_RIGHT|TA_TOP);
-			len = _sntprintf(szBuffer,1024,TEXT("%d"),cxScreen);
-			TextOut(hdc, cxCap * 60, 0, szBuffer,len);
-			//设置对齐方式为左对齐
-			SetTextAlign(hdc,TA_LEFT | TA_TOP);
-			TextOut(hdc, 0, cyChar, TEXT("SM_CYSCREEN"), lstrlen(TEXT("SM_CYSCREEN")));
-
-			TextOut(hdc, cxCap * 30, cyChar, TEXT("屏幕高度"), lstrlen(TEXT("屏幕高度")));
-			//设置对齐方式为右对齐
-			SetTextAlign(hdc, TA_RIGHT | TA_TOP);
-
-			len = _sntprintf(szBuffer, 1024, TEXT("%d"), cyScreen);
-			TextOut(hdc, cxCap * 60, cyChar, szBuffer, len);
-			//设置对齐方式为左对齐
-			SetTextAlign(hdc, TA_LEFT | TA_TOP);
+			DrawBezier(hdc,apt);
             EndPaint(hWnd, &ps);
         }
         break;
@@ -329,3 +323,6 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 
 ```
 
+
+
+![1623079557682](../../themes/pure/source/images/javawz/1623079557682.png)

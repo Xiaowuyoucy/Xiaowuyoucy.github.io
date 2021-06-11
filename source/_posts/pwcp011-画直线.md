@@ -1,100 +1,139 @@
 ---
-title: 系统字体
-date: 2021-05-31 19:26:57
+title: 画直线
+date: 2021-06-07 17:32:12
 tags:
 categories: windows程序设计2
 doc:
 ---
 
-# 系统字体
+#  画直线
 
-![1622460534446](/images/javawz/1622460534446.png) 
+### POINT坐标结构类型
 
-### TEXTMETRIC字体信息结构
-
-```c
-typedef struct tagTEXTMETRIC { 
-LONG tmHeight; //字符高度
-LONG tmAscent; //字符上部高度(基线以上)
-LONG tmDescent; //字符下部高度(基线以下)
-LONG tmInternalLeading, //由tmHeight定义的字符高度的顶部空间数目
-LONG tmExternalLeading, //夹在两行之间的空间数目
-LONG tmAveCharWidth, //平均字符宽度
-LONG tmMaxCharWidth, //最宽字符的宽度
-LONG tmWeight; //字体的粗细轻重程度
-LONG tmOverhang, //加入某些拼接字体上的附加高度
-LONG tmDigitizedAspectX, //字体设计所针对的设备水平方向
-LONG tmDigitizedAspectY, //字体设计所针对的设备垂直方向
-BCHAR tmFirstChar; //为字体定义的第一个字符
-BCHAR tmLastChar; //为字体定义的最后一个字符
-BCHAR tmDefaultChar; //字体中所没有字符的替代字符
-BCHAR tmBreakChar; //用于拆字的字符
-BYTE tmItalic, //字体为斜体时非零
-BYTE tmUnderlined, //字体为下划线时非零
-BYTE tmStruckOut, //字体被删去时非零
-BYTE tmPitchAndFamily, //字体间距(低4位)和族(高4位)
-BYTE tmCharSet; //字体的字符集
-} TEXTMETRIC;
+```
+	typedef struct tagPOINT
+	{
+		LONG  x;
+		LONG  y;
+	} POINT, *PPOINT, NEAR *NPPOINT, FAR *LPPOINT;
 ```
 
 
 
-
-
-### GetTextMetrics
-
- 把程序当前的字体信息，存放到[TEXTMETRIC](https://baike.baidu.com/item/TEXTMETRIC/10316529) 
+### MoveToEx设置当前画笔位置
 
 ```
-BOOL GetTextMetrics(HDC hdc, LPTEXTMETRIC lptm)；
-```
-
-hdc：设备环境句柄。
-
-lptm：指向结构TEXTMETRIC的[指针](https://baike.baidu.com/item/指针)，该结构用于获得字体信息。
-
-```
-GetTextMetrics(hdc, &tm);
-```
-
-###  
-
-### GetSystemMetrics
-
-
-
-```
-int WINAPI GetSystemMetrics( __in intnIndex);
-```
-
- 只有一个参数，称之为「索引」，这个索引有75个[标识符](https://baike.baidu.com/item/标识符/7105638)，通过设置不同的标识符就可以获取系统分辨率、[窗体](https://baike.baidu.com/item/窗体/4163553)显示区域的宽度和高度、滚动条的宽度和高度。 
-
-```c
-//获取屏幕宽度
-cxScreen = GetSystemMetrics(SM_CXSCREEN);
-//获取屏幕高度
-cyScreen = GetSystemMetrics(SM_CYSCREEN);
-```
-
-
-### SetTextAlign
-
- 为指定设备环境设置文字对齐标志 
-
-```
-UINT SetTextAlign(
-HDC hdc, // 设备环境句柄
-UINT fMode // 文本对齐选项
+WINGDIAPI BOOL WINAPI MoveToEx(
+HDC hdc,
+int X,
+int Y,
+LPPOINT lpPoint
 );
 ```
 
-设置对齐方式为左对齐
+HDC hdc：传入参数，[设备上下文](https://baike.baidu.com/item/设备上下文)句柄。
 
-	SetTextAlign(hdc, TA_LEFT | TA_TOP);
-设置对齐方式为右对齐
+int X：传入参数：新位置的X坐标。
+
+int Y：传入参数：新位置的Y坐标。
+
+LPPOINT lpPoint：传出参数：一个指向POINT结构的[指针](https://baike.baidu.com/item/指针)，用来存放上一个点的位置，若此参数为NULL，则不保存上一个点的位置
+
+返回值：
+
+返回TRUE代表移动成功，FALSE代表失败，用GetLastError获得更具体的错误信息
 
 ```
-SetTextAlign(hdc, TA_RIGHT | TA_TOP);
+MoveToEx(hdc, 20, 20, NULL);
+```
+
+
+
+### LineTo从画笔当前位置画到终点位置
+
+```
+WINGDIAPI BOOL WINAPI LineTo(HDChdc,intX,intY,);
+```
+
+hdc:设备场景句柄
+
+X:线段终点X坐标位置，采用逻辑坐标表示。这个点不会实际画出来；它不属于线段的一部份
+
+Y:线段终点Y坐标位置，采用逻辑坐标表示。这个点不会实际画出来；它不属于线段的一部份
+
+返回值：
+
+返回TRUE代表移动成功，FALSE代表失败
+
+```
+//从起点画到200, 20,并改变当前画笔位置
+LineTo(hdc, 200, 20);
+```
+
+
+
+### Polyline
+
+从apt数组中获取坐标点,画一个矩形,不改变当前画笔位置
+
+```
+BOOL Polyline( HDChdc, CONST POINT*lppt, intcPoints)
+```
+
+hdc ------------ Long，要在其中绘图的设备场景
+
+lpPoint -------- POINTAPI，nCount POINTAPI结构[数组](https://baike.baidu.com/item/数组)中的第一个POINTAPI结构
+
+nCount --------- Long，lpPoint数组中的点数。会从第一个点到第二个点画一条线，以次类推
+
+返回值: bool，非零表示成功，零表示失败 
+
+```
+	POINT apt[5] = {
+		{600,30},
+		{800,30},
+		{800,500},
+		{600,500},
+		{600,30}
+	};
+//从apt数组中获取坐标点,画一个矩形,不改变当前画笔位置
+Polyline(hdc,apt,5);
+```
+
+
+
+### PolylineTo
+
+从apt2数组中获取坐标点,画一个矩形,并改变当前画笔位置
+
+使用目前位置作为开始点，并将目前位置设定为最后一根线的终点,根据apt的点依次画直线。设置目前位置可调用MoveToEx函数.
+
+```
+BOOL PolyLineTo(HDC hdc, CONST POINT * apt, DWORD cpt);
+```
+
+参数：
+
+hdc:设备场景句柄
+
+apt:nCount POINTAPI结构[数组](https://baike.baidu.com/item/数组)中的第一个POINTAPI结构
+
+cpt:Point数组中的点数
+
+```
+POINT apt2[5] = {
+	{ 900,30 },
+	{ 1200,30 },
+	{ 1200,500 },
+	{ 900,500 },
+	{ 900,30 }
+};
+
+//设置当前画笔位置
+MoveToEx(hdc, apt2[0].x, apt2[0].y, NULL);
+//从apt2数组中获取坐标点,画一个矩形,改变当前画笔位置
+PolylineTo(hdc, apt2 + 1, 4);
+
 ```
 
 
@@ -102,11 +141,11 @@ SetTextAlign(hdc, TA_RIGHT | TA_TOP);
 <hr>
 
 ```c
-// 系统字体.cpp : 定义应用程序的入口点。
+// 直线.cpp : 定义应用程序的入口点。
 //
 
 #include "stdafx.h"
-#include "系统字体.h"
+#include "直线.h"
 
 #define MAX_LOADSTRING 100
 
@@ -180,7 +219,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_MY));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-	wcex.lpszMenuName	= NULL;//MAKEINTRESOURCEW(IDC_MY);
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_MY);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -227,33 +266,34 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	static TEXTMETRIC tm;
-	static int cxChar;	//字符宽度
-	static int cyChar;	//字符高度
-	static int cxCap;	//一个字符的宽度
-	static int cxScreen, cyScreen;//屏幕宽度和高度
-	TCHAR szBuffer[1024] = { 0 };
-	int len;	//字符串长度
-	HDC hdc;
+	//POINT 坐标结构类型
+	/*
+	typedef struct tagPOINT
+	{
+		LONG  x;
+		LONG  y;
+	} POINT, *PPOINT, NEAR *NPPOINT, FAR *LPPOINT;
+	*/
+
+	//第二个矩形
+	POINT apt[5] = {
+		{600,30},
+		{800,30},
+		{800,500},
+		{600,500},
+		{600,30}
+	};
+	//第三个矩形
+	POINT apt2[5] = {
+		{ 900,30 },
+		{ 1200,30 },
+		{ 1200,500 },
+		{ 900,500 },
+		{ 900,30 }
+	};
+
     switch (message)
     {
-	case WM_CREATE:
-		hdc = GetDC(hWnd);
-
-		//把程序当前的字体信息，存放到tm
-		GetTextMetrics(hdc, &tm);
-		//获取字符平均值
-		cxChar = tm.tmAveCharWidth;
-		//获取字符高度
-		cyChar = tm.tmHeight + tm.tmExternalLeading + 10;
-		//获取一个字符的宽度
-		cxCap = (tm.tmPitchAndFamily & 1 ? 3 : 2) * cxChar / 2;
-		//获取屏幕宽度
-		cxScreen = GetSystemMetrics(SM_CXSCREEN);
-		//获取屏幕高度
-		cyScreen = GetSystemMetrics(SM_CYSCREEN);
-		ReleaseDC(hWnd,hdc);
-		break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -276,26 +316,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 在此处添加使用 hdc 的任何绘图代码...
-			TextOut(hdc,0,0,TEXT("SM_CXSCREEN"),lstrlen(TEXT("SM_CXSCREEN")));
 
-			TextOut(hdc, cxCap * 30, 0, TEXT("屏幕宽度"), lstrlen(TEXT("屏幕宽度")));
-			//设置对齐方式为右对齐
-			SetTextAlign(hdc,TA_RIGHT|TA_TOP);
-			len = _sntprintf(szBuffer,1024,TEXT("%d"),cxScreen);
-			TextOut(hdc, cxCap * 60, 0, szBuffer,len);
-			//设置对齐方式为左对齐
-			SetTextAlign(hdc,TA_LEFT | TA_TOP);
-			TextOut(hdc, 0, cyChar, TEXT("SM_CYSCREEN"), lstrlen(TEXT("SM_CYSCREEN")));
+			//设置起点位置
+			MoveToEx(hdc, 20, 20, NULL);
+			//从起点画到200, 20,并改变当前画笔位置
+			LineTo(hdc, 200, 20);
+			//从当前画笔位置,画到200, 500
+			LineTo(hdc, 200, 500);
+			LineTo(hdc, 20, 500);
+			LineTo(hdc, 20, 20);
 
-			TextOut(hdc, cxCap * 30, cyChar, TEXT("屏幕高度"), lstrlen(TEXT("屏幕高度")));
-			//设置对齐方式为右对齐
-			SetTextAlign(hdc, TA_RIGHT | TA_TOP);
+			//从apt数组中获取坐标点,画一个矩形,不改变当前画笔位置
+			Polyline(hdc,apt,5);
 
-			len = _sntprintf(szBuffer, 1024, TEXT("%d"), cyScreen);
-			TextOut(hdc, cxCap * 60, cyChar, szBuffer, len);
-			//设置对齐方式为左对齐
-			SetTextAlign(hdc, TA_LEFT | TA_TOP);
+
+			//设置当前画笔位置
+			MoveToEx(hdc, apt2[0].x, apt2[0].y, NULL);
+			//从apt2数组中获取坐标点,画一个矩形,改变当前画笔位置
+			PolylineTo(hdc, apt2 + 1, 4);
+
             EndPaint(hWnd, &ps);
+
+
         }
         break;
     case WM_DESTROY:
