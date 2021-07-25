@@ -2,23 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/2021/07/14/hbnx002-13/</loc>
+    <loc>https://xiaowuyoucy.github.io/2021/07/05/cpp0088-%E7%AE%97%E6%B3%95/</loc>
     
-    <lastmod>2021-07-15T11:35:25.211Z</lastmod>
+    <lastmod>2021-07-24T22:08:35.850Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2021/07/25/cpp0091-%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
+    
+    <lastmod>2021-07-24T21:17:04.300Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2021/07/25/cpp0090-%E5%B8%B8%E7%94%A8%E7%9A%84%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/</loc>
+    
+    <lastmod>2021-07-24T18:44:03.589Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://xiaowuyoucy.github.io/2021/07/12/hbnx001-1-12/</loc>
     
-    <lastmod>2021-07-14T16:37:09.891Z</lastmod>
+    <lastmod>2021-07-24T18:43:27.211Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/2021/07/05/cpp0088-%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://xiaowuyoucy.github.io/2021/07/24/cpp0089-foreach%E5%92%8Ctransform%E7%AE%97%E6%B3%95/</loc>
     
-    <lastmod>2021-07-05T10:31:46.306Z</lastmod>
+    <lastmod>2021-07-24T17:32:12.808Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2021/07/15/hbnx003-23/</loc>
+    
+    <lastmod>2021-07-19T07:45:04.801Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2021/07/14/hbnx002-13/</loc>
+    
+    <lastmod>2021-07-16T19:38:51.223Z</lastmod>
     
   </url>
   
@@ -3089,7 +3117,7 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/categories/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
@@ -3103,7 +3131,7 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/categories/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
