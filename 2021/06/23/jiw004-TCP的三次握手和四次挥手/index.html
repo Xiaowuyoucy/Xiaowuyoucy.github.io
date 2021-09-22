@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>TCP的三次握手和四次挥手 | YanChen</title>
+  <meta name="description" content="TCP三次握手  ack的值永远等于上一个数据包seq的值加1 ack也叫期望值  1234三次握手：“喂，你听得到吗？”“我听得到呀，你听得到我吗？”“我能听到你，今天 balabala……”  TCP的四次挥手  1234客户端:我们分手吧服务端:好的,我知道了服务端:我们分手吧客户端:好的再见  tcp的数据传输过程：  SYN表示建立连接，  FIN表示关闭连接，  ACK表示响应，">
+<meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP的三次握手和四次挥手">
+<meta property="og:url" content="https://xiaowuyoucy.github.io/2021/06/23/jiw004-TCP的三次握手和四次挥手/index.html">
+<meta property="og:site_name" content="YanChen">
+<meta property="og:description" content="TCP三次握手  ack的值永远等于上一个数据包seq的值加1 ack也叫期望值  1234三次握手：“喂，你听得到吗？”“我听得到呀，你听得到我吗？”“我能听到你，今天 balabala……”  TCP的四次挥手  1234客户端:我们分手吧服务端:好的,我知道了服务端:我们分手吧客户端:好的再见  tcp的数据传输过程：  SYN表示建立连接，  FIN表示关闭连接，  ACK表示响应，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1624396879962.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1624397329411.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1624398035519.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/823435-20170323092941611-1541980584.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/823435-20170323092953893-1865298744.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/823435-20170323093037486-665986934.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/823435-20170323093050424-1255848578.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/823435-20170323093109565-59098561.png">
+<meta property="og:updated_time" content="2021-06-22T21:52:10.584Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP的三次握手和四次挥手">
+<meta name="twitter:description" content="TCP三次握手  ack的值永远等于上一个数据包seq的值加1 ack也叫期望值  1234三次握手：“喂，你听得到吗？”“我听得到呀，你听得到我吗？”“我能听到你，今天 balabala……”  TCP的四次挥手  1234客户端:我们分手吧服务端:好的,我知道了服务端:我们分手吧客户端:好的再见  tcp的数据传输过程：  SYN表示建立连接，  FIN表示关闭连接，  ACK表示响应，">
+<meta name="twitter:image" content="https://xiaowuyoucy.github.io/images/javawz/1624396879962.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xiaowuyoucy.github.io/2021/06/23/jiw004-TCP的三次握手和四次挥手/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fonts2/iconfont.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xiaowuyoucy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">YanChen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> GuangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="https://www.xiaochenyan.top/navigation/index.html">
+            
+            <i class="icon icon-map-marker"></i>
+            
+            <span class="menu-title">导航</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon iconfont icon-video"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">格言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+				
+				<p id="hitokoto">:D 获取中...</p>
+				<p id="from" style="text-align: right"></p>
+                <script>
+					  var xhr = new XMLHttpRequest();
+					  xhr.open('get', 'https://v1.hitokoto.cn');
+					  xhr.onreadystatechange = function () {
+						if (xhr.readyState === 4) {
+						  var data = JSON.parse(xhr.responseText);
+						  var hitokoto = document.getElementById('hitokoto');
+						  hitokoto.innerText = data.hitokoto;
+						  var from = document.getElementById('from');
+						  from.innerText = "-- " + data.from;
+						}
+					  }
+					  xhr.send();
+				</script>
+				
+				
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">195</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KaliLinux/">KaliLinux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL/">MYSQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WEB安全渗透/">WEB安全渗透</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows命令/">Windows命令</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows网络编程/">Windows网络编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/apache/">apache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/c/">c++</a><span class="category-list-count">94</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp/">cpp</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/githubHexo/">githubHexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计/">windows程序设计</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计2/">windows程序设计2</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于博主/">关于博主</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术资讯/">技术资讯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/易语言/">易语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇编逆向/">汇编逆向</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/理财投资/">理财投资</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简谈计算机/">简谈计算机</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程词汇/">编程词汇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络爬虫/">网络爬虫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机公共基础/">计算机公共基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络TCP-IP传输协议-网络抓包/">计算机网络TCP/IP传输协议/网络抓包</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络原理/">计算机网络原理</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GET/">$_GET</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POST，-SERVER/">$_POST，$_SERVER</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REQUEST/">$_REQUEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOTO语句/">GOTO语句</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang函数/">Golang函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang匿名函数/">Golang匿名函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础/">Golang基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础类型占位符/">Golang基础类型占位符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang常量与变量里表达式/">Golang常量与变量里表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang循环结构/">Golang循环结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang指针/">Golang指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang标准输入与输出/">Golang标准输入与输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang流程控制/">Golang流程控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang程序运算/">Golang程序运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang类型转换及移位运算/">Golang类型转换及移位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang闭包函数/">Golang闭包函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ISO七层模型/">ISO七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java总结/">Java总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalinux/">Kalinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Null和Undefined/">Null和Undefined</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP两种定义常量的形式/">PHP两种定义常量的形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP常量/">PHP常量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python教程/">Python教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python笔记/">Python笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python运算符/">Python运算符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO网站优化/">SEO网站优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIR/">__DIR__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FILE/">__FILE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/">__LINE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache环境变量/">apache环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache配置/">apache配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beef劫持/">beef劫持</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dowhile循环/">dowhile循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iota定义常量组/">iota定义常量组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数/">javascript函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this方法/">js-this方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js布尔类型隐私转换/">js布尔类型隐私转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux目录结构/">linux目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php变量/">php变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urlib2/">urlib2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全渗透/">web安全渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web渗透/">web渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人生事记/">人生事记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/变量的操作/">变量的操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/延时执行defer/">延时执行defer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格狼日/">拉格狼日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间复杂度测试/">时间复杂度测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财，投资/">理财，投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简历/">简历</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络模型/">网络模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/顺序表/">顺序表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/GET/" style="font-size: 13px;">$_GET</a> <a href="/tags/POST，-SERVER/" style="font-size: 13px;">$_POST，$_SERVER</a> <a href="/tags/REQUEST/" style="font-size: 13px;">$_REQUEST</a> <a href="/tags/Cookie/" style="font-size: 13px;">Cookie</a> <a href="/tags/GOTO语句/" style="font-size: 13px;">GOTO语句</a> <a href="/tags/Golang/" style="font-size: 13px;">Golang</a> <a href="/tags/Golang函数/" style="font-size: 13px;">Golang函数</a> <a href="/tags/Golang匿名函数/" style="font-size: 13px;">Golang匿名函数</a> <a href="/tags/Golang基础/" style="font-size: 14px;">Golang基础</a> <a href="/tags/Golang基础类型占位符/" style="font-size: 13px;">Golang基础类型占位符</a> <a href="/tags/Golang常量与变量里表达式/" style="font-size: 13px;">Golang常量与变量里表达式</a> <a href="/tags/Golang循环结构/" style="font-size: 13px;">Golang循环结构</a> <a href="/tags/Golang指针/" style="font-size: 13px;">Golang指针</a> <a href="/tags/Golang标准输入与输出/" style="font-size: 13px;">Golang标准输入与输出</a> <a href="/tags/Golang流程控制/" style="font-size: 13px;">Golang流程控制</a> <a href="/tags/Golang程序运算/" style="font-size: 13px;">Golang程序运算</a> <a href="/tags/Golang类型转换及移位运算/" style="font-size: 13px;">Golang类型转换及移位运算</a> <a href="/tags/Golang闭包函数/" style="font-size: 13px;">Golang闭包函数</a> <a href="/tags/ISO七层模型/" style="font-size: 13px;">ISO七层模型</a> <a href="/tags/Java总结/" style="font-size: 13px;">Java总结</a> <a href="/tags/Kalinux/" style="font-size: 13px;">Kalinux</a> <a href="/tags/Null和Undefined/" style="font-size: 13px;">Null和Undefined</a> <a href="/tags/PHP两种定义常量的形式/" style="font-size: 13px;">PHP两种定义常量的形式</a> <a href="/tags/PHP常量/" style="font-size: 13px;">PHP常量</a> <a href="/tags/Python教程/" style="font-size: 13px;">Python教程</a> <a href="/tags/Python笔记/" style="font-size: 13px;">Python笔记</a> <a href="/tags/Python运算符/" style="font-size: 13px;">Python运算符</a> <a href="/tags/SEO网站优化/" style="font-size: 13px;">SEO网站优化</a> <a href="/tags/XSS/" style="font-size: 14px;">XSS</a> <a href="/tags/DIR/" style="font-size: 13px;">__DIR__</a> <a href="/tags/FILE/" style="font-size: 13px;">__FILE__</a> <a href="/tags/LINE/" style="font-size: 13px;">__LINE__</a> <a href="/tags/apache环境变量/" style="font-size: 13px;">apache环境变量</a> <a href="/tags/apache配置/" style="font-size: 13px;">apache配置</a> <a href="/tags/beef劫持/" style="font-size: 13px;">beef劫持</a> <a href="/tags/dowhile循环/" style="font-size: 13px;">dowhile循环</a> <a href="/tags/iota定义常量组/" style="font-size: 13px;">iota定义常量组</a> <a href="/tags/javascript函数/" style="font-size: 13px;">javascript函数</a> <a href="/tags/js-this方法/" style="font-size: 13px;">js-this方法</a> <a href="/tags/js布尔类型隐私转换/" style="font-size: 13px;">js布尔类型隐私转换</a> <a href="/tags/linux目录结构/" style="font-size: 13px;">linux目录结构</a> <a href="/tags/php变量/" style="font-size: 13px;">php变量</a> <a href="/tags/sql注入/" style="font-size: 13px;">sql注入</a> <a href="/tags/urlib2/" style="font-size: 13px;">urlib2</a> <a href="/tags/web安全渗透/" style="font-size: 13px;">web安全渗透</a> <a href="/tags/web渗透/" style="font-size: 13px;">web渗透</a> <a href="/tags/人生事记/" style="font-size: 13px;">人生事记</a> <a href="/tags/变量的操作/" style="font-size: 13px;">变量的操作</a> <a href="/tags/延时执行defer/" style="font-size: 13px;">延时执行defer</a> <a href="/tags/拉格狼日/" style="font-size: 13px;">拉格狼日</a> <a href="/tags/时间复杂度测试/" style="font-size: 13px;">时间复杂度测试</a> <a href="/tags/理财，投资/" style="font-size: 13px;">理财，投资</a> <a href="/tags/简历/" style="font-size: 13px;">简历</a> <a href="/tags/算法/" style="font-size: 13px;">算法</a> <a href="/tags/网络模型/" style="font-size: 13px;">网络模型</a> <a href="/tags/计算机基础/" style="font-size: 13px;">计算机基础</a> <a href="/tags/顺序表/" style="font-size: 13px;">顺序表</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">51</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">125</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">106</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/26/cpp0094-STL中常用的集合算法/" class="title">STL中常用的集合算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-26T15:13:19.000Z" itemprop="datePublished">2021-07-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/26/cpp0093-STL中常用的算术和生成算法/" class="title">STL中常用的算术和生成算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-26T14:44:33.000Z" itemprop="datePublished">2021-07-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/26/cpp0092-常用的拷贝和替换STL算法/" class="title">常用的拷贝和替换STL算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-26T14:23:54.000Z" itemprop="datePublished">2021-07-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/25/cpp0091-常用的排序算法/" class="title">常用的排序算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-24T19:38:28.000Z" itemprop="datePublished">2021-07-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/25/cpp0090-常用的查找算法/" class="title">常用的查找算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-24T18:33:46.000Z" itemprop="datePublished">2021-07-25</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-jiw004-TCP的三次握手和四次挥手" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TCP的三次握手和四次挥手
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/06/23/jiw004-TCP的三次握手和四次挥手/" class="article-date">
+	  <time datetime="2021-06-22T21:03:51.000Z" itemprop="datePublished">2021-06-23</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/计算机网络TCP-IP传输协议-网络抓包/">计算机网络TCP/IP传输协议/网络抓包</a>
+  </span>
+
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/06/23/jiw004-TCP的三次握手和四次挥手/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.2k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 11(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="tcp三次握手"><a class="markdownIt-Anchor" href="#tcp三次握手"></a> TCP三次握手</h1>
+<p><img src="/images/javawz/1624396879962.png" alt="1624396879962"></p>
+<p>ack的值永远等于上一个数据包seq的值加1</p>
+<p>ack也叫期望值</p>
+<p><img src="/images/javawz/1624397329411.png" alt="1624397329411"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">三次握手：</span><br><span class="line">“喂，你听得到吗？”</span><br><span class="line">“我听得到呀，你听得到我吗？”</span><br><span class="line">“我能听到你，今天 balabala……”</span><br></pre></td></tr></table></figure>
+<h1 id="tcp的四次挥手"><a class="markdownIt-Anchor" href="#tcp的四次挥手"></a> TCP的四次挥手</h1>
+<p><img src="/images/javawz/1624398035519.png" alt="1624398035519"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">客户端:我们分手吧</span><br><span class="line">服务端:好的,我知道了</span><br><span class="line">服务端:我们分手吧</span><br><span class="line">客户端:好的再见</span><br></pre></td></tr></table></figure>
+<h3 id="tcp的数据传输过程"><a class="markdownIt-Anchor" href="#tcp的数据传输过程"></a> tcp的数据传输过程：</h3>
+<h5 id="syn表示建立连接"><a class="markdownIt-Anchor" href="#syn表示建立连接"></a> SYN表示建立连接，</h5>
+<h5 id="fin表示关闭连接"><a class="markdownIt-Anchor" href="#fin表示关闭连接"></a> FIN表示关闭连接，</h5>
+<h5 id="ack表示响应"><a class="markdownIt-Anchor" href="#ack表示响应"></a> ACK表示响应，</h5>
+<h5 id="psh表示有data数据传输"><a class="markdownIt-Anchor" href="#psh表示有data数据传输"></a> PSH表示有DATA数据传输，</h5>
+<h5 id="urg表示紧急指针"><a class="markdownIt-Anchor" href="#urg表示紧急指针"></a> URG表示紧急指针</h5>
+<h5 id="rst表示连接重置"><a class="markdownIt-Anchor" href="#rst表示连接重置"></a> RST表示连接重置。</h5>
+<h1 id="tcp的11种状态"><a class="markdownIt-Anchor" href="#tcp的11种状态"></a> TCP的11种状态</h1>
+<h2 id="tcp三次握手建立连接"><a class="markdownIt-Anchor" href="#tcp三次握手建立连接"></a> TCP三次握手建立连接</h2>
+<p><strong>Tcp头部</strong></p>
+<p><img src="/images/javawz/823435-20170323092941611-1541980584.png" alt="img"></p>
+<p>六个标志位中，我们要用到三个：</p>
+<p><strong>SYN</strong>：SYN=  1 表示这是一个连接请求或连接接受报文。在建立连接时用来进行同步序号（个人理解是，在建立连接的时候，提醒对方记录本方的起始序号）。当SYN=1而ACK=0时，表明这是一个连接请求报文段。对方若是同意建立连接，则应响应的报文段中使SYN=1、ACK=1。因此SYN=1表示该报文是一个连接请求报文或者是一个连接请求接收报文。</p>
+<p><strong>ACK</strong>：确认号只有在该位设置为1的时候才生效，当该位为0是表示确认号无效。TCP规定，在TCP连接建立后所有传送的数据报文段ACK都必须设置为1。</p>
+<p><strong>FIN</strong>：当 FIN = 1 时，表明此报文段的发送方的数据已经发送完毕，并要求释放连接。</p>
+<p>此外我们还需要用到序号和确认号：</p>
+<p><strong>序号</strong>：占4个字节，它的范围在0-2^32-1，序号随着通信的进行不断的递增，当达到最大值的时候重新回到0在开始递增。TCP是面向字节流的，在一个TCP连接中传送的字节流中的每一个字节都按照顺序编号。整个要传送的字节流的起始号必须在连接建立时设置。首部中的序列号字段指的是本报文段所发送的数据的第一个字节的序号。例如，一个报文序号是301，而携带的数据共有100字节。则表示本次报文中的序号是301，下一个报文的序号是401.重复一下，每一个报文的序号是该报文包含的字节中第一个字节的编号。</p>
+<p><strong>确认号</strong>：占4个字节，确认号，是对下一个想要接受的字节的期望，这里隐式确认了对上一个数据包的成功接收。如上例，在成功接收了序号为301的数据包，想要接收下一个数据包因为上个数据包包含100字节，所以此时的确认号应该是401，表示希望接收下一个序号是401的数据包。</p>
+<p>三次握手过程：</p>
+<p><img src="/images/javawz/823435-20170323092953893-1865298744.png" alt="img"></p>
+<p><strong>过程描述：</strong></p>
+<p>首先由Client发出请求连接即 SYN=1 ACK=0 (请看头字段的介绍)，TCP规定SYN=1时不能携带数据，但要消耗一个序号,因此声明自己的序号是 seq=x。</p>
+<p>然后 Server 进行回复确认，即 SYN=1 ACK=1 seq=y，ack=x+1。</p>
+<p>再然后 Client 再进行一次确认，但不用SYN 了，这时即为 ACK=1, seq=x+1，ack=y+1。</p>
+<p><strong>为什么要进行三次握手（两次确认）：</strong></p>
+<p>为什么A还要发送一侧确认呢？这主要是为了防止已失效的连接请求报文突然又传送到了B，因而产生错误。</p>
+<p>所谓“已失效的连接请求报文段”是这样产生的。考虑一种正常情况。A发出连接请求，但因连接请求丢失而未收到确认。于是A再次重传一次连接请求。后来收到了确认建立了连接。数据传输完毕后，就释放了连接。A供发送了两个连接请求的报文段，其中第一个丢失，第二个到达了B。没有“已失效的连接请求报文段”。</p>
+<p>现假定出现一种异常情况，即A发出的第一个连接请求报文段并没有丢失，而是在某些网络节点长时间滞留了，以致延误到连接释放以后的某个时间才到B。本来这是一个已失效的报文段。但是B收到此失效的连接请求报文段后，就误认为是A有发出一次新的连接请求。于是就向A发出确认报文段，同意建立连接。假定不采用三次握手，那么只要B发出确认，新的连接就建立了。</p>
+<p>由于现在A并没有发出建立连接的请求，因此不会理睬B的确认，也不会向B发送数据。但B却以为新的运输连接已经建立了，并一直等待A发来数据。B的许多资源就这样拜拜浪费了。</p>
+<p>采用三次握手的办法可以防止上述现象的发生。例如在刚才的情况下，A不会向B的确认发出确认。B由于收不到确认，就知道A并没有要求建立连接。</p>
+<p><strong>另一种解释：</strong></p>
+<p>这个问题的本质是, 信道不可靠, 但是通信双发需要就某个问题达成一致. 而要解决这个问题,  无论你在消息中包含什么信息, 三次通信是理论上的最小值. 所以三次握手不是TCP本身的要求,  而是为了满足&quot;在不可靠信道上可靠地传输信息&quot;这一需求所导致的. 请注意这里的本质需求,信道不可靠, 数据传输要可靠. 三次达到了,  那后面你想接着握手也好, 发数据也好, 跟进行可靠信息传输的需求就没关系了. 因此,如果信道是可靠的, 即无论什么时候发出消息,  对方一定能收到, 或者你不关心是否要保证对方收到你的消息,  那就能像UDP那样直接发送消息就可以了”。这可视为对“三次握手”目的的另一种解答思路。</p>
+<h2 id="四次挥手关闭连接"><a class="markdownIt-Anchor" href="#四次挥手关闭连接"></a> 四次挥手关闭连接</h2>
+<p><img src="/images/javawz/823435-20170323093037486-665986934.png" alt="img"></p>
+<p>当客户A 没有东西要发送时就要释放 A 这边的连接，A会发送一个报文（没有数据），其中 FIN 设置为1,  服务器B收到后会给应用程序一个信，这时A那边的连接已经关闭，即A不再发送信息（但仍可接收信息）。  A收到B的确认后进入等待状态，等待B请求释放连接， B数据发送完成后就向A请求连接释放，也是用FIN=1 表示， 并且用 ack =  u+1(如图）， A收到后回复一个确认信息，并进入 TIME_WAIT 状态， 等待 2MSL 时间。</p>
+<p><strong>l 为什么要等待呢？</strong></p>
+<p>l 为了防止这种情况：A接到B的释放连接请求后会发送一个确认信息，但是如果这个确认信息丢了，也就是B没有收到确认释放连接，那么B就会重发一个释放连接请求，这时候A还处于TIME_WAIT状态，所以会再次发送一个确认信息。</p>
+<p><strong>l Q2为什么TIME_WAIT 状态还需要等2*MSL秒之后才能返回到CLOSED 状态呢？</strong></p>
+<p>l A2因为虽然双方都同意关闭连接了，而且握手的4个报文也都发送完毕，按理可以直接回到CLOSED 状态（就好比从SYN_SENT  状态到ESTABLISH  状态那样），但是我们必须假想网络是不可靠的，你无法保证你最后发送的ACK报文一定会被对方收到，就是说对方处于LAST_ACK  状态下的SOCKET可能会因为超时未收到ACK报文，而重发FIN报文，所以这个TIME_WAIT 状态的作用就是用来重发可能丢失的ACK报文。</p>
+<h2 id="11种状态"><a class="markdownIt-Anchor" href="#11种状态"></a> 11种状态</h2>
+<p><img src="/images/javawz/823435-20170323093050424-1255848578.png" alt="img"></p>
+<p>简单解释：</p>
+<p><strong>l CLOSED</strong>：初始状态，表示TCP连接是“关闭着的”或“未打开的”。</p>
+<p><strong>l LISTEN</strong> ：表示服务器端的某个SOCKET处于监听状态，可以接受客户端的连接。</p>
+<p><strong>l SYN_RCVD</strong> ：表示服务器接收到了来自客户端请求连接的SYN报文。在正常情况下，这个状态是服务器端的SOCKET在建立TCP连接时的三次握手会话过程中的一个中间状态，很短暂，基本上用netstat很难看到这种状态，除非故意写一个监测程序，将三次TCP握手过程中最后一个ACK报文不予发送。当TCP连接处于此状态时，再收到客户端的ACK报文，它就会进入到ESTABLISHED 状态。</p>
+<p><strong>l SYN_SENT</strong> ：这个状态与SYN_RCVD 状态相呼应，当客户端SOCKET执行connect()进行连接时，它首先发送SYN报文，然后随即进入到SYN_SENT 状态，并等待服务端的发送三次握手中的第2个报文。SYN_SENT 状态表示客户端已发送SYN报文。</p>
+<p><strong>l ESTABLISHED</strong> ：表示TCP连接已经成功建立。</p>
+<p><strong>l FIN_WAIT_1</strong> ：这个状态得好好解释一下，其实FIN_WAIT_1 和FIN_WAIT_2  两种状态的真正含义都是表示等待对方的FIN报文。而这两种状态的区别是：FIN_WAIT_1状态实际上是当SOCKET在ESTABLISHED状态时，它想主动关闭连接，向对方发送了FIN报文，此时该SOCKET进入到FIN_WAIT_1 状态。而当对方回应ACK报文后，则进入到FIN_WAIT_2  状态。当然在实际的正常情况下，无论对方处于任何种情况下，都应该马上回应ACK报文，所以FIN_WAIT_1  状态一般是比较难见到的，而FIN_WAIT_2 状态有时仍可以用netstat看到。</p>
+<p><strong>l FIN_WAIT_2</strong> ：上面已经解释了这种状态的由来，实际上FIN_WAIT_2状态下的SOCKET表示半连接，即有一方调用close()主动要求关闭连接。注意：FIN_WAIT_2 是没有超时的（不像TIME_WAIT 状态），这种状态下如果对方不关闭（不配合完成4次挥手过程），那这个 FIN_WAIT_2  状态将一直保持到系统重启，越来越多的FIN_WAIT_2 状态会导致内核crash。</p>
+<p><strong>l TIME_WAIT</strong> ：表示收到了对方的FIN报文，并发送出了ACK报文。 TIME_WAIT状态下的TCP连接会等待2*MSL（Max Segment  Lifetime，最大分段生存期，指一个TCP报文在Internet上的最长生存时间。每个具体的TCP协议实现都必须选择一个确定的MSL值，RFC  1122建议是2分钟，但BSD传统实现采用了30秒，Linux可以cat /proc/sys/net/ipv4/tcp_fin_timeout看到本机的这个值），然后即可回到CLOSED  可用状态了。如果FIN_WAIT_1状态下，收到了对方同时带FIN标志和ACK标志的报文时，可以直接进入到TIME_WAIT状态，而无须经过FIN_WAIT_2状态。（这种情况应该就是四次挥手变成三次挥手的那种情况）</p>
+<p>l <strong>CLOSING</strong> ：这种状态在实际情况中应该很少见，属于一种比较罕见的例外状态。正常情况下，当一方发送FIN报文后，按理来说是应该先收到（或同时收到）对方的ACK报文，再收到对方的FIN报文。但是CLOSING  状态表示一方发送FIN报文后，并没有收到对方的ACK报文，反而却也收到了对方的FIN报文。什么情况下会出现此种情况呢？那就是当双方几乎在同时close()一个SOCKET的话，就出现了双方同时发送FIN报文的情况，这是就会出现CLOSING 状态，表示双方都正在关闭SOCKET连接。</p>
+<p><strong>l CLOSE_WAIT</strong> ：表示正在等待关闭。怎么理解呢？当对方close()一个SOCKET后发送FIN报文给自己，你的系统毫无疑问地将会回应一个ACK报文给对方，此时TCP连接则进入到CLOSE_WAIT状态。接下来呢，你需要检查自己是否还有数据要发送给对方，如果没有的话，那你也就可以close()这个SOCKET并发送FIN报文给对方，即关闭自己到对方这个方向的连接。有数据的话则看程序的策略，继续发送或丢弃。简单地说，当你处于CLOSE_WAIT 状态下，需要完成的事情是等待你去关闭连接。</p>
+<p><strong>l LAST_ACK</strong> ：当被动关闭的一方在发送FIN报文后，等待对方的ACK报文的时候，就处于LAST_ACK 状态。当收到对方的ACK报文后，也就可以进入到CLOSED 可用状态了。</p>
+<p><strong>CLOSING状态：</strong></p>
+<p><img src="/images/javawz/823435-20170323093109565-59098561.png" alt="img"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xiaowuyoucy.github.io/2021/06/23/jiw004-TCP的三次握手和四次挥手/" title="TCP的三次握手和四次挥手" target="_blank" rel="external">https://xiaowuyoucy.github.io/2021/06/23/jiw004-TCP的三次握手和四次挥手/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+		  
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/06/23/jiw005-IP地址的划分和子网掩码计算方法/" title="IP地址的划分和子网掩码计算方法"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/06/23/jiw003-TCP-IP协议/" title="TCP/IP协议模型"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+	<span>More contact information</span>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:xiaowuyoucy.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '032928647cd59bc9f443',
+    clientSecret: '82a11fd93e4d0779655af6dc4b73942a03e95276',
+    repo: 'Xiaowuyoucy.github.io',
+    owner: 'Xiaowuyoucy',
+    admin: ['Xiaowuyoucy'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>第二章 物理层 | YanChen</title>
+  <meta name="description" content="计算机网络原理 第二章 物理层  2.1 物理层的基本概念 2.2 数据通信的基础知识 相关术语 有关信道的几个基本概念 2.3 物理层下面的传输媒体 2.4 信道复用技术 2.5 数字传输系统 2.6 宽带接入技术    2.1 物理层的基本概念 物理层解决如何在连接各种计算机传输媒体上传输bit流，注意，不是指用什么传输媒体（介质） 物理层主要任务：确定传输媒体接口的一些特性：（为了统一规划">
+<meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章 物理层">
+<meta property="og:url" content="https://xiaowuyoucy.github.io/2021/01/10/计算机网络原理笔记-第二章-物理层/index.html">
+<meta property="og:site_name" content="YanChen">
+<meta property="og:description" content="计算机网络原理 第二章 物理层  2.1 物理层的基本概念 2.2 数据通信的基础知识 相关术语 有关信道的几个基本概念 2.3 物理层下面的传输媒体 2.4 信道复用技术 2.5 数字传输系统 2.6 宽带接入技术    2.1 物理层的基本概念 物理层解决如何在连接各种计算机传输媒体上传输bit流，注意，不是指用什么传输媒体（介质） 物理层主要任务：确定传输媒体接口的一些特性：（为了统一规划">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/20201219080914249.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/20201219080923486.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/20201219080946865.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/20201219080955663.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/202012190810070.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/20201219081015693.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/20201219081023953.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/2020121908103317.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/20201219081052766.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/2020121908105979.png">
+<meta property="og:updated_time" content="2021-01-14T07:41:11.865Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二章 物理层">
+<meta name="twitter:description" content="计算机网络原理 第二章 物理层  2.1 物理层的基本概念 2.2 数据通信的基础知识 相关术语 有关信道的几个基本概念 2.3 物理层下面的传输媒体 2.4 信道复用技术 2.5 数字传输系统 2.6 宽带接入技术    2.1 物理层的基本概念 物理层解决如何在连接各种计算机传输媒体上传输bit流，注意，不是指用什么传输媒体（介质） 物理层主要任务：确定传输媒体接口的一些特性：（为了统一规划">
+<meta name="twitter:image" content="https://xiaowuyoucy.github.io/images/javawz/20201219080914249.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xiaowuyoucy.github.io/2021/01/10/计算机网络原理笔记-第二章-物理层/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fonts2/iconfont.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xiaowuyoucy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">YanChen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> GuangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="https://www.xiaochenyan.top/navigation/index.html">
+            
+            <i class="icon icon-map-marker"></i>
+            
+            <span class="menu-title">导航</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon iconfont icon-video"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">格言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+				
+				<p id="hitokoto">:D 获取中...</p>
+				<p id="from" style="text-align: right"></p>
+                <script>
+					  var xhr = new XMLHttpRequest();
+					  xhr.open('get', 'https://v1.hitokoto.cn');
+					  xhr.onreadystatechange = function () {
+						if (xhr.readyState === 4) {
+						  var data = JSON.parse(xhr.responseText);
+						  var hitokoto = document.getElementById('hitokoto');
+						  hitokoto.innerText = data.hitokoto;
+						  var from = document.getElementById('from');
+						  from.innerText = "-- " + data.from;
+						}
+					  }
+					  xhr.send();
+				</script>
+				
+				
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">195</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KaliLinux/">KaliLinux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL/">MYSQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WEB安全渗透/">WEB安全渗透</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows命令/">Windows命令</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows网络编程/">Windows网络编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/apache/">apache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/c/">c++</a><span class="category-list-count">94</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp/">cpp</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/githubHexo/">githubHexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计/">windows程序设计</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计2/">windows程序设计2</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于博主/">关于博主</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术资讯/">技术资讯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/易语言/">易语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇编逆向/">汇编逆向</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/理财投资/">理财投资</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简谈计算机/">简谈计算机</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程词汇/">编程词汇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络爬虫/">网络爬虫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机公共基础/">计算机公共基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络TCP-IP传输协议-网络抓包/">计算机网络TCP/IP传输协议/网络抓包</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络原理/">计算机网络原理</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GET/">$_GET</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POST，-SERVER/">$_POST，$_SERVER</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REQUEST/">$_REQUEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOTO语句/">GOTO语句</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang函数/">Golang函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang匿名函数/">Golang匿名函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础/">Golang基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础类型占位符/">Golang基础类型占位符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang常量与变量里表达式/">Golang常量与变量里表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang循环结构/">Golang循环结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang指针/">Golang指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang标准输入与输出/">Golang标准输入与输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang流程控制/">Golang流程控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang程序运算/">Golang程序运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang类型转换及移位运算/">Golang类型转换及移位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang闭包函数/">Golang闭包函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ISO七层模型/">ISO七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java总结/">Java总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalinux/">Kalinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Null和Undefined/">Null和Undefined</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP两种定义常量的形式/">PHP两种定义常量的形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP常量/">PHP常量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python教程/">Python教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python笔记/">Python笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python运算符/">Python运算符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO网站优化/">SEO网站优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIR/">__DIR__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FILE/">__FILE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/">__LINE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache环境变量/">apache环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache配置/">apache配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beef劫持/">beef劫持</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dowhile循环/">dowhile循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iota定义常量组/">iota定义常量组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数/">javascript函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this方法/">js-this方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js布尔类型隐私转换/">js布尔类型隐私转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux目录结构/">linux目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php变量/">php变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urlib2/">urlib2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全渗透/">web安全渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web渗透/">web渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人生事记/">人生事记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/变量的操作/">变量的操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/延时执行defer/">延时执行defer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格狼日/">拉格狼日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间复杂度测试/">时间复杂度测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财，投资/">理财，投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简历/">简历</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络模型/">网络模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/顺序表/">顺序表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/GET/" style="font-size: 13px;">$_GET</a> <a href="/tags/POST，-SERVER/" style="font-size: 13px;">$_POST，$_SERVER</a> <a href="/tags/REQUEST/" style="font-size: 13px;">$_REQUEST</a> <a href="/tags/Cookie/" style="font-size: 13px;">Cookie</a> <a href="/tags/GOTO语句/" style="font-size: 13px;">GOTO语句</a> <a href="/tags/Golang/" style="font-size: 13px;">Golang</a> <a href="/tags/Golang函数/" style="font-size: 13px;">Golang函数</a> <a href="/tags/Golang匿名函数/" style="font-size: 13px;">Golang匿名函数</a> <a href="/tags/Golang基础/" style="font-size: 14px;">Golang基础</a> <a href="/tags/Golang基础类型占位符/" style="font-size: 13px;">Golang基础类型占位符</a> <a href="/tags/Golang常量与变量里表达式/" style="font-size: 13px;">Golang常量与变量里表达式</a> <a href="/tags/Golang循环结构/" style="font-size: 13px;">Golang循环结构</a> <a href="/tags/Golang指针/" style="font-size: 13px;">Golang指针</a> <a href="/tags/Golang标准输入与输出/" style="font-size: 13px;">Golang标准输入与输出</a> <a href="/tags/Golang流程控制/" style="font-size: 13px;">Golang流程控制</a> <a href="/tags/Golang程序运算/" style="font-size: 13px;">Golang程序运算</a> <a href="/tags/Golang类型转换及移位运算/" style="font-size: 13px;">Golang类型转换及移位运算</a> <a href="/tags/Golang闭包函数/" style="font-size: 13px;">Golang闭包函数</a> <a href="/tags/ISO七层模型/" style="font-size: 13px;">ISO七层模型</a> <a href="/tags/Java总结/" style="font-size: 13px;">Java总结</a> <a href="/tags/Kalinux/" style="font-size: 13px;">Kalinux</a> <a href="/tags/Null和Undefined/" style="font-size: 13px;">Null和Undefined</a> <a href="/tags/PHP两种定义常量的形式/" style="font-size: 13px;">PHP两种定义常量的形式</a> <a href="/tags/PHP常量/" style="font-size: 13px;">PHP常量</a> <a href="/tags/Python教程/" style="font-size: 13px;">Python教程</a> <a href="/tags/Python笔记/" style="font-size: 13px;">Python笔记</a> <a href="/tags/Python运算符/" style="font-size: 13px;">Python运算符</a> <a href="/tags/SEO网站优化/" style="font-size: 13px;">SEO网站优化</a> <a href="/tags/XSS/" style="font-size: 14px;">XSS</a> <a href="/tags/DIR/" style="font-size: 13px;">__DIR__</a> <a href="/tags/FILE/" style="font-size: 13px;">__FILE__</a> <a href="/tags/LINE/" style="font-size: 13px;">__LINE__</a> <a href="/tags/apache环境变量/" style="font-size: 13px;">apache环境变量</a> <a href="/tags/apache配置/" style="font-size: 13px;">apache配置</a> <a href="/tags/beef劫持/" style="font-size: 13px;">beef劫持</a> <a href="/tags/dowhile循环/" style="font-size: 13px;">dowhile循环</a> <a href="/tags/iota定义常量组/" style="font-size: 13px;">iota定义常量组</a> <a href="/tags/javascript函数/" style="font-size: 13px;">javascript函数</a> <a href="/tags/js-this方法/" style="font-size: 13px;">js-this方法</a> <a href="/tags/js布尔类型隐私转换/" style="font-size: 13px;">js布尔类型隐私转换</a> <a href="/tags/linux目录结构/" style="font-size: 13px;">linux目录结构</a> <a href="/tags/php变量/" style="font-size: 13px;">php变量</a> <a href="/tags/sql注入/" style="font-size: 13px;">sql注入</a> <a href="/tags/urlib2/" style="font-size: 13px;">urlib2</a> <a href="/tags/web安全渗透/" style="font-size: 13px;">web安全渗透</a> <a href="/tags/web渗透/" style="font-size: 13px;">web渗透</a> <a href="/tags/人生事记/" style="font-size: 13px;">人生事记</a> <a href="/tags/变量的操作/" style="font-size: 13px;">变量的操作</a> <a href="/tags/延时执行defer/" style="font-size: 13px;">延时执行defer</a> <a href="/tags/拉格狼日/" style="font-size: 13px;">拉格狼日</a> <a href="/tags/时间复杂度测试/" style="font-size: 13px;">时间复杂度测试</a> <a href="/tags/理财，投资/" style="font-size: 13px;">理财，投资</a> <a href="/tags/简历/" style="font-size: 13px;">简历</a> <a href="/tags/算法/" style="font-size: 13px;">算法</a> <a href="/tags/网络模型/" style="font-size: 13px;">网络模型</a> <a href="/tags/计算机基础/" style="font-size: 13px;">计算机基础</a> <a href="/tags/顺序表/" style="font-size: 13px;">顺序表</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">51</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">125</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">106</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/26/cpp0094-STL中常用的集合算法/" class="title">STL中常用的集合算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-26T15:13:19.000Z" itemprop="datePublished">2021-07-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/26/cpp0093-STL中常用的算术和生成算法/" class="title">STL中常用的算术和生成算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-26T14:44:33.000Z" itemprop="datePublished">2021-07-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/26/cpp0092-常用的拷贝和替换STL算法/" class="title">常用的拷贝和替换STL算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-26T14:23:54.000Z" itemprop="datePublished">2021-07-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/25/cpp0091-常用的排序算法/" class="title">常用的排序算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-24T19:38:28.000Z" itemprop="datePublished">2021-07-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/c/">c++</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/25/cpp0090-常用的查找算法/" class="title">常用的查找算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-24T18:33:46.000Z" itemprop="datePublished">2021-07-25</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-计算机网络原理笔记-第二章-物理层" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第二章 物理层
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/01/10/计算机网络原理笔记-第二章-物理层/" class="article-date">
+	  <time datetime="2021-01-10T08:53:04.000Z" itemprop="datePublished">2021-01-10</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/计算机网络原理/">计算机网络原理</a>
+  </span>
+
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/01/10/计算机网络原理笔记-第二章-物理层/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="计算机网络原理-第二章-物理层"><a class="markdownIt-Anchor" href="#计算机网络原理-第二章-物理层"></a> 计算机网络原理 第二章 物理层</h3>
+<ul>
+<li><a href="#2.1%E7%89%A9%E7%90%86%E5%B1%82%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">2.1 物理层的基本概念</a></li>
+<li><a href="#2.2%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">2.2 数据通信的基础知识</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD">相关术语</a></li>
+<li><a href="#%E6%9C%89%E5%85%B3%E4%BF%A1%E9%81%93%E7%9A%84%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">有关信道的几个基本概念</a></li>
+<li><a href="#2.3%E7%89%A9%E7%90%86%E5%B1%82%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%BC%A0%E8%BE%93%E5%AA%92%E4%BD%93">2.3 物理层下面的传输媒体</a></li>
+<li><a href="#2.4%E4%BF%A1%E9%81%93%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AF">2.4 信道复用技术</a></li>
+<li><a href="#2.5%E6%95%B0%E5%AD%97%E4%BC%A0%E8%BE%93%E7%B3%BB%E7%BB%9F">2.5 数字传输系统</a></li>
+<li><a href="#2.6%E5%AE%BD%E5%B8%A6%E6%8E%A5%E5%85%A5%E6%8A%80%E6%9C%AF">2.6 宽带接入技术</a></li>
+</ul>
+<p><span id="2.1物理层的基本概念"></span></p>
+<h2 id="21-物理层的基本概念"><a class="markdownIt-Anchor" href="#21-物理层的基本概念"></a> 2.1 物理层的基本概念</h2>
+<p>物理层解决如何在连接各种计算机传输媒体上传输bit流，注意，不是指用什么传输媒体（介质）<br>
+<strong>物理层主要任务</strong>：确定传输媒体接口的一些特性：（为了统一规划，标准化，各个厂商生产一致，可以通用）<br>
+<strong>机械特性</strong>：接口形状 大小 引线数目 网线内有几根线<br>
+<strong>电气特性</strong>：例如规定电压范围<br>
+<strong>功能特性</strong>：例如规定-5V表示0 +5V表示1（电压信号代表数字信号）<br>
+<strong>过程特性</strong>：（规程特性）规定建立连接时各个部件的工作步骤<br>
+<span id="2.2数据通信的基础知识"></span></p>
+<h2 id="22-数据通信的基础知识"><a class="markdownIt-Anchor" href="#22-数据通信的基础知识"></a> 2.2 数据通信的基础知识</h2>
+<p>数据通信模型（图）<br>
+<img src="/images/javawz/20201219080914249.png" alt="在这里插入图片描述"></p>
+<h2 id="相关术语"><a class="markdownIt-Anchor" href="#相关术语"></a> 相关术语</h2>
+<p>通信的目的是传送消息<br>
+<strong>数据（data）</strong>：运送消息的实体<br>
+<strong>信号（signal）</strong>：数据的电气或电磁表现</p>
+<ul>
+<li>–模拟信号：代表消息的参数取值连续（如电压高低电平代表01数据）</li>
+<li>–数字信号：代表消息的参数取值离散</li>
+</ul>
+<p><strong>码元（code）</strong>：在使用时间域的波形表示数字信号时，则代表不同</p>
+<p>离散数值的基本波形就称为码元<br>
+在数字通信中常常用时间间隔相同的符号来表示一个二进制数字，这样的时间间隔内的信号称为二进制码元，而这个间隔被称为码元长度，1码元可以携带n bit的信息量<br>
+解释：<br>
+如果信号一共用2种可能，那么1码元代表1bit信息（只有高低电平）<br>
+如果信号一共用4种可能，那么1码元代表2bit信息，00 01 10 11，码元有四种可能，一码元代表2bit<br>
+……<br>
+如果信号一共用2的n次方种可能，那么1码元代表nbit信息。</p>
+<h2 id="有关信道的几个基本概念"><a class="markdownIt-Anchor" href="#有关信道的几个基本概念"></a> 有关信道的几个基本概念</h2>
+<p>信道一般表示向一个方向传送的信息的媒体。所以咱们说平常的信息线路往往包含一条发送信息的信道和一条接受信息的信道。<br>
+<strong>单向通信</strong>（单工通信）–只能发送或只能接收<br>
+例子：电视塔发送电视信号，但是电视无法向电视塔发送信号<br>
+<strong>双向交替通信</strong>（半双工通信）–双方可以收发，但是不能同时发送或同时接收<br>
+<strong>双向同时通信</strong>（全双工通信）–通信的双方可以同时发送和接收消息<br>
+例子：打电话<br>
+计算机通信大多数是半双工和全双工通信</p>
+<p><strong>基带信号</strong>（baseband）和<strong>带通信号</strong>（band pass）<br>
+前提：信号是会衰减的，比如人说话，当距离较远之后，声音就会听不到。<br>
+<strong>基带信号</strong>（baseband）：来自信息源的信号。<br>
+<strong>带通信号</strong>（band pass）：把基带信息经过载波调制后的信号（载波调制就是把信号的频率搬到较高的频段，以便传输）<br>
+因此，如果传输距离短，信息衰减可以接受，那就直接使用基带信号，如果距离长，信号衰减大，那就得通过调制将基带信号转换为带通信号，以减小衰减，接收方收到后再进行解调，分析成基带信号进行解读。</p>
+<p><strong>几种基本调制方法</strong>：<br>
+调幅<br>
+调频<br>
+调相<br>
+具体见图：<br>
+<img src="/images/javawz/20201219080923486.png" alt="在这里插入图片描述"></p>
+<p>（数字信号的）<strong>编码格式</strong>：<br>
+单极性不归零码<br>
+双极性不归零码<br>
+单极性归零码<br>
+双极性归零码<br>
+<strong>归零码</strong>：一次信号结尾始终为0电压 不归零码：一次信号结尾不需要归零<br>
+<strong>单极性</strong>：只有正向和0电压 双极性：有正负电压<br>
+<strong>曼彻斯特编码</strong>：低电平跳高电平代表0 高电平条低电平代表1，可以代表没有数据传输（用电平变化代表数据传输）<br>
+<strong>差分曼彻斯特编码</strong>：0和1没有固定高低电平，后面的信号是几取决于前面的信号<br>
+<img src="/images/javawz/20201219080946865.png" alt="在这里插入图片描述"></p>
+<p><strong>信道极限容量</strong>：信号波形在实际信道传输时，会受到带宽受限、噪声、干扰等引起失真。</p>
+<p><strong>奈氏准则</strong>：在理想条件下，为了避免码间串扰（码元太短，无法识别高低电平），码元传输速率是有上限的（上一章带宽可以无限增加吗例子）<br>
+<strong>信噪比</strong>：带宽受阻且有高斯白噪声干扰的信道的情况下，信道的极限无差错信息传输速率信道的极限信息传输速率C的计算公式：（<strong>香农公式</strong>）<br>
+C = Wlog<sub>2</sub>(1+S/N) b/s (log<sub>2</sub>是log以2为底)<br>
+W：信道带宽（单位Hz）<br>
+S：信道内所传信号的平均功率<br>
+N：信道内部高斯噪声功率<br>
+<strong>香农公式的结论</strong>：<br>
+1信道的带宽或信道的信噪比(S/N)越大，信息极限传输速率越高，若W或S/N没有上限，则C没有上限（实际不可能）<br>
+2只要信息传输速率低于信道极限信息传输速率，则一定可以找到方法确保数据的无差错传输<br>
+实际上信道所能达到的速率比香农公式计算出的低不少</p>
+<p>例子：每分钟说200字，外面有噪声，降低说话速度，来确保收听者听到<br>
+又例如：无线网的衰减：路由器和计算机在相同房间，计算机速率150M，计算机搬到隔壁，速率只剩下100M，因为隔了一道墙，要确保可靠传输就要降低速率，墙可以理解为噪声。<br>
+<img src="/images/javawz/20201219080955663.png" alt="在这里插入图片描述"><br>
+<span id="2.3物理层下面的传输媒体"></span></p>
+<h1 id="23-物理层下面的传输媒体"><a class="markdownIt-Anchor" href="#23-物理层下面的传输媒体"></a> 2.3 物理层下面的传输媒体</h1>
+<p>导向传输媒体：电磁波沿着固体介质传播<br>
+<img src="/images/javawz/202012190810070.png" alt="在这里插入图片描述"></p>
+<p><strong>双绞线</strong></p>
+<ul>
+<li>–屏蔽双绞线STP（铜线绞在一起，避免电流相互作用，减少干扰）</li>
+<li>–无屏蔽双绞线UTP（比上面多了一层绝缘层，避免外界干扰）</li>
+</ul>
+<p><strong>同轴电缆</strong> （结构和有线电视的电线一样）</p>
+<ul>
+<li>–50欧姆同轴电缆用于数字传输，多用于基带传输，也叫基带同轴电缆</li>
+<li>–75欧姆同轴电缆用于模拟传输，即宽带同轴电缆</li>
+</ul>
+<p><strong>光缆</strong><br>
+单模光纤<br>
+多模光纤<br>
+<img src="/images/javawz/20201219081015693.png" alt="在这里插入图片描述"></p>
+<p><strong>非导向传输媒体</strong>（无线传输）：无线传输所使用的频段很广。<br>
+短波通信主要是靠电离层的反射，但短波信道的通信质量较差。<br>
+微波在空间主要是直线传播。</p>
+<ul>
+<li>地面微波接力通信</li>
+<li>卫星通信</li>
+</ul>
+<p><span id="2.4 信道复用技术"></span></p>
+<h1 id="24-信道复用技术"><a class="markdownIt-Anchor" href="#24-信道复用技术"></a> 2.4 信道复用技术</h1>
+<p>目的：多用户同时传输，不会相互影响。提高信道利用率<br>
+<img src="/images/javawz/20201219081023953.png" alt="在这里插入图片描述"></p>
+<p><strong>频分复用 FDM(Frequency Division Multiplexing)</strong><br>
+用户在分配到一定的频带后，在通信过程中自始至终都占用这个频带。<br>
+频分复用的所有用户在同样的时间占用不同的带宽资源（请注意，这里的“带宽”是频率带宽而不是数据的发送速率）。<br>
+解释：特定的用户使用特定的频率波段，传输时采用不同频率的波段进行调制和解调，已达到区分其他数据的目的<br>
+<strong>时分复用TDM(Time Division Multiplexing)</strong><br>
+时分复用则是将时间划分为一段段等长的时分复用帧（TDM 帧）。每一个时分复用的用户在每一个 TDM 帧中占用固定序号的时隙。<br>
+每一个用户所占用的时隙是周期性地出现（其周期就是 TDM 帧的长度）。<br>
+TDM 信号也称为等时(isochronous)信号。<br>
+时分复用的所有用户是在不同的时间占用同样的频带宽度。<br>
+时分复用可能会造成线路资源的浪费 ：<br>
+使用时分复用系统传送计算机数据时，由于计算机数据的突发性质，用户对分配到的子信道的利用率一般是不高的。<br>
+<strong>统计时分复用 STDM(Statistic TDM)</strong><br>
+与时分复用类似，只不过每次发送时标记是哪个用户发出的，解析时按标记解析。可以避免线路资源的浪费<br>
+<strong>波分复用 WDM(Wavelength Division Multiplexing)</strong><br>
+波分复用就是光的频分复用。<br>
+<strong>码分复用 CDM(Code Division Multiplexing)</strong><br>
+常用的名词是码分多址 CDMA (Code Division Multiple Access)。<br>
+各用户使用经过特殊挑选的不同码型，因此彼此不会造成干扰。这种系统发送的信号有很强的抗干扰能力，其频谱类似于白噪声，不易被敌人发现。 每一个比特时间划分为 m 个短的间隔，称为码片(chip)。</p>
+<p><span id="2.5数字传输系统"></span></p>
+<h1 id="25-数字传输系统"><a class="markdownIt-Anchor" href="#25-数字传输系统"></a> 2.5 数字传输系统</h1>
+<p><strong>脉码调制 PCM 体制</strong>：最初是为了在电话局之间的中继线上传送多路的电话。<br>
+由于历史上的原因，PCM 有两个互不兼容的国际标准，即北美的 24 路 PCM（简称为 T1）和欧洲的 30 路 PCM（简称为 E1）。我国采用的是欧洲的 E1 标准。<br>
+E1 的速率是 2.048 Mb/s，而 T1 的速率是 1.544 Mb/s。当需要有更高的数据率时，可采用复用的方法。<br>
+E1取样8000次/s 每个码元代表8位bit E1 采用时分复用技术 32路同时传输<br>
+8<em>8000</em>32 = 2.048Mb/s<br>
+T1只有24路同时传播，且有控制信号<br>
+8<em>8000</em>24+8K=1.544Mb/s(8K表示控制信号)<br>
+<span id="2.6宽带接入技术"></span></p>
+<h1 id="26-宽带接入技术"><a class="markdownIt-Anchor" href="#26-宽带接入技术"></a> 2.6 宽带接入技术</h1>
+<p><strong>ADSL</strong> (Asymmetric Digital Subscriber Line)：非对称数字用户线（就是通过电话线上网）<br>
+用数字技术对现有的模拟电话用户线进行改造，使它能够承载宽带业务。把 0~4 kHz 低端频谱留给传统电话使用，而把原来没有被利用的高端频谱留给用户上网使用。<br>
+<strong>ADSL</strong>实现原理采用DMT技术<br>
+DMT 调制技术采用频分复用的方法，把 40 kHz 以上一直到 1.1 MHz 的高端频谱划分为许多的子信道，其中 25  个子信道用于上行信道，而 249 个子信道用于下行信道。每个子信道占据 4 kHz 带宽（严格讲是 4.3125  kHz），并使用不同的载波（即不同的音调）进行数字调制。这种做法相当于在一对用户线上使用许多小的调制解调器并行地传送数据。<br>
+<img src="/images/javawz/2020121908103317.png" alt="在这里插入图片描述"></p>
+<p>ADSL上网图解：<br>
+<img src="/images/javawz/20201219081052766.png" alt="在这里插入图片描述"></p>
+<p>光纤同轴混合网 <strong>HFC</strong> (Hybrid Fiber Coax)（就是利用有线电视线路上网）<br>
+HFC 网是在目前覆盖面很广的有线电视网 CATV 的基础上开发的一种居民宽带接入网。HFC 网除可传送 CATV  外，还提供电话、数据和其他宽带交互型业务。现有的 CATV 网是树形拓扑结构的同轴电缆网络，它采用模拟技术的频分复用对电视节目进行单向传输。而  HFC 网则需要对 CATV 网进行改造。<br>
+<strong>HFC 的主要特点</strong><br>
+HFC网的主干线路采用光纤<br>
+HFC 网将原 CATV 网中的同轴电缆主干部分改换为光纤，并使用模拟光纤技术。<br>
+在模拟光纤中采用光的振幅调制 AM，这比使用数字光纤更为经济。<br>
+模拟光纤从头端连接到光纤结点(fiber node)，即光分配结点 ODN (Optical Distribution Node)。在光纤结点光信号被转换为电信号。在光纤结点以下就是同轴电缆<br>
+HFC结构示意图</p>
+<p><img src="/images/javawz/2020121908105979.png" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xiaowuyoucy.github.io/2021/01/10/计算机网络原理笔记-第二章-物理层/" title="第二章 物理层" target="_blank" rel="external">https://xiaowuyoucy.github.io/2021/01/10/计算机网络原理笔记-第二章-物理层/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+		  
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/03/29/易语言介绍/" title="易语言介绍"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/01/10/计算机网络原理笔记-第一章-概述/" title="第一章 概述"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+	<span>More contact information</span>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:xiaowuyoucy.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '032928647cd59bc9f443',
+    clientSecret: '82a11fd93e4d0779655af6dc4b73942a03e95276',
+    repo: 'Xiaowuyoucy.github.io',
+    owner: 'Xiaowuyoucy',
+    admin: ['Xiaowuyoucy'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>
