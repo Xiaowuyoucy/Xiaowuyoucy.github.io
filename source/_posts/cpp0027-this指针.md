@@ -2,7 +2,7 @@
 title: this指针
 date: 2021-05-10 22:22:10
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

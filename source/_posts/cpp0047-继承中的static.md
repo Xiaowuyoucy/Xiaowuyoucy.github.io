@@ -2,7 +2,7 @@
 title: 继承中的static
 date: 2021-05-13 01:15:14
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

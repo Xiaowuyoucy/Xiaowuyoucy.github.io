@@ -2,7 +2,7 @@
 title: deque容器
 date: 2021-07-01 13:05:02
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

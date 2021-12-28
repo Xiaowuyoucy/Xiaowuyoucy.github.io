@@ -2,7 +2,7 @@
 title: List容器
 date: 2021-07-05 13:52:34
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

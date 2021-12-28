@@ -2,7 +2,7 @@
 title: STL的string容器
 date: 2021-06-29 12:18:51
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

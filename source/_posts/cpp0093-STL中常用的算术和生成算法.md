@@ -2,7 +2,7 @@
 title: STL中常用的算术和生成算法
 date: 2021-07-26 22:44:33
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 
@@ -17,19 +17,19 @@ doc:
 ```
 
 
-​          vector<int> vecIntA;
+          vector<int> vecIntA;
 
-​          vecIntA.push_back(1);
+          vecIntA.push_back(1);
 
-​          vecIntA.push_back(3);
+          vecIntA.push_back(3);
 
-​          vecIntA.push_back(5);
+          vecIntA.push_back(5);
 
-​          vecIntA.push_back(7);
+          vecIntA.push_back(7);
 
-​          vecIntA.push_back(9);
+          vecIntA.push_back(9);
 
-​          int iSum = accumulate(vecIntA.begin(), vecIntA.end(), 100);     //iSum==125
+          int iSum = accumulate(vecIntA.begin(), vecIntA.end(), 100);     //iSum==125
 ```
 
 

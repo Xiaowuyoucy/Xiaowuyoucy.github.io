@@ -2,7 +2,7 @@
 title: 关于#define offsetof(s,m) (size_t)&(((s *)0)->m)
 date: 2021-04-15 00:37:42
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

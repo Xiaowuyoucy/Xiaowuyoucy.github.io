@@ -2,7 +2,7 @@
 title: 类模板中的static成员
 date: 2021-06-19 07:33:17
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

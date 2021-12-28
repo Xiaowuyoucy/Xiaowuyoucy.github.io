@@ -2,7 +2,7 @@
 title: foreach和transform算法
 date: 2021-07-24 23:28:16
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

@@ -2,7 +2,7 @@
 title: 优先级队列priority_queue
 date: 2021-07-05 14:02:34
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

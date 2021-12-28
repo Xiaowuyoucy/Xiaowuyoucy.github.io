@@ -2,7 +2,7 @@
 title: new和delete操作符
 date: 2021-05-10 20:08:40
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

@@ -2,7 +2,7 @@
 title: STL中常用的集合算法
 date: 2021-07-26 23:13:19
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

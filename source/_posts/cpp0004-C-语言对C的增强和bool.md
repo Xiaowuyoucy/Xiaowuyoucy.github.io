@@ -2,7 +2,7 @@
 title: C++语言对C的增强和bool
 date: 2021-04-15 01:53:25
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

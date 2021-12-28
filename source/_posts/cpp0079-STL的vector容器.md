@@ -2,7 +2,7 @@
 title: STL的vector容器
 date: 2021-06-29 13:23:08
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

@@ -2,7 +2,7 @@
 title: 第一个c++程序 hello world
 date: 2021-04-15 00:37:42
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

@@ -2,7 +2,7 @@
 title: 常用的拷贝和替换STL算法
 date: 2021-07-26 22:23:54
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

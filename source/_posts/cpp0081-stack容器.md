@@ -2,7 +2,7 @@
 title: stack容器
 date: 2021-07-05 13:40:14
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

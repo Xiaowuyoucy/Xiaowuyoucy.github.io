@@ -2,7 +2,7 @@
 title: 重载new和delete
 date: 2021-05-11 23:07:33
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

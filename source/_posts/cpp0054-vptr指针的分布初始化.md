@@ -2,7 +2,7 @@
 title: vptr指针的分布初始化
 date: 2021-05-13 06:27:20
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 

@@ -2,7 +2,7 @@
 title: 验证vptr指针的存在
 date: 2021-05-13 06:24:38
 tags:
-categories: c++
+categories: cpp
 doc:
 ---
 
