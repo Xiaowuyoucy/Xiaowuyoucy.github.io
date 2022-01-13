@@ -2,6 +2,433 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</loc>
+    
+    <lastmod>2022-01-13T18:45:30.402Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/12/linux063%E8%BF%9B%E7%A8%8B%E5%9B%9E%E6%94%B6%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2022-01-12T17:59:27.383Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/12/linux062%E5%AD%A4%E5%84%BF%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B/</loc>
+    
+    <lastmod>2022-01-12T07:32:54.843Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/12/linux061exec%E5%87%BD%E6%95%B0%E6%97%8F/</loc>
+    
+    <lastmod>2022-01-12T07:24:05.348Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/12/linux060ps%E5%92%8Ckill%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2022-01-12T06:51:59.541Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/12/linux059fork%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2022-01-12T06:24:29.950Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/12/linux058%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E5%88%87%E6%8D%A2/</loc>
+    
+    <lastmod>2022-01-12T05:58:25.229Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/12/linux057PCB%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/</loc>
+    
+    <lastmod>2022-01-12T03:45:52.722Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/12/linux056%E5%B9%B6%E8%A1%8C%E5%92%8C%E5%B9%B6%E5%8F%91%E7%9A%84%E6%A6%82%E5%BF%B5/</loc>
+    
+    <lastmod>2022-01-11T18:50:04.935Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/12/linux055%E7%A8%8B%E5%BA%8F%E5%92%8C%E8%BF%9B%E7%A8%8B/</loc>
+    
+    <lastmod>2022-01-11T18:47:27.417Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux037vi%E6%93%8D%E4%BD%9C/</loc>
+    
+    <lastmod>2022-01-10T17:50:24.846Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/11/linux054fcntl%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2022-01-10T17:42:52.338Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/10/linux053dup2%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2022-01-10T16:46:01.368Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/10/linux052dup%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2022-01-10T09:54:41.360Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/10/linux051%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2022-01-10T08:56:14.139Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/10/linux050stat%E5%92%8Clstat%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2022-01-10T08:26:51.848Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/10/linux049read%E5%87%BD%E6%95%B0%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E/</loc>
+    
+    <lastmod>2022-01-10T05:26:31.039Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/10/linux048lseek%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2022-01-09T17:05:34.569Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux046open%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2022-01-09T17:05:23.101Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux047read%E5%92%8Cwirte%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2022-01-08T15:28:07.873Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux045C%E5%BA%93%E5%87%BD%E6%95%B0%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB/</loc>
+    
+    <lastmod>2022-01-08T12:58:43.141Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux044%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4/</loc>
+    
+    <lastmod>2022-01-08T10:46:57.431Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux043C%E5%BA%93%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2022-01-08T09:22:17.058Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux042makefile/</loc>
+    
+    <lastmod>2022-01-08T09:00:45.660Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux041gdb%E8%B0%83%E8%AF%95/</loc>
+    
+    <lastmod>2022-01-08T05:37:06.554Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux040%E5%85%B1%E4%BA%AB%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/</loc>
+    
+    <lastmod>2022-01-08T05:28:51.897Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux039%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%88%B6%E4%BD%9C%E5%92%8C%E4%BD%BF%E7%94%A8/</loc>
+    
+    <lastmod>2022-01-08T05:21:07.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux038%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/</loc>
+    
+    <lastmod>2022-01-08T05:16:29.134Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux036%E7%94%B5%E6%BA%90%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2022-01-08T05:05:49.992Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux035echo%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2022-01-08T05:04:05.279Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux034%E8%AE%BE%E7%BD%AE%E6%88%96%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4%E5%88%AB%E5%90%8D/</loc>
+    
+    <lastmod>2022-01-08T05:02:32.003Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux033%E7%9C%8B%E6%89%8B%E5%86%8C/</loc>
+    
+    <lastmod>2022-01-08T05:00:32.368Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux032scp%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2022-01-08T04:58:28.368Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux031ssh%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    
+    <lastmod>2022-01-07T17:05:20.871Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux030nfs%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    
+    <lastmod>2022-01-07T17:00:07.964Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux019%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/</loc>
+    
+    <lastmod>2022-01-07T16:59:23.677Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux029lftp%E5%AE%A2%E6%88%B7%E7%AB%AF/</loc>
+    
+    <lastmod>2022-01-07T16:53:32.392Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux028ftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2022-01-07T16:46:13.297Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux027%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</loc>
+    
+    <lastmod>2022-01-07T16:38:39.916Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux026nslookup%E6%8A%8A%E5%9F%9F%E5%90%8D%E8%BD%AC%E6%8D%A2%E4%B8%BAip/</loc>
+    
+    <lastmod>2022-01-07T16:29:02.179Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux025ping%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2022-01-07T16:27:02.986Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux024ifconfig%E6%9F%A5%E7%9C%8Bip/</loc>
+    
+    <lastmod>2022-01-07T16:22:16.861Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux023env%E6%9F%A5%E7%9C%8B%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%92%8Ctop%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8/</loc>
+    
+    <lastmod>2022-01-07T16:21:00.805Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux022ps%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF%E5%92%8Ckill%E7%BB%93%E6%9D%9F%E8%BF%9B%E7%A8%8B/</loc>
+    
+    <lastmod>2022-01-07T16:17:58.914Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux021%E5%8E%8B%E7%BC%A9%E5%92%8C%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2022-01-07T16:15:03.679Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/08/linux020U%E7%9B%98%E6%8C%82%E8%BD%BD%E5%92%8C%E5%8D%B8%E8%BD%BD/</loc>
+    
+    <lastmod>2022-01-07T16:09:19.272Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux018%E5%88%9B%E5%BB%BA%E7%AE%A1%E9%81%93%E6%96%87%E4%BB%B6/</loc>
+    
+    <lastmod>2022-01-07T15:56:22.071Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux017%E6%96%87%E4%BB%B6%E7%9A%84%E6%9F%A5%E6%89%BE/</loc>
+    
+    <lastmod>2022-01-07T15:53:11.709Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux016%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%89%80%E6%9C%89%E8%80%85%E5%92%8C%E6%89%80%E5%B1%9E%E7%BB%84/</loc>
+    
+    <lastmod>2022-01-07T15:47:07.996Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux006Linux%E7%9B%AE%E5%BD%95cd%E5%91%BD%E4%BB%A4%E5%92%8Cls%E5%91%BD%E4%BB%A4%E5%92%8Ctree%E5%91%BD%E4%BB%A4pwd%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2022-01-07T15:44:33.402Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux015%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/</loc>
+    
+    <lastmod>2022-01-07T15:43:36.391Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux014%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E5%B1%9E%E6%80%A7%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2022-01-07T15:33:10.799Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux013%E6%96%87%E4%BB%B6%E7%9A%84%E6%A3%80%E7%B4%A2/</loc>
+    
+    <lastmod>2022-01-07T15:27:44.918Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux012ln%E5%88%9B%E5%BB%BA%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/</loc>
+    
+    <lastmod>2022-01-07T15:25:59.295Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux011mv%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2022-01-07T15:23:41.434Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux010%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9/</loc>
+    
+    <lastmod>2022-01-07T15:16:12.683Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux009%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E7%9A%84%E6%8B%B7%E8%B4%9D/</loc>
+    
+    <lastmod>2022-01-07T15:12:08.512Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux008%E5%88%A0%E9%99%A4%E7%9B%AE%E5%BD%95%E5%92%8C%E6%96%87%E4%BB%B6/</loc>
+    
+    <lastmod>2022-01-07T15:08:09.673Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux007%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%92%8C%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%9B%E5%BB%BA/</loc>
+    
+    <lastmod>2022-01-07T15:01:10.149Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/07/linux005%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    
+    <lastmod>2022-01-07T14:56:08.554Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2021/12/23/linux004-1-4/</loc>
+    
+    <lastmod>2022-01-06T18:24:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaowuyoucy.github.io/2022/01/07/libev003%E7%94%A8vs2017%E7%BC%96%E8%AF%91openssl%E6%BA%90%E7%A0%81%E5%B9%B6%E5%AE%8C%E6%88%90%E7%BC%96%E8%AF%91%E6%89%B9%E5%A4%84%E7%90%86%E8%84%9A%E6%9C%AC/</loc>
     
     <lastmod>2022-01-06T18:20:52.845Z</lastmod>
@@ -33,13 +460,6 @@
     <loc>https://xiaowuyoucy.github.io/2022/01/06/sf0004%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</loc>
     
     <lastmod>2022-01-06T16:53:04.464Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xiaowuyoucy.github.io/2021/12/23/linux004-1-4/</loc>
-    
-    <lastmod>2022-01-05T05:41:31.416Z</lastmod>
     
   </url>
   
