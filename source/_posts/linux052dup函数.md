@@ -1,12 +1,12 @@
 ---
-title: linux052dup函数
+title: dup函数
 date: 2022-01-10 17:30:54
 tags:
-categories:
+categories: linux
 doc:
 ---
 
-![image-20220110173058857](../../themes/pure/source/images/javawz/image-20220110173058857.png)
+![image-20220110173058857](/images/javawz/image-20220110173058857.png)
 
 
 

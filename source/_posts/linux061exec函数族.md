@@ -14,6 +14,10 @@ doc:
 
 ### execl函数
 
+```
+#include <unistd.h>
+```
+
 函数原型: 
 
 ```
@@ -39,6 +43,10 @@ execl函数一般执行自己写的程序。
  
 
 #### execlp函数
+
+```
+#include <unistd.h>
+```
 
 函数原型: 
 
@@ -91,7 +99,7 @@ if(pid==0)
 ```
 
 execl: 一般用于执行用户自定义的应用程序.
-execp: 一般用于执行系统命令
+execlp: 一般用于执行系统命令
 
 ```c
 //fork函数测试
