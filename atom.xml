@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaowuyoucy.github.io/"/>
-  <updated>2022-01-23T12:33:05.975Z</updated>
+  <updated>2022-01-24T13:35:23.374Z</updated>
   <id>https://xiaowuyoucy.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>守护进程和线程</title>
+    <link href="https://xiaowuyoucy.github.io/2022/01/24/linux082%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/"/>
+    <id>https://xiaowuyoucy.github.io/2022/01/24/linux082守护进程和线程/</id>
+    <published>2022-01-24T12:30:39.000Z</published>
+    <updated>2022-01-24T13:35:23.374Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="守护进程"><a class="markdownIt-Anchor" href="#守护进程"></a> 守护进程</h2><h3 id="11-守护进程介绍"><a class="markdownIt-Anchor" href="#11-守护进程介绍"></a> 1.1 守护进程介绍</h3><p>Daemon(精灵)进程，是Linux中的后台服务进程，通常独立于控制终端并且周期性地执行某种任务或等待处理某些发生的事件。一般采用以d结尾的名字，如vsftpd</p><p>Linux后台的一些系统服务进程，没有控制终端，不能直接和用户交互。不受用户登录、注销的影响，一直在运行着，他们都是守护进程。如：预读入缓输出机制的实现；ftp服务器；nfs服务器等。</p><ul><li>总结守护进程的特点：<ul><li>Linux后台服务进程</li><li>独立于控制终端</li><li>周期性的执行某种任务</li><li>不受用户登陆和注销的影响</li><li>一般采用以d结尾的名字</li></ul></li></ul><h3 id="12-进程组和会话"><a class="markdownIt-Anchor" href="#12-进程组和会话"></a> 1.2 进程组和会话</h3><ul><li><p>进程组</p></li><li><p>进程组是一个或者多个进程的集合，每个进程都属于一个进程组，引入进程组是为了简化对进程的管理。当父进程创建子进程的时候，默认子进程与父进程属于同一个进程组。</p></li><li><p>进程组ID==第一个进程ID（组长进程）。如父进程创建了多个子进程，父进程和多个子进程同属于一个组，而由于父进程是进程组里的第一个进程，所以父进程就是这个组的组长, 组长ID==父进程ID。</p></li><li><p>可以使用kill -SIGKILL -进程组ID(负的)来将整个进程组内的进程全部杀死。</p></li><li><p>只要进程组中有一个进程存在，进程组就存在，与组长进程是否终止无关。</p></li><li><p>进程组生存期：从进程组创建到最后一个进程离开</p></li><li><p>会话</p></li><li><p>一个会话是一个或多个进程组的集合。</p></li><li><p>创建会话的进程不能是进程组组长</p></li><li><p>创建会话的进程成为一个进程组的组长进程，同时也成为会话的会长。</p></li><li><p>需要有root权限（ubuntu不需要）</p></li><li><p>新创建的会话丢弃原有的控制终端</p></li><li><p>建立新会话时，先调用fork, 父进程终止，子进程调用setsid函数</p></li><li><p>可以使用<code>ps ajx</code>来查看进程组ID和会话ID</p></li><li><p>可以fork出几个子进程，然后查看进程组ID和会话ID</p></li><li><p>进程组和会话的关系图</p></li></ul><p><img src="/images/javawz/wpsA28D.tmp.jpg" alt="img"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;守护进程&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#守护进程&quot;&gt;&lt;/a&gt; 守护进程&lt;/h2&gt;
+&lt;h3 id=&quot;11-守护进程介绍&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#11-守护进程介绍&quot;&gt;&lt;/a
+      
+    
+    </summary>
+    
+      <category term="linux" scheme="https://xiaowuyoucy.github.io/categories/linux/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>使用信号完成两个进程交替数数</title>
@@ -295,7 +319,7 @@
     <link href="https://xiaowuyoucy.github.io/2022/01/20/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%89%A9%E7%90%86%E5%B1%82/"/>
     <id>https://xiaowuyoucy.github.io/2022/01/20/第二章物理层/</id>
     <published>2022-01-19T17:14:47.000Z</published>
-    <updated>2022-01-19T17:19:57.446Z</updated>
+    <updated>2022-01-23T18:36:47.852Z</updated>
     
     <content type="html"><![CDATA[<h3 id="物理层定义的标准"><a class="markdownIt-Anchor" href="#物理层定义的标准"></a> 物理层定义的标准</h3><p>1.物理层解决如何在连接各种计算机的传输媒体上传输数据比特流 （0101…）。<br>物理层的主要任务：确定传输媒体的接口的一些特性：<br>1）机械特性：接口形状，大小，引线数目。<br>2）电气特性：规定电压范围（-5V到5V）。<br>3）功能特性：例如规定-5V是0，+5V是1.<br>4)过程特性：（规程特性）规定建立连接时各个相关部件的工作步骤(比如一个大可乐瓶和一个小可乐瓶,他们的瓶盖都是通用的,说明接口一样大小)。</p><h3 id="数据通信基础知识"><a class="markdownIt-Anchor" href="#数据通信基础知识"></a> 数据通信基础知识</h3>]]></content>
     
@@ -506,30 +530,6 @@
     </summary>
     
       <category term="linux" scheme="https://xiaowuyoucy.github.io/categories/linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>第一章计算机网络概述</title>
-    <link href="https://xiaowuyoucy.github.io/2022/01/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/"/>
-    <id>https://xiaowuyoucy.github.io/2022/01/14/计算机网络概述/</id>
-    <published>2022-01-13T16:56:27.000Z</published>
-    <updated>2022-01-16T14:22:09.558Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="局域网"><a class="markdownIt-Anchor" href="#局域网"></a> 局域网</h3><p><img src="/images/javawz/image-20220114011444766.png" alt="image-20220114011444766"></p><p>每一间课室的电脑都连接到同一台交换机上,楼道上会形成很多网线,不雅观</p><p><img src="/images/javawz/image-20220114012723065.png" alt="image-20220114012723065"></p><p>电脑到交换机距离的网线不超过100米，交换机到交换机的网线也不超过一百米</p><p><img src="/images/javawz/image-20220114013131827.png" alt="image-20220114013131827"></p><p>接入层交换机的接口比较多，汇聚层的接口比较少，但要求输入和输出的带宽高</p><p><img src="/images/javawz/image-20220114013417969.png" alt="image-20220114013417969"></p><p>中间的网线承担了两个课室的流量，不规范</p><p>总结：局域网覆盖范围小，自己花钱买设备带宽固定，自己维护</p><h3 id="intenet和广域网"><a class="markdownIt-Anchor" href="#intenet和广域网"></a> Intenet和广域网</h3><p><img src="/images/javawz/image-20220114014449047.png" alt="image-20220114014449047"></p><p>Intenet有很多 IPS运营商组成，他们都有自己的机房，对网民提供访问Internet连接（可以是ADSL或光纤）</p><p>广域网：距离远（可以超过100米） 花钱租带宽</p><p>我们买的带宽是指从我们这里到运营商那一段的带宽，比如我们拉了100兆的网线，意思就是从我们这里到运营商接口那里是100兆的</p><p>公网地址是全球唯一的，不会重复</p><h3 id="规划ip地址介绍mac地址"><a class="markdownIt-Anchor" href="#规划ip地址介绍mac地址"></a> 规划IP地址介绍MAC地址</h3><p><img src="/images/javawz/image-20220114020833334.png" alt="image-20220114020833334"></p><p>一般路由器地址是自己网段的第一个地址</p><p>例如自己网段是13.0.0.0 路由器地址就是13.0.0.1</p><p>MAC地址：网卡生产时的物理地址，48位二进制表示，也是全球唯一，不重复的</p><p>网关: 数据到其他网段需要给的机器(一般是路由器)</p><p>DNS：解析域名的服务器，比如我们打开<code>www.baidu.com</code>，电脑会先请求DNS服务器，然后DNS服务器会返回一个域名对应的ip地址回来</p><h3 id="数据包和数据帧"><a class="markdownIt-Anchor" href="#数据包和数据帧"></a> 数据包和数据帧</h3><p><img src="/images/javawz/image-20220114022359765.png" alt="image-20220114022359765"></p><p><img src="/images/javawz/image-20220114022439593.png" alt="image-20220114022439593"></p><p>IP地址决定最后给谁</p><p>MAC地址决定下一跳给谁</p><p>数据包最大1500字节,如果数据超过1500个字节会切片,然后给每个数据包编号</p><h3 id="访问网站数据传输过程"><a class="markdownIt-Anchor" href="#访问网站数据传输过程"></a> 访问网站数据传输过程</h3><p><img src="/images/javawz/image-20220114023846946.png" alt="image-20220114023846946"></p><p>网站服务器收到请求之后会将网页打包成很多数据包，每个数据包都有编号，然后再一个个放到网卡缓存里，每个数据包都有源ip地址，目标ip地址，源mac地址和目标mac地址。</p><p>数据包发送到客户机网卡的缓存之后，客户机会发送接收下一个数据包的请求，然后服务器收到之后会将上一个发送的数据包删除掉，再发下一个数据包。</p><p>客户机会一边接收数据包，一边将数据包排好序一个个的显示出来，最终形成一个网页</p><h3 id="osi参考模型"><a class="markdownIt-Anchor" href="#osi参考模型"></a> OSI参考模型</h3><p>应用层:所有能产生网络流量的程序</p><p>表示层:在传输之前是否进行加密或压缩处理,是二进制数据还是ASCII数据</p><p>会话层: 查木马<code>netstat -n</code>,一般连接网络的软件都会建立会话</p><p>传输层:可靠传输 、流量控制、不可控传输</p><p>网络层：负责选择最佳路径 规划IP地址</p><p>数据链路层：帧的开始和结束、透明传输、差错校验</p><p>物理层：接口标准、电器标准、如何在物理链路上传输更快的速度</p><h3 id="理解osi参考模型分层思想"><a class="markdownIt-Anchor" href="#理解osi参考模型分层思想"></a> 理解OSI参考模型分层思想</h3><p>网络七层模型之间有相对独立性，每一层的变化一般不会对其他层有影响。一个计算机可以加多ip地址</p><h3 id="osi参考模型和网络排错"><a class="markdownIt-Anchor" href="#osi参考模型和网络排错"></a> OSI参考模型和网络排错</h3><p>网络出现问题,应该从物理层开始往上排查</p><p>物理层故障：网线断了是物理层故障,发送有包，接收没包，需要检查一下网线水晶头（接触不良）</p><p>数据链路层故障：MAC地址冲突、ADSL欠费、接口网速协商不一致（强制性）、计算机连接到错的VLAN</p><p>网络层故障：没有配网关、配置错误的IP地址，子网掩码，路由器没有配置到达目标网络的路由</p><p>应用层故障：应用程序配置错误（代理配置错误等）</p><h3 id="osi参考模型和网络安全"><a class="markdownIt-Anchor" href="#osi参考模型和网络安全"></a> OSI参考模型和网络安全</h3><p>网络安全-OSI模型各层的安全<br>1.物理层：把用不到的口关掉。<br>2.数据链路层：ADSL拨号的账号密码；无线网络要输数据密码；划分VLAN，在交换机上创建虚拟局域网；交换机端口绑定MAC地址。<br>3.网络层：在路由器上使用ACL控制数据包流量（路由器可以控制哪个网段可以访问哪个网络）。Windows防火墙设置；<br>4.应用层：开发的应用程序没有漏洞，SQL注入漏洞等。</p><h3 id="osi参考模型和tcpip协议"><a class="markdownIt-Anchor" href="#osi参考模型和tcpip协议"></a> OSI参考模型和TCP/IP协议</h3><p><img src="/images/javawz/image-20220116133849928.png" alt="image-20220116133849928"></p><p>TCP/IP协议栈一共五层:应用层、传输层、网络层、数据链路层、物理层。<br>ARP协议为IP协议提供服务，IP协议为ICMP和IGMP协议提供服务。<br>应用层：准备要发送的数据<br>传输层：将数据分段编号<br>网络层：为要发送的数据加上IP地址或去掉接收到的数据中的IP地址。<br>数据链路层：添加或去掉MAC地址和校验值</p><p>FCS：差错校验</p><p><img src="/images/javawz/image-20220116135844590.png" alt="image-20220116135844590"></p><p><img src="/images/javawz/image-20220116135938908.png" alt="image-20220116135938908"></p><p><img src="/images/javawz/image-20220116140018729.png" alt="image-20220116140018729"></p><p><img src="/images/javawz/image-20220116140044730.png" alt="image-20220116140044730"></p><h3 id="计算机网络性能指标"><a class="markdownIt-Anchor" href="#计算机网络性能指标"></a> 计算机网络性能指标</h3><p>1.速率（比特率）：连接在计算机网络上的主机在数字信道上传达数据位数的速率。b/s，kb/s,Mb/s,Gb/s。（一般看到的是byte/s，需要bit/s除以8）<br>网络100M指的是100Mbit<br>速率是指一个发送端一个接收端每秒中传输的bit<br>2.带宽：网络设备支持的最高速度，单位是b/s  Kb/s Mb/s  Gb/s<br>3.吞吐量：单位时间内通过某个网络的数据量。b/s,Mb/s…。<br>一般指的是各个信道速率之和</p><p>4.时延：发送时延=数据块长度（bit）/信道带宽(bit/s)；传播时延；处理时延；接收时延。光纤的支持更高的发送速度，但传播速度没有比铜线快，光纤每秒传输20.5万公里，铜线每秒传输23.1万公里。<br>从网络的一端传输到另一端所需要的时间<br>给网络设备增加带宽可以减少发送时延，但不可以无限增加，发送时延越小，数据长度越窄</p><p>5.时延带宽积=传播时延*带宽。（传输线路上的数据量）</p><p><img src="/images/javawz/image-20220116222042898.png" alt="image-20220116222042898"></p><br><p>6.往返时间（round-trip time）：从发送方发送数据开始，到发送方收到接收方确认。ping 命令可以查看。</p><p><img src="/images/javawz/image-20220116221159756.png" alt="image-20220116221159756"></p><br><p>7.网络利用率：1）信道利用率=有数据通过时间/（有+无）数据通过时间。2）网络利用率：信道利用率加权平均值。3）网络当前时延=网络空闲时的时延/（1-信道利用率）。</p><p><img src="/images/javawz/image-20220116222012493.png" alt="image-20220116222012493"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;局域网&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#局域网&quot;&gt;&lt;/a&gt; 局域网&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/images/javawz/image-20220114011444766.png&quot; alt=&quot;image-2022
-      
-    
-    </summary>
-    
-      <category term="计算机网络原理" scheme="https://xiaowuyoucy.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/"/>
     
     
   </entry>
