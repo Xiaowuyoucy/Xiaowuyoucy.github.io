@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>线程同步 | YanChen</title>
+  <meta name="description" content="1 互斥锁  1.1互斥锁的使用步骤   第1步：创建一把互斥锁  pthread_mutex_t mutex;    初始化互斥锁  pthread_mutex_init(&amp;amp;mutex);—相当于mutex=1    在代码中寻找共享资源（也称为临界区）  pthread_mutex_lock(&amp;amp;mutex); -- mutex = 0    临界区代码  pthread_mu">
+<meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程同步">
+<meta property="og:url" content="https://xiaowuyoucy.github.io/2022/01/30/linux083线程同步/index.html">
+<meta property="og:site_name" content="YanChen">
+<meta property="og:description" content="1 互斥锁  1.1互斥锁的使用步骤   第1步：创建一把互斥锁  pthread_mutex_t mutex;    初始化互斥锁  pthread_mutex_init(&amp;amp;mutex);—相当于mutex=1    在代码中寻找共享资源（也称为临界区）  pthread_mutex_lock(&amp;amp;mutex); -- mutex = 0    临界区代码  pthread_mu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220130014052263.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220130014154167.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220130015559506.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220130020118740.png">
+<meta property="og:updated_time" content="2022-01-29T19:00:15.150Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线程同步">
+<meta name="twitter:description" content="1 互斥锁  1.1互斥锁的使用步骤   第1步：创建一把互斥锁  pthread_mutex_t mutex;    初始化互斥锁  pthread_mutex_init(&amp;amp;mutex);—相当于mutex=1    在代码中寻找共享资源（也称为临界区）  pthread_mutex_lock(&amp;amp;mutex); -- mutex = 0    临界区代码  pthread_mu">
+<meta name="twitter:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220130014052263.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xiaowuyoucy.github.io/2022/01/30/linux083线程同步/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fonts2/iconfont.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xiaowuyoucy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">YanChen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> GuangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="https://www.xiaochenyan.top/navigation/index.html">
+            
+            <i class="icon icon-map-marker"></i>
+            
+            <span class="menu-title">导航</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon iconfont icon-video"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">格言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+				
+				<p id="hitokoto">:D 获取中...</p>
+				<p id="from" style="text-align: right"></p>
+                <script>
+					  var xhr = new XMLHttpRequest();
+					  xhr.open('get', 'https://v1.hitokoto.cn');
+					  xhr.onreadystatechange = function () {
+						if (xhr.readyState === 4) {
+						  var data = JSON.parse(xhr.responseText);
+						  var hitokoto = document.getElementById('hitokoto');
+						  hitokoto.innerText = data.hitokoto;
+						  var from = document.getElementById('from');
+						  from.innerText = "-- " + data.from;
+						}
+					  }
+					  xhr.send();
+				</script>
+				
+				
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">195</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KaliLinux/">KaliLinux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL/">MYSQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WEB安全渗透/">WEB安全渗透</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows命令/">Windows命令</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows网络编程/">Windows网络编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/apache/">apache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/c/">c</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp/">cpp</a><span class="category-list-count">96</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/githubHexo/">githubHexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/libevent/">libevent</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">83</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计/">windows程序设计</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计2/">windows程序设计2</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于博主/">关于博主</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术资讯/">技术资讯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/易语言/">易语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇编逆向/">汇编逆向</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/理财投资/">理财投资</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简谈计算机/">简谈计算机</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程词汇/">编程词汇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络爬虫/">网络爬虫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机公共基础/">计算机公共基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络TCP-IP传输协议-网络抓包/">计算机网络TCP/IP传输协议/网络抓包</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络原理/">计算机网络原理</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高中数学/">高中数学</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GET/">$_GET</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POST，-SERVER/">$_POST，$_SERVER</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REQUEST/">$_REQUEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOTO语句/">GOTO语句</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang函数/">Golang函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang匿名函数/">Golang匿名函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础/">Golang基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础类型占位符/">Golang基础类型占位符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang常量与变量里表达式/">Golang常量与变量里表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang循环结构/">Golang循环结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang指针/">Golang指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang标准输入与输出/">Golang标准输入与输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang流程控制/">Golang流程控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang程序运算/">Golang程序运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang类型转换及移位运算/">Golang类型转换及移位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang闭包函数/">Golang闭包函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ISO七层模型/">ISO七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java总结/">Java总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalinux/">Kalinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Null和Undefined/">Null和Undefined</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP两种定义常量的形式/">PHP两种定义常量的形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP常量/">PHP常量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python教程/">Python教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python笔记/">Python笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python运算符/">Python运算符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO网站优化/">SEO网站优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIR/">__DIR__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FILE/">__FILE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/">__LINE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache环境变量/">apache环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache配置/">apache配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beef劫持/">beef劫持</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dowhile循环/">dowhile循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iota定义常量组/">iota定义常量组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数/">javascript函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this方法/">js-this方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js布尔类型隐私转换/">js布尔类型隐私转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux目录结构/">linux目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php变量/">php变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urlib2/">urlib2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全渗透/">web安全渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web渗透/">web渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人生事记/">人生事记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/变量的操作/">变量的操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/延时执行defer/">延时执行defer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格狼日/">拉格狼日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间复杂度测试/">时间复杂度测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财，投资/">理财，投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简历/">简历</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络模型/">网络模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/顺序表/">顺序表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/GET/" style="font-size: 13px;">$_GET</a> <a href="/tags/POST，-SERVER/" style="font-size: 13px;">$_POST，$_SERVER</a> <a href="/tags/REQUEST/" style="font-size: 13px;">$_REQUEST</a> <a href="/tags/Cookie/" style="font-size: 13px;">Cookie</a> <a href="/tags/GOTO语句/" style="font-size: 13px;">GOTO语句</a> <a href="/tags/Golang/" style="font-size: 13px;">Golang</a> <a href="/tags/Golang函数/" style="font-size: 13px;">Golang函数</a> <a href="/tags/Golang匿名函数/" style="font-size: 13px;">Golang匿名函数</a> <a href="/tags/Golang基础/" style="font-size: 14px;">Golang基础</a> <a href="/tags/Golang基础类型占位符/" style="font-size: 13px;">Golang基础类型占位符</a> <a href="/tags/Golang常量与变量里表达式/" style="font-size: 13px;">Golang常量与变量里表达式</a> <a href="/tags/Golang循环结构/" style="font-size: 13px;">Golang循环结构</a> <a href="/tags/Golang指针/" style="font-size: 13px;">Golang指针</a> <a href="/tags/Golang标准输入与输出/" style="font-size: 13px;">Golang标准输入与输出</a> <a href="/tags/Golang流程控制/" style="font-size: 13px;">Golang流程控制</a> <a href="/tags/Golang程序运算/" style="font-size: 13px;">Golang程序运算</a> <a href="/tags/Golang类型转换及移位运算/" style="font-size: 13px;">Golang类型转换及移位运算</a> <a href="/tags/Golang闭包函数/" style="font-size: 13px;">Golang闭包函数</a> <a href="/tags/ISO七层模型/" style="font-size: 13px;">ISO七层模型</a> <a href="/tags/Java总结/" style="font-size: 13px;">Java总结</a> <a href="/tags/Kalinux/" style="font-size: 13px;">Kalinux</a> <a href="/tags/Null和Undefined/" style="font-size: 13px;">Null和Undefined</a> <a href="/tags/PHP两种定义常量的形式/" style="font-size: 13px;">PHP两种定义常量的形式</a> <a href="/tags/PHP常量/" style="font-size: 13px;">PHP常量</a> <a href="/tags/Python教程/" style="font-size: 13px;">Python教程</a> <a href="/tags/Python笔记/" style="font-size: 13px;">Python笔记</a> <a href="/tags/Python运算符/" style="font-size: 13px;">Python运算符</a> <a href="/tags/SEO网站优化/" style="font-size: 13px;">SEO网站优化</a> <a href="/tags/XSS/" style="font-size: 14px;">XSS</a> <a href="/tags/DIR/" style="font-size: 13px;">__DIR__</a> <a href="/tags/FILE/" style="font-size: 13px;">__FILE__</a> <a href="/tags/LINE/" style="font-size: 13px;">__LINE__</a> <a href="/tags/apache环境变量/" style="font-size: 13px;">apache环境变量</a> <a href="/tags/apache配置/" style="font-size: 13px;">apache配置</a> <a href="/tags/beef劫持/" style="font-size: 13px;">beef劫持</a> <a href="/tags/dowhile循环/" style="font-size: 13px;">dowhile循环</a> <a href="/tags/iota定义常量组/" style="font-size: 13px;">iota定义常量组</a> <a href="/tags/javascript函数/" style="font-size: 13px;">javascript函数</a> <a href="/tags/js-this方法/" style="font-size: 13px;">js-this方法</a> <a href="/tags/js布尔类型隐私转换/" style="font-size: 13px;">js布尔类型隐私转换</a> <a href="/tags/linux目录结构/" style="font-size: 13px;">linux目录结构</a> <a href="/tags/php变量/" style="font-size: 13px;">php变量</a> <a href="/tags/sql注入/" style="font-size: 13px;">sql注入</a> <a href="/tags/urlib2/" style="font-size: 13px;">urlib2</a> <a href="/tags/web安全渗透/" style="font-size: 13px;">web安全渗透</a> <a href="/tags/web渗透/" style="font-size: 13px;">web渗透</a> <a href="/tags/人生事记/" style="font-size: 13px;">人生事记</a> <a href="/tags/变量的操作/" style="font-size: 13px;">变量的操作</a> <a href="/tags/延时执行defer/" style="font-size: 13px;">延时执行defer</a> <a href="/tags/拉格狼日/" style="font-size: 13px;">拉格狼日</a> <a href="/tags/时间复杂度测试/" style="font-size: 13px;">时间复杂度测试</a> <a href="/tags/理财，投资/" style="font-size: 13px;">理财，投资</a> <a href="/tags/简历/" style="font-size: 13px;">简历</a> <a href="/tags/算法/" style="font-size: 13px;">算法</a> <a href="/tags/网络模型/" style="font-size: 13px;">网络模型</a> <a href="/tags/计算机基础/" style="font-size: 13px;">计算机基础</a> <a href="/tags/顺序表/" style="font-size: 13px;">顺序表</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">86</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">51</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">125</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">106</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/01/30/linux083线程同步/" class="title">线程同步</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-29T17:35:19.000Z" itemprop="datePublished">2022-01-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/01/24/linux082守护进程和线程/" class="title">守护进程和线程</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-24T12:30:39.000Z" itemprop="datePublished">2022-01-24</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/01/23/linux081使用信号完成两个进程交替数数/" class="title">使用信号完成两个进程交替数数</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-23T12:30:23.000Z" itemprop="datePublished">2022-01-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/01/23/linux080SIGCHLD/" class="title">SIGCHLD</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-23T11:15:47.000Z" itemprop="datePublished">2022-01-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/01/22/linux079sigaction/" class="title">sigaction函数</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-22T13:10:27.000Z" itemprop="datePublished">2022-01-22</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-linux083线程同步" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      线程同步
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/01/30/linux083线程同步/" class="article-date">
+	  <time datetime="2022-01-29T17:35:19.000Z" itemprop="datePublished">2022-01-30</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </span>
+
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/01/30/linux083线程同步/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 15(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="1-互斥锁"><a class="markdownIt-Anchor" href="#1-互斥锁"></a> 1 互斥锁</h3>
+<h4 id="11互斥锁的使用步骤"><a class="markdownIt-Anchor" href="#11互斥锁的使用步骤"></a> 1.1互斥锁的使用步骤</h4>
+<ul>
+<li>
+<p>第1步：创建一把互斥锁</p>
+<ul>
+<li><code>pthread_mutex_t mutex;</code></li>
+</ul>
+</li>
+<li>
+<p>初始化互斥锁</p>
+<ul>
+<li><code>pthread_mutex_init(&amp;mutex);</code>—相当于mutex=1</li>
+</ul>
+</li>
+<li>
+<p>在代码中寻找共享资源（也称为临界区）</p>
+<ul>
+<li><code>pthread_mutex_lock(&amp;mutex); -- mutex = 0</code></li>
+</ul>
+</li>
+<li>
+<p>临界区代码</p>
+<ul>
+<li><code>pthread_mutex_unlock(&amp;mutex); -- mutex = 1</code></li>
+</ul>
+</li>
+<li>
+<p>释放互斥锁资源</p>
+<ul>
+<li><code>pthread_mutex_destroy(&amp;mutex);</code></li>
+</ul>
+</li>
+</ul>
+<p>注意：必须在所有操作共享资源的线程上都加上锁否则不能起到同步的效果</p>
+<h4 id="12-练习"><a class="markdownIt-Anchor" href="#12-练习"></a> 1.2 练习</h4>
+<ul>
+<li>编写思路：</li>
+</ul>
+<p>1 定义一把互斥锁，应该为一全局变量</p>
+<p><code>pthread_mutex_t mutex;</code></p>
+<p>2 在main函数中对mutex进行初始化</p>
+<p><code>pthread_mutex_init(&amp;mutex, NULL);</code></p>
+<p>3 创建两个线程，在两个线程中加锁和解锁</p>
+<p>4 主线程释放互斥锁资源</p>
+<p><code>pthread_mutex_destroy(&amp;mutex);</code></p>
+<p><img src="/images/javawz/image-20220130014052263.png" alt="image-20220130014052263"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一把锁</span></span><br><span class="line"><span class="keyword">pthread_mutex_t</span> mutex;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">mythread1</span><span class="params">(<span class="keyword">void</span> *args)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//加锁</span></span><br><span class="line">		pthread_mutex_lock(&amp;mutex);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"hello "</span>);</span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"world\n"</span>);</span><br><span class="line">	</span><br><span class="line">		<span class="comment">//解锁</span></span><br><span class="line">		pthread_mutex_unlock(&amp;mutex);</span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">mythread2</span><span class="params">(<span class="keyword">void</span> *args)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//加锁</span></span><br><span class="line">		pthread_mutex_lock(&amp;mutex);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"HELLO "</span>);</span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"WORLD\n"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//解锁</span></span><br><span class="line">		pthread_mutex_unlock(&amp;mutex);</span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line">	<span class="keyword">pthread_t</span> thread1;</span><br><span class="line">	<span class="keyword">pthread_t</span> thread2;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//随机数种子</span></span><br><span class="line">	srand(time(<span class="literal">NULL</span>));</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//互斥锁初始化</span></span><br><span class="line">	pthread_mutex_init(&amp;mutex, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	ret = pthread_create(&amp;thread1, <span class="literal">NULL</span>, mythread1, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">if</span>(ret!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"pthread_create error, [%s]\n"</span>, strerror(ret));</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ret = pthread_create(&amp;thread2, <span class="literal">NULL</span>, mythread2, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">if</span>(ret!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"pthread_create error, [%s]\n"</span>, strerror(ret));</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//等待线程结束</span></span><br><span class="line">	pthread_join(thread1, <span class="literal">NULL</span>);</span><br><span class="line">	pthread_join(thread2, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//释放互斥锁</span></span><br><span class="line">	pthread_mutex_destroy(&amp;mutex);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="13-死锁"><a class="markdownIt-Anchor" href="#13-死锁"></a> 1.3 死锁</h3>
+<p>死锁并不是linux提供给用户的一种使用方法，而是由于用户使用互斥锁不当引起的一种现象。</p>
+<ul>
+<li>常见的死锁有两种：
+<ul>
+<li>第一种：自己锁自己，如下图代码片段</li>
+<li>第二种 线程A拥有A锁，请求获得B锁；线程B拥有B锁，请求获得A锁，这样造成线程A和线程B都不释放自己的锁，而且还想得到对方的锁，从而产生死锁，如下图所示：</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/javawz/image-20220130014154167.png" alt="image-20220130014154167"></p>
+<ul>
+<li>如何解决死锁：
+<ul>
+<li>让线程按照一定的顺序去访问共享资源</li>
+<li>在访问其他锁的时候，需要先将自己的锁解开</li>
+<li>调用<code>pthread_mutex_trylock</code>，如果加锁不成功会立刻返回</li>
+</ul>
+</li>
+</ul>
+<p>​	自己锁自己.<br>
+​		注意点: 线程在异常退出的时候也需要解锁.<br>
+A线程占用着A锁, 又想去获得B锁; B线程占用着B锁, 又想去获得A锁,<br>
+​	  两个线程都不释放自己的锁, 又想去获得对方的锁, 从而造成了死锁.<br>
+​	  解决方法:<br>
+​	  	1 需要先释放自己的锁再去获得其他锁<br>
+​	  	2 避免使用嵌套的锁, 让线程按照一定的顺序加锁<br>
+​	  	3 可以调用<code>pthread_mutex_trylock</code>函数加锁, 该函数不阻塞, 所以不会产生死锁.</p>
+<h3 id="2-读写锁"><a class="markdownIt-Anchor" href="#2-读写锁"></a> 2 读写锁</h3>
+<ul>
+<li>什么是读写锁
+<ul>
+<li>读写锁也叫共享-独占锁。当读写锁以读模式锁住时，它是以共享模式锁住的；当它以写模式锁住时，它是以独占模式锁住的。<strong>写独占、读共享。</strong></li>
+</ul>
+</li>
+<li>读写锁使用场合
+<ul>
+<li>读写锁非常适合于对数据结构读的次数远大于写的情况。</li>
+</ul>
+</li>
+<li>读写锁特性
+<ul>
+<li>读写锁是“写模式加锁”时，解锁前，所有对该锁加锁的线程都会被阻塞。</li>
+<li>读写锁是“读模式加锁”时，如果线程以读模式对其加锁会成功；如果线程以写模式加锁会阻塞。</li>
+<li>读写锁是“读模式加锁”时， 既有试图以写模式加锁的线程，也有试图以读模式加锁的线程。那么读写锁会阻塞随后的读模式锁请求。优先满足写模式锁。读锁、写锁并行阻塞，写锁优先级高</li>
+</ul>
+</li>
+<li>读写锁场景练习:
+<ul>
+<li>线程A加写锁成功, 线程B请求读锁
+<ul>
+<li>线程B阻塞</li>
+</ul>
+</li>
+<li>线程A持有读锁, 线程B请求写锁
+<ul>
+<li>线程B阻塞</li>
+</ul>
+</li>
+<li>线程A拥有读锁, 线程B请求读锁
+<ul>
+<li>线程B加锁成功</li>
+</ul>
+</li>
+<li>线程A持有读锁, 然后线程B请求写锁, 然后线程C请求读锁
+<ul>
+<li>B阻塞，c阻塞 - 写的优先级高</li>
+<li>A解锁，B线程加写锁成功，C继续阻塞</li>
+<li>B解锁，C加读锁成功</li>
+</ul>
+</li>
+<li>线程A持有写锁, 然后线程B请求读锁, 然后线程C请求写锁
+<ul>
+<li>BC阻塞</li>
+<li>A解锁，C加写锁成功，B继续阻塞</li>
+<li>C解锁，B加读锁成功</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>读写锁总结</li>
+</ul>
+<p>读并行，写独占，当读写同时等待锁的时候写的优先级高</p>
+<ul>
+<li>
+<p>读写锁主要操作函数</p>
+<ul>
+<li>定义一把读写锁
+<ul>
+<li><code>pthread_rwlock_t rwlock;</code></li>
+</ul>
+</li>
+<li>初始化读写锁
+<ul>
+<li><code>int pthread_rwlock_init(pthread_rwlock_t *restrict rwlock, const pthread_rwlockattr_t *restrict attr);</code></li>
+<li>函数参数</li>
+<li>rwlock-读写锁</li>
+<li>attr-读写锁属性，传NULL为默认属性</li>
+</ul>
+</li>
+<li>销毁读写锁
+<ul>
+<li><code>int pthread_rwlock_destroy(pthread_rwlock_t *rwlock);</code></li>
+</ul>
+</li>
+<li>加读锁
+<ul>
+<li><code>int pthread_rwlock_rdlock(pthread_rwlock_t *rwlock);</code></li>
+</ul>
+</li>
+<li>尝试加读锁
+<ul>
+<li><code>int pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock);</code></li>
+</ul>
+</li>
+<li>加写锁
+<ul>
+<li><code>int pthread_rwlock_wrlock(pthread_rwlock_t *rwlock);</code></li>
+</ul>
+</li>
+<li>尝试加写锁
+<ul>
+<li><code>int pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock);</code></li>
+</ul>
+</li>
+<li>解锁
+<ul>
+<li><code>int pthread_rwlock_unlock(&amp;pthread_rwlock_t *rwlock);</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>练习：3个线程不定时写同一全局资源，5个线程不定时读同一全局资源。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//读写锁测试程序</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一把读写锁</span></span><br><span class="line"><span class="keyword">pthread_rwlock_t</span> rwlock;</span><br><span class="line"></span><br><span class="line"><span class="comment">//写线程回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">thread_write</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = *(<span class="keyword">int</span> *)arg;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> cur;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//加写锁</span></span><br><span class="line">		pthread_rwlock_wrlock(&amp;rwlock);</span><br><span class="line"></span><br><span class="line">		cur = number;</span><br><span class="line">		cur++;</span><br><span class="line">		number = cur;	</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"[%d]-W:[%d]\n"</span>, i, cur);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//解锁</span></span><br><span class="line">		pthread_rwlock_unlock(&amp;rwlock);</span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//读线程回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">thread_read</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = *(<span class="keyword">int</span> *)arg;</span><br><span class="line">	<span class="keyword">int</span> cur;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//加读锁</span></span><br><span class="line">		pthread_rwlock_rdlock(&amp;rwlock);</span><br><span class="line"></span><br><span class="line">		cur = number;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"[%d]-R:[%d]\n"</span>, i, cur);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//解锁</span></span><br><span class="line">		pthread_rwlock_unlock(&amp;rwlock);</span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n = <span class="number">8</span>;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">8</span>];</span><br><span class="line">	<span class="keyword">pthread_t</span> thread[<span class="number">8</span>];</span><br><span class="line"></span><br><span class="line">	<span class="comment">//读写锁初始化</span></span><br><span class="line">	pthread_rwlock_init(&amp;rwlock, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//创建3个写子线程</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		arr[i] = i;</span><br><span class="line">		pthread_create(&amp;thread[i], <span class="literal">NULL</span>, thread_write, &amp;arr[i]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//创建5个读子线程</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">3</span>; i&lt;n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		arr[i] = i;</span><br><span class="line">		pthread_create(&amp;thread[i], <span class="literal">NULL</span>, thread_read, &amp;arr[i]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//回收子线程</span></span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		pthread_join(thread[j], <span class="literal">NULL</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//释放锁</span></span><br><span class="line">	pthread_rwlock_destroy(&amp;rwlock);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-条件变量"><a class="markdownIt-Anchor" href="#3-条件变量"></a> 3 条件变量</h3>
+<ul>
+<li>条件本身不是锁！但它也可以造成线程阻塞。通常与互斥锁配合使用。给多线程提供一个会合的场所。
+<ul>
+<li>使用互斥量保护共享数据;</li>
+<li>使用条件变量可以使线程阻塞, 等待某个条件的发生, 当条件满足的时候解除阻塞.</li>
+</ul>
+</li>
+<li>条件变量的两个动作:
+<ul>
+<li>条件不满足, 阻塞线程</li>
+<li>条件满足, 通知阻塞的线程解除阻塞, 开始工作.</li>
+</ul>
+</li>
+<li>条件变量相关函数
+<ul>
+<li><code>pthread_cond_t cond;</code>
+<ul>
+<li>定义一个条件变量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>int pthread_cond_init(pthread_cond_t *restrict cond,const pthread_condattr_t *restrict attr);</code>
+<ul>
+<li>函数描述:初始化条件变量</li>
+<li>函数参数:
+<ul>
+<li>cond: 条件变量</li>
+<li>attr: 条件变量属性, 通常传NULL</li>
+</ul>
+</li>
+<li>函数返回值:成功返回0, 失败返回错误号</li>
+</ul>
+</li>
+<li><code>int pthread_cond_destroy(pthread_cond_t *cond);</code>
+<ul>
+<li>函数描述: 销毁条件变量</li>
+<li>函数参数: 条件变量</li>
+<li>返回值: 成功返回0, 失败返回错误号</li>
+</ul>
+</li>
+<li><code>int pthread_cond_wait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex);</code>
+<ul>
+<li>函数描述: 条件不满足, 引起线程阻塞并解锁;
+<ul>
+<li>​     条件满足, 解除线程阻塞, 并加锁</li>
+</ul>
+</li>
+<li>函数参数:
+<ul>
+<li>cond: 条件变量</li>
+<li>mutex: 互斥锁变量</li>
+</ul>
+</li>
+<li>函数返回值: 成功返回0, 失败返回错误号</li>
+</ul>
+</li>
+<li><code>int pthread_cond_signal(pthread_cond_t *cond);</code>
+<ul>
+<li>函数描述: 唤醒至少一个阻塞在该条件变量上的线程</li>
+<li>函数参数: 条件变量</li>
+<li>函数返回值: 成功返回0, 失败返回错误号</li>
+</ul>
+</li>
+</ul>
+<p>4 使用条件变量的代码片段</p>
+<p><img src="/images/javawz/image-20220130015559506.png" alt="image-20220130015559506"></p>
+<p>上述代码中，生产者线程调用<code>pthread_cond_signal</code>函数会使消费者线程在<code>pthread_cond_wait</code>处解除阻塞。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用条件变量实现生产者和消费者模型</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;NODE;</span><br><span class="line"></span><br><span class="line">NODE *head = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一把锁</span></span><br><span class="line"><span class="keyword">pthread_mutex_t</span> mutex;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义条件变量</span></span><br><span class="line"><span class="keyword">pthread_cond_t</span> cond;</span><br><span class="line"></span><br><span class="line"><span class="comment">//生产者线程</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">producer</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	NODE *pNode = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//生产一个节点</span></span><br><span class="line">		pNode = (NODE *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(NODE));</span><br><span class="line">		<span class="keyword">if</span>(pNode==<span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">"malloc error"</span>);</span><br><span class="line">			<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		pNode-&gt;data = rand()%<span class="number">1000</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"P:[%d]\n"</span>, pNode-&gt;data);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//加锁</span></span><br><span class="line">		pthread_mutex_lock(&amp;mutex);</span><br><span class="line"></span><br><span class="line">		pNode-&gt;next = head;</span><br><span class="line">		head = pNode;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//解锁</span></span><br><span class="line">		pthread_mutex_unlock(&amp;mutex);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//通知消费者线程解除阻塞</span></span><br><span class="line">		pthread_cond_signal(&amp;cond);</span><br><span class="line">		</span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//消费者线程</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">consumer</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	NODE *pNode = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//加锁</span></span><br><span class="line">        pthread_mutex_lock(&amp;mutex);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(head==<span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//若条件不满足,需要阻塞等待</span></span><br><span class="line">			<span class="comment">//若条件不满足,则阻塞等待并解锁;</span></span><br><span class="line">			<span class="comment">//若条件满足(被生成者线程调用pthread_cond_signal函数通知),解除阻塞并加锁 </span></span><br><span class="line">			pthread_cond_wait(&amp;cond, &amp;mutex);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"C:[%d]\n"</span>, head-&gt;data);	</span><br><span class="line">		pNode = head;</span><br><span class="line">		head = head-&gt;next;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//解锁</span></span><br><span class="line">		pthread_mutex_unlock(&amp;mutex);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">free</span>(pNode);</span><br><span class="line">		pNode = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line">	<span class="keyword">pthread_t</span> thread1;</span><br><span class="line">	<span class="keyword">pthread_t</span> thread2;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//初始化互斥锁</span></span><br><span class="line">	pthread_mutex_init(&amp;mutex, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//条件变量初始化</span></span><br><span class="line">	pthread_cond_init(&amp;cond, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//创建生产者线程</span></span><br><span class="line">	ret = pthread_create(&amp;thread1, <span class="literal">NULL</span>, producer, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">if</span>(ret!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"pthread_create error, [%s]\n"</span>, strerror(ret));</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//创建消费者线程</span></span><br><span class="line">	ret = pthread_create(&amp;thread2, <span class="literal">NULL</span>, consumer, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">if</span>(ret!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"pthread_create error, [%s]\n"</span>, strerror(ret));</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//等待线程结束</span></span><br><span class="line">	pthread_join(thread1, <span class="literal">NULL</span>);</span><br><span class="line">	pthread_join(thread2, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//释放互斥锁</span></span><br><span class="line">	pthread_mutex_destroy(&amp;mutex);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//释放条件变量</span></span><br><span class="line">	pthread_cond_destroy(&amp;cond);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用条件变量实现生产者和消费者模型</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;NODE;</span><br><span class="line"></span><br><span class="line">NODE *head = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一把锁</span></span><br><span class="line"><span class="keyword">pthread_mutex_t</span> mutex;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义条件变量</span></span><br><span class="line"><span class="keyword">pthread_cond_t</span> cond;</span><br><span class="line"></span><br><span class="line"><span class="comment">//生产者线程</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">producer</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	NODE *pNode = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">int</span> n = *(<span class="keyword">int</span> *)arg;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//生产一个节点</span></span><br><span class="line">		pNode = (NODE *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(NODE));</span><br><span class="line">		<span class="keyword">if</span>(pNode==<span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">"malloc error"</span>);</span><br><span class="line">			<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		pNode-&gt;data = rand()%<span class="number">1000</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"P[%d]:[%d]\n"</span>, n, pNode-&gt;data);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//加锁</span></span><br><span class="line">		pthread_mutex_lock(&amp;mutex);</span><br><span class="line"></span><br><span class="line">		pNode-&gt;next = head;</span><br><span class="line">		head = pNode;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//解锁</span></span><br><span class="line">		pthread_mutex_unlock(&amp;mutex);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//通知消费者线程解除阻塞</span></span><br><span class="line">		pthread_cond_signal(&amp;cond);</span><br><span class="line"></span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//消费者线程</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">consumer</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	NODE *pNode = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">int</span> n = *(<span class="keyword">int</span> *)arg;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//加锁</span></span><br><span class="line">		pthread_mutex_lock(&amp;mutex);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(head==<span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//若条件不满足,需要阻塞等待</span></span><br><span class="line">			<span class="comment">//若条件不满足,则阻塞等待并解锁;</span></span><br><span class="line">			<span class="comment">//若条件满足(被生成者线程调用pthread_cond_signal函数通知),解除阻塞并加锁 </span></span><br><span class="line">			pthread_cond_wait(&amp;cond, &amp;mutex);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(head==<span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//解锁</span></span><br><span class="line">			pthread_mutex_unlock(&amp;mutex);	</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"C[%d]:[%d]\n"</span>, n, head-&gt;data);	</span><br><span class="line">		pNode = head;</span><br><span class="line">		head = head-&gt;next;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//解锁</span></span><br><span class="line">		pthread_mutex_unlock(&amp;mutex);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">free</span>(pNode);</span><br><span class="line">		pNode = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">pthread_t</span> thread1[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">pthread_t</span> thread2[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">	<span class="comment">//初始化互斥锁</span></span><br><span class="line">	pthread_mutex_init(&amp;mutex, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//条件变量初始化</span></span><br><span class="line">	pthread_cond_init(&amp;cond, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		arr[i]= i;</span><br><span class="line">		<span class="comment">//创建生产者线程</span></span><br><span class="line">		ret = pthread_create(&amp;thread1[i], <span class="literal">NULL</span>, producer, &amp;arr[i]);</span><br><span class="line">		<span class="keyword">if</span>(ret!=<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"pthread_create error, [%s]\n"</span>, strerror(ret));</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//创建消费者线程</span></span><br><span class="line">		ret = pthread_create(&amp;thread2[i], <span class="literal">NULL</span>, consumer, &amp;arr[i]);</span><br><span class="line">		<span class="keyword">if</span>(ret!=<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"pthread_create error, [%s]\n"</span>, strerror(ret));</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//等待线程结束</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		pthread_join(thread1[i], <span class="literal">NULL</span>);</span><br><span class="line">		pthread_join(thread2[i], <span class="literal">NULL</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//释放互斥锁</span></span><br><span class="line">	pthread_mutex_destroy(&amp;mutex);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//释放条件变量</span></span><br><span class="line">	pthread_cond_destroy(&amp;cond);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="信号量"><a class="markdownIt-Anchor" href="#信号量"></a> 信号量</h3>
+<p>1 信号量介绍</p>
+<p>​	信号量相当于多把锁, 可以理解为是加强版的互斥锁</p>
+<p>2 相关函数</p>
+<p>定义信号量 <code>sem_t sem</code>;</p>
+<ul>
+<li>
+<p><code>int sem_init(sem_t *sem, int pshared, unsigned int value);</code></p>
+<ul>
+<li>函数描述: 初始化信号量</li>
+<li>函数参数:
+<ul>
+<li>sem: 信号量变量</li>
+<li>pshared: 0表示线程同步, 1表示进程同步</li>
+<li>value: 最多有几个线程操作共享数据</li>
+</ul>
+</li>
+<li>函数返回值:成功返回0, 失败返回-1, 并设置errno值</li>
+</ul>
+</li>
+<li>
+<p><code>int sem_wait(sem_t *sem);</code></p>
+<ul>
+<li>函数描述: 调用该函数一次, 相当于<code>sem--</code>, 当sem为0的时候, 引起阻塞</li>
+<li>函数参数: 信号量变量</li>
+<li>函数返回值: 成功返回0, 失败返回-1, 并设置errno值</li>
+</ul>
+</li>
+<li>
+<p><code>int sem_post(sem_t *sem);</code></p>
+<ul>
+<li>函数描述: 调用一次, 相当于<code>sem++</code></li>
+<li>` 函数参数: 信号量变量</li>
+<li>函数返回值: 成功返回0, 失败返回-1, 并设置errno值</li>
+</ul>
+</li>
+<li>
+<p><code>int sem_trywait(sem_t *sem);</code></p>
+<ul>
+<li>函数描述: 尝试加锁, 若失败直接返回, 不阻塞</li>
+<li>函数参数: 信号量变量</li>
+<li>函数返回值: 成功返回0, 失败返回-1, 并设置errno值</li>
+</ul>
+</li>
+<li>
+<p><code>int sem_destroy(sem_t *sem);</code></p>
+<ul>
+<li>函数描述: 销毁信号量</li>
+<li>函数参数: 信号量变量</li>
+<li>函数返回值: 成功返回0, 失败返回-1, 并设置errno值</li>
+</ul>
+</li>
+</ul>
+<p>3 信号量代码片段:</p>
+<p><img src="/images/javawz/image-20220130020118740.png" alt="image-20220130020118740"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用信号量实现生产者和消费者模型</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;semaphore.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;NODE;</span><br><span class="line"></span><br><span class="line">NODE *head = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义信号量</span></span><br><span class="line"><span class="keyword">sem_t</span> sem_producer;</span><br><span class="line"><span class="keyword">sem_t</span> sem_consumer;</span><br><span class="line"></span><br><span class="line"><span class="comment">//生产者线程</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">producer</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	NODE *pNode = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//生产一个节点</span></span><br><span class="line">		pNode = (NODE *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(NODE));</span><br><span class="line">		<span class="keyword">if</span>(pNode==<span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">"malloc error"</span>);</span><br><span class="line">			<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		pNode-&gt;data = rand()%<span class="number">1000</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"P:[%d]\n"</span>, pNode-&gt;data);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//加锁</span></span><br><span class="line">		sem_wait(&amp;sem_producer); <span class="comment">//--</span></span><br><span class="line"></span><br><span class="line">		pNode-&gt;next = head;</span><br><span class="line">		head = pNode;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//解锁</span></span><br><span class="line">		sem_post(&amp;sem_consumer);  <span class="comment">//相当于++</span></span><br><span class="line"></span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//消费者线程</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">consumer</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	NODE *pNode = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//加锁</span></span><br><span class="line">		sem_wait(&amp;sem_consumer); <span class="comment">//相当于--</span></span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"C:[%d]\n"</span>, head-&gt;data);	</span><br><span class="line">		pNode = head;</span><br><span class="line">		head = head-&gt;next;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//解锁</span></span><br><span class="line">		sem_post(&amp;sem_producer); <span class="comment">//相当于++</span></span><br><span class="line"></span><br><span class="line">		<span class="built_in">free</span>(pNode);</span><br><span class="line">		pNode = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">		sleep(rand()%<span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line">	<span class="keyword">pthread_t</span> thread1;</span><br><span class="line">	<span class="keyword">pthread_t</span> thread2;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//初始化信号量</span></span><br><span class="line">	sem_init(&amp;sem_producer, <span class="number">0</span>, <span class="number">5</span>);</span><br><span class="line">	sem_init(&amp;sem_consumer, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//创建生产者线程</span></span><br><span class="line">	ret = pthread_create(&amp;thread1, <span class="literal">NULL</span>, producer, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">if</span>(ret!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"pthread_create error, [%s]\n"</span>, strerror(ret));</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//创建消费者线程</span></span><br><span class="line">	ret = pthread_create(&amp;thread2, <span class="literal">NULL</span>, consumer, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">if</span>(ret!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"pthread_create error, [%s]\n"</span>, strerror(ret));</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//等待线程结束</span></span><br><span class="line">	pthread_join(thread1, <span class="literal">NULL</span>);</span><br><span class="line">	pthread_join(thread2, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//释放信号量资源</span></span><br><span class="line">	sem_destroy(&amp;sem_producer);</span><br><span class="line">	sem_destroy(&amp;sem_consumer);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xiaowuyoucy.github.io/2022/01/30/linux083线程同步/" title="线程同步" target="_blank" rel="external">https://xiaowuyoucy.github.io/2022/01/30/linux083线程同步/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+		  
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/01/24/linux082守护进程和线程/" title="守护进程和线程"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+	<span>More contact information</span>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:xiaowuyoucy.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '032928647cd59bc9f443',
+    clientSecret: '82a11fd93e4d0779655af6dc4b73942a03e95276',
+    repo: 'Xiaowuyoucy.github.io',
+    owner: 'Xiaowuyoucy',
+    admin: ['Xiaowuyoucy'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>
