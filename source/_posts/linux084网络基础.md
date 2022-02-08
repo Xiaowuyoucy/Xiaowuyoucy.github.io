@@ -70,7 +70,7 @@ IGMP协议是 Internet 组管理协议（Internet Group Management Protocol）�
 缺点:
 
 	 1. 对用户的安全构成威胁  
-  	 2. 开发工作量较大，调试困难
+	 2. 开发工作量较大，调试困难
 
 
 
@@ -161,7 +161,7 @@ UDP是无连接的传输协议，不保证可靠性，有点像寄信，信写�
 
 以太网的帧格式如下所示：
 
-![image-20220131180221986](../../themes/pure/source/images/javawz/image-20220131180221986.png)
+![image-20220131180221986](../../themes/pure/source/images/javawz/image-20220131180221986-1644317422126.png)
 
 其中的**源地址和目的地址**是指网卡的**硬件地址**（也叫MAC地址），长度是48位，是在网卡出厂时固化的。可在shell中使用ifconfig命令查看，“HWaddr 00:15:F2:14:9E:3F”部分就是硬件地址。协议字段有三种值，分别对应IP、ARP、RARP。帧尾是CRC校验码。
 
@@ -597,7 +597,9 @@ addrlen:
 
 在学习socket API时要注意应用程序和TCP协议层是如何交互的： 应用程序调用某个socket函数时TCP协议层完成什么动作，比如调用connect()会发出SYN段 应用程序如何知道TCP协议层的状态变化，比如从某个阻塞的socket函数返回就表明TCP协议收到了某些段，再比如read()返回0就表明收到了FIN段
 
+#### server实现
 
+作用是从客户端读字符，然后将每个字符转换为大写并回送给客户端。
 
 ```c
 #include <stdio.h>
