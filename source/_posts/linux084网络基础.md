@@ -93,7 +93,7 @@ IGMP协议是 Internet 组管理协议（Internet Group Management Protocol）�
 
 #### OSI七层模型
 
-![image-20220131174614011](../../themes/pure/source/images/javawz/image-20220131174614011.png)
+![image-20220131174614011](/images/javawz/image-20220131174614011.png)
 
 1. **物理层**：主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流（就是由1、0转化为电流强弱来进行传输，到达目的地后再转化为1、0，也就是我们常说的数模转换与模数转换）。这一层的数据叫做**比特**。
 
@@ -113,7 +113,7 @@ IGMP协议是 Internet 组管理协议（Internet Group Management Protocol）�
 
 TCP/IP网络协议栈分为应用层（Application）、传输层（Transport）、网络层（Network）和链路层（Link）四层。如下图所示：
 
-![image-20220131174756807](../../themes/pure/source/images/javawz/image-20220131174756807.png)
+![image-20220131174756807](/images/javawz/image-20220131174756807.png)
 
 一般在应用开发过程中，讨论最多的是TCP/IP模型。 
 
@@ -121,13 +121,13 @@ TCP/IP网络协议栈分为应用层（Application）、传输层（Transport）
 
 两台计算机通过TCP/IP协议通讯的过程如下所示：
 
-![image-20220131175741703](../../themes/pure/source/images/javawz/image-20220131175741703.png)
+![image-20220131175741703](/images/javawz/image-20220131175741703.png)
 
 上图对应两台计算机在同一网段中的情况，如果两台计算机在不同的网段中，那么数据从一台计算机到另一台计算机传输过程中要经过一个或多个路由器，如下图所示：
 
-![image-20220131180004435](../../themes/pure/source/images/javawz/image-20220131180004435.png)
+![image-20220131180004435](/images/javawz/image-20220131180004435.png)
 
-链路层有以太网、令牌环网等标准，链路层负责网卡设备的驱动、帧同步（即从网线上检测到什么信号算作新帧的开始）、冲突检测（如果检测到冲突就自动重发）、***\*数据差错校验\****等工作。交换机是工作在链路层的网络设备，可以在不同的链路层网络之间转发数据帧（比如十兆以太网和百兆以太网之间、以太网和令牌环网之间），由于不同链路层的帧格式不同，交换机要将进来的数据包拆掉链路层首部重新封装之后再转发。
+链路层有以太网、令牌环网等标准，链路层负责网卡设备的驱动、帧同步（即从网线上检测到什么信号算作新帧的开始）、冲突检测（如果检测到冲突就自动重发）、**数据差错校验**等工作。交换机是工作在链路层的网络设备，可以在不同的链路层网络之间转发数据帧（比如十兆以太网和百兆以太网之间、以太网和令牌环网之间），由于不同链路层的帧格式不同，交换机要将进来的数据包拆掉链路层首部重新封装之后再转发。
 
 网络层的IP协议是构成Internet的基础。Internet上的主机通过IP地址来标识，Inter-net上有大量路由器负责根据IP地址选择合适的路径转发数据包，数据包从Internet上的源主机到目的主机往往要经过十多个路由器。路由器是工作在第三层的网络设备，同时兼有交换机的功能，可以在不同的链路层接口之间转发数据包，因此路由器需要将进来的数据包拆掉网络层和链路层两层首部并重新封装。IP协议不保证传输的可靠性，数据包在传输过程中可能丢失，可靠性可以在上层协议或应用程序中提供支持。
 
@@ -139,7 +139,7 @@ UDP是无连接的传输协议，不保证可靠性，有点像寄信，信写�
 
 目的主机收到数据包后，如何经过各层协议栈最后到达应用程序呢？其过程如下图所示：
 
-![image-20220131180029314](../../themes/pure/source/images/javawz/image-20220131180029314.png)
+![image-20220131180029314](/images/javawz/image-20220131180029314.png)
 
 
 
@@ -153,7 +153,7 @@ UDP是无连接的传输协议，不保证可靠性，有点像寄信，信写�
 
 传输层及其以下的机制由内核提供，应用层由用户进程提供（后面将介绍如何使用socket API编写应用程序），应用程序对通讯数据的含义进行解释，而传输层及其以下处理通讯的细节，将数据从一台计算机通过一定的路径发送到另一台计算机。应用层数据通过协议栈发到网络上时，每层协议都要加上一个数据首部（header），称为封装（Encapsulation），如下图所示：
 
-![image-20220131180149068](../../themes/pure/source/images/javawz/image-20220131180149068.png)
+![image-20220131180149068](/images/javawz/image-20220131180149068.png)
 
 不同的协议层对数据包有不同的称谓，在传输层叫做段（segment），在网络层叫做数据报（datagram），在链路层叫做帧（frame）。数据封装成帧后发到传输介质上，到达目的主机后每层协议再剥掉相应的首部，最后将应用层数据交给应用程序处理。
 
@@ -161,7 +161,7 @@ UDP是无连接的传输协议，不保证可靠性，有点像寄信，信写�
 
 以太网的帧格式如下所示：
 
-![image-20220131180221986](../../themes/pure/source/images/javawz/image-20220131180221986-1644317422126.png)
+![image-20220131180221986](/images/javawz/image-20220131180221986-1644317422126.png)
 
 其中的**源地址和目的地址**是指网卡的**硬件地址**（也叫MAC地址），长度是48位，是在网卡出厂时固化的。可在shell中使用ifconfig命令查看，“HWaddr 00:15:F2:14:9E:3F”部分就是硬件地址。协议字段有三种值，分别对应IP、ARP、RARP。帧尾是CRC校验码。
 
@@ -171,23 +171,23 @@ UDP是无连接的传输协议，不保证可靠性，有点像寄信，信写�
 
 在网络通讯时，源主机的应用程序知道目的主机的IP地址和端口号，却不知道目的主机的硬件地址，而数据包首先是被网卡接收到再去处理上层协议的，如果接收到的数据包的硬件地址与本机不符，则直接丢弃。因此在通讯前必须获得目的主机的硬件地址。ARP协议就起到这个作用。源主机发出ARP请求，询问“IP地址是192.168.0.1的主机的硬件地址是多少”，并将这个请求广播到本地网段（以太网帧首部的硬件地址填FF:FF:FF:FF:FF:FF表示广播），目的主机接收到广播的ARP请求，发现其中的IP地址与本机相符，则发送一个ARP应答数据包给源主机，将自己的硬件地址填写在应答包中。
 
-每台主机都维护一个ARP缓存表，可以用arp -a命令查看。缓存表中的表项有过期时间（一般为20分钟），如果20分钟内没有再次使用某个表项，则该表项失效，下次还要发ARP请求来获得目的主机的硬件地址。想一想，为什么表项要有过期时间而不是一直有效？
+每台主机都维护一个ARP缓存表，可以用`arp -a`命令查看。缓存表中的表项有过期时间（一般为20分钟），如果20分钟内没有再次使用某个表项，则该表项失效，下次还要发ARP请求来获得目的主机的硬件地址。想一想，为什么表项要有过期时间而不是一直有效？
 
 ARP数据报的格式如下所示：
 
-![image-20220131192510328](../../themes/pure/source/images/javawz/image-20220131192510328.png)
+![image-20220131192510328](/images/javawz/image-20220131192510328.png)
 
 源MAC地址、目的MAC地址在以太网首部和ARP请求中各出现一次，对于链路层为以太网的情况是多余的，但如果链路层是其它类型的网络则有可能是必要的。硬件类型指链路层网络类型，1为以太网，协议类型指要转换的地址类型，0x0800为IP地址，后面两个地址长度对于以太网地址和IP地址分别为6和4（字节），op字段为1表示ARP请求，op字段为2表示ARP应答。
 
-![image-20220131230905439](../../themes/pure/source/images/javawz/image-20220131230905439.png)
+![image-20220131230905439](/images/javawz/image-20220131230905439.png)
 
-![image-20220131231031294](../../themes/pure/source/images/javawz/image-20220131231031294.png)
+![image-20220131231031294](/images/javawz/image-20220131231031294.png)
 
 路由器会把arp数据报发给所有的机器，然后每个机器拿到后会检查接收端的ip是不是自己的ip，如果不是则扔掉
 
 ARP数据报：获取下一条的mac地址
 
-![image-20220131232110833](../../themes/pure/source/images/javawz/image-20220131232110833.png)
+![image-20220131232110833](/images/javawz/image-20220131232110833.png)
 
 TTL:表示当前还可以进行多少跳，每次到达自己这里TTL都会减一
 
@@ -195,7 +195,7 @@ TTL:表示当前还可以进行多少跳，每次到达自己这里TTL都会减�
 
 #### IP段格式
 
-![image-20220201173046589](../../themes/pure/source/images/javawz/image-20220201173046589.png)
+![image-20220201173046589](/images/javawz/image-20220201173046589.png)
 
 
 
@@ -205,7 +205,7 @@ IP数据报的首部长度和数据长度都是可变长的，**但总是4字节
 
 ### UDP数据报格式
 
-![image-20220201173320717](../../themes/pure/source/images/javawz/image-20220201173320717.png)
+![image-20220201173320717](/images/javawz/image-20220201173320717.png)
 
 端口号表示指定的进程
 
@@ -251,19 +251,19 @@ tsize 0
 
 #### TCP数据报格式
 
-![image-20220201173716334](../../themes/pure/source/images/javawz/image-20220201173716334.png)
+![image-20220201173716334](/images/javawz/image-20220201173716334.png)
 
 与UDP协议一样也有源端口号和目的端口号，通讯的双方由IP地址和端口号标识。32位序号、32位确认序号、窗口大小稍后详细解释。4位首部长度和IP协议头类似，表示TCP协议头的长度，以4字节为单位，因此TCP协议头最长可以是4x15=60字节，如果没有选项字段，TCP协议头最短20字节。URG、ACK、PSH、RST、SYN、FIN是六个控制位，本节稍后将解释SYN、ACK、FIN、RST四个位，其它位的解释从略。16位检验和将TCP协议头和数据都计算在内。紧急指针和各种选项的解释从略。
 
 ### NAT映射
 
-![image-20220201173928063](../../themes/pure/source/images/javawz/image-20220201173928063.png)
+![image-20220201173928063](/images/javawz/image-20220201173928063.png)
 
 A机器发送数据包给服务器,首先数据包经过路由器,然后路由器会一个端口号和自己的ip再和A机器的ip成为映射关系,服务器收到后回A机器数据包,目的ip的地址是写路由器的ip,端口号写路由器创建出来的那个端口号,路由器收到数据包后会在NAT映射表中查找端口号对应的ip,找到后再发给A机器
 
 ### 打洞机制
 
-![image-20220201180619648](../../themes/pure/source/images/javawz/image-20220201180619648.png)
+![image-20220201180619648](/images/javawz/image-20220201180619648.png)
 
 两台机器在不同的局域网中进行直接通信,需要进行nat映射和打洞机制.
 
@@ -281,21 +281,21 @@ Socket本身有“插座”的意思，在Linux环境下，用于表示进程间
 
 套接字通信原理如下图所示：
 
-![image-20220201193432501](../../themes/pure/source/images/javawz/image-20220201193432501.png)
+![image-20220201193432501](/images/javawz/image-20220201193432501.png)
 
 **在网络通信中，套接字一定是成对出现的。**一端的发送缓冲区对应对端的接收缓冲区。我们使用同一个文件描述符索发送缓冲区和接收缓冲区。
 
 TCP/IP协议最早在BSD UNIX上实现，为TCP/IP协议设计的应用层编程接口称为socket API。本章的主要内容是socket API，主要介绍TCP协议的函数接口，最后介绍UDP协议和UNIX Domain Socket的函数接口。
 
-![image-20220201193510324](../../themes/pure/source/images/javawz/image-20220201193510324.png)
+![image-20220201193510324](/images/javawz/image-20220201193510324.png)
 
-![image-20220201193808939](../../themes/pure/source/images/javawz/image-20220201193808939.png)
+![image-20220201193808939](/images/javawz/image-20220201193808939.png)
 
 
 
 ### 网络字节序
 
-![image-20220201234457225](../../themes/pure/source/images/javawz/image-20220201234457225.png)
+![image-20220201234457225](/images/javawz/image-20220201234457225.png)
 
 我们已经知道，内存中的多字节数据相对于内存地址有大端和小端之分，磁盘文件中的多字节数据相对于文件中的偏移地址也有大端小端之分。网络数据流同样有大端小端之分，那么如何定义网络数据流的地址呢？发送主机通常将发送缓冲区中的数据按内存地址从低到高的顺序发 出，接收主机把从网络上接到的字节依次保存在接收缓冲区中，也是按内存地址从低到高的顺序保存，因此，网络数据流的地址应这样规定：先发出的数据是低地址，后发出的数据是高地址。
 
@@ -367,7 +367,7 @@ const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);
 
 strcut sockaddr 很多网络编程函数诞生早于IPv4协议，那时候都使用的是sockaddr结构体,为了向前兼容，现在sockaddr退化成了（void *）的作用，传递一个地址给函数，至于这个函数是sockaddr_in还是sockaddr_in6，由地址族确定，然后函数内部再强制类型转化为所需的地址类型。
 
-![image-20220201225235077](../../themes/pure/source/images/javawz/image-20220201225235077.png)
+![image-20220201225235077](/images/javawz/image-20220201225235077.png)
 
 ```
 struct sockaddr {
@@ -451,7 +451,7 @@ bind(listen_fd, (struct sockaddr *)&servaddr, sizeof(servaddr));		/* initialize 
 
 #### socket模型创建流程图
 
-![image-20220201225715684](../../themes/pure/source/images/javawz/image-20220201225715684.png)
+![image-20220201225715684](/images/javawz/image-20220201225715684.png)
 
 #### socket函数
 
@@ -585,7 +585,7 @@ addrlen:
 
 下图是基于TCP协议的客户端/服务器程序的一般流程：
 
-![image-20220201230423889](../../themes/pure/source/images/javawz/image-20220201230423889.png)
+![image-20220201230423889](/images/javawz/image-20220201230423889.png)
 
 服务器调用socket()、bind()、listen()完成初始化后，调用accept()阻塞等待，处于监听端口的状态，客户端调用socket()初始化后，调用connect()发出SYN段并阻塞等待服务器应答，服务器应答一个SYN-ACK段，客户端收到后从connect()返回，同时应答一个ACK段，服务器收到后从accept()返回。
 
@@ -596,6 +596,33 @@ addrlen:
 如果客户端没有更多的请求了，就调用close()关闭连接，就像写端关闭的管道一样，服务器的read()返回0，这样服务器就知道客户端关闭了连接，也调用close()关闭连接。注意，任何一方调用close()后，连接的两个传输方向都关闭，不能再发送数据了。如果一方调用shutdown()则连接处于半关闭状态，仍可接收对方发来的数据。
 
 在学习socket API时要注意应用程序和TCP协议层是如何交互的： 应用程序调用某个socket函数时TCP协议层完成什么动作，比如调用connect()会发出SYN段 应用程序如何知道TCP协议层的状态变化，比如从某个阻塞的socket函数返回就表明TCP协议收到了某些段，再比如read()返回0就表明收到了FIN段
+
+
+
+### nc命令
+
+简单的客户端程序
+
+```
+nc ip地址 端口号
+nc 127.0.0.1 6666
+nc 127.1 6666
+```
+
+#### bzero函数
+
+```
+//要包含的头文件
+#include <string.h>
+
+// 作用: 把缓冲区逐字节清零
+void bzero(void *s, size_t n);
+void *s		//指定缓冲区
+size_t n	//指定缓冲取大小
+
+```
+
+
 
 #### server实现
 
@@ -617,7 +644,7 @@ int main(void)
     int lfd, cfd;
     struct sockaddr_in serv_addr, clie_addr;
     socklen_t clie_addr_len;
-    char buf[BUFSIZ];
+    char buf[BUFSIZ],CLIE_IP[BUFZIZ];
     int n, i;
 
     lfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -633,6 +660,9 @@ int main(void)
     clie_addr_len = sizeof(clie_addr);
     cfd = accept(lfd, (struct sockaddr *)&clie_addr, &clie_addr_len);
 
+    printf("client IP: %s  port:%d\n", inet_ntop(AF_INET, &clie_addr.sin_addr.s_addr, 				clie_IP, sizeof(clie_IP)), 
+            ntohs(clie_addr.sin_port));
+    
     while (1) {
         n = read(cfd, buf, sizeof(buf));
         for (i = 0; i < n; i++)
@@ -647,4 +677,318 @@ int main(void)
 }
 
 ```
+
+
+
+### client客户端实现
+
+作用:客户端输入英文小写字符串,并发送给服务端,然后服务端回一串对应的大写英文字符串,最后输出到终端
+
+如果客户端不绑定端口和ip，操作系统会隐式的帮客户端绑定地址和端口
+
+```
+man 7 ip 		//查看struct sockaddr_in 结构体
+
+gets函数最好不要使用,因为已经过时了,使用fgets来代替gets
+```
+
+
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+
+#include "wrap.h"
+
+#define SERV_IP "127.0.0.1"
+#define SERV_PORT 6666
+
+int main(void)
+{
+    int sfd, len;
+    struct sockaddr_in serv_addr;
+    char buf[BUFSIZ]; //BUFSIZ为系统默认的缓冲区大小。
+
+    sfd = Socket(AF_INET, SOCK_STREAM, 0);
+
+    bzero(&serv_addr, sizeof(serv_addr));   //把serv_addr中每个字节设置为0          
+    serv_addr.sin_family = AF_INET;                             
+    inet_pton(AF_INET, SERV_IP, &serv_addr.sin_addr.s_addr);    
+    serv_addr.sin_port = htons(SERV_PORT);                      
+
+    Connect(sfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+
+    while (1) {
+        //fgets会自动在字符串末尾添加\0
+        //hello world ---->hello world\n\0
+        fgets(buf, sizeof(buf), stdin);
+        int r = Write(sfd, buf, strlen(buf));       
+        printf("Write r ======== %d\n", r);
+        len = Read(sfd, buf, sizeof(buf));
+        printf("Read len ========= %d\n", len);
+        Write(STDOUT_FILENO, buf, len);	//写到终端(也就是屏幕)
+    }
+
+    Close(sfd);
+
+    return 0;
+}
+
+
+```
+
+
+
+```c
+#ifndef __WRAP_H_
+#define __WRAP_H_
+
+void perr_exit(const char *s);
+int Accept(int fd, struct sockaddr *sa, socklen_t *salenptr);
+int Bind(int fd, const struct sockaddr *sa, socklen_t salen);
+int Connect(int fd, const struct sockaddr *sa, socklen_t salen);
+int Listen(int fd, int backlog);
+int Socket(int family, int type, int protocol);
+ssize_t Read(int fd, void *ptr, size_t nbytes);
+ssize_t Write(int fd, const void *ptr, size_t nbytes);
+int Close(int fd);
+ssize_t Readn(int fd, void *vptr, size_t n);
+ssize_t Writen(int fd, const void *vptr, size_t n);
+ssize_t my_read(int fd, char *ptr);
+ssize_t Readline(int fd, void *vptr, size_t maxlen);
+
+#endif
+
+```
+
+
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <errno.h>
+#include <sys/socket.h>
+
+void perr_exit(const char *s)
+{
+	perror(s);
+	exit(-1);
+}
+
+int Accept(int fd, struct sockaddr *sa, socklen_t *salenptr)
+{
+	int n;
+
+again:
+	if ((n = accept(fd, sa, salenptr)) < 0) {
+		if ((errno == ECONNABORTED) || (errno == EINTR))
+			goto again;	//重新接受连接
+		else
+			perr_exit("accept error");
+	}
+	return n;
+}
+
+int Bind(int fd, const struct sockaddr *sa, socklen_t salen)
+{
+    int n;
+
+	if ((n = bind(fd, sa, salen)) < 0)
+		perr_exit("bind error");
+
+    return n;
+}
+
+int Connect(int fd, const struct sockaddr *sa, socklen_t salen)
+{
+    int n;
+    n = connect(fd, sa, salen);
+	if (n < 0) {
+		perr_exit("connect error");
+    }
+
+    return n;
+}
+
+int Listen(int fd, int backlog)
+{
+    int n;
+
+	if ((n = listen(fd, backlog)) < 0)
+		perr_exit("listen error");
+
+    return n;
+}
+
+int Socket(int family, int type, int protocol)
+{
+	int n;
+
+	if ((n = socket(family, type, protocol)) < 0)
+		perr_exit("socket error");
+
+	return n;
+}
+
+ssize_t Read(int fd, void *ptr, size_t nbytes)
+{
+	ssize_t n;
+
+again:
+	if ( (n = read(fd, ptr, nbytes)) == -1) {
+		if (errno == EINTR)
+			goto again;
+		else
+			return -1;
+	}
+
+	return n;
+}
+
+ssize_t Write(int fd, const void *ptr, size_t nbytes)
+{
+	ssize_t n;
+
+again:
+	if ((n = write(fd, ptr, nbytes)) == -1) {
+		if (errno == EINTR)
+			goto again;
+		else
+			return -1;
+	}
+	return n;
+}
+
+int Close(int fd)
+{
+    int n;
+	if ((n = close(fd)) == -1)
+		perr_exit("close error");
+
+    return n;
+}
+
+/*参三: 应该读取的字节数*/                          //socket 4096  readn(cfd, buf, 4096)   nleft = 4096-1500
+ssize_t Readn(int fd, void *vptr, size_t n)
+{
+	size_t  nleft;              //usigned int 剩余未读取的字节数
+	ssize_t nread;              //int 实际读到的字节数
+	char   *ptr;
+
+	ptr = vptr;
+	nleft = n;                  //n 未读取字节数
+
+	while (nleft > 0) {
+		if ((nread = read(fd, ptr, nleft)) < 0) {
+			if (errno == EINTR)
+				nread = 0;
+			else
+				return -1;
+		} else if (nread == 0)
+			break;
+
+		nleft -= nread;   //nleft = nleft - nread 
+		ptr += nread;
+	}
+	return n - nleft;
+}
+
+ssize_t Writen(int fd, const void *vptr, size_t n)
+{
+	size_t nleft;
+	ssize_t nwritten;
+	const char *ptr;
+
+	ptr = vptr;
+	nleft = n;
+	while (nleft > 0) {
+		if ( (nwritten = write(fd, ptr, nleft)) <= 0) {
+			if (nwritten < 0 && errno == EINTR)
+				nwritten = 0;
+			else
+				return -1;
+		}
+		nleft -= nwritten;
+		ptr += nwritten;
+	}
+	return n;
+}
+
+static ssize_t my_read(int fd, char *ptr)
+{
+	static int read_cnt;
+	static char *read_ptr;
+	static char read_buf[100];
+
+	if (read_cnt <= 0) {
+again:
+		if ( (read_cnt = read(fd, read_buf, sizeof(read_buf))) < 0) {   //"hello\n"
+			if (errno == EINTR)
+				goto again;
+			return -1;
+		} else if (read_cnt == 0)
+			return 0;
+
+		read_ptr = read_buf;
+	}
+	read_cnt--;
+	*ptr = *read_ptr++;
+
+	return 1;
+}
+
+/*readline --- fgets*/    
+//传出参数 vptr
+ssize_t Readline(int fd, void *vptr, size_t maxlen)
+{
+	ssize_t n, rc;
+	char    c, *ptr;
+	ptr = vptr;
+
+	for (n = 1; n < maxlen; n++) {
+		if ((rc = my_read(fd, &c)) == 1) {   //ptr[] = hello\n
+			*ptr++ = c;
+			if (c == '\n')
+				break;
+		} else if (rc == 0) {
+			*ptr = 0;
+			return n-1;
+		} else
+			return -1;
+	}
+	*ptr = 0;
+
+	return n;
+}
+
+
+```
+
+
+
+<br>
+
+<br>
+
+### 客户端服务器程序分析
+
+<br>
+
+![image-20220210013817470](/images/javawz/image-20220210013817470.png)
+
+客户端和服务器端的cfd文件描述符各自指向两个缓冲区一个是读缓冲区另一个是写缓冲区
+
+他们是通过IP地址+端口号进行建立连接的
+
+一个文件描述符读的同时也可以写,所以是双向全双工的
+
+客户端输入hello然后通过cfd写入发送缓冲区里，然后发送给服务器端的cfd接收缓冲区，服务器端收到hello后将其转换为HELLO后，将其写入发送缓冲区，然后发送给客户端的接收缓冲区，客户端收到后显示到终端
+
+如果cfd只有一个缓冲区，就只能接收或发送，如果缓冲区是负责接收的，那么就不能发送，相反同上。所以cfd一定是两个缓冲区进行工作的。
+
+服务器端或客户端的read如果没有接收到消息，一定是阻塞的，直到缓冲区收到内容才进行工作。
 
