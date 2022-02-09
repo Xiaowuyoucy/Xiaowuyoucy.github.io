@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/31/linux084%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</loc>
+    
+    <lastmod>2022-02-09T18:22:11.476Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/02/10/linux000g%E5%8A%A0%E5%8A%A0%E4%BD%BF%E7%94%A8/</loc>
+    
+    <lastmod>2022-02-09T17:17:08.065Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaowuyoucy.github.io/2022/02/08/linux000%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE2/</loc>
     
     <lastmod>2022-02-08T10:47:48.213Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://xiaowuyoucy.github.io/2022/02/08/linux000%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2022-02-08T10:41:19.557Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xiaowuyoucy.github.io/2022/01/31/linux084%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</loc>
-    
-    <lastmod>2022-02-07T15:27:09.300Z</lastmod>
     
   </url>
   
@@ -3831,14 +3838,14 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/tags/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/tags/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
