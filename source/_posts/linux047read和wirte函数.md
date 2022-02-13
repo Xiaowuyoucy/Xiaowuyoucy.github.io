@@ -3,7 +3,7 @@ title: read和write函数
 date: 2022-01-08 23:04:52
 tags:
 categories: linux
-doc:
+doc: true
 ---
 
 ### read函数

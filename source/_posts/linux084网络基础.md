@@ -3,7 +3,7 @@ title: 网络基础
 date: 2022-01-31 16:50:57
 tags:
 categories: linux
-doc:
+doc: true
 ---
 
 ### 协议的概念
@@ -701,38 +701,40 @@ gets函数最好不要使用,因为已经过时了,使用fgets来代替gets
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
-#include "wrap.h"
-
 #define SERV_IP "127.0.0.1"
-#define SERV_PORT 6666
+#define SERV_PORT 9527
 
 int main(void)
 {
     int sfd, len;
     struct sockaddr_in serv_addr;
-    char buf[BUFSIZ]; //BUFSIZ为系统默认的缓冲区大小。
+    char buf[BUFSIZ]; 
 
-    sfd = Socket(AF_INET, SOCK_STREAM, 0);
+    /*创建一个socket 指定IPv4 TCP*/
+    sfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    bzero(&serv_addr, sizeof(serv_addr));   //把serv_addr中每个字节设置为0          
-    serv_addr.sin_family = AF_INET;                             
-    inet_pton(AF_INET, SERV_IP, &serv_addr.sin_addr.s_addr);    
-    serv_addr.sin_port = htons(SERV_PORT);                      
+    /*初始化一个地址结构:*/
+    bzero(&serv_addr, sizeof(serv_addr));                       //清零
+    serv_addr.sin_family = AF_INET;                             //IPv4协议族
+    inet_pton(AF_INET, SERV_IP, &serv_addr.sin_addr.s_addr);    //指定IP 字符串类型转换为网络字节序 参3:传出参数
+    serv_addr.sin_port = htons(SERV_PORT);                      //指定端口 本地转网络字节序
 
-    Connect(sfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+    /*根据地址结构链接指定服务器进程*/
+    connect(sfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
 
     while (1) {
-        //fgets会自动在字符串末尾添加\0
-        //hello world ---->hello world\n\0
+        /*从标准输入获取数据*/
         fgets(buf, sizeof(buf), stdin);
-        int r = Write(sfd, buf, strlen(buf));       
-        printf("Write r ======== %d\n", r);
-        len = Read(sfd, buf, sizeof(buf));
-        printf("Read len ========= %d\n", len);
-        Write(STDOUT_FILENO, buf, len);	//写到终端(也就是屏幕)
+        /*将数据写给服务器*/
+        write(sfd, buf, strlen(buf));       //写个服务器
+        /*从服务器读回转换后数据*/
+        len = read(sfd, buf, sizeof(buf));
+        /*写至标准输出*/
+        write(STDOUT_FILENO, buf, len);
     }
 
-    Close(sfd);
+    /*关闭链接*/
+    close(sfd);
 
     return 0;
 }
@@ -741,6 +743,42 @@ int main(void)
 ```
 
 
+
+<br>
+
+<br>
+
+### 客户端服务器程序分析
+
+<br>
+
+![image-20220210013817470](/images/javawz/image-20220210013817470.png)
+
+客户端和服务器端的cfd文件描述符各自指向两个缓冲区一个是读缓冲区另一个是写缓冲区
+
+他们是通过IP地址+端口号进行建立连接的
+
+一个文件描述符读的同时也可以写,所以是双向全双工的
+
+客户端输入hello然后通过cfd写入发送缓冲区里，然后发送给服务器端的cfd接收缓冲区，服务器端收到hello后将其转换为HELLO后，将其写入发送缓冲区，然后发送给客户端的接收缓冲区，客户端收到后显示到终端
+
+如果cfd只有一个缓冲区，就只能接收或发送，如果缓冲区是负责接收的，那么就不能发送，相反同上。所以cfd一定是两个缓冲区进行工作的。
+
+服务器端或客户端的read如果没有接收到消息，一定是阻塞的，直到缓冲区收到内容才进行工作。
+
+### 查看网络程序端口
+
+```
+netstat -apn | grep 端口号
+```
+
+
+
+### 错误处理函数
+
+帮助文档查看函数名的时候是不区分大小写的
+
+#### wrap.h
 
 ```c
 #ifndef __WRAP_H_
@@ -766,6 +804,8 @@ ssize_t Readline(int fd, void *vptr, size_t maxlen);
 
 
 
+#### wrap.c
+
 ```c
 #include <stdlib.h>
 #include <stdio.h>
@@ -786,7 +826,7 @@ int Accept(int fd, struct sockaddr *sa, socklen_t *salenptr)
 again:
 	if ((n = accept(fd, sa, salenptr)) < 0) {
 		if ((errno == ECONNABORTED) || (errno == EINTR))
-			goto again;	//重新接受连接
+			goto again;
 		else
 			perr_exit("accept error");
 	}
@@ -873,6 +913,7 @@ int Close(int fd)
 }
 
 /*参三: 应该读取的字节数*/                          //socket 4096  readn(cfd, buf, 4096)   nleft = 4096-1500
+//读n个字节
 ssize_t Readn(int fd, void *vptr, size_t n)
 {
 	size_t  nleft;              //usigned int 剩余未读取的字节数
@@ -896,7 +937,7 @@ ssize_t Readn(int fd, void *vptr, size_t n)
 	}
 	return n - nleft;
 }
-
+//写n个字节
 ssize_t Writen(int fd, const void *vptr, size_t n)
 {
 	size_t nleft;
@@ -917,7 +958,7 @@ ssize_t Writen(int fd, const void *vptr, size_t n)
 	}
 	return n;
 }
-
+//一次读100个字节
 static ssize_t my_read(int fd, char *ptr)
 {
 	static int read_cnt;
@@ -943,6 +984,7 @@ again:
 
 /*readline --- fgets*/    
 //传出参数 vptr
+// 作用：读一行
 ssize_t Readline(int fd, void *vptr, size_t maxlen)
 {
 	ssize_t n, rc;
@@ -970,25 +1012,252 @@ ssize_t Readline(int fd, void *vptr, size_t maxlen)
 
 
 
-<br>
+### read函数返回值
+
+```
+char buf[1024];
+
+>0		实际读到的字节数,可以等于buf或小于buf
+=0		对端关闭
+=-1		异常
+	1.	errno == EINTR 	被信号中断	可以进行重启或退出处理
+	2.  errno == EAGAIN (EWOULDBLOCK) 非阻塞方式读，并且没有数据
+	3.  其他值   出现错误。--perror 打印错误信息 ,exit 退出程序。
+```
 
 <br>
 
-### 客户端服务器程序分析
+### TCP三次握手和四次挥手
+
+![image-20220210193456378](/images/javawz/image-20220210193456378.png)
+
+``` ACK
+TCP三次握手
+客户端: 发送SYN包 				1(0)	括号0代表这个数据包带0字节数据
+服务端: 收到后做应答	 			  2000(0) ACK 2			ACK是应答客户端发送的SYN包号+1
+客户端: 收到服务端的包后做出应答	  ACK 2001
+
+TCP四次挥手
+客户端:	发送FIN包   2(0)  ACK 2001
+服务端;    收到后回一个ACK包   ACK 3
+这时候TCP属于半关闭状态
+服务端:	发送FIN包  FIN 2001(0) ACK 3
+客户端:	发送ACK包  ACK 2002
+
+
+MTU、mss、半关闭
+
+	MTU： 最大传输单元    受协议限制   以太网1500   IP 65535
+
+	mss： 受MTU 标示一个数据包携带数据的上限数。 
+
+	win： 滑动窗口——当前本端 能接收的数据上限值。(单位：字节)
+```
 
 <br>
 
-![image-20220210013817470](/images/javawz/image-20220210013817470.png)
+使用TCP建立连接的机器,如果机器A发送数据包给机器B，机器B没有收到的话，机器A会重新发送一次
 
-客户端和服务器端的cfd文件描述符各自指向两个缓冲区一个是读缓冲区另一个是写缓冲区
 
-他们是通过IP地址+端口号进行建立连接的
 
-一个文件描述符读的同时也可以写,所以是双向全双工的
+### 协议上限分析
 
-客户端输入hello然后通过cfd写入发送缓冲区里，然后发送给服务器端的cfd接收缓冲区，服务器端收到hello后将其转换为HELLO后，将其写入发送缓冲区，然后发送给客户端的接收缓冲区，客户端收到后显示到终端
+![image-20220210200444005](/images/javawz/image-20220210200444005.png)
 
-如果cfd只有一个缓冲区，就只能接收或发送，如果缓冲区是负责接收的，那么就不能发送，相反同上。所以cfd一定是两个缓冲区进行工作的。
 
-服务器端或客户端的read如果没有接收到消息，一定是阻塞的，直到缓冲区收到内容才进行工作。
 
+### 多进程并发服务器程序实现
+
+![image-20220210204704757](/images/javawz/image-20220210204704757.png)
+
+```c
+#include <stdio.h>
+#include <string.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <signal.h>
+#include <sys/wait.h>
+#include <ctype.h>
+#include <unistd.h>
+
+#include "wrap.h"
+
+#define MAXLINE 8192
+#define SERV_PORT 8000
+
+void do_sigchild(int num)
+{
+    while (waitpid(0, NULL, WNOHANG) > 0)
+        ;
+}
+
+int main(void)
+{
+    struct sockaddr_in servaddr, cliaddr;
+    socklen_t cliaddr_len;
+    int listenfd, connfd;
+    char buf[MAXLINE];
+    char str[INET_ADDRSTRLEN];
+    int i, n;
+    pid_t pid;
+    struct sigaction newact;
+
+    newact.sa_handler = do_sigchild;
+    sigemptyset(&newact.sa_mask);
+    newact.sa_flags = 0;
+    sigaction(SIGCHLD, &newact, NULL);
+
+    listenfd = Socket(AF_INET, SOCK_STREAM, 0);
+
+    int opt = 1;
+    setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+
+    bzero(&servaddr, sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    servaddr.sin_port = htons(SERV_PORT);
+
+    Bind(listenfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
+
+    Listen(listenfd, 20);
+
+    printf("Accepting connections ...\n");
+    while (1) {
+        cliaddr_len = sizeof(cliaddr);
+        connfd = Accept(listenfd, (struct sockaddr *)&cliaddr, &cliaddr_len);
+        pid = fork();
+        //子进程工作
+        if (pid == 0) {
+            Close(listenfd);
+            while (1) {
+                n = Read(connfd, buf, MAXLINE);
+                if (n == 0) {
+                    printf("the other side has been closed.\n");
+                    break;
+                }
+                printf("received from %s at PORT %d\n",
+                        inet_ntop(AF_INET, &cliaddr.sin_addr, str, sizeof(str)),
+                        ntohs(cliaddr.sin_port));
+
+                for (i = 0; i < n; i++)
+                    buf[i] = toupper(buf[i]);
+
+                Write(STDOUT_FILENO, buf, n);
+                Write(connfd, buf, n);
+            }
+            Close(connfd);
+            return 0;
+        } else if (pid > 0) {
+            Close(connfd);
+        }  else
+            perr_exit("fork");
+    }
+    return 0;
+}
+
+
+
+```
+
+
+
+### 多线程并发服务器程序实现
+
+```c
+#include <stdio.h>
+#include <string.h>
+#include <arpa/inet.h>
+#include <pthread.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+#include "wrap.h"
+
+#define MAXLINE 8192
+#define SERV_PORT 8000
+
+struct s_info {                     //定义一个结构体, 将地址结构跟cfd捆绑
+    struct sockaddr_in cliaddr;
+    int connfd;
+};
+
+void *do_work(void *arg)
+{
+    int n,i;
+    struct s_info *ts = (struct s_info*)arg;
+    char buf[MAXLINE];
+    char str[INET_ADDRSTRLEN];      //#define INET_ADDRSTRLEN 16  可用"[+d"查看
+
+    while (1) {
+        n = Read(ts->connfd, buf, MAXLINE);                     //读客户端
+        if (n == 0) {
+            printf("the client %d closed...\n", ts->connfd);
+            break;                                              //跳出循环,关闭cfd
+        }
+        printf("received from %s at PORT %d\n",
+                inet_ntop(AF_INET, &(*ts).cliaddr.sin_addr, str, sizeof(str)),
+                ntohs((*ts).cliaddr.sin_port));                 //打印客户端信息(IP/PORT)
+
+        for (i = 0; i < n; i++) 
+            buf[i] = toupper(buf[i]);                           //小写-->大写
+
+        Write(STDOUT_FILENO, buf, n);                           //写出至屏幕
+        Write(ts->connfd, buf, n);                              //回写给客户端
+    }
+    Close(ts->connfd);
+
+    return (void *)0;
+}
+
+int main(void)
+{
+    struct sockaddr_in servaddr, cliaddr;
+    socklen_t cliaddr_len;
+    int listenfd, connfd;
+    pthread_t tid;
+    struct s_info ts[256];      //根据最大线程数创建结构体数组.
+    int i = 0;
+
+    listenfd = Socket(AF_INET, SOCK_STREAM, 0);                     //创建一个socket, 得到lfd
+
+    bzero(&servaddr, sizeof(servaddr));                             //地址结构清零
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);                   //指定本地任意IP
+    servaddr.sin_port = htons(SERV_PORT);                           //指定端口号 8000
+
+    Bind(listenfd, (struct sockaddr *)&servaddr, sizeof(servaddr)); //绑定
+
+    Listen(listenfd, 128);      //设置同一时刻链接服务器上限数
+
+    printf("Accepting client connect ...\n");
+
+    while (1) {
+        cliaddr_len = sizeof(cliaddr);
+        connfd = Accept(listenfd, (struct sockaddr *)&cliaddr, &cliaddr_len);   //阻塞监听客户端链接请求
+        ts[i].cliaddr = cliaddr;
+        ts[i].connfd = connfd;
+
+        /* 达到线程最大数时，pthread_create出错处理, 增加服务器稳定性 */
+        pthread_create(&tid, NULL, do_work, (void*)&ts[i]);
+        pthread_detach(tid);                                                    //子线程分离,防止僵线程产生.
+        i++;
+    }
+
+    return 0;
+}
+
+
+```
+
+
+
+
+
+### TCP状态转换
+
+![image-20220211012542123](/images/javawz/image-20220211012542123.png)
+
+2MSL在linux中是
+
+TIME_WAIT状态是确保主动关闭端发送的最后一个ACK能顺利到达
