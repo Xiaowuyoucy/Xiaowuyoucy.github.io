@@ -1258,6 +1258,299 @@ int main(void)
 
 ![image-20220211012542123](/images/javawz/image-20220211012542123.png)
 
+RST标志位表示客户端异常断开,服务端无法接收ACK,所以客户端操作系统会发送一个RST标志,然后让服务端回到LISTEN状态,重新接收连接
+
 2MSL在linux中是
 
 TIME_WAIT状态是确保主动关闭端发送的最后一个ACK能顺利到达
+
+**CLOSED：**表示初始状态。
+
+**LISTEN：**该状态表示服务器端的某个SOCKET处于监听状态，可以接受连接。
+
+**SYN_SENT：**这个状态与SYN_RCVD遥相呼应，当客户端SOCKET执行CONNECT连接时，它首先发送SYN报文，随即进入到了SYN_SENT状态，并等待服务端的发送三次握手中的第2个报文。SYN_SENT状态表示客户端已发送SYN报文。
+
+**SYN_RCVD:** 该状态表示接收到SYN报文，在正常情况下，这个状态是服务器端的SOCKET在建立TCP连接时的三次握手会话过程中的一个中间状态，很短暂。此种状态时，当收到客户端的ACK报文后，会进入到ESTABLISHED状态。
+
+**ESTABLISHED：**表示连接已经建立。
+
+**FIN_WAIT_1:** FIN_WAIT_1和FIN_WAIT_2状态的真正含义都是表示等待对方的FIN报文。区别是：
+
+FIN_WAIT_1状态是当socket在ESTABLISHED状态时，想主动关闭连接，向对方发送了FIN报文，此时该socket进入到FIN_WAIT_1状态。
+
+FIN_WAIT_2状态是当对方回应ACK后，该socket进入到FIN_WAIT_2状态，正常情况下，对方应马上回应ACK报文，所以FIN_WAIT_1状态一般较难见到，而FIN_WAIT_2状态可用netstat看到。
+
+**FIN_WAIT_2**：主动关闭链接的一方，发出FIN收到ACK以后进入该状态。称之为半连接或半关闭状态。该状态下的socket只能接收数据，不能发。
+
+**TIME_WAIT:** 表示收到了对方的FIN报文，并发送出了ACK报文，等2MSL后即可回到CLOSED可用状态。如果FIN_WAIT_1状态下，收到对方同时带 FIN标志和ACK标志的报文时，可以直接进入到TIME_WAIT状态，而无须经过FIN_WAIT_2状态。
+
+**CLOSING:** 这种状态较特殊，属于一种较罕见的状态。正常情况下，当你发送FIN报文后，按理来说是应该先收到（或同时收到）对方的 ACK报文，再收到对方的FIN报文。但是CLOSING状态表示你发送FIN报文后，并没有收到对方的ACK报文，反而却也收到了对方的FIN报文。什么情况下会出现此种情况呢？如果双方几乎在同时close一个SOCKET的话，那么就出现了双方同时发送FIN报文的情况，也即会出现CLOSING状态，表示双方都正在关闭SOCKET连接。
+
+**CLOSE_WAIT:** 此种状态表示在等待关闭。当对方关闭一个SOCKET后发送FIN报文给自己，系统会回应一个ACK报文给对方，此时则进入到CLOSE_WAIT状态。接下来呢，察看是否还有数据发送给对方，如果没有可以 close这个SOCKET，发送FIN报文给对方，即关闭连接。所以在CLOSE_WAIT状态下，需要关闭连接。
+
+**LAST_ACK:** 该状态是被动关闭一方在发送FIN报文后，最后等待对方的ACK报文。当收到ACK报文后，即可以进入到CLOSED可用状态。
+
+
+
+### 2MSL
+
+2MSL (Maximum Segment Lifetime) 
+
+RFC 793中规定MSL为2分钟，实际应用中常用的是30秒，1分钟和2分钟等。
+
+#### 程序设计中的问题
+
+做一个测试，首先启动server，然后启动client，用Ctrl-C终止server，马上再运行server，运行结果：
+
+```
+itcast$ ./server
+bind error: Address already in use 
+```
+
+这是因为，虽然server的应用程序终止了，但TCP协议层的连接并没有完全断开，因此不能再次监听同样的server端口。我们用netstat命令查看一下：
+
+```
+itcast$ netstat -apn |grep 6666
+tcp        1      0 192.168.1.11:38103      192.168.1.11:6666       CLOSE_WAIT  3525/client     
+tcp        0      0 192.168.1.11:6666       192.168.1.11:38103      FIN_WAIT2   -           
+```
+
+server终止时，socket描述符会自动关闭并发FIN段给client，client收到FIN后处于CLOSE_WAIT状态，但是client并没有终止，也没有关闭socket描述符，因此不会发FIN给server，因此server的TCP连接处于FIN_WAIT2状态。
+
+现在用Ctrl-C把client也终止掉，再观察现象：
+
+```
+itcast$ netstat -apn |grep 6666
+tcp        0      0 192.168.1.11:6666       192.168.1.11:38104      TIME_WAIT   -
+itcast$ ./server
+bind error: Address already in use
+```
+
+client终止时自动关闭socket描述符，server的TCP连接收到client发的FIN段后处于TIME_WAIT状态。TCP协议规定，**主动关闭连接的一方要处于TIME_WAIT状态**，等待两个MSL（maximum segment lifetime）的时间后才能回到CLOSED状态，因为我们先Ctrl-C终止了server，所以server是主动关闭连接的一方，在TIME_WAIT期间仍然不能再次监听同样的server端口。
+
+MSL在RFC 1122中规定为两分钟，但是各操作系统的实现不同，在Linux上一般经过半分钟后就可以再次启动server了。至于为什么要规定TIME_WAIT的时间，可参考UNP 2.7节。
+
+### 半关闭
+
+当TCP链接中A发送FIN请求关闭，B端回应ACK后（A端进入FIN_WAIT_2状态），B没有立即发送FIN给A时，A方处在半链接状态，此时A可以接收B发送的数据，但是A已不能再向B发送数据。
+
+从程序的角度，可以使用API来控制实现半连接状态。
+
+```
+#include <sys/socket.h>
+int shutdown(int sockfd, int how);
+sockfd: 需要关闭的socket的描述符
+how:	允许为shutdown操作选择以下几种方式:
+	SHUT_RD(0)：	关闭sockfd上的读功能，此选项将不允许sockfd进行读操作。
+					该套接字不再接受数据，任何当前在套接字接受缓冲区的数据将被无声的丢弃掉。
+	SHUT_WR(1):		关闭sockfd的写功能，此选项将不允许sockfd进行写操作。进程不能在对此套接字发出写操作。
+	SHUT_RDWR(2):	关闭sockfd的读写功能。相当于调用shutdown两次：首先是以SHUT_RD,然后以SHUT_WR。
+```
+
+使用close中止一个连接，但它只是减少描述符的引用计数，并不直接关闭连接，只有当描述符的引用计数为0时才关闭连接。
+
+**shutdown不考虑描述符的引用计数，直接关闭描述符**。也可选择中止一个方向的连接，只中止读或只中止写。
+
+注意:
+
+1. 如果有多个进程共享一个套接字，close每被调用一次，计数减1，直到计数为0时，也就是所用进程都调用了close，套接字将被释放。 
+
+2. 在多进程中如果一个进程调用了shutdown(sfd, SHUT_RDWR)后，其它的进程将无法进行通信。但，如果一个进程close(sfd)将不会影响到其它进程。
+
+#### 端口复用
+
+在server的TCP连接没有完全断开之前不允许重新监听是不合理的。因为，TCP连接没有完全断开指的是connfd（127.0.0.1:6666）没有完全断开，而我们重新监听的是lis-tenfd（0.0.0.0:6666），虽然是占用同一个端口，但IP地址不同，connfd对应的是与某个客户端通讯的一个具体的IP地址，而listenfd对应的是wildcard address。解决这个问题的方法是使用setsockopt()设置socket描述符的选项SO_REUSEADDR为1，表示允许创建端口号相同但IP地址不同的多个socket描述符。
+
+在server代码的socket()和bind()调用之间插入如下代码：
+
+```
+int opt = 1;
+setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+```
+
+有关setsockopt可以设置的其它选项请参考UNP第7章。
+
+
+
+## 多路I/O转接服务器
+
+多路IO转接服务器也叫做多任务IO服务器。该类服务器实现的主旨思想是，不再由应用程序自己监视客户端连接，取而代之由内核替应用程序监视文件。
+
+主要使用的方法有三种
+
+### select
+
+1. select能监听的文件描述符个数受限于FD_SETSIZE,一般为1024，单纯改变进程打开的文件描述符个数并不能改变select监听文件个数
+
+2. 解决1024以下客户端时使用select是很合适的，但如果链接客户端过多，select采用的是轮询模型，会大大降低服务器响应效率，不应在select上投入更多精力
+
+
+
+![image-20220214185634906](../../themes/pure/source/images/javawz/image-20220214185634906.png)
+
+
+
+![image-20220214190814350](../../themes/pure/source/images/javawz/image-20220214190814350.png)
+
+
+
+如果要修改文件描述符上限需要重新编译内核
+
+如果有两个文件描述符,一个是1号文件描述符另一个是1023号文件描述符触发了读事件,则需要for循环遍历1023次才能找到对应的两个事件,解决办法是创建一个数组来保存文件描述符,防止多余的遍历
+
+满足监听条件的集合和原有集合都是同一个集合,所有要提前保存好原有集合,防止数据被覆盖
+
+
+
+```
+#include <sys/select.h>
+/* According to earlier standards */
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+int select(int nfds, fd_set *readfds, fd_set *writefds,
+			fd_set *exceptfds, struct timeval *timeout);
+
+	nfds: 		监控的文件描述符集里最大文件描述符加1，因为此参数会告诉内核检测前多少个文件描述符的状态
+	readfds：	监控有读数据到达文件描述符集合，传入传出参数
+	writefds：	监控写数据到达文件描述符集合，传入传出参数
+	exceptfds：	监控异常发生达文件描述符集合,如带外数据到达异常，传入传出参数
+	timeout：	定时阻塞监控时间，3种情况
+				1.NULL，永远等下去
+				2.设置timeval，等待固定时间
+				3.设置timeval里时间均为0，检查描述字后立即返回，轮询
+	struct timeval {
+		long tv_sec; /* seconds */
+		long tv_usec; /* microseconds */
+	};
+	void FD_CLR(int fd, fd_set *set); 	//把文件描述符集合里fd清0
+	int FD_ISSET(int fd, fd_set *set); 	//测试文件描述符集合里fd是否置1
+	void FD_SET(int fd, fd_set *set); 	//把文件描述符集合里fd位置1
+	void FD_ZERO(fd_set *set); 			//把文件描述符集合里所有位清0
+```
+
+### select实现
+
+![image-20220214203149162](../../themes/pure/source/images/javawz/image-20220214203149162.png)
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <arpa/inet.h>
+#include <ctype.h>
+
+#include "wrap.h"
+
+#define SERV_PORT 6666
+
+int main(int argc, char *argv[])
+{
+    int i, j, n, maxi;
+
+    int nready, client[FD_SETSIZE];                 /* 自定义数组client, 防止遍历1024个文件描述符  FD_SETSIZE默认为1024 */
+    int maxfd, listenfd, connfd, sockfd;
+    char buf[BUFSIZ], str[INET_ADDRSTRLEN];         /* #define INET_ADDRSTRLEN 16 */
+
+	//存放服务器和客户端的ip和端口
+    struct sockaddr_in clie_addr, serv_addr;
+	//客户端clie_addr的长度
+    socklen_t clie_addr_len;
+    fd_set rset, allset;                            /* rset 读事件文件描述符集合 allset用来暂存 */
+	//创建套接字
+    listenfd = Socket(AF_INET, SOCK_STREAM, 0);
+
+	//设置端口复用
+    int opt = 1;
+    setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+
+	//清空serv_addr
+    bzero(&serv_addr, sizeof(serv_addr));
+	//设置服务器端口和ip
+    serv_addr.sin_family= AF_INET;
+    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    serv_addr.sin_port= htons(SERV_PORT);
+
+	//绑定端口和ip
+    Bind(listenfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+	//设置监听
+    Listen(listenfd, 128);
+
+    maxfd = listenfd;                                           /* 起初 listenfd 即为最大文件描述符 */
+	
+    maxi = -1;                                     	             /* 将来用作client[]的下标, 初始值指向0个元素之前下标位置 */
+    for (i = 0; i < FD_SETSIZE; i++)
+        client[i] = -1;                                         /* 用-1初始化client[] */
+
+    FD_ZERO(&allset);
+    FD_SET(listenfd, &allset);                                  /* 构造select监控文件描述符集 */
+
+    while (1) {   
+        rset = allset;                                          /* 每次循环时都从新设置select监控信号集 */
+        nready = select(maxfd+1, &rset, NULL, NULL, NULL);
+        if (nready < 0)
+            perr_exit("select error");
+
+        if (FD_ISSET(listenfd, &rset)) {                        /* 说明有新的客户端链接请求 */
+
+            clie_addr_len = sizeof(clie_addr);
+            connfd = Accept(listenfd, (struct sockaddr *)&clie_addr, &clie_addr_len);       /* Accept 不会阻塞 */
+            printf("received from %s at PORT %d\n",
+                    inet_ntop(AF_INET, &clie_addr.sin_addr.s_addr, str, sizeof(str)),
+                    ntohs(clie_addr.sin_port));
+
+            for (i = 0; i < FD_SETSIZE; i++)
+                if (client[i] < 0) {                            /* 找client[]中没有使用的位置 */
+                    client[i] = connfd;                         /* 保存accept返回的文件描述符到client[]里 */
+                    break;
+                }
+
+            if (i == FD_SETSIZE) {                              /* 达到select能监控的文件个数上限 1024 */
+                fputs("too many clients\n", stderr);
+                exit(1);
+            }
+
+            FD_SET(connfd, &allset);                            /* 向监控文件描述符集合allset添加新的文件描述符connfd */
+			//如果connfn大于maxfd则交换
+            if (connfd > maxfd)
+                maxfd = connfd;                                 /* select第一个参数需要 */
+
+            if (i > maxi)
+                maxi = i;                                       /* 保证maxi存的总是client[]最后一个元素下标 */
+
+            if (--nready == 0)
+                continue;
+        } 
+
+        for (i = 0; i <= maxi; i++) {                               /* 检测哪个clients 有数据就绪 */
+
+            if ((sockfd = client[i]) < 0)
+                continue;
+            if (FD_ISSET(sockfd, &rset)) {
+
+                if ((n = Read(sockfd, buf, sizeof(buf))) == 0) {    /* 当client关闭链接时,服务器端也关闭对应链接 */
+                    Close(sockfd);
+                    FD_CLR(sockfd, &allset);                        /* 解除select对此文件描述符的监控 */
+                    client[i] = -1;
+                } else if (n > 0) {
+                    for (j = 0; j < n; j++)
+                        buf[j] = toupper(buf[j]);
+                    Write(sockfd, buf, n);
+                    Write(STDOUT_FILENO, buf, n);
+                }
+                if (--nready == 0)
+                    break;                                          /* 跳出for, 但还在while中 */
+            }
+        }
+    }
+    Close(listenfd);
+    return 0;
+}
+
+
+```
+
+
+
+![image-20220214204935192](../../themes/pure/source/images/javawz/image-20220214204935192.png)
