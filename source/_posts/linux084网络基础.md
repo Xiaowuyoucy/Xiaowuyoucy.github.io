@@ -1386,11 +1386,11 @@ setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
 
 
-![image-20220214185634906](../../themes/pure/source/images/javawz/image-20220214185634906.png)
+![image-20220214185634906](/images/javawz/image-20220214185634906.png)
 
 
 
-![image-20220214190814350](../../themes/pure/source/images/javawz/image-20220214190814350.png)
+![image-20220214190814350](/images/javawz/image-20220214190814350.png)
 
 
 
@@ -1431,7 +1431,7 @@ int select(int nfds, fd_set *readfds, fd_set *writefds,
 
 ### select实现
 
-![image-20220214203149162](../../themes/pure/source/images/javawz/image-20220214203149162.png)
+![image-20220214203149162](/images/javawz/image-20220214203149162.png)
 
 ```c
 #include <stdio.h>
@@ -1553,4 +1553,4 @@ int main(int argc, char *argv[])
 
 
 
-![image-20220214204935192](../../themes/pure/source/images/javawz/image-20220214204935192.png)
+![image-20220214204935192](/images/javawz/image-20220214204935192.png)
