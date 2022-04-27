@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>图(graph) | YanChen</title>
+  <meta name="description" content="图的相关概念  图的定义和术语 图的定义：图是由顶点的有穷非空集合和顶点之间的边的集合组成，通常表示为：G = (V,E)，其中，G表示一个图，V是图G中顶点的集合，E是图G中边的集合。 图中的元素称为顶点(Vertex) 顶点必须是有穷的非空集合,因此一个图至少有一个顶点。 顶点之间的逻辑关系用边(Edge)来表示,边集可以是空的。 无向边：若顶点Vi 到Vj 的边没有方向，则称这条边为无向边">
+<meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图(graph)">
+<meta property="og:url" content="https://xiaowuyoucy.github.io/2022/04/08/图-graph/index.html">
+<meta property="og:site_name" content="YanChen">
+<meta property="og:description" content="图的相关概念  图的定义和术语 图的定义：图是由顶点的有穷非空集合和顶点之间的边的集合组成，通常表示为：G = (V,E)，其中，G表示一个图，V是图G中顶点的集合，E是图G中边的集合。 图中的元素称为顶点(Vertex) 顶点必须是有穷的非空集合,因此一个图至少有一个顶点。 顶点之间的逻辑关系用边(Edge)来表示,边集可以是空的。 无向边：若顶点Vi 到Vj 的边没有方向，则称这条边为无向边">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408020846032.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408020925632.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408021013033.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408021041958.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408025046325.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408030319392.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408021246414.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408021408335.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408021419655.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408041335770.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408021823273.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408021856686.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408034350690.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408034407319.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408034504461.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408220553196.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408220721949.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408220750174.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408220813779.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408220827738.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220409030209152.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408221013803.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220409004002534.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220414071801628.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220414072024176.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220414072333490.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220414072738740.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220414072819782.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220414073224878.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220414073244767.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220414073614721.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220414073955303.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220414074324676.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220414074546109.png">
+<meta property="og:updated_time" content="2022-04-15T23:35:12.676Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图(graph)">
+<meta name="twitter:description" content="图的相关概念  图的定义和术语 图的定义：图是由顶点的有穷非空集合和顶点之间的边的集合组成，通常表示为：G = (V,E)，其中，G表示一个图，V是图G中顶点的集合，E是图G中边的集合。 图中的元素称为顶点(Vertex) 顶点必须是有穷的非空集合,因此一个图至少有一个顶点。 顶点之间的逻辑关系用边(Edge)来表示,边集可以是空的。 无向边：若顶点Vi 到Vj 的边没有方向，则称这条边为无向边">
+<meta name="twitter:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220408020846032.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xiaowuyoucy.github.io/2022/04/08/图-graph/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fonts2/iconfont.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xiaowuyoucy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">YanChen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> GuangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="https://www.xiaochenyan.top/navigation/index.html">
+            
+            <i class="icon icon-map-marker"></i>
+            
+            <span class="menu-title">导航</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon iconfont icon-video"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">格言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+				
+				<p id="hitokoto">:D 获取中...</p>
+				<p id="from" style="text-align: right"></p>
+                <script>
+					  var xhr = new XMLHttpRequest();
+					  xhr.open('get', 'https://v1.hitokoto.cn');
+					  xhr.onreadystatechange = function () {
+						if (xhr.readyState === 4) {
+						  var data = JSON.parse(xhr.responseText);
+						  var hitokoto = document.getElementById('hitokoto');
+						  hitokoto.innerText = data.hitokoto;
+						  var from = document.getElementById('from');
+						  from.innerText = "-- " + data.from;
+						}
+					  }
+					  xhr.send();
+				</script>
+				
+				
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">195</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KaliLinux/">KaliLinux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL/">MYSQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHCE/">RHCE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WEB安全渗透/">WEB安全渗透</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows命令/">Windows命令</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows网络编程/">Windows网络编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/apache/">apache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/c/">c</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp/">cpp</a><span class="category-list-count">102</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp17从入门到精通/">cpp17从入门到精通</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/githubHexo/">githubHexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/libevent/">libevent</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">88</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计/">windows程序设计</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计2/">windows程序设计2</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术资讯/">技术资讯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/易语言/">易语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇编逆向/">汇编逆向</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/理财投资/">理财投资</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简谈计算机/">简谈计算机</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程词汇/">编程词汇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络爬虫/">网络爬虫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机公共基础/">计算机公共基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络TCP-IP传输协议-网络抓包/">计算机网络TCP/IP传输协议/网络抓包</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络原理/">计算机网络原理</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高中数学/">高中数学</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GET/">$_GET</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POST，-SERVER/">$_POST，$_SERVER</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REQUEST/">$_REQUEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOTO语句/">GOTO语句</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang函数/">Golang函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang匿名函数/">Golang匿名函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础/">Golang基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础类型占位符/">Golang基础类型占位符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang常量与变量里表达式/">Golang常量与变量里表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang循环结构/">Golang循环结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang指针/">Golang指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang标准输入与输出/">Golang标准输入与输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang流程控制/">Golang流程控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang程序运算/">Golang程序运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang类型转换及移位运算/">Golang类型转换及移位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang闭包函数/">Golang闭包函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ISO七层模型/">ISO七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java总结/">Java总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalinux/">Kalinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Null和Undefined/">Null和Undefined</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP两种定义常量的形式/">PHP两种定义常量的形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP常量/">PHP常量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python教程/">Python教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python笔记/">Python笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python运算符/">Python运算符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO网站优化/">SEO网站优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIR/">__DIR__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FILE/">__FILE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/">__LINE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache环境变量/">apache环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache配置/">apache配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beef劫持/">beef劫持</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dowhile循环/">dowhile循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iota定义常量组/">iota定义常量组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数/">javascript函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this方法/">js-this方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js布尔类型隐私转换/">js布尔类型隐私转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux目录结构/">linux目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php变量/">php变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urlib2/">urlib2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全渗透/">web安全渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web渗透/">web渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/变量的操作/">变量的操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/延时执行defer/">延时执行defer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格狼日/">拉格狼日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间复杂度测试/">时间复杂度测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财，投资/">理财，投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络模型/">网络模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/顺序表/">顺序表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/GET/" style="font-size: 13px;">$_GET</a> <a href="/tags/POST，-SERVER/" style="font-size: 13px;">$_POST，$_SERVER</a> <a href="/tags/REQUEST/" style="font-size: 13px;">$_REQUEST</a> <a href="/tags/Cookie/" style="font-size: 13px;">Cookie</a> <a href="/tags/GOTO语句/" style="font-size: 13px;">GOTO语句</a> <a href="/tags/Golang/" style="font-size: 13px;">Golang</a> <a href="/tags/Golang函数/" style="font-size: 13px;">Golang函数</a> <a href="/tags/Golang匿名函数/" style="font-size: 13px;">Golang匿名函数</a> <a href="/tags/Golang基础/" style="font-size: 14px;">Golang基础</a> <a href="/tags/Golang基础类型占位符/" style="font-size: 13px;">Golang基础类型占位符</a> <a href="/tags/Golang常量与变量里表达式/" style="font-size: 13px;">Golang常量与变量里表达式</a> <a href="/tags/Golang循环结构/" style="font-size: 13px;">Golang循环结构</a> <a href="/tags/Golang指针/" style="font-size: 13px;">Golang指针</a> <a href="/tags/Golang标准输入与输出/" style="font-size: 13px;">Golang标准输入与输出</a> <a href="/tags/Golang流程控制/" style="font-size: 13px;">Golang流程控制</a> <a href="/tags/Golang程序运算/" style="font-size: 13px;">Golang程序运算</a> <a href="/tags/Golang类型转换及移位运算/" style="font-size: 13px;">Golang类型转换及移位运算</a> <a href="/tags/Golang闭包函数/" style="font-size: 13px;">Golang闭包函数</a> <a href="/tags/ISO七层模型/" style="font-size: 13px;">ISO七层模型</a> <a href="/tags/Java总结/" style="font-size: 13px;">Java总结</a> <a href="/tags/Kalinux/" style="font-size: 13px;">Kalinux</a> <a href="/tags/Null和Undefined/" style="font-size: 13px;">Null和Undefined</a> <a href="/tags/PHP两种定义常量的形式/" style="font-size: 13px;">PHP两种定义常量的形式</a> <a href="/tags/PHP常量/" style="font-size: 13px;">PHP常量</a> <a href="/tags/Python教程/" style="font-size: 13px;">Python教程</a> <a href="/tags/Python笔记/" style="font-size: 13px;">Python笔记</a> <a href="/tags/Python运算符/" style="font-size: 13px;">Python运算符</a> <a href="/tags/SEO网站优化/" style="font-size: 13px;">SEO网站优化</a> <a href="/tags/XSS/" style="font-size: 14px;">XSS</a> <a href="/tags/DIR/" style="font-size: 13px;">__DIR__</a> <a href="/tags/FILE/" style="font-size: 13px;">__FILE__</a> <a href="/tags/LINE/" style="font-size: 13px;">__LINE__</a> <a href="/tags/apache环境变量/" style="font-size: 13px;">apache环境变量</a> <a href="/tags/apache配置/" style="font-size: 13px;">apache配置</a> <a href="/tags/beef劫持/" style="font-size: 13px;">beef劫持</a> <a href="/tags/dowhile循环/" style="font-size: 13px;">dowhile循环</a> <a href="/tags/iota定义常量组/" style="font-size: 13px;">iota定义常量组</a> <a href="/tags/javascript函数/" style="font-size: 13px;">javascript函数</a> <a href="/tags/js-this方法/" style="font-size: 13px;">js-this方法</a> <a href="/tags/js布尔类型隐私转换/" style="font-size: 13px;">js布尔类型隐私转换</a> <a href="/tags/linux目录结构/" style="font-size: 13px;">linux目录结构</a> <a href="/tags/php变量/" style="font-size: 13px;">php变量</a> <a href="/tags/sql注入/" style="font-size: 13px;">sql注入</a> <a href="/tags/urlib2/" style="font-size: 13px;">urlib2</a> <a href="/tags/web安全渗透/" style="font-size: 13px;">web安全渗透</a> <a href="/tags/web渗透/" style="font-size: 13px;">web渗透</a> <a href="/tags/变量的操作/" style="font-size: 13px;">变量的操作</a> <a href="/tags/延时执行defer/" style="font-size: 13px;">延时执行defer</a> <a href="/tags/拉格狼日/" style="font-size: 13px;">拉格狼日</a> <a href="/tags/时间复杂度测试/" style="font-size: 13px;">时间复杂度测试</a> <a href="/tags/理财，投资/" style="font-size: 13px;">理财，投资</a> <a href="/tags/算法/" style="font-size: 13px;">算法</a> <a href="/tags/网络模型/" style="font-size: 13px;">网络模型</a> <a href="/tags/计算机基础/" style="font-size: 13px;">计算机基础</a> <a href="/tags/顺序表/" style="font-size: 13px;">顺序表</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">87</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">51</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">125</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">106</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/cpp/">cpp</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/27/排序算法/" class="title">排序算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-27T07:10:54.000Z" itemprop="datePublished">2022-04-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/cpp/">cpp</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/21/二叉树插入查找删除实现/" class="title">二叉树插入查找删除实现</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-21T05:27:04.000Z" itemprop="datePublished">2022-04-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/cpp/">cpp</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/18/AStar寻路算法/" class="title">AStar寻路算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-17T21:12:11.000Z" itemprop="datePublished">2022-04-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/cpp/">cpp</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/08/图-graph/" class="title">图(graph)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-07T18:03:59.000Z" itemprop="datePublished">2022-04-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/cpp/">cpp</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/04/04/树和二叉树/" class="title">树和二叉树</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-04-04T14:07:32.000Z" itemprop="datePublished">2022-04-04</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-图-graph" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      图(graph)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/04/08/图-graph/" class="article-date">
+	  <time datetime="2022-04-07T18:03:59.000Z" itemprop="datePublished">2022-04-08</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/cpp/">cpp</a>
+  </span>
+
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/04/08/图-graph/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 7.7k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 33(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="图的相关概念"><a class="markdownIt-Anchor" href="#图的相关概念"></a> 图的相关概念</h2>
+<h3 id="图的定义和术语"><a class="markdownIt-Anchor" href="#图的定义和术语"></a> 图的定义和术语</h3>
+<p>图的定义：图是由<strong>顶点的有穷非空集合</strong>和<strong>顶点之间的边的集合</strong>组成，通常表示为：G = (V,E)，其中，G表示一个图，V是图G中顶点的集合，E是图G中边的集合。</p>
+<p>图中的元素称为顶点(Vertex)</p>
+<p>顶点必须是有穷的非空集合,因此一个图至少有一个顶点。</p>
+<p>顶点之间的逻辑关系用边(Edge)来表示,边集可以是空的。</p>
+<p><strong>无向边</strong>：若顶点Vi 到Vj 的边没有方向，则称这条边为无向边，用无序偶对<code>（Vi ，Vj）</code>来表示。</p>
+<p><strong>有向边</strong>：若从顶点Vi 到Vj的边有方向，则称这条边为有向边，也称为弧(Arc)。用有序偶对<code>&lt;Vi ，Vj&gt;</code>来表示。<code>Vi</code>称为弧尾(Tail)或初始点，<code>Vj</code>称为弧头(Head)或终端点。</p>
+<p>注意: <code>&lt; Vi ，Vj &gt;</code>和<code>&lt; Vj ，Vi &gt;</code>是两条不同的有向边。<br>
+<strong>无向图</strong>: 如果图中任意两个顶点之间的边都是无向边，则称该图为无向图。</p>
+<p>图例(G1):</p>
+<p><img src="/images/javawz/image-20220408020846032.png" alt="image-20220408020846032"></p>
+<p><strong>有向图</strong>: 如果图中任意顶点之间的边都是有向边，则称该图为有向图。<br>
+图例(G2):</p>
+<p><img src="/images/javawz/image-20220408020925632.png" alt="image-20220408020925632"></p>
+<p><strong>无向完全图</strong>：在无向图中，如果任意两个顶点之间都存在边，则称该图为无向完全图。含有n个顶点的无向完全图有<code>n(n-1)/2</code>条边。<br>
+图例(G3)</p>
+<p><img src="/images/javawz/image-20220408021013033.png" alt="image-20220408021013033"></p>
+<p><strong>有向完全图</strong>：在有向图中，如果任意两个顶点之间都存在方向互为相反的两条弧，则称该图为有向完全图。含有n个顶点的有向完全图有n(n-1)条边。</p>
+<p><img src="/images/javawz/image-20220408021041958.png" alt="image-20220408021041958"></p>
+<p>总结: 图G的顶点数n和边数e的关系<br>
+<strong>（1）若G是无向图，则0≤e≤n(n-1)/2</strong><br>
+恰有n(n-1)/2条边的无向图称无向完全图(Undireet-ed Complete Graph)<br>
+<strong>（2）若G是有向图，则0≤e≤n(n-1)。</strong><br>
+恰有n(n-1)条边的有向图称为有向完全图(Directed Complete Graph)。<br>
+注意：<br>
+　完全图具有最多的边数。任意一对顶点间均有边相连。<br>
+<strong>稀疏图</strong>: 有很少条边或弧的图。<br>
+<strong>稠密图</strong>: 有很多条边或弧的图。<br>
+<strong>权</strong>: 有时图的边或弧具有与它相关的数,这种与图的边或弧相关的数叫做权。</p>
+<p><img src="/images/javawz/image-20220408025046325.png" alt="image-20220408025046325"></p>
+<p><strong>网</strong>：带权的图通常称为网。<br>
+<strong>度</strong>：顶点的度是指<strong>和该顶点关联的边的数目</strong>。</p>
+<p><strong>无向图的度</strong>：与这个顶点相关联的边的条数，边的数量等于各个顶点度数和的一半。</p>
+<p><strong>有向图的度：</strong></p>
+<ul>
+<li><strong>入度</strong>：有向图中以顶点（v）为头的弧的数目，称为（v）的入度。</li>
+<li><strong>出度</strong>：有向图中以顶点（v）为尾的弧的数目，称为（v）的出度。</li>
+<li><strong>弧的数量=各个顶点出度和 = 各个顶点的入度和</strong></li>
+</ul>
+<p><strong>邻接点</strong>：对于无向图，同一边上的两个顶点称为邻接点。<br>
+<strong>子图</strong>: 假设两个图G=(V,E)和G1=(V1,E1),如果V1⊆V且E1⊆E则G1为G的子图<br>
+<strong>路径的长度</strong>: 路径上的边或弧的数目。</p>
+<p><img src="/images/javawz/image-20220408030319392.png" alt="image-20220408030319392"></p>
+<p>上图中左侧B到D的路径长为2，右侧B到D的路径为3</p>
+<h3 id="连通图相关术语"><a class="markdownIt-Anchor" href="#连通图相关术语"></a> 连通图相关术语</h3>
+<p>在无向图G=(V,E)中，如果从顶点v到顶点w有路径，则称v和w是相通的。**如果对图中任意两个顶点Vi和Vj 属于E，则两个顶点是连通的，则称G是连通图。**如下图1，它的顶点A都顶点B、C、D都是连通的，但显然顶点A与顶点E或F就无路径，因此不能算是连通图。而图2，顶点A、B、C、D相互都是连通的，所以它本身是连通图。</p>
+<p><img src="/images/javawz/image-20220408021246414.png" alt="image-20220408021246414"></p>
+<h4 id="连通图生成树"><a class="markdownIt-Anchor" href="#连通图生成树"></a> 连通图生成树</h4>
+<p>连通图的生成树<strong>是一个极小的连通子图，它含有图中全部的n个顶点，但只有足以构成一棵树的n-1条边。</strong><br>
+<strong>极小连通子图是相对于连通图来说的。</strong><br>
+比如下图的图1是一个普通图，但显然它不是生成树，当去掉两条构成环的边后，比如图2或图3，就满足n个顶点n-1条边且连通的定义了。它们都是一棵生成树。从这里也知道，如果一个图有n个顶点和小于n-1条边，则是非连通图，如果它多于n-1条边，必定构成一个环，因为这条边使得它依附的那两个顶点之间有了第二条路径。比如图2和图3，随便加哪两顶点的边都将构成环。<strong>不过有n-1条边并不一定是生成树</strong>，比如图4。</p>
+<p><img src="/images/javawz/image-20220408021408335.png" alt="image-20220408021408335"></p>
+<p><img src="/images/javawz/image-20220408021419655.png" alt="image-20220408021419655"></p>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+<p>图按照<strong>有无方向</strong>分为<strong>无向图</strong>和<strong>有向图</strong>。<br>
+无向图由<strong>顶点</strong>和<strong>边</strong>构成。<br>
+有向图由<strong>顶点</strong>和弧构成，弧有<strong>弧头</strong>和<strong>弧尾</strong>之分。<br>
+图按照<strong>边或弧的多少</strong>分为<strong>稀疏图</strong>和<strong>稠密图</strong>。<br>
+如果<strong>任意两个顶点之间都存在边</strong>叫<strong>完全图</strong>，有向的叫有向完全图。<br>
+与顶点相关联的边的条数叫做度，有向图顶点分为入度和出度。<br>
+图上的边或弧带权则称为网。</p>
+<p>无向图中<strong>连通</strong>且<strong>n个顶点n-1条边</strong>叫生成树。</p>
+<h2 id="12-图的存储结构"><a class="markdownIt-Anchor" href="#12-图的存储结构"></a> 1.2、图的存储结构</h2>
+<p><strong>图</strong>可以用<strong>顺序存储</strong>或链式存储</p>
+<p><strong>顺序存储:邻接矩阵</strong></p>
+<p><strong>链式存储:邻接表</strong></p>
+<h3 id="121邻接矩阵"><a class="markdownIt-Anchor" href="#121邻接矩阵"></a> 1.2.1邻接矩阵</h3>
+<p><img src="/images/javawz/image-20220408041335770.png" alt="image-20220408041335770"></p>
+<p>图的邻接矩阵存储方式是用两个数组来表示图。</p>
+<ul>
+<li>一个一维数组存储图中顶点信息。</li>
+<li>一个二维数组（邻接矩阵）存储图中的边或弧的信息。</li>
+</ul>
+<p>设图G有n个顶点，则邻接矩阵是一个n*n的方阵，定义为：</p>
+<p><img src="/images/javawz/image-20220408021823273.png" alt="image-20220408021823273"></p>
+<p>看一个实例，下图左就是一个<strong>无向图</strong>。</p>
+<p><img src="/images/javawz/image-20220408021856686.png" alt="image-20220408021856686"></p>
+<p>从上面可以看出，<strong>无向图的边数组是一个对称矩阵</strong>。所谓对称矩阵就是n阶矩阵的元满足a<sub>ij</sub> = a<sub>ji</sub>  ，即从矩阵的左上角到右下角的主对角线为轴，右上角的元和左下角相对应的元全都是相等的。<br>
+从这个矩阵中，很容易知道图中的信息。</p>
+<ul>
+<li>
+<p>（1）<strong>判断任意两顶点是否有边无边；</strong></p>
+</li>
+<li>
+<p>（2）<strong>某个顶点的度，其实就是这个顶点vi在邻接矩阵中第i行或（第i列）的元素之和；</strong></p>
+</li>
+<li>
+<p>（3）**求顶点vi的所有邻接点就是将矩阵中第i行元素扫描一遍，**arc[i][j]为1就是邻接点；</p>
+<p>而有向图讲究入度和出度，顶点v2的入度为2，正好是第i列各数之和。顶点v2的出度为1，即第i行的各数之和。</p>
+</li>
+</ul>
+<p><img src="/images/javawz/image-20220408034350690.png" alt="image-20220408034350690"></p>
+<p>若图G是<strong>网图</strong>，有n个顶点，则邻接矩阵是一个n*n的方阵，定义为：</p>
+<p><img src="/images/javawz/image-20220408034407319.png" alt="image-20220408034407319"></p>
+<p>这里的w<sub>ij</sub>表示(v<sub>i</sub>,v<sub>j</sub>)上的权值。无穷大表示一个计算机允许的、大于所有边上权值的值，也就是一个不可能的极限值。下面左图就是一个有向网图，下图就是它的邻接矩阵。</p>
+<p><img src="/images/javawz/image-20220408034504461.png" alt="image-20220408034504461"></p>
+<h3 id="创建无向图和有向图代码示例"><a class="markdownIt-Anchor" href="#创建无向图和有向图代码示例"></a> 创建无向图和有向图代码示例</h3>
+<h4 id="无向图"><a class="markdownIt-Anchor" href="#无向图"></a> 无向图</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//最大的顶点数</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertex 50 </span></span><br><span class="line"><span class="comment">//存放顶点名称的数组</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> VertexInfo[<span class="number">9</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义图的结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Graph</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">// 顶点数组 - 存储顶点的名字  等价于  vertex[MaxVertex][9]  最多存放MaxVertex个顶点</span></span><br><span class="line">	VertexInfo vertex[MaxVertex];</span><br><span class="line">	<span class="comment">// 边的数组  二维矩阵</span></span><br><span class="line">	<span class="keyword">int</span> edge[MaxVertex][MaxVertex];</span><br><span class="line">	<span class="comment">// 顶点的个数</span></span><br><span class="line">	<span class="keyword">int</span> vertexNum;</span><br><span class="line">	<span class="comment">// 边的条数</span></span><br><span class="line">	<span class="keyword">int</span> edgeNum;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求用户输入的顶点在顶点数组中的位置</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LocalVertex</span><span class="params">(Graph &amp;g, VertexInfo v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 遍历顶点数组</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">strcmp</span>(v, g.vertex[i]) == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 找到了,返回元素的下标</span></span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 没找到</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 构建一个图</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreateGraph</span><span class="params">(Graph &amp;g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入图的顶点数和边数: 顶点 边"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; g.vertexNum &gt;&gt; g.edgeNum;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入"</span> &lt;&lt; g.vertexNum &lt;&lt; <span class="string">"个顶点的值"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; g.vertex[i]; <span class="comment">//初始化每个顶点</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 初始化所有边都不存在</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g.vertexNum; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			g.edge[i][j] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入"</span> &lt;&lt; g.edgeNum &lt;&lt; <span class="string">"条边, 顶点1 顶点2"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	VertexInfo v1, v2;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.edgeNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; v1 &gt;&gt; v2;</span><br><span class="line">		<span class="comment">// 求用户输入的顶点在顶点数组中的位置</span></span><br><span class="line">		<span class="keyword">int</span> m = LocalVertex(g, v1); <span class="comment">//获取v1在二维数组中的位置</span></span><br><span class="line">		<span class="keyword">int</span> n = LocalVertex(g, v2); <span class="comment">//获取v2在二维数组中的位置</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// 边对应的二维数组赋值</span></span><br><span class="line">		g.edge[m][n] = <span class="number">1</span>;</span><br><span class="line">		g.edge[n][m] = <span class="number">1</span>;	<span class="comment">// 无向图 对称关系</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印图 - </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintGraph</span><span class="params">(Graph&amp; g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 水平表头</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; g.vertex[i] &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="comment">// 垂直的</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; g.vertex[i] &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g.vertexNum; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; g.edge[i][j] &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//构建图</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Graph graph;</span><br><span class="line">	CreateGraph(graph);</span><br><span class="line">	PrintGraph(graph);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	test01();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="有向图"><a class="markdownIt-Anchor" href="#有向图"></a> 有向图</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertex 50</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> VertexInfo[<span class="number">9</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义图的结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Graph</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">// 顶点数组 - 存储顶点的名字</span></span><br><span class="line">	VertexInfo vertex[MaxVertex];</span><br><span class="line">	<span class="comment">// 边的数组</span></span><br><span class="line">	<span class="keyword">int</span> edge[MaxVertex][MaxVertex];</span><br><span class="line">	<span class="comment">// 顶点的个数</span></span><br><span class="line">	<span class="keyword">int</span> vertexNum;</span><br><span class="line">	<span class="comment">// 边的条数</span></span><br><span class="line">	<span class="keyword">int</span> edgeNum;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求用户输入的顶点在顶点数组中的位置</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LocalVertex</span><span class="params">(Graph &amp;g, VertexInfo v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 遍历顶点数组</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">strcmp</span>(v, g.vertex[i]) == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 找到了,返回元素的下标</span></span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 没找到</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 构建一个图</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreateGraph</span><span class="params">(Graph &amp;g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入图的顶点数和边数: 顶点 边"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; g.vertexNum &gt;&gt; g.edgeNum;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入"</span> &lt;&lt; g.vertexNum &lt;&lt; <span class="string">"个顶点的值"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; g.vertex[i];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 初始化所有边都不存在</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g.vertexNum; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			g.edge[i][j] = INT_MAX;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// &lt;B, A&gt;</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入"</span> &lt;&lt; g.edgeNum &lt;&lt; <span class="string">"条边, 弧尾 弧头 权重"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">int</span> w;</span><br><span class="line">	VertexInfo v1, v2;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.edgeNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; v1 &gt;&gt; v2 &gt;&gt; w;</span><br><span class="line">		<span class="comment">// 求用户输入的顶点在顶点数组中的位置</span></span><br><span class="line">		<span class="keyword">int</span> m = LocalVertex(g, v1);</span><br><span class="line">		<span class="keyword">int</span> n = LocalVertex(g, v2);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 边对应的二维数组赋值</span></span><br><span class="line">		g.edge[m][n] = w;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 打印图 - </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintGraph</span><span class="params">(Graph&amp; g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 水平表头</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; g.vertex[i] &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="comment">// 垂直的</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; g.vertex[i] &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g.vertexNum; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (g.edge[i][j] == INT_MAX)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"∞"</span> &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; g.edge[i][j] &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Graph g;</span><br><span class="line">	CreateGraph(g);</span><br><span class="line">	PrintGraph(g);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	test01();</span><br><span class="line"></span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="邻接表"><a class="markdownIt-Anchor" href="#邻接表"></a> 邻接表</h3>
+<p><img src="/images/javawz/image-20220408220553196.png" alt="image-20220408220553196"></p>
+<p>邻接矩阵是不错的一种图存储结构，但是，对于边数相对顶点较少的图，这种结构存在对存储空间的极大浪费。因此，找到一种数组与链表相结合的存储方法称为邻接表。</p>
+<p>邻接表的存储方式是这样的：<br>
+（1）图中<strong>顶点用一个一维数组存储</strong>，当然，<strong>顶点也可以用单链表来存储</strong>，<br>
+不过，数组可以较容易的读取顶点的信息，更加方便。<br>
+（2）图中<strong>每个顶点vi的所有邻接点构成一个线性表</strong>，由于邻接点的个数不定，所以，用单链表存储，无向图称为顶点vi的边表，有向图则称为顶点vi作为弧尾的出边表。<br>
+数据结构定义:</p>
+<p><img src="/images/javawz/image-20220408220721949.png" alt="image-20220408220721949"></p>
+<p>例如，下图就是一个无向图的邻接表的结构。</p>
+<p><img src="/images/javawz/image-20220408220750174.png" alt="image-20220408220750174"></p>
+<p>从图中可以看出，顶点表的各个结点由data和firstedge两个域表示，data是数据域，存储顶点的信息，firstedge是指针域，指向边表的第一个结点，即此顶点的第一个邻接点。边表结点由adjvex和next两个域组成。adjvex是邻接点域，存储某顶点的邻接点在顶点表中的下标，next则存储指向边表中下一个结点的指针。</p>
+<p>对于带权值的网图，可以在边表结点定义中再增加一个weight的数据域，存储权值信息即可。如下图所示。</p>
+<p><img src="/images/javawz/image-20220408220813779.png" alt="image-20220408220813779"></p>
+<p><img src="/images/javawz/image-20220408220827738.png" alt="image-20220408220827738"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertex 100</span></span><br><span class="line"><span class="comment">// 邻接点的结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edgeNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">// 当前顶点在顶点数组中的位置</span></span><br><span class="line">	<span class="keyword">int</span> position;</span><br><span class="line">	<span class="comment">// 指向后继节点的指针</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">edgeNode</span>* <span class="title">next</span>;</span></span><br><span class="line">	<span class="comment">// 节点相关的信息 - info</span></span><br><span class="line">	<span class="keyword">int</span> weight;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 顶点数组的结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Vertex</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">// 顶点的名字</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">9</span>];</span><br><span class="line">	<span class="comment">// 指向临接点结构体指针</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">edgeNode</span>* <span class="title">first</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 邻接表图结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GraphList</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">// 顶点数组</span></span><br><span class="line">	Vertex head[MaxVertex];</span><br><span class="line">	<span class="comment">// 顶点的个数</span></span><br><span class="line">	<span class="keyword">int</span> vertexNum;</span><br><span class="line">	<span class="comment">// 边的条数</span></span><br><span class="line">	<span class="keyword">int</span> edgeNum;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取点对应的下标</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LocalVertex</span><span class="params">(GraphList&amp;g, <span class="keyword">char</span>* name)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">strcmp</span>(name, g.head[i].name) == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;	<span class="comment">// 没找到</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个图</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreateGraph</span><span class="params">(GraphList &amp;g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入图的顶点数和边数: 顶点 边"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; g.vertexNum &gt;&gt; g.edgeNum;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入"</span> &lt;&lt; g.vertexNum &lt;&lt; <span class="string">"个顶点的值"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; g.head[i].name;</span><br><span class="line">		g.head[i].first = <span class="literal">NULL</span>;	<span class="comment">// 目前没有邻接点</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入"</span> &lt;&lt; g.edgeNum &lt;&lt; <span class="string">"条边, 顶点1 顶点2"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">char</span> v1[<span class="number">9</span>], v2[<span class="number">9</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.edgeNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; v1 &gt;&gt; v2;</span><br><span class="line">		<span class="comment">// 以M为头结点的链表, n是m的;邻接点</span></span><br><span class="line">		<span class="comment">// 求用户输入的顶点在顶点数组中的位置</span></span><br><span class="line">		<span class="keyword">int</span> m = LocalVertex(g, v1);</span><br><span class="line">		<span class="keyword">int</span> n = LocalVertex(g, v2);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 链表中添加邻接点</span></span><br><span class="line">		edgeNode* pNew = <span class="keyword">new</span> edgeNode;</span><br><span class="line">		<span class="comment">// init pNew</span></span><br><span class="line">		pNew-&gt;position = n;	<span class="comment">// 当前的节点在顶点数组中的位置</span></span><br><span class="line">		<span class="comment">// pNew添加到头结点数组第m个元素 对应的链表中</span></span><br><span class="line">		<span class="comment">// 头插法  尾插法需要遍历到尾部 ，麻烦，因此用头插法</span></span><br><span class="line">		pNew-&gt;next = g.head[m].first;</span><br><span class="line">		g.head[m].first = pNew;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 1</span></span><br><span class="line">		<span class="comment">// 以N为头结点的链表, m是n的;邻接点</span></span><br><span class="line">		edgeNode* pNew1 = <span class="keyword">new</span> edgeNode;</span><br><span class="line">		<span class="comment">// init pNew1</span></span><br><span class="line">		pNew1-&gt;position = m;	<span class="comment">// 当前的节点在顶点数组中的位置</span></span><br><span class="line">		<span class="comment">// pNew添加到头结点数组第m个元素 对应的链表中</span></span><br><span class="line">		<span class="comment">// 头插法</span></span><br><span class="line">		pNew1-&gt;next = g.head[n].first;</span><br><span class="line">		g.head[n].first = pNew1;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 打印图</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintGraphList</span><span class="params">(GraphList&amp; g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		edgeNode* pNode = g.head[i].first;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; g.head[i].name &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">		<span class="keyword">while</span> (pNode != <span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> index = pNode-&gt;position;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; g.head[index].name &lt;&lt; <span class="string">" ,"</span>;</span><br><span class="line">			pNode = pNode-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	GraphList g;</span><br><span class="line">	CreateGraph(g);</span><br><span class="line">	PrintGraphList(g);</span><br><span class="line"></span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="图的遍历"><a class="markdownIt-Anchor" href="#图的遍历"></a> 图的遍历</h3>
+<p>图的遍历和树的遍历类似，希望从图中某一顶点出发访遍图中其余顶点，且使每一个顶点仅被访问一次，这一过程就叫图的遍历。</p>
+<p>对于图的遍历来说，如何避免因回路陷入死循环，就需要科学地设计遍历方案，通常有两种遍历次序方案：<strong>深度优先遍历</strong>和<strong>广度优先遍历</strong>。</p>
+<h4 id="深度优先遍历dfsdepth-first-search"><a class="markdownIt-Anchor" href="#深度优先遍历dfsdepth-first-search"></a> 深度优先遍历(DFSdepth first search)</h4>
+<p><img src="/images/javawz/image-20220409030209152.png" alt="image-20220409030209152"></p>
+<p><strong>深度优先遍历，也有称为深度优先搜索，简称DFS</strong>。其实，<strong>就像是一棵树的前序遍历</strong>。<br>
+它从图中某个结点v出发，访问此顶点，然后从v的未被访问的邻接点出发深度优先遍历图，直至图中所有和v有路径相通的顶点都被访问到。若图中尚有顶点未被访问，则另选图中一个未曾被访问的顶点作起始点，重复上述过程，直至图中的所有顶点都被访问到为止。<br>
+<strong>深度优先搜索是通过栈来实现的。</strong><br>
+下图中的数字显示了深度优先搜索顶点被访问的顺序</p>
+<p><img src="/images/javawz/image-20220408221013803.png" alt="image-20220408221013803"></p>
+<p>为了实现深度优先搜索，首先选择一个起始顶点并需要遵守三个规则：</p>
+<ul>
+<li>如果可能，访问一个邻接的未访问顶点，标记它，并把它放入栈中。</li>
+<li>当不能执行规则1时，如果栈不空，就从栈中弹出一个顶点。</li>
+<li>如果不能执行规则1和规则2，就完成了整个搜索过程。</li>
+</ul>
+<h4 id="邻接矩阵深度优先遍历"><a class="markdownIt-Anchor" href="#邻接矩阵深度优先遍历"></a> 邻接矩阵深度优先遍历</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 深度优先搜索</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(Graph&amp; g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">bool</span>* visited = <span class="keyword">new</span> <span class="keyword">bool</span>[g.vertexNum];</span><br><span class="line">	<span class="comment">// init</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		visited[i] = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 从顶点数组中的第一个开始访问</span></span><br><span class="line">	<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;	<span class="comment">// int - 顶点数组的下标</span></span><br><span class="line">	visited[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; g.vertex[<span class="number">0</span>] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	st.push(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (!st.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 遍历所有的顶点, 找邻接点 - 栈顶元素对应的邻接点</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 栈顶元素在顶点数组中的位置</span></span><br><span class="line">			<span class="keyword">int</span> top = st.top();</span><br><span class="line">			<span class="keyword">if</span> (!visited[i] &amp;&amp; g.edge[top][i] &gt; <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 遍历该顶点</span></span><br><span class="line">				visited[i] = <span class="literal">true</span>;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; g.vertex[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">				<span class="comment">// 邻接点压栈</span></span><br><span class="line">				st.push(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 栈顶的顶点与其余的顶点组成的边全部判断了一遍</span></span><br><span class="line">		st.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">delete</span>[] visited;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="邻接表深度优先遍历"><a class="markdownIt-Anchor" href="#邻接表深度优先遍历"></a> 邻接表深度优先遍历</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 深度优先搜索</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(GraphList&amp; g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 保证顶点不被重复遍历</span></span><br><span class="line">	<span class="keyword">bool</span>* visited = <span class="keyword">new</span> <span class="keyword">bool</span>[g.vertexNum];</span><br><span class="line">	<span class="comment">// init</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		visited[i] = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 从顶点数组中找一个顶点, 开始遍历 - 0</span></span><br><span class="line">	<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;	<span class="comment">// int - 顶点在顶点数组中的下标</span></span><br><span class="line">	st.push(<span class="number">0</span>);</span><br><span class="line">	<span class="comment">// 访问</span></span><br><span class="line">	visited[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; g.head[<span class="number">0</span>].name &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当栈为空, 遍历完成</span></span><br><span class="line">	<span class="keyword">while</span> (!st.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 顶点在顶点数组中的下标取出来</span></span><br><span class="line">		<span class="keyword">int</span> top = st.top();</span><br><span class="line">		<span class="comment">// 找下标对应的顶点的邻接点</span></span><br><span class="line">		edgeNode* pNode = g.head[top].first;</span><br><span class="line">		<span class="keyword">while</span> (pNode)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 如果节点被遍历过了</span></span><br><span class="line">			<span class="keyword">while</span> (pNode &amp;&amp; visited[pNode-&gt;position])</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 指针后移</span></span><br><span class="line">				pNode = pNode-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 找到了没有被访问的</span></span><br><span class="line">			<span class="keyword">if</span> (pNode)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 访问</span></span><br><span class="line">				visited[pNode-&gt;position] = <span class="literal">true</span>;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; g.head[pNode-&gt;position].name &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">				<span class="comment">// 找新的顶点pNode-&gt;position的邻接点</span></span><br><span class="line">				<span class="comment">// 链表和链表直接做跳转</span></span><br><span class="line">				pNode = g.head[pNode-&gt;position].first;</span><br><span class="line">				st.push(pNode-&gt;position);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		st.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">delete</span>[] visited;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="广度优先遍历bfs-breadth-first-search"><a class="markdownIt-Anchor" href="#广度优先遍历bfs-breadth-first-search"></a> 广度优先遍历(BFS Breadth First Search)</h3>
+<p>广度优先遍历，又称为广度优先搜索，简称BFS。图的广度优先遍历就类<strong>似于树的层序遍历</strong>了。</p>
+<p>在深度优先搜索中，算法表现得好像要尽快地远离起始点似的。相反，在广度优先搜索中，<strong>算法好像要尽可能地靠近起始点。它首先访问起始顶点的所有邻接点，然后再访问较远的区域。它是用队列来实现的。</strong><br>
+下面图中的数字显示了广度优先搜索顶点被访问的顺序。</p>
+<p><img src="/images/javawz/image-20220409004002534.png" alt="image-20220409004002534"></p>
+<p>实现广度优先搜索，也要遵守三个规则：</p>
+<ul>
+<li>访问下一个未来访问的邻接点，这个顶点必须是当前顶点的邻接点，标记它，并把它插入到队列中。</li>
+<li>如果因为已经没有未访问顶点而不能执行规则1时，那么从队列头取一个顶点，并使其成为当前顶点。</li>
+<li>如果因为队列为空而不能执行规则2，则搜索结束。</li>
+</ul>
+<h4 id="邻接矩阵广度优先遍历"><a class="markdownIt-Anchor" href="#邻接矩阵广度优先遍历"></a> 邻接矩阵广度优先遍历</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 广度优先搜索</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(Graph&amp; g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 保证顶点不被重复遍历</span></span><br><span class="line">	<span class="keyword">bool</span>* visited = <span class="keyword">new</span> <span class="keyword">bool</span>[g.vertexNum];</span><br><span class="line">	<span class="comment">// init</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		visited[i] = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 找一个顶点, 开始访问 - 0</span></span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;	<span class="comment">// 存储顶点的下标</span></span><br><span class="line">	visited[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; g.vertex[<span class="number">0</span>] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	q.push(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 如果队列为空, 遍历完成</span></span><br><span class="line">	<span class="keyword">while</span> (!q.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 队头顶点的下标值拿出来</span></span><br><span class="line">		<span class="keyword">int</span> front = q.front();</span><br><span class="line">		<span class="comment">// 遍历所有的顶点, 找邻接点</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 如果没被访问, 并且两顶点互为邻接点</span></span><br><span class="line">			<span class="keyword">if</span> (!visited[i] &amp;&amp; g.edge[front][i] &gt; <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 访问,并且入队列</span></span><br><span class="line">				visited[i] = <span class="literal">true</span>;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; g.vertex[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">				q.push(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 所有的邻接点都访问完成,出队列</span></span><br><span class="line">		q.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">delete</span>[] visited;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="邻接表广度优先遍历"><a class="markdownIt-Anchor" href="#邻接表广度优先遍历"></a> 邻接表广度优先遍历</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(GraphList&amp; g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 保证顶点不被重复遍历</span></span><br><span class="line">	<span class="keyword">bool</span>* visited = <span class="keyword">new</span> <span class="keyword">bool</span>[g.vertexNum];</span><br><span class="line">	<span class="comment">// init</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		visited[i] = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 从顶点数组中找一个顶点, 开始遍历 - 0</span></span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;	<span class="comment">// int - 顶点在顶点数组中的下标</span></span><br><span class="line">	q.push(<span class="number">0</span>);</span><br><span class="line">	<span class="comment">// 访问</span></span><br><span class="line">	visited[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; g.head[<span class="number">0</span>].name &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 队列为空,遍历完成</span></span><br><span class="line">	<span class="keyword">while</span> (!q.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 取出队头元素值, 顶点在顶点数组中的下标</span></span><br><span class="line">		<span class="keyword">int</span> front = q.front();</span><br><span class="line">		<span class="comment">// 找队头元素对应的定点的所有的邻接点</span></span><br><span class="line">		edgeNode* pNode = g.head[front].first;</span><br><span class="line">		<span class="keyword">while</span> (pNode)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 如果没有被访问</span></span><br><span class="line">			<span class="keyword">if</span> (!visited[pNode-&gt;position])</span><br><span class="line">			&#123;</span><br><span class="line">				visited[pNode-&gt;position] = <span class="literal">true</span>;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; g.head[pNode-&gt;position].name &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">				<span class="comment">// 邻接点入队列</span></span><br><span class="line">				q.push(pNode-&gt;position);</span><br><span class="line">			&#125;</span><br><span class="line">			pNode = pNode-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 所有的临界点发全部被访问</span></span><br><span class="line">		q.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">delete</span>[] visited;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="迪杰斯特拉dijkstra算法"><a class="markdownIt-Anchor" href="#迪杰斯特拉dijkstra算法"></a> 迪杰斯特拉(Dijkstra)算法</h3>
+<p>visit表示该点是否被访问过</p>
+<p>dist数组存放起点到各个点的距离</p>
+<p><img src="/images/javawz/image-20220414071801628.png" alt="image-20220414071801628"></p>
+<p>以济南为中间结点，济南到武汉的距离为400且小于北京直接到武汉的距离，所以更新dist数组中北京到武汉的距离为400，并将visit数组中的济南点设置为1，代表已访问过</p>
+<p><img src="/images/javawz/image-20220414072024176.png" alt="image-20220414072024176"></p>
+<p>以武汉为中间结点，武汉到北京的距离是400 + 200 等于600，更新dist数组，因为武汉到其他点只有北京一个没有被访问过，所以当更新了武汉到北京的距离之后，visit数组中的武汉点可以设置为1，代表已经访问过。</p>
+<p>最后剩下北京点没有被访问过，因为北京点是目标点，所以visit数组中的北京点可以直接设置为1</p>
+<p><img src="/images/javawz/image-20220414072333490.png" alt="image-20220414072333490"></p>
+<p><img src="/images/javawz/image-20220414072738740.png" alt="image-20220414072738740"></p>
+<p>初始化北京到其他点的距离</p>
+<p><img src="/images/javawz/image-20220414072819782.png" alt="image-20220414072819782"></p>
+<p>选择北京到达其他点最近的点，北京到天津的距离为100，是最近的点，所以选择天津作为中间结点</p>
+<p>天津到郑州的距离为1000,1000小于1200，所以更新dist数组</p>
+<p>天津到济南的距离为400 更新dist数组</p>
+<p><img src="/images/javawz/image-20220414073224878.png" alt="image-20220414073224878"></p>
+<p>将天津设置为已访问的结点</p>
+<p>现在剩下济南，郑州，长沙，海南没有被访问过</p>
+<p><img src="/images/javawz/image-20220414073244767.png" alt="image-20220414073244767"></p>
+<p>选择北京到剩下的结点中最短距离的结点济南作为中间点</p>
+<p>济南到郑州的距离为400 + 400 = 800,  800 &lt; 1000所以更新dist数组</p>
+<p>济南到长沙的距离为400 + 1300 = 1700,更新dist数组</p>
+<p>济南到海南的距离为400 + 1400 = 1800,更新dist数组</p>
+<p><img src="/images/javawz/image-20220414073614721.png" alt="image-20220414073614721"></p>
+<p>将济南结点设置为已访问过的结点</p>
+<p>现在剩下郑州,长沙,海南三个结点没有被访问过.</p>
+<p>选择北京到剩下结点中最短距离的结点作为中间结点</p>
+<p>这里选择郑州作为中间结点</p>
+<p>郑州到长沙的距离为800 + 500 = 1300,1300 &lt; 1700,所以更新dist数组</p>
+<p><img src="/images/javawz/image-20220414073955303.png" alt="image-20220414073955303"></p>
+<p>将郑州设置为已访问过的结点</p>
+<p>选择北京到剩下结点中最短的距离作为中间结点</p>
+<p>这里选择长沙,长沙到海南的距离是1300 + 1500 = 2800 ,2800 &gt; 1800,所以不用更新dist数组</p>
+<p><img src="/images/javawz/image-20220414074324676.png" alt="image-20220414074324676"></p>
+<p>将长沙设置为已访问的结点</p>
+<p>最后剩下海南结点没有被访问</p>
+<p>因为海南结点是最后一个结点,所以直接将海南结点设置为已访问结点即可</p>
+<p><strong>最后dist数组中存放了北京到达其他城市的最短距离</strong></p>
+<p><img src="/images/javawz/image-20220414074546109.png" alt="image-20220414074546109"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//定义顶点的最大值</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertex 50</span></span><br><span class="line"><span class="comment">//定义顶点类型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> VertexInfo[<span class="number">4</span>];</span><br><span class="line"><span class="comment">//定义一个图的结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Graph</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//一维数组 -- 顶点信息</span></span><br><span class="line">	VertexInfo vertex[MaxVertex];</span><br><span class="line">	<span class="comment">//二维数组 -- 边或者弧 对应关系 或者 权</span></span><br><span class="line">	<span class="keyword">int</span> edge[MaxVertex][MaxVertex];</span><br><span class="line">	<span class="comment">//顶点的个数</span></span><br><span class="line">	<span class="keyword">int</span> vertexNum;</span><br><span class="line">	<span class="comment">//边的条数</span></span><br><span class="line">	<span class="keyword">int</span> edgeNum;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//寻找顶点在一维数组中的位置</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">localVertex</span><span class="params">(Graph &amp;g, VertexInfo v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//遍历顶点数组</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//寻找值与v相等的顶点</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">strcmp</span>(v, g.vertex[i]) == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//用邻接矩阵创建图 -- 有向的网图</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createGraph</span><span class="params">(Graph &amp;g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"输入图的顶点数和边数(用空格间隔)"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; g.vertexNum &gt;&gt; g.edgeNum;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入图的"</span> &lt;&lt; g.vertexNum &lt;&lt; <span class="string">"个顶点: "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//循环输入</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//接收顶点的值</span></span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; g.vertex[i];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//初始化顶点之间的对应关系</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g.vertexNum; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//初始化为最大值</span></span><br><span class="line">			g.edge[i][j] = INT_MAX;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//定义变量</span></span><br><span class="line">	<span class="keyword">int</span> w;	<span class="comment">//权重</span></span><br><span class="line">	VertexInfo v1, v2;	<span class="comment">//顶点</span></span><br><span class="line">	<span class="comment">//输入边和权重</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"依次输入"</span> &lt;&lt; g.edgeNum &lt;&lt; <span class="string">"条边的 弧尾 弧头  权重"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//循环输入</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.edgeNum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; v1 &gt;&gt; v2 &gt;&gt; w;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//找到v1在一维数组中的位置</span></span><br><span class="line">		<span class="keyword">int</span> m = localVertex(g, v1);</span><br><span class="line">		<span class="comment">//找到v2在一维数组中的位置</span></span><br><span class="line">		<span class="keyword">int</span> n = localVertex(g, v2);</span><br><span class="line">		<span class="comment">//赋值</span></span><br><span class="line">		g.edge[m][n] = w;</span><br><span class="line">		<span class="comment">//如果是无向图</span></span><br><span class="line">		g.edge[n][m] = w;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印图</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printGraph</span><span class="params">(Graph &amp;g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"打印图 -- 邻接矩阵:"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; g.vertex[i] &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; g.vertex[i] &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g.vertexNum; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (g.edge[i][j] == INT_MAX)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"∞"</span> &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; g.edge[i][j] &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//深度优先搜索</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(Graph &amp;g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//创建一个数组,标记节点是否已经被访问</span></span><br><span class="line">	<span class="keyword">bool</span> *visited = <span class="keyword">new</span> <span class="keyword">bool</span>[g.vertexNum];</span><br><span class="line">	<span class="comment">//数组初始化</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//全部标记为未访问</span></span><br><span class="line">		visited[i] = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//创建栈对象</span></span><br><span class="line">	<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">	<span class="comment">//从数组的第一个顶点开始</span></span><br><span class="line">	<span class="comment">//访问第一个顶点</span></span><br><span class="line">	visited[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">	<span class="comment">//打印第一个顶点</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; g.vertex[<span class="number">0</span>] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	<span class="comment">//下标压栈</span></span><br><span class="line">	st.push(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (!st.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> i;</span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//取出顶点</span></span><br><span class="line">			<span class="keyword">int</span> top = st.top();</span><br><span class="line">			<span class="comment">//顶点的邻接点 -- 没有被访问过</span></span><br><span class="line">			<span class="keyword">if</span> (!visited[i] &amp;&amp; g.edge[top][i] &lt; INT_MAX)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//访问</span></span><br><span class="line">				visited[i] = <span class="literal">true</span>;</span><br><span class="line">				<span class="comment">//打印</span></span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; g.vertex[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">				<span class="comment">//下标压栈</span></span><br><span class="line">				st.push(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//查找完一遍,栈顶元素出栈</span></span><br><span class="line">		<span class="keyword">if</span> (i &gt;= g.vertexNum)</span><br><span class="line">		&#123;</span><br><span class="line">			st.pop();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] visited;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//广度优先搜索</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(Graph &amp;g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//创建一个数组,标记顶点是否被访问</span></span><br><span class="line">	<span class="keyword">bool</span> *visited = <span class="keyword">new</span> <span class="keyword">bool</span>[g.vertexNum];</span><br><span class="line">	<span class="comment">//初始化</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//false -- 未访问</span></span><br><span class="line">		visited[i] = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//定义一个队列对象</span></span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">	<span class="comment">//第一个顶点标记为已访问</span></span><br><span class="line">	visited[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">	<span class="comment">//打印第一个顶点</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; g.vertex[<span class="number">0</span>] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	<span class="comment">//顶点在数组中的下标,入队列</span></span><br><span class="line">	q.push(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (!q.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> front = q.front();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//寻找队列中队头的顶点的邻接点</span></span><br><span class="line">			<span class="keyword">if</span> (!visited[i] &amp;&amp; g.edge[front][i] &lt; INT_MAX)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//标记为已访问</span></span><br><span class="line">				visited[i] = <span class="literal">true</span>;</span><br><span class="line">				<span class="comment">//打印</span></span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; g.vertex[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">				<span class="comment">//下标入队列</span></span><br><span class="line">				q.push(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//寻找完所有的邻接点之后,下标出队列</span></span><br><span class="line">		q.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">delete</span>[] visited;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最短路径</span></span><br><span class="line"><span class="comment">// 迪杰斯特拉(Dijkstra)算法</span></span><br><span class="line"><span class="comment">// path哪一顶点到当前点的距离最近</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstraPath</span><span class="params">(Graph &amp;g, <span class="keyword">int</span> *path, <span class="keyword">int</span> *dist, <span class="keyword">int</span> v0)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> min = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> pos = v0;	<span class="comment">// 访问的起始顶点</span></span><br><span class="line">	<span class="comment">//定义一个数组, 标记顶点是否已经被访问</span></span><br><span class="line">	<span class="keyword">bool</span> *visited = <span class="keyword">new</span> <span class="keyword">bool</span>[g.vertexNum];</span><br><span class="line">	<span class="comment">//初始化</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		visited[i] = <span class="literal">false</span>;	<span class="comment">//顶点未访问</span></span><br><span class="line">		<span class="keyword">if</span> (i != v0) <span class="comment">//排除顶点到出发点的计算</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//初始化所有点的最近邻接点都是V0点</span></span><br><span class="line">			path[i] = v0;</span><br><span class="line">			<span class="comment">// v0到各个顶点的权重</span></span><br><span class="line">			dist[i] = g.edge[v0][i];</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; g.vertex[v0] &lt;&lt; <span class="string">" 到 "</span> &lt;&lt; g.vertex[i]</span><br><span class="line">				&lt;&lt; <span class="string">" 距离: dist["</span> &lt;&lt; i &lt;&lt; <span class="string">"]="</span> &lt;&lt; dist[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// path[]数组 - 到当前点的最近的邻接点</span></span><br><span class="line">			<span class="comment">// dist[] 数组 - 从出发点到各个点的最短距离</span></span><br><span class="line">			<span class="comment">// i == v0没有任何意义, 不存在路径</span></span><br><span class="line">			path[i] = <span class="number">-1</span>;</span><br><span class="line">			dist[i] = INT_MAX;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//把v0标记为已访问</span></span><br><span class="line">	visited[v0] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		min = INT_MAX;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g.vertexNum; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 没有被访问, 并且找到了拥有更小权值的边</span></span><br><span class="line">			<span class="comment">// path[]数组 - 到当前点的最近的邻接点</span></span><br><span class="line">			<span class="comment">// dist[] 数组 - 从出发点到各个点的最短距离</span></span><br><span class="line">			<span class="keyword">if</span> (!visited[j] &amp;&amp; min&gt;dist[j])</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//保存最小值</span></span><br><span class="line">				min = dist[j];</span><br><span class="line">				<span class="comment">//保存位置</span></span><br><span class="line">				pos = j;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"+++ 顶点更新: pos ="</span> &lt;&lt; pos</span><br><span class="line">					&lt;&lt; <span class="string">"顶点为: "</span> &lt;&lt; g.vertex[pos] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//pos位置的顶点标记为已访问</span></span><br><span class="line">		visited[pos] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// dist V0点到各个点的距离</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g.vertexNum; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// g.edge[pos][j] &lt; INT_MAX - 判断pos-&gt;j这条边是存在的</span></span><br><span class="line">			<span class="keyword">if</span> (!visited[j] &amp;&amp; dist[pos] + g.edge[pos][j] &lt; dist[j] &amp;&amp; g.edge[pos][j] &lt; INT_MAX)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 更新最短距离</span></span><br><span class="line">				<span class="comment">//例如 将j看成E  pos看成B，求出A到E最短路径</span></span><br><span class="line">				dist[j] = dist[pos] + g.edge[pos][j];</span><br><span class="line">				<span class="comment">//更新路径, 到顶点j最近的顶点是pos</span></span><br><span class="line">				path[j] = pos;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"=== 更新最短距离: dist["</span> &lt;&lt; j</span><br><span class="line">					&lt;&lt; <span class="string">"] = "</span> &lt;&lt; dist[j] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// v0 - 起始点</span></span><br><span class="line"><span class="comment">// v  - 到达点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showPath</span><span class="params">(Graph &amp;g, <span class="keyword">int</span> *path, <span class="keyword">int</span> v0, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//创建一个栈对象</span></span><br><span class="line">	<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">	<span class="keyword">int</span> temp = v;</span><br><span class="line">	<span class="keyword">while</span> (temp != v0)</span><br><span class="line">	&#123;</span><br><span class="line">		st.push(temp);</span><br><span class="line">		<span class="comment">//寻找上一个顶点</span></span><br><span class="line">		temp = path[temp];</span><br><span class="line">	&#125;</span><br><span class="line">	st.push(v0);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//打印路径</span></span><br><span class="line">	<span class="keyword">while</span> (!st.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; g.vertex[st.top()] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">		st.pop();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//定义一个图的对象</span></span><br><span class="line">	Graph g;</span><br><span class="line">	<span class="comment">//用邻接矩阵创建图</span></span><br><span class="line">	createGraph(g);</span><br><span class="line">	<span class="comment">//打印</span></span><br><span class="line">	printGraph(g);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//深度优先搜索</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"深度优先搜索"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	DFS(g);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//广度优先搜索</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"广度优先搜索"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	BFS(g);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*==================================================</span></span><br><span class="line"><span class="comment">	==================================================*/</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"迪杰斯特拉(Dijkstra)算法"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">// path数组 - 到当前点的最近的邻接点</span></span><br><span class="line">	<span class="keyword">int</span> path[<span class="number">50</span>];</span><br><span class="line">	<span class="comment">// dist[] 数组 - 从出发点到各个点的最短距离</span></span><br><span class="line">	<span class="keyword">int</span> dist[<span class="number">50</span>];</span><br><span class="line">	<span class="comment">// 出发点</span></span><br><span class="line">	<span class="keyword">int</span> v0 = <span class="number">0</span>;</span><br><span class="line">	dijkstraPath(g, path, dist, v0);</span><br><span class="line">	<span class="comment">// A-&gt;D怎么走?多么长?</span></span><br><span class="line">	<span class="comment">// dist[3] = A-&gt;D的最短距离</span></span><br><span class="line">	<span class="comment">// path[3]</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; g.vertexNum; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"路径: "</span>;</span><br><span class="line">		showPath(g, path, v0, i);</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"路径长度: "</span> &lt;&lt; dist[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Keyboard not found, press F1 to continue..."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xiaowuyoucy.github.io/2022/04/08/图-graph/" title="图(graph)" target="_blank" rel="external">https://xiaowuyoucy.github.io/2022/04/08/图-graph/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+		  
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/04/18/AStar寻路算法/" title="AStar寻路算法"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/04/04/树和二叉树/" title="树和二叉树"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+	<span>More contact information</span>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:xiaowuyoucy.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '032928647cd59bc9f443',
+    clientSecret: '82a11fd93e4d0779655af6dc4b73942a03e95276',
+    repo: 'Xiaowuyoucy.github.io',
+    owner: 'Xiaowuyoucy',
+    admin: ['Xiaowuyoucy'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>
