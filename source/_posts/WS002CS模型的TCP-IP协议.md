@@ -724,7 +724,7 @@ int main(void)
 	SOCKADDR_IN sockAddress;
 	sockAddress.sin_family = AF_INET;
 	sockAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
-	sockAddress.sin_port = 12345;
+	sockAddress.sin_port = htons(12345);
 
 	if (SOCKET_ERROR == bind(socketListen,(struct sockaddr*)&sockAddress,sizeof(sockAddress)))
 	{

@@ -77,7 +77,7 @@ libevent是事件驱动, epoll反应堆也是事件驱动, 当要监测的事件
 
 进入到libevent-2.0.22-stable/sample下, 可以查看一些示例源代码文件.
 
-使用libevent库编写代码在编译程序的时候需要指定库名:-levent;
+使用libevent库编写代码在编译程序的时候需要指定库名:`-levent`;
 
 安装文件的libevent库文件所在路径:libevent-2.0.22-stable/.libs;
 
@@ -89,7 +89,7 @@ libevent是事件驱动, epoll反应堆也是事件驱动, 当要监测的事件
 
 `gcc hello-world.c -levent`
 
-由于安装的时候已经将头文件和库文件拷贝到了系统头文件所在路径/usr/local/include和系统库文件所在路径/usr/local/lib, 所以这里编译的时候可以不用指定-I和-L.
+由于安装的时候已经将头文件和库文件拷贝到了系统头文件所在路径/usr/local/include和系统库文件所在路径/usr/local/lib, 所以这里编译的时候可以不用指定`-I`和`-L`
 
  
 
