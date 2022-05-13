@@ -102,3 +102,12 @@ deploy:
   type: git
   repository: git@github.com:Xiaowuyoucy/Xiaowuyoucy.github.io.git
   branch: master
+  
+Plugins:
+- hexo-generator-baidu-sitemap
+- hexo-generator-sitemap
+
+baidusitemap:
+    path: baidusitemap.xml
+sitemap:
+    path: sitemap.xml
