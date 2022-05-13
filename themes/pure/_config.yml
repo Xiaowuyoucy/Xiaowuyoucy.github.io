@@ -10,7 +10,7 @@ menu:
   Movies: movies #电影单
   Links: links  # 友链
   About: about  # 关于
-  
+  sitemap: /sitemap.xml || sitemap
 
 # Enable/Disable menu icons
 menu_icons:
