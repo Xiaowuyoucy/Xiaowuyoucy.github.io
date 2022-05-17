@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>NAT的四种类型 | YanChen</title>
+  <meta name="description" content="一：NAT类型  基于UDP的P2P应用需要考虑NAT的类型，因为不同的NAT组合的穿透的方式并不一致，有的能通， 有的不能通。一般来讲， NAT可以分为四种类型，分别是: 12345671,  全锥型(Full Cone)2,  受限锥型(Restricted Cone)， 或者说是IP受限锥型3,  端口受限锥型(Port Restricted Cone), 或者说是IP + PORT受限锥">
+<meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NAT的四种类型">
+<meta property="og:url" content="https://xiaowuyoucy.github.io/2022/05/15/NAT的四种类型/index.html">
+<meta property="og:site_name" content="YanChen">
+<meta property="og:description" content="一：NAT类型  基于UDP的P2P应用需要考虑NAT的类型，因为不同的NAT组合的穿透的方式并不一致，有的能通， 有的不能通。一般来讲， NAT可以分为四种类型，分别是: 12345671,  全锥型(Full Cone)2,  受限锥型(Restricted Cone)， 或者说是IP受限锥型3,  端口受限锥型(Port Restricted Cone), 或者说是IP + PORT受限锥">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1309518-20210520170839788-971942459.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1309518-20210520171340167-1991626586.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1309518-20210520172322286-481923861.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1309518-20210520174201499-1628049021.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1309518-20210520174148137-1979686418.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1309518-20210520174437259-2033657389.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/1309518-20210520183858300-1646375177.png">
+<meta property="og:updated_time" content="2022-05-15T01:58:36.536Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NAT的四种类型">
+<meta name="twitter:description" content="一：NAT类型  基于UDP的P2P应用需要考虑NAT的类型，因为不同的NAT组合的穿透的方式并不一致，有的能通， 有的不能通。一般来讲， NAT可以分为四种类型，分别是: 12345671,  全锥型(Full Cone)2,  受限锥型(Restricted Cone)， 或者说是IP受限锥型3,  端口受限锥型(Port Restricted Cone), 或者说是IP + PORT受限锥">
+<meta name="twitter:image" content="https://xiaowuyoucy.github.io/images/javawz/1309518-20210520170839788-971942459.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xiaowuyoucy.github.io/2022/05/15/NAT的四种类型/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fonts2/iconfont.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xiaowuyoucy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">YanChen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> GuangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="https://www.xiaochenyan.top/navigation/index.html">
+            
+            <i class="icon icon-map-marker"></i>
+            
+            <span class="menu-title">导航</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon iconfont icon-video"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">格言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+				
+				<p id="hitokoto">:D 获取中...</p>
+				<p id="from" style="text-align: right"></p>
+                <script>
+					  var xhr = new XMLHttpRequest();
+					  xhr.open('get', 'https://v1.hitokoto.cn');
+					  xhr.onreadystatechange = function () {
+						if (xhr.readyState === 4) {
+						  var data = JSON.parse(xhr.responseText);
+						  var hitokoto = document.getElementById('hitokoto');
+						  hitokoto.innerText = data.hitokoto;
+						  var from = document.getElementById('from');
+						  from.innerText = "-- " + data.from;
+						}
+					  }
+					  xhr.send();
+				</script>
+				
+				
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">195</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KaliLinux/">KaliLinux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL/">MYSQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenSSL/">OpenSSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHCE/">RHCE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WEB安全渗透/">WEB安全渗透</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows命令/">Windows命令</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows网络编程/">Windows网络编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/apache/">apache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/c/">c</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp/">cpp</a><span class="category-list-count">104</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp17从入门到精通/">cpp17从入门到精通</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/githubHexo/">githubHexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/libevent/">libevent</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">94</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计/">windows程序设计</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计2/">windows程序设计2</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术资讯/">技术资讯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">38</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/易语言/">易语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇编逆向/">汇编逆向</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/理财投资/">理财投资</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简谈计算机/">简谈计算机</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程词汇/">编程词汇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络爬虫/">网络爬虫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机公共基础/">计算机公共基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络TCP-IP传输协议-网络抓包/">计算机网络TCP/IP传输协议/网络抓包</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络原理/">计算机网络原理</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高中数学/">高中数学</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GET/">$_GET</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POST，-SERVER/">$_POST，$_SERVER</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REQUEST/">$_REQUEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOTO语句/">GOTO语句</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang函数/">Golang函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang匿名函数/">Golang匿名函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础/">Golang基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础类型占位符/">Golang基础类型占位符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang常量与变量里表达式/">Golang常量与变量里表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang循环结构/">Golang循环结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang指针/">Golang指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang标准输入与输出/">Golang标准输入与输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang流程控制/">Golang流程控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang程序运算/">Golang程序运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang类型转换及移位运算/">Golang类型转换及移位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang闭包函数/">Golang闭包函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ISO七层模型/">ISO七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java总结/">Java总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalinux/">Kalinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Null和Undefined/">Null和Undefined</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP两种定义常量的形式/">PHP两种定义常量的形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP常量/">PHP常量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python教程/">Python教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python笔记/">Python笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python运算符/">Python运算符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO网站优化/">SEO网站优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIR/">__DIR__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FILE/">__FILE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/">__LINE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache环境变量/">apache环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache配置/">apache配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beef劫持/">beef劫持</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dowhile循环/">dowhile循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iota定义常量组/">iota定义常量组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数/">javascript函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this方法/">js-this方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js布尔类型隐私转换/">js布尔类型隐私转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux目录结构/">linux目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php变量/">php变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urlib2/">urlib2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全渗透/">web安全渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web渗透/">web渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/变量的操作/">变量的操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/延时执行defer/">延时执行defer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格狼日/">拉格狼日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间复杂度测试/">时间复杂度测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财，投资/">理财，投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络模型/">网络模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/顺序表/">顺序表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/GET/" style="font-size: 13px;">$_GET</a> <a href="/tags/POST，-SERVER/" style="font-size: 13px;">$_POST，$_SERVER</a> <a href="/tags/REQUEST/" style="font-size: 13px;">$_REQUEST</a> <a href="/tags/Cookie/" style="font-size: 13px;">Cookie</a> <a href="/tags/GOTO语句/" style="font-size: 13px;">GOTO语句</a> <a href="/tags/Golang/" style="font-size: 13px;">Golang</a> <a href="/tags/Golang函数/" style="font-size: 13px;">Golang函数</a> <a href="/tags/Golang匿名函数/" style="font-size: 13px;">Golang匿名函数</a> <a href="/tags/Golang基础/" style="font-size: 14px;">Golang基础</a> <a href="/tags/Golang基础类型占位符/" style="font-size: 13px;">Golang基础类型占位符</a> <a href="/tags/Golang常量与变量里表达式/" style="font-size: 13px;">Golang常量与变量里表达式</a> <a href="/tags/Golang循环结构/" style="font-size: 13px;">Golang循环结构</a> <a href="/tags/Golang指针/" style="font-size: 13px;">Golang指针</a> <a href="/tags/Golang标准输入与输出/" style="font-size: 13px;">Golang标准输入与输出</a> <a href="/tags/Golang流程控制/" style="font-size: 13px;">Golang流程控制</a> <a href="/tags/Golang程序运算/" style="font-size: 13px;">Golang程序运算</a> <a href="/tags/Golang类型转换及移位运算/" style="font-size: 13px;">Golang类型转换及移位运算</a> <a href="/tags/Golang闭包函数/" style="font-size: 13px;">Golang闭包函数</a> <a href="/tags/ISO七层模型/" style="font-size: 13px;">ISO七层模型</a> <a href="/tags/Java总结/" style="font-size: 13px;">Java总结</a> <a href="/tags/Kalinux/" style="font-size: 13px;">Kalinux</a> <a href="/tags/Null和Undefined/" style="font-size: 13px;">Null和Undefined</a> <a href="/tags/PHP两种定义常量的形式/" style="font-size: 13px;">PHP两种定义常量的形式</a> <a href="/tags/PHP常量/" style="font-size: 13px;">PHP常量</a> <a href="/tags/Python教程/" style="font-size: 13px;">Python教程</a> <a href="/tags/Python笔记/" style="font-size: 13px;">Python笔记</a> <a href="/tags/Python运算符/" style="font-size: 13px;">Python运算符</a> <a href="/tags/SEO网站优化/" style="font-size: 13px;">SEO网站优化</a> <a href="/tags/XSS/" style="font-size: 14px;">XSS</a> <a href="/tags/DIR/" style="font-size: 13px;">__DIR__</a> <a href="/tags/FILE/" style="font-size: 13px;">__FILE__</a> <a href="/tags/LINE/" style="font-size: 13px;">__LINE__</a> <a href="/tags/apache环境变量/" style="font-size: 13px;">apache环境变量</a> <a href="/tags/apache配置/" style="font-size: 13px;">apache配置</a> <a href="/tags/beef劫持/" style="font-size: 13px;">beef劫持</a> <a href="/tags/dowhile循环/" style="font-size: 13px;">dowhile循环</a> <a href="/tags/iota定义常量组/" style="font-size: 13px;">iota定义常量组</a> <a href="/tags/javascript函数/" style="font-size: 13px;">javascript函数</a> <a href="/tags/js-this方法/" style="font-size: 13px;">js-this方法</a> <a href="/tags/js布尔类型隐私转换/" style="font-size: 13px;">js布尔类型隐私转换</a> <a href="/tags/linux目录结构/" style="font-size: 13px;">linux目录结构</a> <a href="/tags/php变量/" style="font-size: 13px;">php变量</a> <a href="/tags/sql注入/" style="font-size: 13px;">sql注入</a> <a href="/tags/urlib2/" style="font-size: 13px;">urlib2</a> <a href="/tags/web安全渗透/" style="font-size: 13px;">web安全渗透</a> <a href="/tags/web渗透/" style="font-size: 13px;">web渗透</a> <a href="/tags/变量的操作/" style="font-size: 13px;">变量的操作</a> <a href="/tags/延时执行defer/" style="font-size: 13px;">延时执行defer</a> <a href="/tags/拉格狼日/" style="font-size: 13px;">拉格狼日</a> <a href="/tags/时间复杂度测试/" style="font-size: 13px;">时间复杂度测试</a> <a href="/tags/理财，投资/" style="font-size: 13px;">理财，投资</a> <a href="/tags/算法/" style="font-size: 13px;">算法</a> <a href="/tags/网络模型/" style="font-size: 13px;">网络模型</a> <a href="/tags/计算机基础/" style="font-size: 13px;">计算机基础</a> <a href="/tags/顺序表/" style="font-size: 13px;">顺序表</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">87</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">51</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">125</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">106</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/17/Git教程/" class="title">Git教程</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-17T14:55:09.000Z" itemprop="datePublished">2022-05-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/cpp/">cpp</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/17/项目介绍和部署/" class="title">项目介绍和部署</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-17T14:36:46.000Z" itemprop="datePublished">2022-05-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/OpenSSL/">OpenSSL</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/17/OpenSSL安装和配置/" class="title">OpenSSL安装和配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-16T23:12:06.000Z" itemprop="datePublished">2022-05-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/数据库/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/16/MySQL中的事务/" class="title">MySQL中的事务</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-16T01:23:35.000Z" itemprop="datePublished">2022-05-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/数据库/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/16/预处理类API函数/" class="title">预处理类API函数</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-16T01:22:35.000Z" itemprop="datePublished">2022-05-16</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-NAT的四种类型" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NAT的四种类型
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/05/15/NAT的四种类型/" class="article-date">
+	  <time datetime="2022-05-15T01:54:16.000Z" itemprop="datePublished">2022-05-15</time>
+	</a>
+</span>
+        
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/05/15/NAT的四种类型/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.9k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 7(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="一nat类型"><a class="markdownIt-Anchor" href="#一nat类型"></a> 一：NAT类型</h2>
+<h3 id="基于udp的p2p应用需要考虑nat的类型因为不同的nat组合的穿透的方式并不一致有的能通-有的不能通-一般来讲-nat可以分为四种类型分别是"><a class="markdownIt-Anchor" href="#基于udp的p2p应用需要考虑nat的类型因为不同的nat组合的穿透的方式并不一致有的能通-有的不能通-一般来讲-nat可以分为四种类型分别是"></a> 基于UDP的P2P应用需要考虑NAT的类型，因为不同的NAT组合的穿透的方式并不一致，有的能通， 有的不能通。一般来讲， NAT可以分为四种类型，分别是:</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1,  全锥型(Full Cone)</span><br><span class="line"></span><br><span class="line">2,  受限锥型(Restricted Cone)， 或者说是IP受限锥型</span><br><span class="line"></span><br><span class="line">3,  端口受限锥型(Port Restricted Cone), 或者说是IP + PORT受限锥型</span><br><span class="line"></span><br><span class="line">4,  对称型(Symmetric)</span><br></pre></td></tr></table></figure>
+<p>其中<strong>1,2,3属于同一种类型，都是锥型</strong>，区别只是路由器的不同的安全策略。还有些NAT不属于这四种中的任何一种，就不在本文的讨论范围了。</p>
+<h2 id="二为什么有四种类型的nat"><a class="markdownIt-Anchor" href="#二为什么有四种类型的nat"></a> 二：为什么有四种类型的NAT</h2>
+<p>NAT缓解了IPV4地址不够用的问题，同时也带了限制，那就是<strong>NAT外部的主机无法主动跟位于NAT内部的主机通信，NAT内部主机想要通信，必须主动和公网的一个IP通信，路由器负责建立一个映射关系，从而实现数据的转发， 这就是NAT的工作原理</strong>。</p>
+<h2 id="一nat使用案例"><a class="markdownIt-Anchor" href="#一nat使用案例"></a> （一）NAT使用案例</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">公网server1 ip是1.1.1.1， 监听端口是1111</span><br><span class="line"></span><br><span class="line">公网server2 ip是2.2.2.2， 监听端口是2222</span><br><span class="line"></span><br><span class="line">NAT router ip是8.8.8.8</span><br><span class="line"></span><br><span class="line">NAT内部client是192.168.0.3</span><br></pre></td></tr></table></figure>
+<p><img src="/images/javawz/1309518-20210520170839788-971942459.png" alt="img"></p>
+<p>client发送数据的时候，不管是tcp还是udp必须本地绑定一个端口，一般来讲，这个过程都是自动的。</p>
+<p>假定client(192.168.0.3, 100)给 server(1.1.1.1, 1111)发送报文，报文到达路由器，</p>
+<p>路由器在自己的公网ip上开辟一个端口800，从而建立了一个隐射关系(8.8.8.8, 800)&lt;—&gt;(192.168.0.3, 100),</p>
+<p>建立映射关系后，所以(192.168.0.3, 100)和(1.1.1.1, 1111)之间的报文都通过这个映射关系进行转发。</p>
+<p><img src="/images/javawz/1309518-20210520171340167-1991626586.png" alt="img"></p>
+<h2 id="二nat之间主要的区别分两种情况讨论"><a class="markdownIt-Anchor" href="#二nat之间主要的区别分两种情况讨论"></a> （二）NAT之间主要的区别分两种情况讨论</h2>
+<h3 id="1client19216803-100和server1111-1111在路由器上建立好映射关系后如果client19216803-100又给2222-2222发送数据路由器该怎么处理呢"><a class="markdownIt-Anchor" href="#1client19216803-100和server1111-1111在路由器上建立好映射关系后如果client19216803-100又给2222-2222发送数据路由器该怎么处理呢"></a> 1:client(192.168.0.3, 100)和server(1.1.1.1, 1111)在路由器上建立好映射关系后，如果client(192.168.0.3, 100)又给(2.2.2.2, 2222)发送数据，路由器该怎么处理呢?</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1,  复用旧的映射关系(8.8.8.8, 800)&lt;---&gt;(192.168.0.3, 100)和(2.2.2.2, 2222)通信, 这就是锥型(Cone) NAT---（分为下面的3个小类）</span><br><span class="line"></span><br><span class="line">2,  创建新的映射关系(8.8.8.8, 801)&lt;---&gt;(192.168.0.3, 100)和(2.2.2.2, 2222)通信, 这就是对称型NAT</span><br></pre></td></tr></table></figure>
+<p>注: (8.8.8.8, 801)只是举例，到底用什么端口取决于路由器的端口管理策略，总之是另外的一个端口，有的路由器有多个公网IP，不同的IP也会参与到这个映射关系中。</p>
+<h3 id="2client19216803-100和server1111-1111在路由器上建立好映射关系后如果这个时候路由器8888在800端口上收到从另外一台server2222-2222发来的数据是不是应该转发给19216803-100呢"><a class="markdownIt-Anchor" href="#2client19216803-100和server1111-1111在路由器上建立好映射关系后如果这个时候路由器8888在800端口上收到从另外一台server2222-2222发来的数据是不是应该转发给19216803-100呢"></a> 2:client(192.168.0.3, 100)和server(1.1.1.1,  1111)在路由器上建立好映射关系后，如果这个时候路由器(8.8.8.8)在800端口上收到从另外一台server(2.2.2.2,  2222)发来的数据，是不是应该转发给(192.168.0.3, 100)呢？</h3>
+<p>有四种情况:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1, 无条件转发给(192.168.0.3, 100)， 这就是全锥型(Full Cone)NAT。</span><br><span class="line"></span><br><span class="line">2, 如果(192.168.0.3, 100)之前给(2.2.2.2)发送过数据，则转发， 这就是受限锥型(Restricted Cone)。</span><br><span class="line"></span><br><span class="line">3, 如果(192.168.0.3, 100)之前给(2.2.2.2, 2222)发送过数据，则转发， 这就是端口受限锥型(Port Restricted Cone)。</span><br><span class="line"></span><br><span class="line">4, 丢弃报文，拒绝转发, 这就是对称型NAT。</span><br></pre></td></tr></table></figure>
+<p>从上面也描述也可以看出，安全性系数, 对称型 &gt; 端口受限锥型 &gt; 受限锥型 &gt; 全锥型</p>
+<h2 id="三不同nat的穿透性"><a class="markdownIt-Anchor" href="#三不同nat的穿透性"></a> （三）不同NAT的穿透性</h2>
+<p><img src="/images/javawz/1309518-20210520172322286-481923861.png" alt="img"></p>
+<p>对称nat无法穿透，这个说法不正确，<strong>对称nat与全椎full cone nat、对称nat 与 ip受限椎型cone</strong>，是可以穿透的，<strong>对称nat与 端口受限、对称nat与对称nat</strong>，不可穿透。<br>
+类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、full cone 全椎</span><br><span class="line">2、Restricted Cone ip受限</span><br><span class="line">3、port Restricted Cone 端口受限</span><br><span class="line">4、Symmetric 对称。</span><br></pre></td></tr></table></figure>
+<h3 id="穿透关系上述4种类型如果定义他们的值为序列号n为序列号相加"><a class="markdownIt-Anchor" href="#穿透关系上述4种类型如果定义他们的值为序列号n为序列号相加"></a> 穿透关系：上述4种类型，如果定义他们的值为序列号，N为序列号相加。</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">则N&lt;=6可穿透。2 和 4 序列相加 = 6 则可穿透。 </span><br><span class="line">3(端口受限)和4（对称）= 7 不可穿透。</span><br></pre></td></tr></table></figure>
+<h1 id="三p2p网络中的nat穿透问题nat的原理和类型"><a class="markdownIt-Anchor" href="#三p2p网络中的nat穿透问题nat的原理和类型"></a> 三：p2p网络中的NAT穿透问题—NAT的原理和类型</h1>
+<h2 id="一完全圆锥型nat-full-cane-nat"><a class="markdownIt-Anchor" href="#一完全圆锥型nat-full-cane-nat"></a> （一）完全圆锥型NAT (Full Cane NAT)</h2>
+<h3 id="完全圆锥型的nat将从同一内部ip地址和端口来的所有请求都映射到相同的外部ip地址和端口-而且任何外部主机通过向映射的外部地址发送报文可以实现和内部主机进行通信"><a class="markdownIt-Anchor" href="#完全圆锥型的nat将从同一内部ip地址和端口来的所有请求都映射到相同的外部ip地址和端口-而且任何外部主机通过向映射的外部地址发送报文可以实现和内部主机进行通信"></a> <strong>完全圆锥型的NAT,将从同一内部IP地址和端口来的所有请求，都映射到相同的外部IP地址和端口。而且，任何外部主机通过向映射的外部地址发送报文，可以实现和内部主机进行通信。</strong></h3>
+<p>这是一种<strong>比较宽松的策略</strong>，<strong>只要建立了内部网络的IP地址和端口与公网IP地址和端口的映射关系，则所有Internet上的主机都可以访问该NAT之后的主机！！！</strong></p>
+<p><img src="/images/javawz/1309518-20210520174201499-1628049021.png" alt="img"></p>
+<p>在图中，<strong>NAT会将内网地址{X:y} (x代表内网主机的IP地址，Y代表端口)映射成公网地址{A:b}(A代表映射的公网IP地址，b代表映射的端口)并绑定。任何数据分组都可以通过地址{A:b}送到此内网主机。</strong></p>
+<h2 id="二受限圆锥型nat-restricted-cone-natip受限"><a class="markdownIt-Anchor" href="#二受限圆锥型nat-restricted-cone-natip受限"></a> （二）受限圆锥型NAT ( Restricted Cone NAT)–IP受限</h2>
+<p>受限圆锥型NAT也是将从相同的内部IP地址和端口来的所有请求，映射到相同的公网IP地址和端口。</p>
+<h3 id="但是与完全圆锥型nat不同当且仅当内网主机之前己经向公网主机假设ip地址为p发送过数据分组此公网主机才能够向内网主机发送数据分组"><a class="markdownIt-Anchor" href="#但是与完全圆锥型nat不同当且仅当内网主机之前己经向公网主机假设ip地址为p发送过数据分组此公网主机才能够向内网主机发送数据分组"></a> 但是与完全圆锥型NAT不同，当且仅当内网主机之前己经向公网主机(假设IP地址为P)发送过数据分组，此公网主机才能够向内网主机发送数据分组。</h3>
+<p><img src="/images/javawz/1309518-20210520174148137-1979686418.png" alt="img"></p>
+<p>在图中，<strong>NAT会将内网地址{x:y}映射成公网地址{A:b〕并绑定，只有源地址为P的分组才能和此内网主机通信。</strong></p>
+<h2 id="三端口受限圆锥型nat-port-restricted-cone-natipport受限"><a class="markdownIt-Anchor" href="#三端口受限圆锥型nat-port-restricted-cone-natipport受限"></a> （三）端口受限圆锥型NAT ( Port Restricted Cone NAT)–IP+port受限</h2>
+<h3 id="类似于受限圆锥型nat但更严格-端口受限圆锥型nat增加了端口号的限制当且仅当内网主机之前已经向公网主机发送了数据分组公网主机才能和此内网主机通信"><a class="markdownIt-Anchor" href="#类似于受限圆锥型nat但更严格-端口受限圆锥型nat增加了端口号的限制当且仅当内网主机之前已经向公网主机发送了数据分组公网主机才能和此内网主机通信"></a> 类似于受限圆锥型NAT，但更严格。<strong>端口受限圆锥型NAT增加了端口号的限制，当且仅当内网主机之前已经向公网主机发送了数据分组，公网主机才能和此内网主机通信。</strong></h3>
+<p><img src="/images/javawz/1309518-20210520174437259-2033657389.png" alt="img"></p>
+<p>在图中，NAT会将内网地址{X:y}映射成公网地址{A:b}并绑定，<strong>由于内网主机之前己经分别与地址为M,端口为n的公网主机以及地址为P,端口为q的公网主机通信</strong>，所以<strong>只有来自这两个公网地址和端口的分组才能到达内网主机</strong>。</p>
+<h2 id="四对称型nat-csymmetric-nat-重点理解"><a class="markdownIt-Anchor" href="#四对称型nat-csymmetric-nat-重点理解"></a> （四）对称型NAT CSymmetric NAT)----重点理解</h2>
+<h3 id="对称型nat把从同一内网地址和端口到相同的地址和端口的所有请求都映射到同一个公网地址和端口"><a class="markdownIt-Anchor" href="#对称型nat把从同一内网地址和端口到相同的地址和端口的所有请求都映射到同一个公网地址和端口"></a> 对称型NAT把从<strong>同一内网地址和端口****到相同的地址和端口的所有请求</strong>，<strong>都映射到同一个公网地址和端口</strong>。</h3>
+<p>如果<strong>同一个内网主机，用相同的内网地址和端口向另一个地址发送数据分组，则会使用不同的映射</strong>，<strong>而且公网主机只有在接收到数据分组后，才能向与发送分组的内网主机进行通信</strong>。可见，对称性NAT是所有NAT类型中限制最为严格的。</p>
+<p><img src="/images/javawz/1309518-20210520183858300-1646375177.png" alt="img"></p>
+<p>在图中，对称型NAT会将内网地址{X:y}转换成公网地址{A:b}<strong>并绑定为{X:y}|{A:b}&lt;一&gt;{P:q}</strong>。这就意味着NAT只允许地址{A:b}接收来自{P:q}的分组，将它转给{X:y} 。<strong>当客户机请求一个不同的公网地址{M:n}时，NAT会新分配一个外部端口{<a href="https://www.baidu.com/s?wd=C%3A&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" target="_blank" rel="noopener">C:</a>d}</strong> 。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xiaowuyoucy.github.io/2022/05/15/NAT的四种类型/" title="NAT的四种类型" target="_blank" rel="external">https://xiaowuyoucy.github.io/2022/05/15/NAT的四种类型/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+		  
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/05/15/ORACLE查看数据库的库名、实例名、域名、服务器以及服务名/" title="ORACLE查看数据库的库名、实例名、域名、服务器以及服务名"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/05/15/Linux设备检测外部网络NAT类型/" title="Linux设备检测外部网络NAT类型"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+	<span>More contact information</span>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:xiaowuyoucy.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '032928647cd59bc9f443',
+    clientSecret: '82a11fd93e4d0779655af6dc4b73942a03e95276',
+    repo: 'Xiaowuyoucy.github.io',
+    owner: 'Xiaowuyoucy',
+    admin: ['Xiaowuyoucy'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>
