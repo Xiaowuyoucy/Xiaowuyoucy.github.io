@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>UML类图_常见的报文编码方式_ASN1报文编解码_vs连接linux服务器 | YanChen</title>
+  <meta name="description" content="两台机器通信  1 两台机器的操作系统平台不同: 一台是32为windows, 一台是linux 64系统  不同的平台对数据的处理都可能不一样,比如在windows中的int类型是4个字节,在linux中可能是2个字节。  2 网络传输的时候用的是大端模式 只要是传输的数据的数据类型超过了一个字节都需要进行网络字节序的转换 关于字节序序的函数:  12htons htonl ntohs nto">
+<meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UML类图_常见的报文编码方式_ASN1报文编解码_vs连接linux服务器">
+<meta property="og:url" content="https://xiaowuyoucy.github.io/2022/05/21/UML类图-常见的报文编码方式-ASN1报文编解码-vs连接linux服务器/index.html">
+<meta property="og:site_name" content="YanChen">
+<meta property="og:description" content="两台机器通信  1 两台机器的操作系统平台不同: 一台是32为windows, 一台是linux 64系统  不同的平台对数据的处理都可能不一样,比如在windows中的int类型是4个字节,在linux中可能是2个字节。  2 网络传输的时候用的是大端模式 只要是传输的数据的数据类型超过了一个字节都需要进行网络字节序的转换 关于字节序序的函数:  12htons htonl ntohs nto">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522003152929.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522003744558.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522004231464.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522004610246.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522004827876.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522004959775.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522005440449.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522005903188.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522010251666.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/c3d36423a938455a9551fc5b00ff0542.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522013950586.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522014650992.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522014903248.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522015040222.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522015129104.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522015211419.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522040443774.png">
+<meta property="og:updated_time" content="2022-05-21T21:24:30.994Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UML类图_常见的报文编码方式_ASN1报文编解码_vs连接linux服务器">
+<meta name="twitter:description" content="两台机器通信  1 两台机器的操作系统平台不同: 一台是32为windows, 一台是linux 64系统  不同的平台对数据的处理都可能不一样,比如在windows中的int类型是4个字节,在linux中可能是2个字节。  2 网络传输的时候用的是大端模式 只要是传输的数据的数据类型超过了一个字节都需要进行网络字节序的转换 关于字节序序的函数:  12htons htonl ntohs nto">
+<meta name="twitter:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220522003152929.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xiaowuyoucy.github.io/2022/05/21/UML类图-常见的报文编码方式-ASN1报文编解码-vs连接linux服务器/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fonts2/iconfont.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xiaowuyoucy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">YanChen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> GuangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="https://www.xiaochenyan.top/navigation/index.html">
+            
+            <i class="icon icon-map-marker"></i>
+            
+            <span class="menu-title">导航</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon iconfont icon-video"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">格言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+				
+				<p id="hitokoto">:D 获取中...</p>
+				<p id="from" style="text-align: right"></p>
+                <script>
+					  var xhr = new XMLHttpRequest();
+					  xhr.open('get', 'https://v1.hitokoto.cn');
+					  xhr.onreadystatechange = function () {
+						if (xhr.readyState === 4) {
+						  var data = JSON.parse(xhr.responseText);
+						  var hitokoto = document.getElementById('hitokoto');
+						  hitokoto.innerText = data.hitokoto;
+						  var from = document.getElementById('from');
+						  from.innerText = "-- " + data.from;
+						}
+					  }
+					  xhr.send();
+				</script>
+				
+				
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">195</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KaliLinux/">KaliLinux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL/">MYSQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenSSL/">OpenSSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHCE/">RHCE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WEB安全渗透/">WEB安全渗透</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows命令/">Windows命令</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows网络编程/">Windows网络编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/apache/">apache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/c/">c</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp/">cpp</a><span class="category-list-count">105</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp17从入门到精通/">cpp17从入门到精通</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/githubHexo/">githubHexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/libevent/">libevent</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">94</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计/">windows程序设计</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计2/">windows程序设计2</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术资讯/">技术资讯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">38</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/易语言/">易语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇编逆向/">汇编逆向</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/理财投资/">理财投资</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简谈计算机/">简谈计算机</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程词汇/">编程词汇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络爬虫/">网络爬虫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机公共基础/">计算机公共基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络TCP-IP传输协议-网络抓包/">计算机网络TCP/IP传输协议/网络抓包</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络原理/">计算机网络原理</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高中数学/">高中数学</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GET/">$_GET</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POST，-SERVER/">$_POST，$_SERVER</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REQUEST/">$_REQUEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOTO语句/">GOTO语句</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang函数/">Golang函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang匿名函数/">Golang匿名函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础/">Golang基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础类型占位符/">Golang基础类型占位符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang常量与变量里表达式/">Golang常量与变量里表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang循环结构/">Golang循环结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang指针/">Golang指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang标准输入与输出/">Golang标准输入与输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang流程控制/">Golang流程控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang程序运算/">Golang程序运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang类型转换及移位运算/">Golang类型转换及移位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang闭包函数/">Golang闭包函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ISO七层模型/">ISO七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java总结/">Java总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalinux/">Kalinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Null和Undefined/">Null和Undefined</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP两种定义常量的形式/">PHP两种定义常量的形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP常量/">PHP常量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python教程/">Python教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python笔记/">Python笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python运算符/">Python运算符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO网站优化/">SEO网站优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIR/">__DIR__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FILE/">__FILE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/">__LINE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache环境变量/">apache环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache配置/">apache配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beef劫持/">beef劫持</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dowhile循环/">dowhile循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iota定义常量组/">iota定义常量组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数/">javascript函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this方法/">js-this方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js布尔类型隐私转换/">js布尔类型隐私转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux目录结构/">linux目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php变量/">php变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urlib2/">urlib2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全渗透/">web安全渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web渗透/">web渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/变量的操作/">变量的操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/延时执行defer/">延时执行defer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格狼日/">拉格狼日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间复杂度测试/">时间复杂度测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财，投资/">理财，投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络模型/">网络模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/顺序表/">顺序表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/GET/" style="font-size: 13px;">$_GET</a> <a href="/tags/POST，-SERVER/" style="font-size: 13px;">$_POST，$_SERVER</a> <a href="/tags/REQUEST/" style="font-size: 13px;">$_REQUEST</a> <a href="/tags/Cookie/" style="font-size: 13px;">Cookie</a> <a href="/tags/GOTO语句/" style="font-size: 13px;">GOTO语句</a> <a href="/tags/Golang/" style="font-size: 13px;">Golang</a> <a href="/tags/Golang函数/" style="font-size: 13px;">Golang函数</a> <a href="/tags/Golang匿名函数/" style="font-size: 13px;">Golang匿名函数</a> <a href="/tags/Golang基础/" style="font-size: 14px;">Golang基础</a> <a href="/tags/Golang基础类型占位符/" style="font-size: 13px;">Golang基础类型占位符</a> <a href="/tags/Golang常量与变量里表达式/" style="font-size: 13px;">Golang常量与变量里表达式</a> <a href="/tags/Golang循环结构/" style="font-size: 13px;">Golang循环结构</a> <a href="/tags/Golang指针/" style="font-size: 13px;">Golang指针</a> <a href="/tags/Golang标准输入与输出/" style="font-size: 13px;">Golang标准输入与输出</a> <a href="/tags/Golang流程控制/" style="font-size: 13px;">Golang流程控制</a> <a href="/tags/Golang程序运算/" style="font-size: 13px;">Golang程序运算</a> <a href="/tags/Golang类型转换及移位运算/" style="font-size: 13px;">Golang类型转换及移位运算</a> <a href="/tags/Golang闭包函数/" style="font-size: 13px;">Golang闭包函数</a> <a href="/tags/ISO七层模型/" style="font-size: 13px;">ISO七层模型</a> <a href="/tags/Java总结/" style="font-size: 13px;">Java总结</a> <a href="/tags/Kalinux/" style="font-size: 13px;">Kalinux</a> <a href="/tags/Null和Undefined/" style="font-size: 13px;">Null和Undefined</a> <a href="/tags/PHP两种定义常量的形式/" style="font-size: 13px;">PHP两种定义常量的形式</a> <a href="/tags/PHP常量/" style="font-size: 13px;">PHP常量</a> <a href="/tags/Python教程/" style="font-size: 13px;">Python教程</a> <a href="/tags/Python笔记/" style="font-size: 13px;">Python笔记</a> <a href="/tags/Python运算符/" style="font-size: 13px;">Python运算符</a> <a href="/tags/SEO网站优化/" style="font-size: 13px;">SEO网站优化</a> <a href="/tags/XSS/" style="font-size: 14px;">XSS</a> <a href="/tags/DIR/" style="font-size: 13px;">__DIR__</a> <a href="/tags/FILE/" style="font-size: 13px;">__FILE__</a> <a href="/tags/LINE/" style="font-size: 13px;">__LINE__</a> <a href="/tags/apache环境变量/" style="font-size: 13px;">apache环境变量</a> <a href="/tags/apache配置/" style="font-size: 13px;">apache配置</a> <a href="/tags/beef劫持/" style="font-size: 13px;">beef劫持</a> <a href="/tags/dowhile循环/" style="font-size: 13px;">dowhile循环</a> <a href="/tags/iota定义常量组/" style="font-size: 13px;">iota定义常量组</a> <a href="/tags/javascript函数/" style="font-size: 13px;">javascript函数</a> <a href="/tags/js-this方法/" style="font-size: 13px;">js-this方法</a> <a href="/tags/js布尔类型隐私转换/" style="font-size: 13px;">js布尔类型隐私转换</a> <a href="/tags/linux目录结构/" style="font-size: 13px;">linux目录结构</a> <a href="/tags/php变量/" style="font-size: 13px;">php变量</a> <a href="/tags/sql注入/" style="font-size: 13px;">sql注入</a> <a href="/tags/urlib2/" style="font-size: 13px;">urlib2</a> <a href="/tags/web安全渗透/" style="font-size: 13px;">web安全渗透</a> <a href="/tags/web渗透/" style="font-size: 13px;">web渗透</a> <a href="/tags/变量的操作/" style="font-size: 13px;">变量的操作</a> <a href="/tags/延时执行defer/" style="font-size: 13px;">延时执行defer</a> <a href="/tags/拉格狼日/" style="font-size: 13px;">拉格狼日</a> <a href="/tags/时间复杂度测试/" style="font-size: 13px;">时间复杂度测试</a> <a href="/tags/理财，投资/" style="font-size: 13px;">理财，投资</a> <a href="/tags/算法/" style="font-size: 13px;">算法</a> <a href="/tags/网络模型/" style="font-size: 13px;">网络模型</a> <a href="/tags/计算机基础/" style="font-size: 13px;">计算机基础</a> <a href="/tags/顺序表/" style="font-size: 13px;">顺序表</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">51</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">87</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">51</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">125</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">106</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/cpp/">cpp</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/21/UML类图-常见的报文编码方式-ASN1报文编解码-vs连接linux服务器/" class="title">UML类图_常见的报文编码方式_ASN1报文编解码_vs连接linux服务器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-21T03:32:04.000Z" itemprop="datePublished">2022-05-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Git/">Git</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/17/Git教程/" class="title">Git教程</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-17T14:55:09.000Z" itemprop="datePublished">2022-05-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/cpp/">cpp</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/17/项目介绍和部署/" class="title">项目介绍和部署</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-17T14:36:46.000Z" itemprop="datePublished">2022-05-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/OpenSSL/">OpenSSL</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/17/OpenSSL安装和配置/" class="title">OpenSSL安装和配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-16T23:12:06.000Z" itemprop="datePublished">2022-05-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/数据库/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/16/MySQL中的事务/" class="title">MySQL中的事务</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-16T01:23:35.000Z" itemprop="datePublished">2022-05-16</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-UML类图-常见的报文编码方式-ASN1报文编解码-vs连接linux服务器" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UML类图_常见的报文编码方式_ASN1报文编解码_vs连接linux服务器
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/05/21/UML类图-常见的报文编码方式-ASN1报文编解码-vs连接linux服务器/" class="article-date">
+	  <time datetime="2022-05-21T03:32:04.000Z" itemprop="datePublished">2022-05-21</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/cpp/">cpp</a>
+  </span>
+
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/05/21/UML类图-常见的报文编码方式-ASN1报文编解码-vs连接linux服务器/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4.2k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 16(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="两台机器通信"><a class="markdownIt-Anchor" href="#两台机器通信"></a> 两台机器通信</h2>
+<h3 id="1-两台机器的操作系统平台不同"><a class="markdownIt-Anchor" href="#1-两台机器的操作系统平台不同"></a> 1 两台机器的操作系统平台不同:</h3>
+<pre><code>一台是32为windows, 一台是linux 64系统
+</code></pre>
+<p>不同的平台对数据的处理都可能不一样,比如在windows中的int类型是4个字节,在linux中可能是2个字节。</p>
+<h3 id="2-网络传输的时候用的是大端模式"><a class="markdownIt-Anchor" href="#2-网络传输的时候用的是大端模式"></a> 2 网络传输的时候用的是大端模式</h3>
+<pre><code>只要是传输的数据的数据类型超过了一个字节都需要进行网络字节序的转换
+关于字节序序的函数:
+</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">htons htonl ntohs ntohl </span><br><span class="line">h: host			 to: 到		n: network		l: long			s: short</span><br></pre></td></tr></table></figure>
+<p>​	  假如在从A传递数据给B, 需要传递一个结构体</p>
+<h3 id="3-字节序对齐不一样"><a class="markdownIt-Anchor" href="#3-字节序对齐不一样"></a> 3 字节序对齐不一样</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct test</span><br><span class="line">&#123;</span><br><span class="line">	int a;</span><br><span class="line">	char c;</span><br><span class="line">	double d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-两台服务的开发语言不同"><a class="markdownIt-Anchor" href="#4-两台服务的开发语言不同"></a> 4 两台服务的开发语言不同</h3>
+<pre><code>对于C语言, 一个字符占用一个字节
+对于java, 一个字符占用2个字节
+</code></pre>
+<p>报文: 其实就是数据.<br>
+上述几种情况, 涉及到网络数据传输, 都需要对数据进行编解码操作.</p>
+<h1 id="uml类图"><a class="markdownIt-Anchor" href="#uml类图"></a> UML类图:</h1>
+<h2 id="1-面向对象设计"><a class="markdownIt-Anchor" href="#1-面向对象设计"></a> 1. 面向对象设计</h2>
+<p>面向对象设计主要就是使用UML的类图，类图用于描述系统中所包含的类以及它们之间的相互关系，帮助人</p>
+<p>们简化对系统的理解，它是<strong>系统分析和设计阶段的重要产物，也是系统编码和测试的重要模型依据</strong></p>
+<h2 id="类的uml画法"><a class="markdownIt-Anchor" href="#类的uml画法"></a> 类的UML画法</h2>
+<p><strong>类（Class）封装了数据和行为，是面向对象的重要组成部分，它是具有相同属性、操作、关系的对象集合的</strong></p>
+<p><strong>总称</strong>。在系统中，每个类都具有一定的职责，职责指的是类要完成什么样子的功能，要承担什么样子的义</p>
+<p>务。一个类可以有多种职责，但是设计得好的类一般只有一种职责。</p>
+<p>假如我现在定义了这么一个类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Persion </span><br><span class="line">&#123;</span><br><span class="line">public: </span><br><span class="line">	string getName()</span><br><span class="line">	&#123; </span><br><span class="line">		return name; </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	void setName(string name) &#123; </span><br><span class="line">		this-&gt;name = name;</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">protected: </span><br><span class="line">	void playBasketball() &#123; </span><br><span class="line">		pass();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">private: </span><br><span class="line">	void pass() &#123;</span><br><span class="line"></span><br><span class="line">	&#125; </span><br><span class="line"></span><br><span class="line">private: </span><br><span class="line">	string name = &quot;Jack&quot;; </span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>那么此类对应的UML为：</p>
+<p><img src="/images/javawz/image-20220522003152929.png" alt="image-20220522003152929"></p>
+<p>看到该图分为三层：最顶层的为类名，中间层的为属性，最底层的为方法。<br>
+属性的表示方式为：【可见性】【属性名称】：【类型】={缺省值，可选}<br>
+方法的表示方式为：【可见性】【方法名称】（【参数列表】）：【类型】<br>
+可见性都是一样的，&quot;-“表示private、”+“表示public、”#&quot;表示protected。</p>
+<h2 id="3-继承关系"><a class="markdownIt-Anchor" href="#3-继承关系"></a> 3. 继承关系</h2>
+<p>继承也叫作泛化（Generalization），用于描述父子类之间的关系，父类又称为基类或者超类，子类又称作<br>
+派生类。在UML中，泛化关系用带空心三角形的实线来表示。</p>
+<h3 id="31-普通继承关系"><a class="markdownIt-Anchor" href="#31-普通继承关系"></a> 3.1 普通继承关系</h3>
+<p>假如现在我又定义了一个Student和一个Teacher：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Student : public Persion </span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">public: </span><br><span class="line">	void study() &#123;&#125; </span><br><span class="line"></span><br><span class="line">private: </span><br><span class="line">	string studentNo; </span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Teacher : public Persion </span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">public: </span><br><span class="line">	void teach() &#123;&#125; </span><br><span class="line"></span><br><span class="line">private: </span><br><span class="line">	string teacherNo; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>那么，用UML表示这种关系应当是：</p>
+<p><img src="/images/javawz/image-20220522003744558.png" alt="image-20220522003744558"></p>
+<h3 id="32-抽象继承关系"><a class="markdownIt-Anchor" href="#32-抽象继承关系"></a> 3.2 抽象继承关系</h3>
+<blockquote>
+<p>上面的继承是普通的继承，在C++中，除了普通的继承之外，众所周知的还有一种抽象的继承关系，因此就<br>
+再讲讲抽象继承关系，作为上面的继承的补充。</p>
+<p>比方说我想实现一个链表（Link），插入（insert）与删除（remove）动作我想让子类去实现，链表本身只<br>
+实现统计链表中元素个数的动作（count），然后有一个子类单向链表（OneWayLink）去实现父类没有实现<br>
+的动作，C++代码为：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// 抽象类(含有纯虚函数的类)</span><br><span class="line">class Link &#123;</span><br><span class="line"></span><br><span class="line">public: </span><br><span class="line">	virtual void insert() = 0; </span><br><span class="line"></span><br><span class="line">	virtual void remove() = 0;</span><br><span class="line"></span><br><span class="line">	int count() &#123;</span><br><span class="line">    		return 0;</span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 子类 </span><br><span class="line">class OneWayLink : public Link </span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">public: </span><br><span class="line"></span><br><span class="line">	void insert() &#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	void remove() &#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>其UML的画法为：</p>
+<p><img src="/images/javawz/image-20220522004231464.png" alt="image-20220522004231464"></p>
+<blockquote>
+<p>在UML中，抽象类无论类名还是抽象方法名，都以斜体的方式表示，因为这也是一种继承关系，所以子类与父类通过带空心三角形的实线来联系。</p>
+</blockquote>
+<h2 id="4-关联关系"><a class="markdownIt-Anchor" href="#4-关联关系"></a> 4. 关联关系</h2>
+<blockquote>
+<p>关联（Assocition）关系是类与类之间最常见的一种关系，它是一种结构化的关系，表示一类对象与另一类<br>
+对象之间有联系，如汽车和轮胎、师傅和徒弟、班级和学生等。在UML类图中，用实线连接有关联关系的对<br>
+象所对应的类，在C++中通常将一个类的对象作为另一个类的成员变量。关联关系分单向关联、双向关联、<br>
+自关联，逐一看一下。</p>
+</blockquote>
+<h3 id="41-单向关联关系"><a class="markdownIt-Anchor" href="#41-单向关联关系"></a> 4.1 单向关联关系</h3>
+<p>单向关联指的是关联只有一个方向，比如顾客（Customer）拥有地址（Address），其代码实现为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 地址类 </span><br><span class="line">class Address &#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 顾客类 </span><br><span class="line">class Customer </span><br><span class="line">&#123;</span><br><span class="line">private:</span><br><span class="line">	Address address; 	// 作为成员变量 </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>UML的画法为：</p>
+<p><img src="/images/javawz/image-20220522004610246.png" alt="image-20220522004610246"></p>
+<h3 id="42-双向关联关系"><a class="markdownIt-Anchor" href="#42-双向关联关系"></a> 4.2 双向关联关系</h3>
+<blockquote>
+<p>默认情况下的关联都是双向的，比如顾客（Customer）购买商品（Product），反之，卖出去的商品总是与<br>
+某个顾客与之相关联，这就是双向关联。c++ 类的写法为：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 商品类 </span><br><span class="line">class Product &#123;</span><br><span class="line">private: </span><br><span class="line">	Customer customer; // 该商品属于哪一位顾客, 作为成员变量 </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 顾客类 </span><br><span class="line">class Customer &#123;</span><br><span class="line">private:</span><br><span class="line">	Product product[64]; // 给顾客购买了哪些商品, 作为成员变量 </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>对应的UML类图应当是：</p>
+<p><img src="/images/javawz/image-20220522004827876.png" alt="image-20220522004827876"></p>
+<h3 id="43-自关联关系"><a class="markdownIt-Anchor" href="#43-自关联关系"></a> 4.3 自关联关系</h3>
+<blockquote>
+<p>自关联，指的就是对象中的属性为对象本身，这在链表中非常常见，单向链表Node中会维护一个它的前驱<br>
+Node，双向链表Node中会维护一个它的前驱Node和一个它的后继Node。就以单向链表为例，它的C++写<br>
+法为：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 链表节点 </span><br><span class="line">class Node </span><br><span class="line">&#123;</span><br><span class="line">private: </span><br><span class="line">	Node* nextNode; // 指向后继节点的指针, 作为成员变量 </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>对应的UML类图应当是：</p>
+<p><img src="/images/javawz/image-20220522004959775.png" alt="image-20220522004959775"></p>
+<h2 id="5-聚合关系"><a class="markdownIt-Anchor" href="#5-聚合关系"></a> 5. 聚合关系</h2>
+<blockquote>
+<p>聚合（Aggregation）关系表示整体与部分的关系。在聚合关系中，成员对象是整体的一部分，但是成员对象<br>
+可以脱离整体对象独立存在。在UML中，</p>
+<p>聚合关系用带空心菱形的直线表示，如汽车（Car）与引擎（Engine）、轮胎（Wheel）、车灯（Light），C++ 表示为：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Engine &#123;&#125;;</span><br><span class="line"></span><br><span class="line">class Wheel &#123;&#125;;</span><br><span class="line"></span><br><span class="line">class Light &#123;&#125;;</span><br><span class="line"></span><br><span class="line">class Car &#123;</span><br><span class="line"></span><br><span class="line">public: </span><br><span class="line"></span><br><span class="line">	Car(Engine engine, Light light, Wheel wheel) </span><br><span class="line">	&#123; </span><br><span class="line">		this-&gt;engine = engine; </span><br><span class="line">		this-&gt;light = light;</span><br><span class="line">    	this-&gt;wheel = wheel; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	void drive() &#123;&#125; </span><br><span class="line"></span><br><span class="line">private: </span><br><span class="line"></span><br><span class="line">	Engine engine; </span><br><span class="line"></span><br><span class="line">	Light light;</span><br><span class="line"></span><br><span class="line">	Wheel wheel; </span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>对应的UML类图为：</p>
+<p><img src="/images/javawz/image-20220522005440449.png" alt="image-20220522005440449"></p>
+<blockquote>
+<p>代码实现聚合关系，<strong>成员对象通常以构造方法、Setter方法的方式注入到整体对象之中</strong>。</p>
+</blockquote>
+<h2 id="6-组合关系"><a class="markdownIt-Anchor" href="#6-组合关系"></a> 6. 组合关系</h2>
+<blockquote>
+<p>组合（Composition）关系也表示的是一种整体和部分的关系，但是在组合关系中整体对象可以控制成员对<br>
+象的生命周期，一旦整体对象不存在，成员对象也不存在，整体对象和成员对象之间具有同生共死的关系。 在UML中组合关系用带实心菱形的直线表示。<br>
+比如人的头（Head）和嘴巴（Mouth）、鼻子（Nose），嘴巴和鼻子是头的组成部分之一，一旦头没了，<br>
+嘴巴也没了，因此头和嘴巴、鼻子是组合关系，C++ 表示为：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Mouth &#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Nose &#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Head &#123;</span><br><span class="line">public: </span><br><span class="line">	Head() </span><br><span class="line">	&#123; </span><br><span class="line">		mouth = new Mouth(); </span><br><span class="line">		nose = new Nose(); 	</span><br><span class="line">	&#125;</span><br><span class="line">	void shake() &#123;</span><br><span class="line">	</span><br><span class="line">	&#125; </span><br><span class="line"></span><br><span class="line">private: </span><br><span class="line">	Mouth *mouth;</span><br><span class="line">	Nose *nose;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>其UML的表示方法为：</p>
+<p><img src="/images/javawz/image-20220522005903188.png" alt="image-20220522005903188"></p>
+<blockquote>
+<p>代码实现组合关系，通常在整体类的构造方法中直接实例化成员类，因为组合关系的整体和部分是共生关<br>
+系，如果通过外部注入，那么即使整体不存在，那么部分还是存在的，这就相当于变成了一种聚合关系了。</p>
+</blockquote>
+<h2 id="7-依赖关系"><a class="markdownIt-Anchor" href="#7-依赖关系"></a> 7. 依赖关系</h2>
+<blockquote>
+<p>依赖（Dependency）关系是一种使用关系，特定事物的改变有可能会影响到使用该事物的其他事物，在需<br>
+要表示一个事物使用另一个事物时使用依赖关系，大多数情况下依赖关系体现在某个类的方法使用另一个类<br>
+的对象作为参数。在UML中，依赖关系用带箭头的虚线表示，由依赖的一方指向被依赖的一方。</p>
+<p>比如，驾驶员（Driver）开车，Driver类的drive()方法将车（Car）的对象作为一个参数传递，以便在drive()<br>
+方法中能够调用car的move()方法，且驾驶员的drive()方法依赖车的move()方法，因此也可以说Driver依赖<br>
+Car，C++代码为：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Car </span><br><span class="line">&#123;</span><br><span class="line">public: </span><br><span class="line">	void move(); </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Driver &#123;</span><br><span class="line">public: </span><br><span class="line">	void drive(Car car) </span><br><span class="line">	&#123; </span><br><span class="line">		car.move(); </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>其UML的画法为：</p>
+<p><img src="/images/javawz/image-20220522010251666.png" alt="image-20220522010251666"></p>
+<blockquote>
+<p>依赖关系通常通过三种方式来实现：</p>
+<ol>
+<li>将一个类的对象作为另一个类中方法的参数</li>
+<li>在一个类的方法中将另一个类的对象作为其对象的局部变量</li>
+<li>在一个类的方法中调用另一个类的静态方法</li>
+</ol>
+</blockquote>
+<h2 id="8-关联关系-聚合关系-组合关系之间的区别"><a class="markdownIt-Anchor" href="#8-关联关系-聚合关系-组合关系之间的区别"></a> 8. 关联关系、聚合关系、组合关系之间的区别</h2>
+<blockquote>
+<p>从上文可以看出，关联关系、聚合关系和组合关系三者之间比较相似，本文的最后就来总结一下这三者之间<br>
+的区别。</p>
+<p>关联和聚合的区别主要在于语义上：关联的两个对象之间一般是平等的，聚合则一般是不平等的。</p>
+<p>聚合和组合的区别则在语义和实现上都有差别：组合的两个对象之间生命周期有很大的关联，被组合的对象<br>
+在组合对象创建的同时或者创建之后创建，在组合对象销毁之前销毁，一般来说被组合对象不能脱离组合对<br>
+象独立存在，而且也只能属于一个组合对象；聚合则不一样，被聚合的对象可以属于多个聚合对象。</p>
+<p>再举例子来说：</p>
+<ul>
+<li>
+<p>你和你的朋友属于关联关系，因为你和你的朋友之间的关系是平等的，关联关系只是表示一下两个对象<br>
+之间的一种简单的联系而已，就像我有一个朋友</p>
+</li>
+<li>
+<p>你和你借的书属于聚合关系，第一是因为书可以独立存在，第二是因为书不仅仅属于你，也可以属于别<br>
+人，只是暂时你拥有</p>
+</li>
+<li>
+<p>你和你的心脏属于组合关系，因为你的心脏只是属于你的，不能脱离与你而存在</p>
+</li>
+</ul>
+<p>不过，实际应用中，我个人感觉三种关系其实没有区分得这么清楚，有些架构师甚至会说&quot;组合和聚合没什么<br>
+区别&quot;，所以，有时候不需要把细节扣得这么细，合理利用对象之间的关系给出设计方案即可。</p>
+</blockquote>
+<h2 id="常用的几种序列化方式"><a class="markdownIt-Anchor" href="#常用的几种序列化方式"></a> 常用的几种序列化方式</h2>
+<ol>
+<li>XML类似于HTML，与HTML很相似，但是用它来序列化对象的时候，就显得很复杂</li>
+<li>JSON使用起来很简单，他的产生来自于一种关联数组，其本质是采用“键值对”的方式描述对象</li>
+<li>Protocol Buffer是一个高效的数据化数据存储格式，用于结构化数据串行化，很适合做数据储存或RPC数据交换格式</li>
+<li>ASN.1抽象语法标记</li>
+<li>boost 序列化的类</li>
+<li>自定义的格式</li>
+</ol>
+<h3 id="asn1"><a class="markdownIt-Anchor" href="#asn1"></a> ASN.1</h3>
+<p>头文件和源代码下载地址:<a href="https://gitee.com/xiaochenyan/mypro/tree/master/%E5%A4%9A%E7%AB%AF%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE%E4%BC%A0%E8%BE%93%E5%B9%B3%E5%8F%B0/%E5%8F%82%E8%80%83%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener">https://gitee.com/xiaochenyan/mypro/tree/master/多端安全协议传输平台/参考代码</a></p>
+<p>描述了对一种数据进行表示、编码、传输和解码的数据格式。</p>
+<ul>
+<li>ASN.1它有两部分
+<ol>
+<li>一部分描述信息内数据，数据类型及序列格式；
+<ul>
+<li>相当于属性</li>
+</ul>
+</li>
+<li>一部分描述如何将各个部分组成消息
+<ul>
+<li>相当于方法</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p><img src="/images/javawz/c3d36423a938455a9551fc5b00ff0542.png" alt="在这里插入图片描述"></p>
+<h3 id="编码格式tlv"><a class="markdownIt-Anchor" href="#编码格式tlv"></a> 编码格式（TLV）</h3>
+<table>
+<thead>
+<tr>
+<th>TAG（type）</th>
+<th>LENGTH</th>
+<th>VALUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据类型</td>
+<td>数据长度</td>
+<td>数据的值</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">Persion</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">64</span>];</span><br><span class="line">&#125;Persion;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/javawz/image-20220522013950586.png" alt="image-20220522013950586"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ITCAST_ANYBUF_</span> &#123;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> 	  *pData;		<span class="comment">// 数据值</span></span><br><span class="line">	ITCAST_UINT32     dataLen;		<span class="comment">// 数据长度	</span></span><br><span class="line"></span><br><span class="line">	ITCAST_UINT32     unusedBits;	<span class="comment">/* for bit string */</span></span><br><span class="line">	ITCAST_UINT32     memoryType;</span><br><span class="line">	ITCAST_UINT32     dataType;		<span class="comment">// 数据类型</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ITCAST_ANYBUF_</span> *<span class="title">next</span>;</span>    <span class="comment">/* for sequence and set */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ITCAST_ANYBUF_</span> *<span class="title">prev</span>;</span></span><br><span class="line"></span><br><span class="line">&#125;ITCAST_ANYBUF;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ITCAST_INT DER_ItAsn1_WriteInteger(ITCAST_UINT32 integer, ITASN1_INTEGER **ppDerInteger);</span><br><span class="line">函数说明:对整形数据进行编码操作</span><br><span class="line">函数参数:</span><br><span class="line">	integer: 输入参数, 表示待编码的整形数据</span><br><span class="line">	ppDerInteger: 传出参数, 编码之后的数据</span><br><span class="line">返回值:</span><br><span class="line">	成功或者失败</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">ITCAST_INT DER_ItAsn1_ReadInteger(ITASN1_INTEGER *pDerInteger, ITCAST_UINT32 *pInteger);</span><br><span class="line">函数说明: 对整形数据解码</span><br><span class="line">参数说明: </span><br><span class="line">	pDerInteger: 传入参数, 表示待解码的数据</span><br><span class="line">	pInteger: 传出参数, 表示解码之后的数据</span><br><span class="line">返回值:</span><br><span class="line">	成功或者失败</span><br><span class="line">	  ITCAST_ANYBUF p;</span><br><span class="line">	  ITCAST_UINT32 aa; </span><br><span class="line">例如: DER_ItAsn1_ReadInteger(&amp;p, &amp;aa);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ITCAST_INT DER_ItAsn1_WritePrintableString(ITASN1_PRINTABLESTRING *pPrintString, ITASN1_PRINTABLESTRING **ppDerPrintString);</span><br><span class="line">函数说明:编码字符串数据</span><br><span class="line">函数参数:</span><br><span class="line">	pPrintString: 输入参数, 表示要编码的数据</span><br><span class="line">	ppDerPrintString: 输出参数, 表示编码之后的数据</span><br><span class="line">返回值:</span><br><span class="line">	成功或者失败	</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ITCAST_INT DER_ItAsn1_ReadPrintableString(ITASN1_PRINTABLESTRING *pDerPrintString, ITASN1_PRINTABLESTRING **ppPrintString);</span><br><span class="line">函数说明: 解码函数, 将ANYCAST_ANYBUF类型解码到第二个参数</span><br><span class="line">参数说明:</span><br><span class="line">		pDerPrintString: 输入参数, 表示待解码的数据</span><br><span class="line">		ppPrintString: 输出参数, 存放解码之后的数据</span><br><span class="line">返回值:</span><br><span class="line">	成功或者失败</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ITCAST_INT DER_ITCAST_String_To_AnyBuf(ITCAST_ANYBUF **pOriginBuf, unsigned char * strOrigin, int strOriginLen);</span><br><span class="line">函数说明: 将char *----&gt;ITCAST_ANYBUF类型</span><br><span class="line">函数参数:</span><br><span class="line">	pOriginBuf: 传出参数, ITCAST_ANYBUF指针</span><br><span class="line">	strOrigin: 传入参数, 待转换的字符串</span><br><span class="line">	strOriginLen: 传入参数, strOrigin的字符串长度</span><br><span class="line">返回值:</span><br><span class="line">	成功或者失败</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int EncodeChar(char *pData, int dataLen, ITCAST_ANYBUF **outBuf);</span><br><span class="line">函数说明: 将char *类型数据进行编码</span><br><span class="line">函数参数:</span><br><span class="line">	pData: 输入参数, 指的是待编码的字符串</span><br><span class="line">	dataLen: 输入参数, 指的是pData的长度</span><br><span class="line">	outBuf: 输出参数, ITCAST_ANYBUF类型的数据, TLV格式</span><br><span class="line">	</span><br><span class="line">int DecodeChar(ITCAST_ANYBUF *inBuf, char **Data, int *pDataLen);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ITCAST_INT DER_ItAsn1_WriteSequence(ITASN1_SEQUENCE *pSequence, ITCAST_ANYBUF **ppDerSequence);</span><br><span class="line">函数说明: 序列化链表, 将链表序列化成字节流数据</span><br><span class="line">函数参数:</span><br><span class="line">	pSequence: 输入参数, 待序列化的数据</span><br><span class="line">	ppDerSequence: 输出参数, 序列化之后的数据</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ITCAST_INT DER_ItAsn1_ReadSequence(ITCAST_ANYBUF *pDerSequence, ITASN1_SEQUENCE **ppSequence);</span><br><span class="line">函数说明: 反序列化</span><br><span class="line">参数说明:</span><br><span class="line">	pDerSequence:输入参数, 开始需要将char *---&gt;ITCAST_ANYBUF类型</span><br><span class="line">	ppSequence: 输出参数, 获得链表头节点</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ITCAST_INT DER_ITCAST_FreeQueue(ITCAST_ANYBUF *pAnyBuf);</span><br><span class="line">释放内存</span><br></pre></td></tr></table></figure>
+<h3 id="代码示例"><a class="markdownIt-Anchor" href="#代码示例"></a> 代码示例</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;teacher.h&quot;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Teacher tea;</span><br><span class="line">	memset(&amp;tea, 0x00, sizeof(Teacher));</span><br><span class="line">	strcpy(tea.name, &quot;路飞&quot;);</span><br><span class="line">	tea.age = 20;</span><br><span class="line">	tea.p = (char*)malloc(100);</span><br><span class="line">	strcpy(tea.p, &quot;我是要成为海贼王的男人&quot;);</span><br><span class="line">	tea.plen = strlen(tea.p);</span><br><span class="line"></span><br><span class="line">	// 编码</span><br><span class="line">	char* outData;</span><br><span class="line">	int outlen;</span><br><span class="line">	encodeTeacher(&amp;tea, &amp;outData, &amp;outlen);</span><br><span class="line"></span><br><span class="line">	//===============================================</span><br><span class="line"></span><br><span class="line">	// 解码</span><br><span class="line">	Teacher* pt;</span><br><span class="line">	decodeTeacher(outData, outlen, &amp;pt);</span><br><span class="line">	printf(&quot;name:	%s\n&quot;, pt-&gt;name);</span><br><span class="line">	printf(&quot;age:	%d\n&quot;, pt-&gt;age);</span><br><span class="line">	printf(&quot;p:	%s\n&quot;, pt-&gt;p);</span><br><span class="line">	printf(&quot;plen:	%d\n&quot;, pt-&gt;plen);</span><br><span class="line"></span><br><span class="line">	freeTeacher(&amp;pt);</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="teacherh"><a class="markdownIt-Anchor" href="#teacherh"></a> Teacher.h</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#ifndef _TEACHER_H</span><br><span class="line">#define _TEACHER_H</span><br><span class="line">typedef struct _Teacher</span><br><span class="line">&#123;</span><br><span class="line">	char name[64]; </span><br><span class="line">	int age;   </span><br><span class="line">	char *p;</span><br><span class="line">	long plen;</span><br><span class="line">&#125;Teacher;</span><br><span class="line"></span><br><span class="line">// 编码结构体</span><br><span class="line">//p: 输入参数, 待编码的结构体</span><br><span class="line">//outData: 输出参数, 保存编码之后的字符串</span><br><span class="line">//outlen: 输出参数, 编码之后的字符串的长度</span><br><span class="line">int encodeTeacher(Teacher* p, char** outData, int* outlen);</span><br><span class="line">// 解码结构体</span><br><span class="line"></span><br><span class="line">//inData: 输入参数</span><br><span class="line">//inLen: inData的长度</span><br><span class="line">//p:保存解码之后的数据</span><br><span class="line">int decodeTeacher(char* inData, int inLen, Teacher**p);</span><br><span class="line">// 释放内存函数</span><br><span class="line"></span><br><span class="line">//释放内存</span><br><span class="line">void freeTeacher(Teacher** p);</span><br><span class="line"></span><br><span class="line">#endif	// _TEACHER_H</span><br></pre></td></tr></table></figure>
+<h3 id="teacherc"><a class="markdownIt-Anchor" href="#teacherc"></a> Teacher.c</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;teacher.h&quot;</span><br><span class="line">#include &quot;itcast_asn1_der.h&quot;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">	typedef struct _Teacher</span><br><span class="line">	&#123;</span><br><span class="line">		char name[64];</span><br><span class="line">		int age;</span><br><span class="line">		char *p;</span><br><span class="line">		long plen;</span><br><span class="line">	&#125;Teacher;</span><br><span class="line">*/</span><br><span class="line">int encodeTeacher(Teacher * p, char ** outData, int * outlen)</span><br><span class="line">&#123;</span><br><span class="line">	ITCAST_ANYBUF *head = NULL;</span><br><span class="line">	ITCAST_ANYBUF *temp = NULL;</span><br><span class="line">	ITCAST_ANYBUF *next = NULL;</span><br><span class="line"></span><br><span class="line">	//编码name</span><br><span class="line">	//ITCAST_INT DER_ItAsn1_WritePrintableString(ITASN1_PRINTABLESTRING *pPrintString, ITASN1_PRINTABLESTRING **ppDerPrintString);</span><br><span class="line">	//char *----&gt;ITCAST_ANYBUF</span><br><span class="line">	DER_ITCAST_String_To_AnyBuf(&amp;temp, p-&gt;name, strlen(p-&gt;name)+1);</span><br><span class="line">	DER_ItAsn1_WritePrintableString(temp, &amp;head);</span><br><span class="line">	DER_ITCAST_FreeQueue(temp);</span><br><span class="line">	next = head;</span><br><span class="line"></span><br><span class="line">	//编码age</span><br><span class="line">	DER_ItAsn1_WriteInteger(p-&gt;age, &amp;next-&gt;next);</span><br><span class="line">	next = next-&gt;next;</span><br><span class="line"></span><br><span class="line">	//编码p</span><br><span class="line">	//int EncodeChar(char *pData, int dataLen, ITCAST_ANYBUF **outBuf);</span><br><span class="line">	EncodeChar(p-&gt;p, strlen(p-&gt;p)+1, &amp;next-&gt;next);</span><br><span class="line">	next = next-&gt;next;</span><br><span class="line"></span><br><span class="line">	//编码plen</span><br><span class="line">	DER_ItAsn1_WriteInteger(p-&gt;plen, &amp;next-&gt;next);</span><br><span class="line"></span><br><span class="line">	//序列化</span><br><span class="line">	DER_ItAsn1_WriteSequence(head, &amp;temp);</span><br><span class="line"></span><br><span class="line">	//输出参数赋值</span><br><span class="line">	*outData = temp-&gt;pData;</span><br><span class="line">	*outlen = temp-&gt;dataLen;</span><br><span class="line"></span><br><span class="line">	//释放内存</span><br><span class="line">	DER_ITCAST_FreeQueue(head);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">	typedef struct _Teacher</span><br><span class="line">	&#123;</span><br><span class="line">		char name[64];</span><br><span class="line">		int age;</span><br><span class="line">		char *p;</span><br><span class="line">		long plen;</span><br><span class="line">	&#125;Teacher;</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">int decodeTeacher(char * inData, int inLen, Teacher ** p)</span><br><span class="line">&#123;</span><br><span class="line">	ITCAST_ANYBUF *head = NULL;</span><br><span class="line">	ITCAST_ANYBUF *temp = NULL;</span><br><span class="line">	ITCAST_ANYBUF *next = NULL;</span><br><span class="line"></span><br><span class="line">	Teacher *pt = (Teacher *)malloc(sizeof(Teacher));</span><br><span class="line">	if (pt == NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//将inData反序列化成链表</span><br><span class="line">	//将char *---&gt;ITCAST_ANYBUF类型</span><br><span class="line">	DER_ITCAST_String_To_AnyBuf(&amp;temp, inData, inLen);</span><br><span class="line">	DER_ItAsn1_ReadSequence(temp, &amp;head);</span><br><span class="line">	DER_ITCAST_FreeQueue(temp);</span><br><span class="line">	next = head;</span><br><span class="line"></span><br><span class="line">	//解码name</span><br><span class="line">	DER_ItAsn1_ReadPrintableString(next, &amp;temp);</span><br><span class="line">	memcpy(pt-&gt;name, temp-&gt;pData, temp-&gt;dataLen);</span><br><span class="line">	next = next-&gt;next;</span><br><span class="line">	DER_ITCAST_FreeQueue(temp);</span><br><span class="line"></span><br><span class="line">	//解码age</span><br><span class="line">	DER_ItAsn1_ReadInteger(next, &amp;pt-&gt;age);</span><br><span class="line">	next = next-&gt;next;</span><br><span class="line"></span><br><span class="line">	//解码p</span><br><span class="line">	int len = 0;</span><br><span class="line">	DecodeChar(next, &amp;pt-&gt;p, &amp;len);</span><br><span class="line">	next = next-&gt;next;</span><br><span class="line"></span><br><span class="line">	//解码plen</span><br><span class="line">	DER_ItAsn1_ReadInteger(next, &amp;pt-&gt;plen);</span><br><span class="line"></span><br><span class="line">	//给输出参数赋值</span><br><span class="line">	*p = pt;</span><br><span class="line"></span><br><span class="line">	//释放内存</span><br><span class="line">	DER_ITCAST_FreeQueue(head);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void freeTeacher(Teacher ** p)</span><br><span class="line">&#123;</span><br><span class="line">	if ((*p) != NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		if ((*p)-&gt;p != NULL)</span><br><span class="line">		&#123;</span><br><span class="line">			free((*p)-&gt;p);</span><br><span class="line">		&#125;</span><br><span class="line">		free(*p);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="vs连接linux服务器"><a class="markdownIt-Anchor" href="#vs连接linux服务器"></a> vs连接linux服务器</h2>
+<p>创建项目工程</p>
+<p><img src="/images/javawz/image-20220522014650992.png" alt="image-20220522014650992"></p>
+<p>点击菜单栏上的工具----------&gt;选项</p>
+<p><img src="/images/javawz/image-20220522014903248.png" alt="image-20220522014903248"></p>
+<p>选择  跨平台-------&gt;连接管理器-----------&gt;添加</p>
+<p><img src="/images/javawz/image-20220522015040222.png" alt="image-20220522015040222"></p>
+<p><img src="/images/javawz/image-20220522015129104.png" alt="image-20220522015129104"></p>
+<br>
+<p><img src="/images/javawz/image-20220522015211419.png" alt="image-20220522015211419"></p>
+<p>修改生成目录的路径</p>
+<p><img src="/images/javawz/image-20220522040443774.png" alt="image-20220522040443774"></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xiaowuyoucy.github.io/2022/05/21/UML类图-常见的报文编码方式-ASN1报文编解码-vs连接linux服务器/" title="UML类图_常见的报文编码方式_ASN1报文编解码_vs连接linux服务器" target="_blank" rel="external">https://xiaowuyoucy.github.io/2022/05/21/UML类图-常见的报文编码方式-ASN1报文编解码-vs连接linux服务器/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+		  
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/05/17/Git教程/" title="Git教程"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+	<span>More contact information</span>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:xiaowuyoucy.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '032928647cd59bc9f443',
+    clientSecret: '82a11fd93e4d0779655af6dc4b73942a03e95276',
+    repo: 'Xiaowuyoucy.github.io',
+    owner: 'Xiaowuyoucy',
+    admin: ['Xiaowuyoucy'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>
