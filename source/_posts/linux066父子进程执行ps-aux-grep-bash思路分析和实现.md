@@ -10,7 +10,7 @@ doc:
 
 
 
-![image-20220117003549233](../../themes/pure/source/images/javawz/image-20220117003549233.png)
+![image-20220117003549233](/images/javawz/image-20220117003549233.png)
 
 
 
