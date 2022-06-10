@@ -6,7 +6,7 @@ categories: cpp
 doc:
 ---
 
-![1620656678104](../../themes/pure/source/images/javawz/1620656678104.png)
+![1620656678104](/images/javawz/1620656678104.png)
 
 
 

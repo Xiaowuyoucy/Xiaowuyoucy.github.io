@@ -325,4 +325,4 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 
 
 
-![1623079557682](../../themes/pure/source/images/javawz/1623079557682.png)
+![1623079557682](/images/javawz/1623079557682.png)

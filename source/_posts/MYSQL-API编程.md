@@ -239,7 +239,7 @@ while ((row = mysql_fetch_row(result)))
 
 MYSQL_ROW的本质是` typedef char ** MYSQL_ROW;` 数据信息存储的形式如下图所示：
 
-![image-20220516003930249](../../themes/pure/source/images/javawz/image-20220516003930249.png)
+![image-20220516003930249](/images/javawz/image-20220516003930249.png)
 
 
 

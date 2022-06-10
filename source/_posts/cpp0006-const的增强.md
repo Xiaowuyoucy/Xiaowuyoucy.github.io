@@ -18,7 +18,7 @@ doc:
 
 
 
-![1618497147515](../../themes/pure/source/images/javawz/1618497147515.png)
+![1618497147515](/images/javawz/1618497147515.png)
 
 
 
@@ -51,4 +51,4 @@ int main(int argc, char* argv[])
 
 ```
 
-![1618498667603](../../themes/pure/source/images/javawz/1618498667603.png)
+![1618498667603](/images/javawz/1618498667603.png)
