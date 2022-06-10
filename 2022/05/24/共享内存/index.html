@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>共享内存 | YanChen</title>
+  <meta name="description" content="共享内存 共享内存是进程间通信中最简单的方式之一。共享内存允许两个或更多进程访问同一块内存，当一个进程改 变了这块地址中的内容的时候，其它进程都会察觉到这个更改。  共享内存头文件 12#include &amp;lt;sys/ipc.h&amp;gt;#include &amp;lt;sys/shm.h&amp;gt;  共享内存操作函数 创建或打开一块共享内存区 123456789101112131415161718192">
+<meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
+<meta property="og:type" content="article">
+<meta property="og:title" content="共享内存">
+<meta property="og:url" content="https://xiaowuyoucy.github.io/2022/05/24/共享内存/index.html">
+<meta property="og:site_name" content="YanChen">
+<meta property="og:description" content="共享内存 共享内存是进程间通信中最简单的方式之一。共享内存允许两个或更多进程访问同一块内存，当一个进程改 变了这块地址中的内容的时候，其它进程都会察觉到这个更改。  共享内存头文件 12#include &amp;lt;sys/ipc.h&amp;gt;#include &amp;lt;sys/shm.h&amp;gt;  共享内存操作函数 创建或打开一块共享内存区 123456789101112131415161718192">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220524083153140.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220524083853111.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220524084019939.png">
+<meta property="og:updated_time" content="2022-05-24T01:13:51.758Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="共享内存">
+<meta name="twitter:description" content="共享内存 共享内存是进程间通信中最简单的方式之一。共享内存允许两个或更多进程访问同一块内存，当一个进程改 变了这块地址中的内容的时候，其它进程都会察觉到这个更改。  共享内存头文件 12#include &amp;lt;sys/ipc.h&amp;gt;#include &amp;lt;sys/shm.h&amp;gt;  共享内存操作函数 创建或打开一块共享内存区 123456789101112131415161718192">
+<meta name="twitter:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220524083153140.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xiaowuyoucy.github.io/2022/05/24/共享内存/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fonts2/iconfont.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xiaowuyoucy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">YanChen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> GuangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="https://www.xiaochenyan.top/navigation/index.html">
+            
+            <i class="icon icon-map-marker"></i>
+            
+            <span class="menu-title">导航</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon iconfont icon-video"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">格言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+				
+				<p id="hitokoto">:D 获取中...</p>
+				<p id="from" style="text-align: right"></p>
+                <script>
+					  var xhr = new XMLHttpRequest();
+					  xhr.open('get', 'https://v1.hitokoto.cn');
+					  xhr.onreadystatechange = function () {
+						if (xhr.readyState === 4) {
+						  var data = JSON.parse(xhr.responseText);
+						  var hitokoto = document.getElementById('hitokoto');
+						  hitokoto.innerText = data.hitokoto;
+						  var from = document.getElementById('from');
+						  from.innerText = "-- " + data.from;
+						}
+					  }
+					  xhr.send();
+				</script>
+				
+				
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">195</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KaliLinux/">KaliLinux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL/">MYSQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenSSL/">OpenSSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHCE/">RHCE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WEB安全渗透/">WEB安全渗透</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows命令/">Windows命令</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows网络编程/">Windows网络编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/apache/">apache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/c/">c</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp/">cpp</a><span class="category-list-count">116</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp17从入门到精通/">cpp17从入门到精通</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/githubHexo/">githubHexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/libevent/">libevent</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">96</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计/">windows程序设计</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计2/">windows程序设计2</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/多端安全协议传输平台/">多端安全协议传输平台</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术资讯/">技术资讯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">38</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/易语言/">易语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇编逆向/">汇编逆向</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/理财投资/">理财投资</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简谈计算机/">简谈计算机</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程词汇/">编程词汇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络爬虫/">网络爬虫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机公共基础/">计算机公共基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络TCP-IP传输协议-网络抓包/">计算机网络TCP/IP传输协议/网络抓包</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络原理/">计算机网络原理</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高中数学/">高中数学</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GET/">$_GET</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POST，-SERVER/">$_POST，$_SERVER</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REQUEST/">$_REQUEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOTO语句/">GOTO语句</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang函数/">Golang函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang匿名函数/">Golang匿名函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础/">Golang基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础类型占位符/">Golang基础类型占位符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang常量与变量里表达式/">Golang常量与变量里表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang循环结构/">Golang循环结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang指针/">Golang指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang标准输入与输出/">Golang标准输入与输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang流程控制/">Golang流程控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang程序运算/">Golang程序运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang类型转换及移位运算/">Golang类型转换及移位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang闭包函数/">Golang闭包函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ISO七层模型/">ISO七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java总结/">Java总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalinux/">Kalinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Null和Undefined/">Null和Undefined</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP两种定义常量的形式/">PHP两种定义常量的形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP常量/">PHP常量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python教程/">Python教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python笔记/">Python笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python运算符/">Python运算符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO网站优化/">SEO网站优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIR/">__DIR__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FILE/">__FILE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/">__LINE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache环境变量/">apache环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache配置/">apache配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beef劫持/">beef劫持</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dowhile循环/">dowhile循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iota定义常量组/">iota定义常量组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数/">javascript函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this方法/">js-this方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js布尔类型隐私转换/">js布尔类型隐私转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux目录结构/">linux目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php变量/">php变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urlib2/">urlib2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全渗透/">web安全渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web渗透/">web渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/变量的操作/">变量的操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/延时执行defer/">延时执行defer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格狼日/">拉格狼日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间复杂度测试/">时间复杂度测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财，投资/">理财，投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络模型/">网络模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/顺序表/">顺序表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/GET/" style="font-size: 13px;">$_GET</a> <a href="/tags/POST，-SERVER/" style="font-size: 13px;">$_POST，$_SERVER</a> <a href="/tags/REQUEST/" style="font-size: 13px;">$_REQUEST</a> <a href="/tags/Cookie/" style="font-size: 13px;">Cookie</a> <a href="/tags/GOTO语句/" style="font-size: 13px;">GOTO语句</a> <a href="/tags/Golang/" style="font-size: 13px;">Golang</a> <a href="/tags/Golang函数/" style="font-size: 13px;">Golang函数</a> <a href="/tags/Golang匿名函数/" style="font-size: 13px;">Golang匿名函数</a> <a href="/tags/Golang基础/" style="font-size: 14px;">Golang基础</a> <a href="/tags/Golang基础类型占位符/" style="font-size: 13px;">Golang基础类型占位符</a> <a href="/tags/Golang常量与变量里表达式/" style="font-size: 13px;">Golang常量与变量里表达式</a> <a href="/tags/Golang循环结构/" style="font-size: 13px;">Golang循环结构</a> <a href="/tags/Golang指针/" style="font-size: 13px;">Golang指针</a> <a href="/tags/Golang标准输入与输出/" style="font-size: 13px;">Golang标准输入与输出</a> <a href="/tags/Golang流程控制/" style="font-size: 13px;">Golang流程控制</a> <a href="/tags/Golang程序运算/" style="font-size: 13px;">Golang程序运算</a> <a href="/tags/Golang类型转换及移位运算/" style="font-size: 13px;">Golang类型转换及移位运算</a> <a href="/tags/Golang闭包函数/" style="font-size: 13px;">Golang闭包函数</a> <a href="/tags/ISO七层模型/" style="font-size: 13px;">ISO七层模型</a> <a href="/tags/Java总结/" style="font-size: 13px;">Java总结</a> <a href="/tags/Kalinux/" style="font-size: 13px;">Kalinux</a> <a href="/tags/Null和Undefined/" style="font-size: 13px;">Null和Undefined</a> <a href="/tags/PHP两种定义常量的形式/" style="font-size: 13px;">PHP两种定义常量的形式</a> <a href="/tags/PHP常量/" style="font-size: 13px;">PHP常量</a> <a href="/tags/Python教程/" style="font-size: 13px;">Python教程</a> <a href="/tags/Python笔记/" style="font-size: 13px;">Python笔记</a> <a href="/tags/Python运算符/" style="font-size: 13px;">Python运算符</a> <a href="/tags/SEO网站优化/" style="font-size: 13px;">SEO网站优化</a> <a href="/tags/XSS/" style="font-size: 14px;">XSS</a> <a href="/tags/DIR/" style="font-size: 13px;">__DIR__</a> <a href="/tags/FILE/" style="font-size: 13px;">__FILE__</a> <a href="/tags/LINE/" style="font-size: 13px;">__LINE__</a> <a href="/tags/apache环境变量/" style="font-size: 13px;">apache环境变量</a> <a href="/tags/apache配置/" style="font-size: 13px;">apache配置</a> <a href="/tags/beef劫持/" style="font-size: 13px;">beef劫持</a> <a href="/tags/dowhile循环/" style="font-size: 13px;">dowhile循环</a> <a href="/tags/iota定义常量组/" style="font-size: 13px;">iota定义常量组</a> <a href="/tags/javascript函数/" style="font-size: 13px;">javascript函数</a> <a href="/tags/js-this方法/" style="font-size: 13px;">js-this方法</a> <a href="/tags/js布尔类型隐私转换/" style="font-size: 13px;">js布尔类型隐私转换</a> <a href="/tags/linux目录结构/" style="font-size: 13px;">linux目录结构</a> <a href="/tags/php变量/" style="font-size: 13px;">php变量</a> <a href="/tags/sql注入/" style="font-size: 13px;">sql注入</a> <a href="/tags/urlib2/" style="font-size: 13px;">urlib2</a> <a href="/tags/web安全渗透/" style="font-size: 13px;">web安全渗透</a> <a href="/tags/web渗透/" style="font-size: 13px;">web渗透</a> <a href="/tags/变量的操作/" style="font-size: 13px;">变量的操作</a> <a href="/tags/延时执行defer/" style="font-size: 13px;">延时执行defer</a> <a href="/tags/拉格狼日/" style="font-size: 13px;">拉格狼日</a> <a href="/tags/时间复杂度测试/" style="font-size: 13px;">时间复杂度测试</a> <a href="/tags/理财，投资/" style="font-size: 13px;">理财，投资</a> <a href="/tags/算法/" style="font-size: 13px;">算法</a> <a href="/tags/网络模型/" style="font-size: 13px;">网络模型</a> <a href="/tags/计算机基础/" style="font-size: 13px;">计算机基础</a> <a href="/tags/顺序表/" style="font-size: 13px;">顺序表</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">66</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">87</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">51</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">125</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">106</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/06/08/oracle-win和linux编程/" class="title">oracle_win和linux编程</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-06-08T14:40:24.000Z" itemprop="datePublished">2022-06-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/多端安全协议传输平台/">多端安全协议传输平台</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/06/05/保存配置信息的几种方式/" class="title">保存配置信息的几种方式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-06-05T11:23:18.000Z" itemprop="datePublished">2022-06-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/多端安全协议传输平台/">多端安全协议传输平台</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/06/05/OCCI/" class="title">OCCI</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-06-05T00:38:09.000Z" itemprop="datePublished">2022-06-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/06/04/Shell脚本/" class="title">Shell脚本</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-06-04T11:01:14.000Z" itemprop="datePublished">2022-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/多端安全协议传输平台/">多端安全协议传输平台</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/31/服务端类实现/" class="title">服务端类实现</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-31T00:20:21.000Z" itemprop="datePublished">2022-05-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-共享内存" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      共享内存
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/05/24/共享内存/" class="article-date">
+	  <time datetime="2022-05-24T00:16:14.000Z" itemprop="datePublished">2022-05-24</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </span>
+
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/05/24/共享内存/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4.3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 18(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="共享内存"><a class="markdownIt-Anchor" href="#共享内存"></a> 共享内存</h1>
+<p>共享内存是进程间通信中最简单的方式之一。共享内存允许两个或更多进程访问同一块内存，当一个进程改</p>
+<p>变了这块地址中的内容的时候，其它进程都会察觉到这个更改。</p>
+<h3 id="共享内存头文件"><a class="markdownIt-Anchor" href="#共享内存头文件"></a> 共享内存头文件</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/ipc.h&gt;</span><br><span class="line">#include &lt;sys/shm.h&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="共享内存操作函数"><a class="markdownIt-Anchor" href="#共享内存操作函数"></a> 共享内存操作函数</h3>
+<p>创建或打开一块共享内存区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">int shmget(key_t key, size_t size, int shmflg);</span><br><span class="line">- 参数key: 创建出的共享内存的键值, 每块共享内存的键值是唯一的 </span><br><span class="line">	- 看做一个32位整形数, 一般指定的数据格式是16进制形式的</span><br><span class="line">- 参数size: 创建的共享内存的大小, 分配的时候实际大小是是4k的倍数</span><br><span class="line">- 参数shmflag: 共享内存的属性, 与创建文件相同 </span><br><span class="line">	- open(name, flag, mode); - 与flag相同 </span><br><span class="line">	- shmflag的取值 </span><br><span class="line">		- IPC_CREAT: 创建共享内存 </span><br><span class="line">			- 创建文件并指定权限: IPC_CREAT|0664 </span><br><span class="line">		- IPC_EXCL: 必须和IPC_CREAT一起使用, 检测共享内存是否存在 </span><br><span class="line">	- 返回值: 返回创建的共享内存的描述符, 理解为共享内存的ID, ID也是唯一的 </span><br><span class="line">   			成功: 返回共享内存的ID值</span><br><span class="line">   			失败: 返回-1, 并设置errno</span><br><span class="line">	</span><br><span class="line">// 1. 创建一块不存在的共享内存 </span><br><span class="line">// 如果检测到key值为0x12的共享内存已经存在, 该函数调用失败 </span><br><span class="line">shmget(0x12, 4096, IPC_CREAT|IPC_EXCL|0664) </span><br><span class="line"></span><br><span class="line">// 2. 打开一块已经存在的共享内存, 共享内存的key 0x12 </span><br><span class="line">shmget(0x12, 0, 0) </span><br><span class="line"></span><br><span class="line">// 3. 操作一块内存, 存在打开, 不存在创建 </span><br><span class="line">shmget(0x12, 4096, IPC_CREAT|0664)</span><br></pre></td></tr></table></figure>
+<h3 id="将当前进程和共享内存关联到一起"><a class="markdownIt-Anchor" href="#将当前进程和共享内存关联到一起"></a> 将当前进程和共享内存关联到一起</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void *shmat(int shmid, const void *shmaddr, int shmflg);</span><br><span class="line">- 参数shmid: shmget函数的返回值 </span><br><span class="line">- 参数shmaddr: 共享内存和进程关联, 指定的内存位置 </span><br><span class="line">	- 赋值为NULL, 内核会自动分配 </span><br><span class="line">- 参数shmflg: </span><br><span class="line">	- SHM_RDONLY: 对共享内存只读 </span><br><span class="line">	- 0: 可以对共享内存读写 </span><br><span class="line">- 返回值: 关联成功之后, 内核分配的可进行读写的内存块的首地址</span><br><span class="line">  		成功: 内存地址</span><br><span class="line">   		失败: (void *) -1</span><br></pre></td></tr></table></figure>
+<h3 id="将共享内存和当前进程分离"><a class="markdownIt-Anchor" href="#将共享内存和当前进程分离"></a> 将共享内存和当前进程分离</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int shmdt(const void *shmaddr); </span><br><span class="line">- 参数shmaddr: shmat函数的返回值 </span><br><span class="line">- 返回值: </span><br><span class="line">		成功: 返回0</span><br><span class="line">   		失败: 返回-1, 并设置errno</span><br></pre></td></tr></table></figure>
+<h3 id="共享内存操作-删除共享内存"><a class="markdownIt-Anchor" href="#共享内存操作-删除共享内存"></a> 共享内存操作 -（删除共享内存 ）</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int shmctl(int shmid, int cmd, struct shmid_ds *buf); </span><br><span class="line">- 参数shmid: shmget函数的返回值 </span><br><span class="line">- 参数cmd: </span><br><span class="line">	- IPC_STAT: 查看共享内存状态 </span><br><span class="line">	- IPC_SET: 设置共享内存状态 </span><br><span class="line">	- IPC_RMID: 删除共享内存 </span><br><span class="line">- 参数buf: </span><br><span class="line">	- IPC_STAT: 传出参数, 记录共享内存信息 </span><br><span class="line">	- IPC_SET: 传入参数 </span><br><span class="line">	- IPC_RMID: 用不到, 赋值为NULL</span><br></pre></td></tr></table></figure>
+<ul>
+<li>问题1: 是不是可以对共享内存进行多次删除
+<ul>
+<li>可以</li>
+<li>共享内存被删除一次之后, 如果还有进程和共享内存关联着, 共享内存的key会发生变化变成0
+<ul>
+<li>如果共享内存key是&gt;0的数: 共享内存状态正常, 任意进程都可以和当前共享内存进行关联</li>
+<li>key == 0:
+<ul>
+<li>共享内存标记为被删除, 没有被马上删除是因为还有进程没有和它解除关联</li>
+<li>不相干的进程是没有权限和key为0的共享内存进行关联的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/javawz/image-20220524083153140.png" alt="image-20220524083153140"></p>
+<ul>
+<li>问题2: 如果多个进程都和同一共享内存进行关联, 其中一个进程将共享内存删除, 共享内存什么时候被删除?
+<ul>
+<li>共享内存的引用计数为0 的时候, 共享内存被删除</li>
+</ul>
+</li>
+</ul>
+<p>shm和mmap的区别</p>
+<ol>
+<li>shm不需要磁盘文件, mmap需要磁盘文件</li>
+<li>shm效率高</li>
+<li>mmap操作的数据量比shm大 4. shm内存位置在内核只有一块, mmap内存在用户区, 每个进程都有各自的内存映射区</li>
+<li>shm和mmap的数据谁更安全?</li>
+</ol>
+<ul>
+<li>mmap会通过映射的文件做备份</li>
+</ul>
+<ol start="5">
+<li>进程退出, 共享内存依然存在, 进程退出,内存映射区就不存在了</li>
+</ol>
+<h2 id="ftok函数"><a class="markdownIt-Anchor" href="#ftok函数"></a> ftok函数</h2>
+<h3 id="函数原型"><a class="markdownIt-Anchor" href="#函数原型"></a> 函数原型</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">key_t ftok(const char *pathname, int proj_id); </span><br><span class="line">	- pathname: 路径或文件名, 必须存在, 对文件的权限没有要求</span><br><span class="line">	- /home/kevin/a.txt - /home/kevin/hello - 目录 </span><br><span class="line">	</span><br><span class="line">- proj_id: 只用到了一个字节, 取值范围: 0-255, 也可以传递一字符</span><br><span class="line">	- 88</span><br><span class="line">	- &apos;a</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<h3 id="思考"><a class="markdownIt-Anchor" href="#思考"></a> 思考:</h3>
+<p>pathname 是目录还是文件的具体路径，是否可以随便设置？<br>
+可以</p>
+<p>pathname 指定的目录或文件的权限是否有要求?<br>
+没有</p>
+<p>proj_id 是否可以随便设定，有什么限制条件?<br>
+取值范围 0-255</p>
+<h3 id="陷阱"><a class="markdownIt-Anchor" href="#陷阱"></a> 陷阱：</h3>
+<p>误解:<br>
+只要文件的路径，名称和子序列号不变，那么得到的key值永远就不会变。<br>
+正解:<br>
+如果pathname指向的文件或者目录被删除而且又重新创建，那么文件系统会赋予这个同名文件新<br>
+的inode 节点信息，于是这些进程调用的 ftok() 都能正常返回，但键值key却不一定相同了。</p>
+<p><br><br><br><br></p>
+<h3 id="共享内存操作命令"><a class="markdownIt-Anchor" href="#共享内存操作命令"></a> 共享内存操作命令</h3>
+<h4 id="ipcs-用法"><a class="markdownIt-Anchor" href="#ipcs-用法"></a> ipcs 用法</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ipcs -a // 打印当前系统中所有的进程间通信方式的信息 </span><br><span class="line">ipcs -m // 打印出使用共享内存进行进程间通信的信息 == 常用 ==</span><br><span class="line">============= 以下为了解内容 ================ </span><br><span class="line">ipcs -q // 打印出使用消息队列进行进程间通信的信息 </span><br><span class="line">ipcs -s // 打印出使用信号进行进程间通信的信息</span><br></pre></td></tr></table></figure>
+<p>man msgget		//消息队列相关函数<br>
+man semget		//信号量数组相关函数</p>
+<p><br><br><br><br></p>
+<h4 id="ipcrm-用法"><a class="markdownIt-Anchor" href="#ipcrm-用法"></a> ipcrm 用法</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ipcrm -M shmkey // 移除用shmkey创建的共享内存段 </span><br><span class="line">ipcrm -m shmid // 移除用shmid标识的共享内存段</span><br><span class="line">================ 以下为了解内容 ================ </span><br><span class="line">ipcrm -Q msgkey // 移除用msqkey创建的消息队列 </span><br><span class="line">ipcrm -q msqid // 移除用msqid标识的消息队列 </span><br><span class="line">ipcrm -S semkey // 移除用semkey创建的信号 </span><br><span class="line">ipcrm -s semid // 移除用semid标识的信号</span><br></pre></td></tr></table></figure>
+<p><br><br><br><br></p>
+<h3 id="共享内存在项目中的使用"><a class="markdownIt-Anchor" href="#共享内存在项目中的使用"></a> 共享内存在项目中的使用</h3>
+<p><img src="/images/javawz/image-20220524083853111.png" alt="image-20220524083853111"></p>
+<p>与业务相关的共享内存结构图:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">struct NodeSHMInfo &#123; </span><br><span class="line">int status; 	//密匙状态</span><br><span class="line">int seckeyID; </span><br><span class="line">char clientID[12]; </span><br><span class="line">char serverID[12];</span><br><span class="line">char seckey[128]; //密匙</span><br><span class="line">&#125; NODE;</span><br></pre></td></tr></table></figure>
+<p>共享内存结构图: 头4个字节存放最大节点个数, 后面一共存放maxNode个秘钥信息</p>
+<p><img src="/images/javawz/image-20220524084019939.png" alt="image-20220524084019939"></p>
+<p>在遍历共享内存的时候, 首先获得共享内存的头4个字节内容, 也就是最大节点个数, 可以作为遍历的最大次数.</p>
+<p>遍历的时候查找共享内存根据clientID和serverID来进行查找.</p>
+<p><br><br><br><br></p>
+<h3 id="myipc_shmh"><a class="markdownIt-Anchor" href="#myipc_shmh"></a> myipc_shm.h</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">// myipc_shm.h</span><br><span class="line">#ifndef _WBM_MY_SHM_H_</span><br><span class="line">#define _WBM_MY_SHM_H_</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#ifdef __cplusplus </span><br><span class="line">extern &quot;C&quot; &#123;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">//共享内存错误码</span><br><span class="line">#define		MYIPC_OK				0		//正确</span><br><span class="line">#define		MYIPC_ParamErr			301		//输入参数失败</span><br><span class="line">#define		MYIPC_NotEXISTErr		302		//共享内存不存在错误</span><br><span class="line">#define		MYIPC_CreateErr			303		//创建共享内存错误</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//创建共享内存 若共享内存不存在，则创建</span><br><span class="line">int IPC_CreatShm(int key, int shmsize, int *shmhdl);</span><br><span class="line"></span><br><span class="line">//打开共享内存 若共享内存不存在，返回错误</span><br><span class="line">int IPC_OpenShm(int key, int shmsize, int *shmhdl);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/***********************************************************************</span><br><span class="line">  功能描述：    创建共享内存 通过种子文件</span><br><span class="line">  参数说明：    shmname  [in]  是共享内存名,系统中唯一标志</span><br><span class="line">                shmsize  [in]  是要创建的共享内存的大小；</span><br><span class="line">                shmhdl   [out] 共享内存的句柄.</span><br><span class="line">  返回值：      返回0函数执行成功；非0返回错误码</span><br><span class="line">************************************************************************/</span><br><span class="line">int IPC_CreatShmBySeedName(char *shmname, int shmsize, int *shmhdl);</span><br><span class="line"></span><br><span class="line">/***********************************************************************</span><br><span class="line">  功能描述：    关联共享内存</span><br><span class="line">  参数说明：    shmhdl	[in]  共享的句柄</span><br><span class="line">                mapaddr [out] 共享内存首地址</span><br><span class="line">  返回值：      返回0函数执行成功；非0返回错误码</span><br><span class="line">************************************************************************/</span><br><span class="line">int IPC_MapShm(int shmhdl, void **mapaddr);</span><br><span class="line"></span><br><span class="line">/***********************************************************************</span><br><span class="line">  功能描述：    取消共享内存关联</span><br><span class="line">  参数说明：    unmapaddr   [in] 共享内存首地址</span><br><span class="line">  返回值：      返回0函数执行成功；非0返回错误码</span><br><span class="line">************************************************************************/</span><br><span class="line">int IPC_UnMapShm(void *unmapaddr);</span><br><span class="line"></span><br><span class="line">/***********************************************************************</span><br><span class="line">  功能描述：    删除共享内存</span><br><span class="line">  参数说明：    shmhdl	[in]  共享的句柄</span><br><span class="line">  返回值：      返回0函数执行成功；非0返回错误码</span><br><span class="line">************************************************************************/</span><br><span class="line">int IPC_DelShm(int shmhdl);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">&#125;</span><br><span class="line">#endif</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<h3 id="myipc_shmc"><a class="markdownIt-Anchor" href="#myipc_shmc"></a> myipc_shm.c</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#define	_OS_LINUX_</span><br><span class="line"></span><br><span class="line">#if defined _OS_LINUX_</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;errno.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;memory.h&gt;</span><br><span class="line">#include &lt;sys/ipc.h&gt;</span><br><span class="line">#include &lt;sys/shm.h&gt;</span><br><span class="line">#include &lt;sys/sem.h&gt;</span><br><span class="line">#include &lt;sys/msg.h&gt;</span><br><span class="line">#include &quot;myipc_shm.h&quot; </span><br><span class="line"></span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">static int shmflag = 0;</span><br><span class="line">static int shmkey;</span><br><span class="line"></span><br><span class="line">//创建共享内存 若共享内存不存在，则创建 若存在使用原来的</span><br><span class="line">int IPC_CreatShm(int key, int shmsize, int *shmhdl)</span><br><span class="line">&#123;</span><br><span class="line">	int		tmpshmhdl = 0;</span><br><span class="line">	int 	ret = 0;</span><br><span class="line">	//	创建共享内存 </span><br><span class="line">	//	若共享内存不存在则创建 </span><br><span class="line">	//	若共享内存已存在使用原来的</span><br><span class="line">	tmpshmhdl = shmget(key, shmsize, IPC_CREAT | IPC_EXCL | 0666);</span><br><span class="line">	if (tmpshmhdl == -1)			//创建失败</span><br><span class="line">	&#123;</span><br><span class="line">		ret = MYIPC_ParamErr;</span><br><span class="line">		printf(&quot;func shmget() err :%d &quot;, ret);</span><br><span class="line">		return ret;</span><br><span class="line">	&#125;</span><br><span class="line">	*shmhdl = tmpshmhdl;</span><br><span class="line">	return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//打开共享内存 若共享内存不存在，返回错误</span><br><span class="line">//参数 无意义 可填写0</span><br><span class="line">int IPC_OpenShm(int key, int shmsize, int *shmhdl)</span><br><span class="line">&#123;</span><br><span class="line">	int		tmpshmhdl = 0;</span><br><span class="line">	int 	ret = 0;</span><br><span class="line">	//	创建共享内存 </span><br><span class="line">	//	若共享内存不存在则创建 </span><br><span class="line">	//	若共享内存已存在使用原来的</span><br><span class="line">	tmpshmhdl = shmget(key, 0, 0);</span><br><span class="line">	if (tmpshmhdl == -1)			//打开失败</span><br><span class="line">	&#123;</span><br><span class="line">		ret = MYIPC_NotEXISTErr;</span><br><span class="line">		//printf(&quot;func shmget() err :%d &quot;, ret);</span><br><span class="line">		return ret;</span><br><span class="line">	&#125;</span><br><span class="line">	*shmhdl = tmpshmhdl;</span><br><span class="line">	return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/***********************************************************************</span><br><span class="line">  功能描述：    创建共享内存</span><br><span class="line">  参数说明：    shmname  [in]  是共享内存名,系统中唯一标志</span><br><span class="line">				shmsize  [in]  是要创建的共享内存的大小；</span><br><span class="line">				shmhdl   [out] 共享内存的句柄.</span><br><span class="line">  返回值：      返回0函数执行成功；非0返回错误码</span><br><span class="line">************************************************************************/</span><br><span class="line">int IPC_CreatShmBySeedName(char *shmseedfile, int shmsize, int *shmhdl)</span><br><span class="line">&#123;</span><br><span class="line">	if (shmflag == 0)			//判断接口中共享内存key是否已经存在</span><br><span class="line">	&#123;</span><br><span class="line">		shmkey = ftok(shmseedfile, &apos;c&apos;);</span><br><span class="line">		if (shmkey == -1)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(&quot;ftok&quot;);</span><br><span class="line">			return -1;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		shmflag = 1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//创建共享内存</span><br><span class="line">	*shmhdl = shmget(shmkey, shmsize, IPC_CREAT | 0666);</span><br><span class="line">	if (*shmhdl == -1)			//创建失败</span><br><span class="line">		return -2;</span><br><span class="line">	return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">/***********************************************************************</span><br><span class="line">  功能描述：    关联共享内存</span><br><span class="line">  参数说明：    shmhdl	[in]  共享的句柄</span><br><span class="line">				mapaddr [out] 共享内存首地址</span><br><span class="line">  返回值：      返回0函数执行成功；非0返回错误码</span><br><span class="line">************************************************************************/</span><br><span class="line">int IPC_MapShm(int  shmhdl, void  **mapaddr)</span><br><span class="line">&#123;</span><br><span class="line">	void *tempptr = NULL;</span><br><span class="line"></span><br><span class="line">	//连接共享内存</span><br><span class="line">	tempptr = (void *)shmat(shmhdl, 0, 0);</span><br><span class="line">	if (tempptr == (void*)-1)		//共享内存连接失败</span><br><span class="line">		return -1;</span><br><span class="line">	*mapaddr = tempptr;			//导出共享内存首指针</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">/***********************************************************************</span><br><span class="line">  功能描述：    取消共享内存关联</span><br><span class="line">  参数说明：    unmapaddr   [in] 共享内存首地址</span><br><span class="line">  返回值：      返回0函数执行成功；非0返回错误码</span><br><span class="line">************************************************************************/</span><br><span class="line">int IPC_UnMapShm(void *unmapaddr)</span><br><span class="line">&#123;</span><br><span class="line">	int  rv;</span><br><span class="line">	//取消连接共享内存 </span><br><span class="line">	rv = shmdt((char *)unmapaddr);</span><br><span class="line">	if (rv == -1)			//取消连接失败</span><br><span class="line">		return -1;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">/***********************************************************************</span><br><span class="line">  功能描述：    删除共享内存</span><br><span class="line">  参数说明：    shmhdl	[in]  共享的句柄</span><br><span class="line">  返回值：      返回0函数执行成功；非0返回错误码</span><br><span class="line">************************************************************************/</span><br><span class="line">int IPC_DelShm(int shmhdl)</span><br><span class="line">&#123;</span><br><span class="line">	int  rv;</span><br><span class="line">	//删除共享内存</span><br><span class="line">	rv = shmctl(shmhdl, IPC_RMID, NULL);</span><br><span class="line">	if (rv &lt; 0)				//删除共享内存失败</span><br><span class="line">		return -1;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="keymng_shmoph"><a class="markdownIt-Anchor" href="#keymng_shmoph"></a> keymng_shmop.h</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// keymng_shmop.h</span><br><span class="line"></span><br><span class="line">#ifndef _KEYMNG_SHMOP_H_</span><br><span class="line">#define _KEYMNG_SHMOP_H_</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">#ifdef __cplusplus </span><br><span class="line">extern &quot;C&quot; &#123;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">//将网点密钥信息写共享内存， 网点共享内存结构体</span><br><span class="line">typedef struct _NodeSHMInfo</span><br><span class="line">&#123;	</span><br><span class="line">	int 			status;			//密钥状态 0-有效 1无效</span><br><span class="line">	char			clientId[12];	//客户端id</span><br><span class="line">	char			serverId[12];	//服务器端id	</span><br><span class="line">	int				seckeyid;		//对称密钥id</span><br><span class="line">	unsigned char	seckey[128];	//对称密钥 //hash1 hash256 md5</span><br><span class="line">&#125;NodeSHMInfo;</span><br><span class="line"></span><br><span class="line">//int KeyMng_ShmInit(int keyid, int keysize, void *shmid )</span><br><span class="line">//打开共享内存 共享内存存在则使用 不存在则创建</span><br><span class="line">int KeyMng_ShmInit(int key, int maxnodenum, int *shmhdl);</span><br><span class="line"></span><br><span class="line">// 客户端已经存储了一个秘钥 - 覆盖</span><br><span class="line">// ......还没有存储秘钥     - 找一个位置存储秘钥</span><br><span class="line">int KeyMng_ShmWrite(int shmhdl, int maxnodenum, NodeSHMInfo *pNodeInfo);</span><br><span class="line"></span><br><span class="line">int KeyMng_ShmRead(int shmhdl, char *clientId, char *serverId,  int maxnodenum, NodeSHMInfo *pNodeInfo);</span><br><span class="line"></span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">&#125;</span><br><span class="line">#endif</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<h3 id="keymng_shmopc"><a class="markdownIt-Anchor" href="#keymng_shmopc"></a> keymng_shmop.c</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">//#include &lt;sys/socket.h&gt;</span><br><span class="line">//#include &lt;netinet/in.h&gt;</span><br><span class="line">//#include &lt;arpa/inet.h&gt;</span><br><span class="line">#include &lt;signal.h&gt;</span><br><span class="line">#include &lt;sys/wait.h&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;errno.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">#include &quot;itcastlog.h&quot;</span><br><span class="line">#include &quot;keymng_shmop.h&quot;</span><br><span class="line">#include &quot;myipc_shm.h&quot;</span><br><span class="line"></span><br><span class="line">//#include &quot;keymngclientop.h&quot;</span><br><span class="line">//#include &quot;poolsocket.h&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//看共享内存是否存在</span><br><span class="line">//若 存在使用旧 </span><br><span class="line">//若 不存在创建</span><br><span class="line">int KeyMng_ShmInit(int key, int maxnodenum, int *shmhdl)</span><br><span class="line">&#123;</span><br><span class="line">	int				ret = 0;</span><br><span class="line"></span><br><span class="line">	//打开共享内存</span><br><span class="line">	ret = IPC_OpenShm(key, maxnodenum * sizeof(NodeSHMInfo), shmhdl);</span><br><span class="line">	if (ret == MYIPC_NotEXISTErr)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;keymng监测到共享内存不存在 正在创建共享内存...\n&quot;);</span><br><span class="line">		ret = IPC_CreatShm(key, maxnodenum * sizeof(NodeSHMInfo), shmhdl);</span><br><span class="line">		if (ret != 0)</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;keymng创建共享内存 err:%d \n&quot;, ret);</span><br><span class="line">			return ret;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			void 	*mapaddr = NULL;</span><br><span class="line">			printf(&quot;keymng创建共享内存 ok...\n&quot;);</span><br><span class="line"></span><br><span class="line">			ret = IPC_MapShm(*shmhdl, (void **)&amp;mapaddr);</span><br><span class="line">			if (ret != 0)</span><br><span class="line">			&#123;</span><br><span class="line">				printf(&quot;fun IPC_MapShm() err:%d 清空共享内存失败\n&quot;, ret);</span><br><span class="line">				return ret;</span><br><span class="line">			&#125;</span><br><span class="line">			memset(mapaddr, 0, maxnodenum * sizeof(NodeSHMInfo));</span><br><span class="line">			IPC_UnMapShm(mapaddr);</span><br><span class="line">			printf(&quot;keymng清空共享内存ok\n&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	else if (ret == 0)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;keymng监测到共享内存存在 使用旧的共享内存...\n&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;fun IPC_OpenShm() err:%d\n&quot;, ret);</span><br><span class="line">	&#125;</span><br><span class="line">	return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//写网点密钥 </span><br><span class="line">//若存在 则修改 </span><br><span class="line">//若不存在 则找一个空的位置写入</span><br><span class="line">int KeyMng_ShmWrite(int shmhdl, int maxnodenum, NodeSHMInfo *pNodeInfo)</span><br><span class="line">&#123;</span><br><span class="line">	int				ret = 0, i = 0;</span><br><span class="line">	NodeSHMInfo  	tmpNodeInfo; //空结点</span><br><span class="line">	NodeSHMInfo		*pNode = NULL;</span><br><span class="line">        bool flag = false;</span><br><span class="line">        void 			*mapaddr = NULL;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	memset(&amp;tmpNodeInfo, 0, sizeof(NodeSHMInfo));</span><br><span class="line">	//连接共享内存</span><br><span class="line">	ret = IPC_MapShm(shmhdl, (void **)&amp;mapaddr);</span><br><span class="line">	if (ret != 0)</span><br><span class="line">	&#123;</span><br><span class="line">                flag = true;</span><br><span class="line">		ITCAST_LOG(__FILE__, __LINE__, IC_ERROR_LEVEL, ret, &quot;func IPC_MapShm() err&quot;);</span><br><span class="line">		goto End;</span><br><span class="line">	&#125;</span><br><span class="line">        if(flag) break;</span><br><span class="line"></span><br><span class="line">	//判断传入的网点密钥 是否已经 存在</span><br><span class="line">	for (i = 0; i &lt; maxnodenum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		pNode = mapaddr + sizeof(NodeSHMInfo)*i;</span><br><span class="line">		if (strcmp(pNode-&gt;clientId, pNodeInfo-&gt;clientId) == 0 &amp;&amp;</span><br><span class="line">			strcmp(pNode-&gt;serverId, pNodeInfo-&gt;serverId) == 0)</span><br><span class="line">		&#123;</span><br><span class="line">			ITCAST_LOG(__FILE__, __LINE__, IC_WARNING_LEVEL, ret, &quot;系统检测到 共享内存中已经存在网点信息cliented:%s serverid%s&quot;, pNode-&gt;clientId, pNode-&gt;serverId);</span><br><span class="line">			memcpy(pNode, pNodeInfo, sizeof(NodeSHMInfo));</span><br><span class="line">			goto End;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//若不存在</span><br><span class="line">	for (i = 0; i &lt; maxnodenum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		pNode = mapaddr + sizeof(NodeSHMInfo)*i;</span><br><span class="line">		if (memcmp(&amp;tmpNodeInfo, pNode, sizeof(NodeSHMInfo)) == 0)</span><br><span class="line">		&#123;</span><br><span class="line">			ITCAST_LOG(__FILE__, __LINE__, IC_WARNING_LEVEL, ret, &quot;系统检测到 有一个空的位置 &quot;);</span><br><span class="line">			memcpy(pNode, pNodeInfo, sizeof(NodeSHMInfo));</span><br><span class="line">			goto End;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (i == maxnodenum)</span><br><span class="line">	&#123;</span><br><span class="line">		ret = 1111;</span><br><span class="line">		ITCAST_LOG(__FILE__, __LINE__, IC_ERROR_LEVEL, ret, &quot;系统检测到共享内存已满 &quot;);</span><br><span class="line">		goto End;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">End:</span><br><span class="line">	IPC_UnMapShm(mapaddr);</span><br><span class="line">	return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//根据clientid和serverid 去读网点信息</span><br><span class="line">int KeyMng_ShmRead(int shmhdl, char *clientId, char *serverId, int maxnodenum, NodeSHMInfo *pNodeInfo)</span><br><span class="line">&#123;</span><br><span class="line">	int				ret = 0, i = 0;</span><br><span class="line">	NodeSHMInfo  	tmpNodeInfo; //空结点</span><br><span class="line">	NodeSHMInfo		*pNode = NULL;</span><br><span class="line"></span><br><span class="line">	void 			*mapaddr = NULL;</span><br><span class="line"></span><br><span class="line">	memset(&amp;tmpNodeInfo, 0, sizeof(NodeSHMInfo));</span><br><span class="line">	//连接共享内存</span><br><span class="line">	ret = IPC_MapShm(shmhdl, (void **)&amp;mapaddr);</span><br><span class="line">	if (ret != 0)</span><br><span class="line">	&#123;</span><br><span class="line">		ITCAST_LOG(__FILE__, __LINE__, IC_ERROR_LEVEL, ret, &quot;func IPC_MapShm() err&quot;);</span><br><span class="line">		goto End;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//遍历网点信息</span><br><span class="line">	for (i = 0; i &lt; maxnodenum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		pNode = mapaddr + sizeof(NodeSHMInfo)*i;</span><br><span class="line"></span><br><span class="line">		if (strcmp(pNode-&gt;clientId, clientId) == 0 &amp;&amp;</span><br><span class="line">			strcmp(pNode-&gt;serverId, serverId) == 0)</span><br><span class="line">		&#123;</span><br><span class="line">			ITCAST_LOG(__FILE__, __LINE__, IC_WARNING_LEVEL, ret, &quot;系统检测到 有一个空的位置 &quot;);</span><br><span class="line">			memcpy(pNodeInfo, pNode, sizeof(NodeSHMInfo));</span><br><span class="line">			goto End;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (i == maxnodenum)</span><br><span class="line">	&#123;</span><br><span class="line">		ret = 1111;</span><br><span class="line">		ITCAST_LOG(__FILE__, __LINE__, IC_WARNING_LEVEL, ret, &quot;系统检测到共享内存已满 &quot;);</span><br><span class="line">		goto End;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">End:</span><br><span class="line">	IPC_UnMapShm(mapaddr);</span><br><span class="line">	return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+<br>
+<br>
+<br>
+<h2 id="进程间通讯的几种方式"><a class="markdownIt-Anchor" href="#进程间通讯的几种方式"></a> 进程间通讯的几种方式:</h2>
+<h3 id="1-匿名管道pipe"><a class="markdownIt-Anchor" href="#1-匿名管道pipe"></a> 1 匿名管道pipe:</h3>
+<h4 id="特点"><a class="markdownIt-Anchor" href="#特点"></a> 特点:</h4>
+<pre><code>1 只能用于有血缘关系的进程间通信
+2 管道有两端, 管道的数据流向是从管道的写端到管道的读端
+3 管道的本质是一块内核缓冲区
+4 数据从管道中读走之后就不存在了
+5 管道的实现实际上是环形队列
+6 默认情况下管道的读端和写端都是阻塞的
+</code></pre>
+<h3 id="2-命名管道-fifo"><a class="markdownIt-Anchor" href="#2-命名管道-fifo"></a> 2 命名管道: fifo</h3>
+<h4 id="特点-2"><a class="markdownIt-Anchor" href="#特点-2"></a> 特点:</h4>
+<pre><code>1 有无血缘关系的进程间通信都可以
+2 创建的fifo文件大小为0, 是linux文件类型之一
+3 使用fifo需要先创建一个fifo文件
+4 使用fifo完成通信两个进程必须打开相同的fifo文件
+5 效率比pipe低
+</code></pre>
+<h3 id="3-mmap"><a class="markdownIt-Anchor" href="#3-mmap"></a> 3 mmap</h3>
+<p>​	共享映射区本质是将文件内容映射到内存.</p>
+<h4 id="特点-3"><a class="markdownIt-Anchor" href="#特点-3"></a> 特点:</h4>
+<p>​		1 有无血缘关系都可以完成进程间通信<br>
+​		2 如果完成没有血缘关系的进程间通信必须使用文件.<br>
+​		3 若使用的是MAP_SHARED, 则对内存的修改会反映到文件中去<br>
+​		4 需要注意mmap可能存在调用失败的情况<br>
+​		5 匿名映射只能用于有血缘关系的进程间通信</p>
+<h3 id="4-信号"><a class="markdownIt-Anchor" href="#4-信号"></a> 4 信号</h3>
+<p>​	进程A给进程B发送信号的实现机制: 本质上是进程A先给内核发送信号, 然后内核给进程B发送</p>
+<p>​	通signal或者sigaction注册信号<br>
+​	通过kill函数给指定进程发送信号</p>
+<h4 id="特点-4"><a class="markdownIt-Anchor" href="#特点-4"></a> 特点:</h4>
+<p>​	1 信号不能携带大量信息<br>
+​	2 信号的优先级高, 产生信号之后会打断程序的执行<br>
+​	3 不建议使用信号完成进程间通信.<br>
+​	4 一般使用kill命令给一个进程发送信号, 进程收到信号之后调用信号处理函数完成操作.</p>
+<h4 id="信号的处理动作"><a class="markdownIt-Anchor" href="#信号的处理动作"></a> 信号的处理动作:</h4>
+<p>​	1 忽略信号<br>
+​	2 执行默认处理动作<br>
+​	3 执行用户自定义的函数</p>
+<h3 id="5-本地socket通信"><a class="markdownIt-Anchor" href="#5-本地socket通信"></a> 5 本地socket通信</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unix_socket = socket(AF_UNIX, SOCK_STREAM, 0);</span><br><span class="line">unix_socket = socket(AF_UNIX, SOCK_DGRAM, 0);</span><br></pre></td></tr></table></figure>
+<p>​		1 本地socket通信既可以使用TCP也可以使用UDP<br>
+​		2 如果使用TCP通信, bind的时候需要指定一个文件, 若文件存在会保存, unlink删除.<br>
+​		3 读或者写其实是通过文件描述符去操作内核的缓冲区<br>
+​		4 编写流程, 可以直接参考TCP或者UDP开发流程.</p>
+<h3 id="6-共享内存"><a class="markdownIt-Anchor" href="#6-共享内存"></a> 6 共享内存</h3>
+<p>​	共享内存的实质是将内核的一块内存映射到进程中的内存, 操作本地内存就相当于操作共享内存.</p>
+<h4 id="使用共享内存的步骤"><a class="markdownIt-Anchor" href="#使用共享内存的步骤"></a> 使用共享内存的步骤:</h4>
+<p>​	1 创建共享内存<br>
+​	2 关联共享内存<br>
+​	3 使用共享内存–读写共享内存<br>
+​	4 断开与共享内存的关联<br>
+​	5 删除共享内存</p>
+<p>共享内存和以上的管道, mmap和本地socket通信比较起来, 共享内存不需要文件描述符,<br>
+后者需要.<br>
+共享内存是进程间通信方式中效率最高的.</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xiaowuyoucy.github.io/2022/05/24/共享内存/" title="共享内存" target="_blank" rel="external">https://xiaowuyoucy.github.io/2022/05/24/共享内存/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+		  
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/05/30/共享内存基础类的代码编写/" title="共享内存基础类的代码编写"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/05/24/socket类/" title="socket类"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+	<span>More contact information</span>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:xiaowuyoucy.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '032928647cd59bc9f443',
+    clientSecret: '82a11fd93e4d0779655af6dc4b73942a03e95276',
+    repo: 'Xiaowuyoucy.github.io',
+    owner: 'Xiaowuyoucy',
+    admin: ['Xiaowuyoucy'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>

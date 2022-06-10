@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>OCCI | YanChen</title>
+  <meta name="description" content="编写服务端程序 服务端使用多线程处理多个客户端连接, 一个线程处理一个客户端连接, 一个客户端需要使用一个TcpSocket对象, 可以使用map完成线程ID和TcpSocket的映射关系, map&amp;lt;pthread_t, TcpSocket *&amp;gt;m_listSocket; 线程的回调函数需要访问到服务端操作类的成员变量, 所以应该将回调函数设置为类的友元函数. 1234auto it">
+<meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OCCI">
+<meta property="og:url" content="https://xiaowuyoucy.github.io/2022/06/05/OCCI/index.html">
+<meta property="og:site_name" content="YanChen">
+<meta property="og:description" content="编写服务端程序 服务端使用多线程处理多个客户端连接, 一个线程处理一个客户端连接, 一个客户端需要使用一个TcpSocket对象, 可以使用map完成线程ID和TcpSocket的映射关系, map&amp;lt;pthread_t, TcpSocket *&amp;gt;m_listSocket; 线程的回调函数需要访问到服务端操作类的成员变量, 所以应该将回调函数设置为类的友元函数. 1234auto it">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220605190706609.png">
+<meta property="og:updated_time" content="2022-06-05T11:22:19.063Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OCCI">
+<meta name="twitter:description" content="编写服务端程序 服务端使用多线程处理多个客户端连接, 一个线程处理一个客户端连接, 一个客户端需要使用一个TcpSocket对象, 可以使用map完成线程ID和TcpSocket的映射关系, map&amp;lt;pthread_t, TcpSocket *&amp;gt;m_listSocket; 线程的回调函数需要访问到服务端操作类的成员变量, 所以应该将回调函数设置为类的友元函数. 1234auto it">
+<meta name="twitter:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220605190706609.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xiaowuyoucy.github.io/2022/06/05/OCCI/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fonts2/iconfont.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xiaowuyoucy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">YanChen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> GuangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="https://www.xiaochenyan.top/navigation/index.html">
+            
+            <i class="icon icon-map-marker"></i>
+            
+            <span class="menu-title">导航</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon iconfont icon-video"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">格言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+				
+				<p id="hitokoto">:D 获取中...</p>
+				<p id="from" style="text-align: right"></p>
+                <script>
+					  var xhr = new XMLHttpRequest();
+					  xhr.open('get', 'https://v1.hitokoto.cn');
+					  xhr.onreadystatechange = function () {
+						if (xhr.readyState === 4) {
+						  var data = JSON.parse(xhr.responseText);
+						  var hitokoto = document.getElementById('hitokoto');
+						  hitokoto.innerText = data.hitokoto;
+						  var from = document.getElementById('from');
+						  from.innerText = "-- " + data.from;
+						}
+					  }
+					  xhr.send();
+				</script>
+				
+				
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">195</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KaliLinux/">KaliLinux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL/">MYSQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenSSL/">OpenSSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHCE/">RHCE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WEB安全渗透/">WEB安全渗透</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows命令/">Windows命令</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows网络编程/">Windows网络编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/apache/">apache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/c/">c</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp/">cpp</a><span class="category-list-count">116</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp17从入门到精通/">cpp17从入门到精通</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/githubHexo/">githubHexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/libevent/">libevent</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">96</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计/">windows程序设计</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计2/">windows程序设计2</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/多端安全协议传输平台/">多端安全协议传输平台</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术资讯/">技术资讯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">38</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/易语言/">易语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇编逆向/">汇编逆向</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/理财投资/">理财投资</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简谈计算机/">简谈计算机</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程词汇/">编程词汇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络爬虫/">网络爬虫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机公共基础/">计算机公共基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络TCP-IP传输协议-网络抓包/">计算机网络TCP/IP传输协议/网络抓包</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络原理/">计算机网络原理</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高中数学/">高中数学</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GET/">$_GET</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POST，-SERVER/">$_POST，$_SERVER</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REQUEST/">$_REQUEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOTO语句/">GOTO语句</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang函数/">Golang函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang匿名函数/">Golang匿名函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础/">Golang基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础类型占位符/">Golang基础类型占位符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang常量与变量里表达式/">Golang常量与变量里表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang循环结构/">Golang循环结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang指针/">Golang指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang标准输入与输出/">Golang标准输入与输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang流程控制/">Golang流程控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang程序运算/">Golang程序运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang类型转换及移位运算/">Golang类型转换及移位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang闭包函数/">Golang闭包函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ISO七层模型/">ISO七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java总结/">Java总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalinux/">Kalinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Null和Undefined/">Null和Undefined</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP两种定义常量的形式/">PHP两种定义常量的形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP常量/">PHP常量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python教程/">Python教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python笔记/">Python笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python运算符/">Python运算符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO网站优化/">SEO网站优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIR/">__DIR__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FILE/">__FILE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/">__LINE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache环境变量/">apache环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache配置/">apache配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beef劫持/">beef劫持</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dowhile循环/">dowhile循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iota定义常量组/">iota定义常量组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数/">javascript函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this方法/">js-this方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js布尔类型隐私转换/">js布尔类型隐私转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux目录结构/">linux目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php变量/">php变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urlib2/">urlib2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全渗透/">web安全渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web渗透/">web渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/变量的操作/">变量的操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/延时执行defer/">延时执行defer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格狼日/">拉格狼日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间复杂度测试/">时间复杂度测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财，投资/">理财，投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络模型/">网络模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/顺序表/">顺序表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/GET/" style="font-size: 13px;">$_GET</a> <a href="/tags/POST，-SERVER/" style="font-size: 13px;">$_POST，$_SERVER</a> <a href="/tags/REQUEST/" style="font-size: 13px;">$_REQUEST</a> <a href="/tags/Cookie/" style="font-size: 13px;">Cookie</a> <a href="/tags/GOTO语句/" style="font-size: 13px;">GOTO语句</a> <a href="/tags/Golang/" style="font-size: 13px;">Golang</a> <a href="/tags/Golang函数/" style="font-size: 13px;">Golang函数</a> <a href="/tags/Golang匿名函数/" style="font-size: 13px;">Golang匿名函数</a> <a href="/tags/Golang基础/" style="font-size: 14px;">Golang基础</a> <a href="/tags/Golang基础类型占位符/" style="font-size: 13px;">Golang基础类型占位符</a> <a href="/tags/Golang常量与变量里表达式/" style="font-size: 13px;">Golang常量与变量里表达式</a> <a href="/tags/Golang循环结构/" style="font-size: 13px;">Golang循环结构</a> <a href="/tags/Golang指针/" style="font-size: 13px;">Golang指针</a> <a href="/tags/Golang标准输入与输出/" style="font-size: 13px;">Golang标准输入与输出</a> <a href="/tags/Golang流程控制/" style="font-size: 13px;">Golang流程控制</a> <a href="/tags/Golang程序运算/" style="font-size: 13px;">Golang程序运算</a> <a href="/tags/Golang类型转换及移位运算/" style="font-size: 13px;">Golang类型转换及移位运算</a> <a href="/tags/Golang闭包函数/" style="font-size: 13px;">Golang闭包函数</a> <a href="/tags/ISO七层模型/" style="font-size: 13px;">ISO七层模型</a> <a href="/tags/Java总结/" style="font-size: 13px;">Java总结</a> <a href="/tags/Kalinux/" style="font-size: 13px;">Kalinux</a> <a href="/tags/Null和Undefined/" style="font-size: 13px;">Null和Undefined</a> <a href="/tags/PHP两种定义常量的形式/" style="font-size: 13px;">PHP两种定义常量的形式</a> <a href="/tags/PHP常量/" style="font-size: 13px;">PHP常量</a> <a href="/tags/Python教程/" style="font-size: 13px;">Python教程</a> <a href="/tags/Python笔记/" style="font-size: 13px;">Python笔记</a> <a href="/tags/Python运算符/" style="font-size: 13px;">Python运算符</a> <a href="/tags/SEO网站优化/" style="font-size: 13px;">SEO网站优化</a> <a href="/tags/XSS/" style="font-size: 14px;">XSS</a> <a href="/tags/DIR/" style="font-size: 13px;">__DIR__</a> <a href="/tags/FILE/" style="font-size: 13px;">__FILE__</a> <a href="/tags/LINE/" style="font-size: 13px;">__LINE__</a> <a href="/tags/apache环境变量/" style="font-size: 13px;">apache环境变量</a> <a href="/tags/apache配置/" style="font-size: 13px;">apache配置</a> <a href="/tags/beef劫持/" style="font-size: 13px;">beef劫持</a> <a href="/tags/dowhile循环/" style="font-size: 13px;">dowhile循环</a> <a href="/tags/iota定义常量组/" style="font-size: 13px;">iota定义常量组</a> <a href="/tags/javascript函数/" style="font-size: 13px;">javascript函数</a> <a href="/tags/js-this方法/" style="font-size: 13px;">js-this方法</a> <a href="/tags/js布尔类型隐私转换/" style="font-size: 13px;">js布尔类型隐私转换</a> <a href="/tags/linux目录结构/" style="font-size: 13px;">linux目录结构</a> <a href="/tags/php变量/" style="font-size: 13px;">php变量</a> <a href="/tags/sql注入/" style="font-size: 13px;">sql注入</a> <a href="/tags/urlib2/" style="font-size: 13px;">urlib2</a> <a href="/tags/web安全渗透/" style="font-size: 13px;">web安全渗透</a> <a href="/tags/web渗透/" style="font-size: 13px;">web渗透</a> <a href="/tags/变量的操作/" style="font-size: 13px;">变量的操作</a> <a href="/tags/延时执行defer/" style="font-size: 13px;">延时执行defer</a> <a href="/tags/拉格狼日/" style="font-size: 13px;">拉格狼日</a> <a href="/tags/时间复杂度测试/" style="font-size: 13px;">时间复杂度测试</a> <a href="/tags/理财，投资/" style="font-size: 13px;">理财，投资</a> <a href="/tags/算法/" style="font-size: 13px;">算法</a> <a href="/tags/网络模型/" style="font-size: 13px;">网络模型</a> <a href="/tags/计算机基础/" style="font-size: 13px;">计算机基础</a> <a href="/tags/顺序表/" style="font-size: 13px;">顺序表</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">66</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">87</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">51</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">125</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">106</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/06/08/oracle-win和linux编程/" class="title">oracle_win和linux编程</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-06-08T14:40:24.000Z" itemprop="datePublished">2022-06-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/多端安全协议传输平台/">多端安全协议传输平台</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/06/05/保存配置信息的几种方式/" class="title">保存配置信息的几种方式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-06-05T11:23:18.000Z" itemprop="datePublished">2022-06-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/多端安全协议传输平台/">多端安全协议传输平台</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/06/05/OCCI/" class="title">OCCI</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-06-05T00:38:09.000Z" itemprop="datePublished">2022-06-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/06/04/Shell脚本/" class="title">Shell脚本</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-06-04T11:01:14.000Z" itemprop="datePublished">2022-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/多端安全协议传输平台/">多端安全协议传输平台</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/31/服务端类实现/" class="title">服务端类实现</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-31T00:20:21.000Z" itemprop="datePublished">2022-05-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-OCCI" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      OCCI
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/06/05/OCCI/" class="article-date">
+	  <time datetime="2022-06-05T00:38:09.000Z" itemprop="datePublished">2022-06-05</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/多端安全协议传输平台/">多端安全协议传输平台</a>
+  </span>
+
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/06/05/OCCI/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.2k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 9(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="编写服务端程序"><a class="markdownIt-Anchor" href="#编写服务端程序"></a> 编写服务端程序</h3>
+<p>服务端使用多线程处理多个客户端连接, 一个线程处理一个客户端连接, 一个客户端需要使用一个TcpSocket对象,<br>
+可以使用map完成线程ID和TcpSocket的映射关系, map&lt;pthread_t, TcpSocket *&gt;m_listSocket;</p>
+<p>线程的回调函数需要访问到服务端操作类的成员变量, 所以应该将回调函数设置为类的友元函数.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">auto it = m_socketList.find(threadId);----&gt;自动类型推导</span><br><span class="line">但是如果it是先定义后赋值不行:</span><br><span class="line">auto it;</span><br><span class="line">it = m_socketList.find(threadId);</span><br></pre></td></tr></table></figure>
+<p>在使用SHA1进行加密的时候, 函数参数是什么类型, 就提供什么类型的数据, 否则可能会有问题.</p>
+<h3 id="守护进程"><a class="markdownIt-Anchor" href="#守护进程"></a> 守护进程</h3>
+<ol>
+<li>守护进程特点</li>
+</ol>
+<blockquote>
+<ul>
+<li>后台服务进程</li>
+<li>独立于控制终端</li>
+<li>周期性执行某任务</li>
+<li>不受用户登录注销影响</li>
+<li>一般采用以d结尾的名字(服务)</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li>
+<p>创建守护进程的流程</p>
+<ul>
+<li>创建子进程, 杀死父进程 - 必须的
+<ul>
+<li>创建子进程: fork();</li>
+<li>守护进程是怎么来的?
+<ul>
+<li>有一个没有任何职务的进程才可以被加官进爵, 守护进程是一个会话
+<ul>
+<li>范围: 进程 -&gt; 进程组 -&gt; 会话
+<ul>
+<li>进程组中的组长: 默认是进程组中的第一个进程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如何杀死父进程
+<ul>
+<li>exit(0)</li>
+<li>kill()</li>
+<li>raise() -&gt; 自己给自己发信号</li>
+<li>abort() -&gt; 给自己发送SIGABRT信号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>子进程提升为会话 - 必须的
+<ul>
+<li>setsid()</li>
+<li>提升成功之后, 进程就脱离了终端</li>
+</ul>
+</li>
+<li>修改工作目录 - 可选
+<ul>
+<li>chdir();</li>
+<li>/mnt/U盘1/app
+<ul>
+<li>在当前目录/mnt/U盘1/下 执行 ./app, 进程的工作路径: /mnt/U盘1/</li>
+</ul>
+</li>
+<li>将工作目录切换到一个不能被卸载的路径下就可以了
+<ul>
+<li>chdir(&quot;/home&quot;);</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修改掩码 - 可选
+<ul>
+<li>umask();</li>
+</ul>
+</li>
+<li>关闭/重定向文件描述法 - 可选
+<ul>
+<li>标准输入 -&gt; 0</li>
+<li>标准输出 -&gt; 1</li>
+<li>标准错误 -&gt; 2</li>
+<li>如果的重定向, 对应的位置: /dev/null
+<ul>
+<li>/dev/null是一个黑洞文件,不管放什么数据进去,文件大小都是0</li>
+<li>重定向的目的: 排除干扰</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int devFd = open(&quot;/dev/null&quot;, O_RDWR);</span><br><span class="line">int dup2(int oldfd, int newfd);</span><br><span class="line">dup2(devFd, 0);</span><br><span class="line">newfd 不管之前指向哪一个文件, 现在指向oldfd</span><br></pre></td></tr></table></figure>
+<ul>
+<li>核心处理动作 -&gt; 周期性的执行某些操作 - 必须</li>
+<li>关闭守护进程 -&gt; 使用shell脚本管理 - 可选</li>
+</ul>
+</li>
+</ol>
+<h2 id="occi"><a class="markdownIt-Anchor" href="#occi"></a> OCCI</h2>
+<blockquote>
+<p>Oracle C<ins>调用接口 – OCCI 即 Oracle C</ins> Call Interface<br>
+OCCI 是Oracle 的C++ API, 允许你使用面向对象的特性、本地类、C++语言的方法来访问Oracle数据库</p>
+</blockquote>
+<h3 id="occi-介绍"><a class="markdownIt-Anchor" href="#occi-介绍"></a> OCCI 介绍</h3>
+<ol>
+<li>
+<p>优势</p>
+<blockquote>
+<ol>
+<li>基于标准C++和面向对象的设计；</li>
+<li>效率较高；</li>
+<li>适合开发C/S模式的程序，软件中间层；</li>
+</ol>
+</blockquote>
+</li>
+<li>
+<p>特性</p>
+<blockquote>
+<ol>
+<li>完整支持SQL/PLSQL</li>
+<li>为不断增长的用户和请求提供了弹性选项</li>
+<li>为使用用户自定义类型，如C中的类，提供了无缝接口</li>
+<li>支持所有的Oracle数据类型以及LOB types（大对象）</li>
+<li>可以访问数据库元数据</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<p>OCCI 头文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;occi.h&gt; -- 程序中只需要包含这一个头文件</span><br><span class="line">#include &lt;occiCommon.h&gt;</span><br><span class="line">#include &lt;occiControl.h&gt;</span><br><span class="line">#include &lt;occiData.h&gt;</span><br><span class="line">#include &lt;occiObjects.h&gt;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>OCCI 库</li>
+</ol>
+<ul>
+<li>
+<p>Windows</p>
+<ul>
+<li>oraocci11.lib/ oraocci11d.lib</li>
+<li>oraocci11.dll/ oraocci11d.dll</li>
+</ul>
+</li>
+<li>
+<p>Linux</p>
+<ul>
+<li><a href="http://libnnz11.so" target="_blank" rel="noopener">libnnz11.so</a></li>
+<li><a href="http://libocci.so" target="_blank" rel="noopener">libocci.so</a></li>
+<li><a href="http://libclntsh.so" target="_blank" rel="noopener">libclntsh.so</a></li>
+</ul>
+</li>
+</ul>
+<p>linux下的环境配置-----root用户下进行配置</p>
+<ul>
+<li>将oracle_client_11gR2.tar.gz文件上传值linux操作系统的/opt目录下</li>
+<li>执行tar -zxvf oracle_client_11gR2.tar.gz解压至当前目录下</li>
+<li>进入到刚刚解压的目录, 打开&lt;&lt;Hi-看我,<a href="http://xn--wnuv08b.sh" target="_blank" rel="noopener">看我.sh</a>&gt;&gt;</li>
+<li>将文件中的export导出的环境变量拷贝到root用户的.bashrc文件中
+<ul>
+<li>注意: 若解压的目录不是/opt, 环境变量中的路径需要修改</li>
+</ul>
+</li>
+<li>执行. .bashrc或者source .bashrc 或者退出再次登录使配置的环境变量生效
+<ul>
+<li>可以执行echo $OCCI_HOME进行查看, 若看到内容则设置成功</li>
+</ul>
+</li>
+<li>切换到/opt/instantclient_11_2/network/admin目录下
+<ul>
+<li>打开tnsnames.ora文件, 修改其中的HOST部分, 将IP修改成实际的oracle服务的IP地址</li>
+</ul>
+</li>
+<li>occi.cpp测试代码上传到root用户下
+<ul>
+<li>然后执行: g++ -o a.out occi.cpp -locci -lclntsh, 编译通过表明设置的没有问题.</li>
+<li>若执行报错, 查看一下代码中的oracle的用户名和密码是否正确.</li>
+</ul>
+</li>
+</ul>
+<p>常见的几个环境变量:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PATH:命令或者可执行程序搜索的路径</span><br><span class="line"></span><br><span class="line">C_INCLUDE_PATH:gcc编译器查找头文件的路径</span><br><span class="line"></span><br><span class="line">CPLUS_INCLUDE_PATH: g++编译器查找头文件的路径</span><br><span class="line"></span><br><span class="line">LD_LIBRARY_PATH:查找动态链接库的路径</span><br><span class="line"></span><br><span class="line">LIBRARY_PATH: 查找静态库的路径</span><br><span class="line"></span><br><span class="line">若编译的时候使用静态库文件:</span><br><span class="line">则: gcc foo.c -L /home/itcast/lib -static -lfoo -o foo</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">oracle用户安装了oracle服务系统, 本身就有oracle编程需要的库文件和头文件:</span><br><span class="line">&gt; export OCCI_HOME=/u01/app/oracle/product/11.2.0/db_1</span><br><span class="line">&gt; export OCCI_INCLUDE_DIR=$OCCI_HOME/rdbms/public</span><br><span class="line">&gt; export OCCI_LIBRARY_PATH=$OCCI_HOME/lib</span><br><span class="line">&gt; export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$OCCI_LIBRARY_PATH</span><br><span class="line">&gt;</span><br><span class="line">&gt; 程序编译时搜索的库目录</span><br><span class="line">&gt;</span><br><span class="line">&gt; export LIBRARY_PATH=$$LIBRARY_PATH:$OCCI_LIBRARY_PATH</span><br><span class="line">&gt;</span><br><span class="line">&gt; 程序编译时搜索的头文件目录</span><br><span class="line">&gt;</span><br><span class="line">&gt; export CPLUS_INCLUDE_PATH=$$CPLUS_INCLUDE_PATH:$OCCI_INCLUDE_DIR</span><br><span class="line">&gt;</span><br><span class="line">&gt; 上面的环境变量中OCCI_HOME和OCCI_INCLUDE_DIR与在root中的配置不同, 其余相同</span><br></pre></td></tr></table></figure>
+<h2 id="occi使用"><a class="markdownIt-Anchor" href="#occi使用"></a> OCCI使用</h2>
+<h3 id="初始化-environment-类"><a class="markdownIt-Anchor" href="#初始化-environment-类"></a> 初始化 - Environment 类</h3>
+<blockquote>
+<p>OCCI通过创建一个Environment的对象完成初始化工作。<br>
+可以通过Environment创建数据库连接，从而进行其它的操作<br>
+要创建Environment，应该调用Environment类的静态方法createEnvironment()</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 环境初始化</span><br><span class="line">Environment* env = Environment::createEnvironment();</span><br><span class="line">// 关闭, 释放资源</span><br><span class="line">Environment::terminateEnvironment(env);</span><br></pre></td></tr></table></figure>
+<h3 id="连接数据库-connection-类"><a class="markdownIt-Anchor" href="#连接数据库-connection-类"></a> 连接数据库 - Connection 类</h3>
+<blockquote>
+<p>连接数据库通过Connection类的对象实例实现</p>
+<p>调用Environment类的createConnection()方法可以创建一个Connection对象；</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 函数原型:</span><br><span class="line">Connection *Environment::createConnection(</span><br><span class="line">const string &amp;userName,const string &amp;password, const string &amp;connectString );</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 函数调用</span><br><span class="line">const string userName = &quot;scott&quot;; // 用户名</span><br><span class="line">const string passwd = &quot;tiger&quot;; // 密码</span><br><span class="line">const string connstr = &quot;192.168.247.129:1521/orcl&quot;; // 数据库连接串</span><br><span class="line">Connection* conn = env-&gt;createConnection(userName, passwd, connstr);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用Environment::terminateConnection()断开连接</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 断开连接</span><br><span class="line">env-&gt;terminateConnection(conn);</span><br></pre></td></tr></table></figure>
+<h3 id="执行sql"><a class="markdownIt-Anchor" href="#执行sql"></a> 执行SQL</h3>
+<blockquote>
+<p>Statement 类用于执行SQL语句,并获取返回结果。<br>
+ResultSet 类用于处理SELECT 查询的结果。<br>
+对于所有类型的数据的绑定或者获取，OCCI都提供了统一的方法<br>
+setXXX 方法用于Statement<br>
+getXXX 方法用于Statement &amp; ResultSet<br>
+OCCI会自动处理类型之间的转换。<br>
+使用方法：<br>
+使用Connection::createStatement()创建Statement对象, 指定 SQL 命令(DDL/DML/query)作为参数</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 操作函数</span><br><span class="line">Connection::createStatement(string &amp;sql);</span><br><span class="line"></span><br><span class="line">Statement::setSQL(string &amp;sql);</span><br><span class="line"></span><br><span class="line">Statement::execute(string &amp;sql); // can be used for any SQL, returns status</span><br><span class="line"></span><br><span class="line">Statement::executeUpdate(string &amp;sql); // returns Insert/Update/Delete count</span><br><span class="line"></span><br><span class="line">Statement::executeQuery(string &amp;sql); // returns ResultSet（结果集）</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用 setXXX 方法传递要绑定用于输入的值<br>
+使用合适的execute方法执行SQL<br>
+对于SELECT 查询, 使用ResultSet 对象处理返回结果</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 插入操作</span><br><span class="line">Statement *stmt = conn-&gt;createStatement(“ insert into Dept(Deptno,Dname, Loc) values (1,</span><br><span class="line">‘ACCOUNTS’, ‘ZONE1’ ”);</span><br><span class="line">stmt-&gt;executeUpdate();</span><br><span class="line">conn-&gt;terminateStatement(stmt); // 关闭查询, 释放资源</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用绑定参数的DML（数据操作语句）示例：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Statement *stmt = conn-&gt;createStatement(“ insert into Emp(EmpNo,Ename) values(:1, :2) ”);</span><br><span class="line">//1 and 2 are bind placeholders</span><br><span class="line">int empno = 2;</span><br><span class="line">string empname = “JOHN W”;</span><br><span class="line">//first parameter is bind position, second is value</span><br><span class="line">stmt-&gt;setInt(1, empno);</span><br><span class="line">stmt-&gt;setString(2, empname);</span><br><span class="line">stmt-&gt;executeUpdate();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>执行SELECT查询并处理结果：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Statement *stmt = conn-&gt;createStatement(</span><br><span class="line">	“select Empno, Ename, Sal from Emp where Hiredate &gt;= :1”);</span><br><span class="line">//automatically converted to Date</span><br><span class="line">stmt-&gt;setString(1, “01-JAN-1987”);</span><br><span class="line">//executeQuery returns a ResultSet</span><br><span class="line">ResultSet *rs = stmt-&gt;executeQuery();</span><br><span class="line">//ResultSet::next fetches rows and returns FALSE</span><br><span class="line">//when no more rows</span><br><span class="line">while (rs-&gt;next() == true)</span><br><span class="line">&#123;</span><br><span class="line">    //get values using the getXXX methods of ResultSet</span><br><span class="line">    empno = rs-&gt;getInt(1);</span><br><span class="line">    empname = rs-&gt;getString(2);</span><br><span class="line">    empsalary = rs-&gt;getFloat(3);</span><br><span class="line">&#125;</span><br><span class="line">stmt-&gt;closeResultSet(rs);//to free resources</span><br></pre></td></tr></table></figure>
+<h2 id="window配置occi环境"><a class="markdownIt-Anchor" href="#window配置occi环境"></a> window配置occi环境</h2>
+<p>包含头文件和库路径还有库名字</p>
+<p><img src="/images/javawz/image-20220605190706609.png" alt="image-20220605190706609"></p>
+<h3 id="1-linux如何查找动态库编译-运行"><a class="markdownIt-Anchor" href="#1-linux如何查找动态库编译-运行"></a> 1. Linux如何查找动态库(编译、运行) ?</h3>
+<ol>
+<li>编译和链接时，动态库的搜索路径顺序如下（注意不会递归性地在其子目录下搜索）：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(1) gcc编译、链接命令中的-L选项；</span><br><span class="line">(2) gcc的环境变量的 LIBRARY_PATH（多个路径用冒号分割）；</span><br><span class="line">(3) gcc默认动态库目录：/lib:/usr/lib:usr/lib64:/usr/local/lib。</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>运行时，动态库的搜索路径顺序如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(1) 编译目标代码时指定的动态库搜索路径：用选项-Wl,rpath和include指定的动态库的搜索路径，</span><br><span class="line">	比如gcc -Wl,-rpath,include -L. -ldltest hello.c，在执行文件时会搜索路径`./include`;</span><br><span class="line">	</span><br><span class="line">(2) 环境变量LD_LIBRARY_PATH（多个路径用冒号分割）;</span><br><span class="line"></span><br><span class="line">(3) 修改 /etc/ld.so.conf 配置文件指定的动态库绝对路径, /etc/ld.so.cache</span><br><span class="line">（通过sudo ldconfig生效，一般是非root用户时使用）;</span><br><span class="line"></span><br><span class="line">(4) gcc默认动态库目录：/lib:/usr/lib:usr/lib64:/usr/local/lib 等。</span><br></pre></td></tr></table></figure>
+<h3 id="2-oracle解锁用户"><a class="markdownIt-Anchor" href="#2-oracle解锁用户"></a> 2. oracle解锁用户</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 解锁用户</span><br><span class="line">ALTER USER scott ACCOUNT UNLOCK;</span><br><span class="line">// 重写设置密码</span><br><span class="line">ALTER USER scott IDENTIFIED BY tiger;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xiaowuyoucy.github.io/2022/06/05/OCCI/" title="OCCI" target="_blank" rel="external">https://xiaowuyoucy.github.io/2022/06/05/OCCI/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+		  
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/06/05/保存配置信息的几种方式/" title="保存配置信息的几种方式"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/06/04/Shell脚本/" title="Shell脚本"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+	<span>More contact information</span>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:xiaowuyoucy.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '032928647cd59bc9f443',
+    clientSecret: '82a11fd93e4d0779655af6dc4b73942a03e95276',
+    repo: 'Xiaowuyoucy.github.io',
+    owner: 'Xiaowuyoucy',
+    admin: ['Xiaowuyoucy'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>
