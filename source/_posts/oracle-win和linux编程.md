@@ -2,13 +2,22 @@
 title: oracle_win和linux编程
 date: 2022-06-08 22:40:24
 tags:
-categories: 
+categories: linux
 doc:
 ---
 
+### 关于信号处理函数的经验:
+
+1 在信号处理函数中尽可能的要简单
+2 在信号处理函数中不要打印日志.
+
 ### windows
 
-```
+需要安装oracle服务端对应版本的oracle客户端才行
+
+比如服务端版本是10.0.1  客户端也必须是10.0.1版本,否则库加载失败或编译不通过
+
+```cpp
 #include <iostream>
 #include <occi.h>
 #include <string>
@@ -62,9 +71,30 @@ int main()
 
 ### Linux
 
-
+初始化环境
 
 ```
+Environment *env = Environment::createEnvironment();
+
+成功:返回指针对象
+失败:返回NULL
+```
+
+连接数据库
+
+```
+Connection *Environment::createConnection(const string &userName,const string &password, const string &connectString );
+userName: 用户名
+password: 用户密码
+connectString: ip地址:端口/实例名
+
+成功: 返回指针对象
+失败: 返回NULL
+```
+
+
+
+```cpp
 #include <iostream>
 #include <occi.h>
 #include <string>
@@ -83,6 +113,7 @@ int main()
 		return -1;
 	}
 	
+	//连接数据库
 	//Connection *Environment::createConnection( 
     //const string &userName,const string &password, const string &connectString );
 	string user="scott";
