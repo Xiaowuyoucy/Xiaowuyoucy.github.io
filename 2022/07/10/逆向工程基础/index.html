@@ -50,7 +50,10 @@
 <meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220713005916672.png">
 <meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220713013432002.png">
 <meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220713014111043.png">
-<meta property="og:updated_time" content="2022-07-12T17:49:46.743Z">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220714011408035.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220714012232945.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/images/javawz/image-20220714012419678.png">
+<meta property="og:updated_time" content="2022-07-13T17:24:34.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="逆向工程基础">
 <meta name="twitter:description" content="关于逆向工程  逆向工程（Reverse Engineering，简称RE)  代码逆向工程（Reverse Code Engineering，简称RCE）  逆向分析法  静态分析法  在不执行代码文件的情形下，对代码进行静态分析的一种方法。   动态分析法  在程序文件的执行过程中对代码进行动态分析    Hex Editor是一个简单易用的工具，使用它可以轻松地把二进制文件转换为十六进制文">
@@ -435,10 +438,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/07/10/逆向工程基础/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.2k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.5k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 8(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 9(分)</span>
 	
 
       </div>
@@ -513,7 +516,7 @@
 <p><img src="/images/javawz/image-20220710202412666.png" alt="image-20220710202412666"></p>
 <p>使用OllyDbg中的Name in all modules命令可以列出被加载的DLL文件中提供的所有API。使用Name in all modules命令打开All names窗口，单击Name栏目按名称排序，通过键盘敲出MessageBoxW后，光标会自动定位到MessageBoxW上</p>
 <p><img src="/images/javawz/image-20220710203219441.png" alt="image-20220710203219441"></p>
-<p>双击MessageBoxW函数后就会显示其代码，它实现于USER32.dl1库中</p>
+<p>双击MessageBoxW函数后就会显示其代码，它实现于USER32.dll库中</p>
 <p><img src="/images/javawz/image-20220710203502389.png" alt="image-20220710203502389"></p>
 <p>模块中的地址和本程序的地址是完全不同的。</p>
 <h3 id="修改字符串的两种方法"><a class="markdownIt-Anchor" href="#修改字符串的两种方法"></a> 修改字符串的两种方法</h3>
@@ -603,7 +606,7 @@ GS： Data Segment，数据段寄存器</p>
 <p>CF（Carry Flag，进位标志）</p>
 <p><img src="/images/javawz/image-20220713014111043.png" alt="image-20220713014111043"></p>
 <p>ZF<br>
-若运算结果为0，则其值为1（True），否则其值为O（False）。<br>
+若运算结果为0，则其值为1（True），否则其值为0（False）。<br>
 OF<br>
 有符号整数（signed integer）溢出时， OF值被置为1。此外， MSB （Most Significant Bit，<br>
 最高有效位）改变时，其值也被设为1。<br>
@@ -614,6 +617,24 @@ CF<br>
 <p>EIP：Instruction Pointer，指令指针寄存器</p>
 <p>程序运行时，CPU会读取EIP中一条指令的地址，传送指令到指令缓冲区后，EIP寄存器的值自动增加，增加的大小即是读取指令的字节大小。</p>
 <p>不能直接修改EIP的值，只能通过其他指令间接修改</p>
+<h1 id="栈"><a class="markdownIt-Anchor" href="#栈"></a> 栈</h1>
+<p>（1）暂时保存函数内的局部变量。<br>
+（2）调用函数时传递参数。<br>
+（3）保存函数返回后的地址。</p>
+<p>栈其实是一种数据结构，它按照FILO（First In Last Out，后进先出）的原则存储数据。</p>
+<p><img src="/images/javawz/image-20220714011408035.png" alt="image-20220714011408035"></p>
+<p>栈顶指针（ESP）初始状态指向栈底端。</p>
+<p>执行PUSH命令将数据压入栈时，栈顶指针就会上移到栈顶端。</p>
+<p>执行POP命令从栈中弹出数据时，若栈为空，则栈顶指针重新移动到栈底端。</p>
+<p>栈是一种由高地址向低地址扩展的数据结构</p>
+<p>栈是逆向扩展的</p>
+<p>从栈中弹出数据后，ESP随之向下移动。</p>
+<p>向栈压入数据时，栈顶指针减小，向低地址移动；从栈中弹出数据时，栈顶指针增<br>
+加，向高地址移动。</p>
+<h1 id="汇编指令"><a class="markdownIt-Anchor" href="#汇编指令"></a> 汇编指令</h1>
+<p><img src="/images/javawz/image-20220714012232945.png" alt="image-20220714012232945"></p>
+<p>函数参数压入栈时是从最后一个参数开始压入的。</p>
+<p><img src="/images/javawz/image-20220714012419678.png" alt="image-20220714012419678"></p>
 
       
     </div>
