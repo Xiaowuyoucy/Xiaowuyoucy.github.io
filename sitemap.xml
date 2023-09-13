@@ -2,9 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/06/java00010%E6%95%B0%E7%BB%84/</loc>
+    
+    <lastmod>2023-09-13T15:00:20.870Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00006JDK9%E7%9A%84JShell-%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%B8%A4%E7%82%B9%E4%BC%98%E5%8C%96/</loc>
+    
+    <lastmod>2023-09-10T14:37:49.310Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00004java%E8%BF%90%E7%AE%97%E7%AC%A6/</loc>
+    
+    <lastmod>2023-09-10T14:17:53.542Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/03/java00000Java%E7%BC%96%E8%AF%91%E5%92%8C%E8%BF%90%E8%A1%8C/</loc>
+    
+    <lastmod>2023-09-10T13:47:50.773Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00002JDK%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2023-09-09T16:25:31.097Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00002JRE-JDK%E5%92%8CJVM/</loc>
+    
+    <lastmod>2023-09-09T15:52:36.635Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00002z%E8%AF%AD%E8%A8%80%E7%9A%84%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%80%A7/</loc>
+    
+    <lastmod>2023-09-09T15:47:19.963Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/31/linux084%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</loc>
+    
+    <lastmod>2023-07-14T11:25:12.149Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2023/04/10/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AELinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
+    
+    <lastmod>2023-04-11T16:16:03.934Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaowuyoucy.github.io/2022/07/10/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80/</loc>
     
-    <lastmod>2022-07-13T17:24:34.723Z</lastmod>
+    <lastmod>2022-07-13T17:31:26.457Z</lastmod>
     
   </url>
   
@@ -642,13 +705,6 @@
     <loc>https://xiaowuyoucy.github.io/2022/03/27/define%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7/</loc>
     
     <lastmod>2022-03-27T04:26:18.975Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xiaowuyoucy.github.io/2022/01/31/linux084%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</loc>
-    
-    <lastmod>2022-03-26T10:43:52.754Z</lastmod>
     
   </url>
   
@@ -4034,13 +4090,6 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/2020/02/06/java00010%E6%95%B0%E7%BB%84/</loc>
-    
-    <lastmod>2020-02-07T11:50:26.499Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://xiaowuyoucy.github.io/2020/02/06/java00009%E6%96%B9%E6%B3%95%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2020-02-05T21:34:04.363Z</lastmod>
@@ -4076,23 +4125,9 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00006JDK9%E7%9A%84JShell-%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%B8%A4%E7%82%B9%E4%BC%98%E5%8C%96/</loc>
-    
-    <lastmod>2020-02-04T00:36:20.957Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://xiaowuyoucy.github.io/2020/02/04/java00005%E6%96%B9%E6%B3%95/</loc>
     
     <lastmod>2020-02-04T00:15:05.122Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00004java%E8%BF%90%E7%AE%97%E7%AC%A6/</loc>
-    
-    <lastmod>2020-02-04T00:02:38.881Z</lastmod>
     
   </url>
   
@@ -4121,13 +4156,6 @@
     <loc>https://xiaowuyoucy.github.io/2020/02/04/java00001%E5%8F%98%E9%87%8F/</loc>
     
     <lastmod>2020-02-03T20:56:29.796Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xiaowuyoucy.github.io/2020/02/03/java00000Java%E7%BC%96%E8%AF%91%E5%92%8C%E8%BF%90%E8%A1%8C/</loc>
-    
-    <lastmod>2020-02-03T07:22:02.503Z</lastmod>
     
   </url>
   
@@ -4454,14 +4482,14 @@
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/categories/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://xiaowuyoucy.github.io/repository/index.html</loc>
+    <loc>https://xiaowuyoucy.github.io/categories/index.html</loc>
     
     <lastmod>2018-10-04T14:11:17.000Z</lastmod>
     

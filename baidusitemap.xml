@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/06/java00010%E6%95%B0%E7%BB%84/</loc>
+    <lastmod>2023-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00006JDK9%E7%9A%84JShell-%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%B8%A4%E7%82%B9%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2023-09-10</lastmod>
+  </url>
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00004java%E8%BF%90%E7%AE%97%E7%AC%A6/</loc>
+    <lastmod>2023-09-10</lastmod>
+  </url>
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/03/java00000Java%E7%BC%96%E8%AF%91%E5%92%8C%E8%BF%90%E8%A1%8C/</loc>
+    <lastmod>2023-09-10</lastmod>
+  </url>
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00002JDK%E5%AE%89%E8%A3%85/</loc>
+    <lastmod>2023-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00002JRE-JDK%E5%92%8CJVM/</loc>
+    <lastmod>2023-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00002z%E8%AF%AD%E8%A8%80%E7%9A%84%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%80%A7/</loc>
+    <lastmod>2023-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2022/01/31/linux084%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2023-07-14</lastmod>
+  </url>
+  <url>
+    <loc>https://xiaowuyoucy.github.io/2023/04/10/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AELinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2023-04-11</lastmod>
+  </url>
+  <url>
     <loc>https://xiaowuyoucy.github.io/2022/07/10/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2022-07-13</lastmod>
   </url>
@@ -367,10 +403,6 @@
   <url>
     <loc>https://xiaowuyoucy.github.io/2022/03/27/define%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7/</loc>
     <lastmod>2022-03-27</lastmod>
-  </url>
-  <url>
-    <loc>https://xiaowuyoucy.github.io/2022/01/31/linux084%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2022-03-26</lastmod>
   </url>
   <url>
     <loc>https://xiaowuyoucy.github.io/2022/03/06/%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5/</loc>
@@ -2301,10 +2333,6 @@
     <lastmod>2020-02-07</lastmod>
   </url>
   <url>
-    <loc>https://xiaowuyoucy.github.io/2020/02/06/java00010%E6%95%B0%E7%BB%84/</loc>
-    <lastmod>2020-02-07</lastmod>
-  </url>
-  <url>
     <loc>https://xiaowuyoucy.github.io/2020/02/06/java00009%E6%96%B9%E6%B3%95%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2020-02-05</lastmod>
   </url>
@@ -2325,15 +2353,7 @@
     <lastmod>2020-02-05</lastmod>
   </url>
   <url>
-    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00006JDK9%E7%9A%84JShell-%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%B8%A4%E7%82%B9%E4%BC%98%E5%8C%96/</loc>
-    <lastmod>2020-02-04</lastmod>
-  </url>
-  <url>
     <loc>https://xiaowuyoucy.github.io/2020/02/04/java00005%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2020-02-04</lastmod>
-  </url>
-  <url>
-    <loc>https://xiaowuyoucy.github.io/2020/02/04/java00004java%E8%BF%90%E7%AE%97%E7%AC%A6/</loc>
     <lastmod>2020-02-04</lastmod>
   </url>
   <url>
@@ -2350,10 +2370,6 @@
   </url>
   <url>
     <loc>https://xiaowuyoucy.github.io/2020/02/04/java00001%E5%8F%98%E9%87%8F/</loc>
-    <lastmod>2020-02-03</lastmod>
-  </url>
-  <url>
-    <loc>https://xiaowuyoucy.github.io/2020/02/03/java00000Java%E7%BC%96%E8%AF%91%E5%92%8C%E8%BF%90%E8%A1%8C/</loc>
     <lastmod>2020-02-03</lastmod>
   </url>
   <url>
