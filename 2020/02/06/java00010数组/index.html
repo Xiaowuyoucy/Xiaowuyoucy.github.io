@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="YanChen">
 <meta property="og:description" content="数组  数组的概念 ​	数组是引用数据类型 ​			类型要统一 ​		数组的长度在运行期间不可以改变  初始化  动态初始化（指定长度） ​	数据类型[] 数组名称 = new 数据类型[数组长度] ​	使用动态初始化数组的时候,其中的元素将会自动拥有一个默认值.规则如下:  如果是整数类型,那么默认值为0; 如果是浮点类型,那么默认值为0.0; 如果是字符类型,那么默认值为’\u0000’ u">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-09-13T15:00:20.870Z">
+<meta property="og:updated_time" content="2023-09-24T16:55:12.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数组">
 <meta name="twitter:description" content="数组  数组的概念 ​	数组是引用数据类型 ​			类型要统一 ​		数组的长度在运行期间不可以改变  初始化  动态初始化（指定长度） ​	数据类型[] 数组名称 = new 数据类型[数组长度] ​	使用动态初始化数组的时候,其中的元素将会自动拥有一个默认值.规则如下:  如果是整数类型,那么默认值为0; 如果是浮点类型,那么默认值为0.0; 如果是字符类型,那么默认值为’\u0000’ u">
@@ -410,10 +410,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/02/06/java00010数组/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 669(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 814(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 2(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
 	
 
       </div>
@@ -436,6 +436,15 @@
 <li>如果是布尔类型,那么默认值为false;</li>
 <li>如果是引用类型,那么默认值为null(空常量);</li>
 </ol>
+<p>注意事项：</p>
+<ol>
+<li>静态初始化没有直接指定长度，但是仍然会自动推算得到长度。</li>
+<li>静态初始化标准格式可以拆分成为两个步骤。</li>
+<li>动态初始化也可以拆分成为两个步骤。</li>
+<li>静态初始化一旦使用省略格式，就不能拆分成为两个步骤了。</li>
+</ol>
+<p>使用建议：<br>
+如果不确定数组当中的具体内容，用动态初始化；否则，已经确定了具体的内容，用静态初始化。</p>
 <h5 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> 注意事项</h5>
 <p>静态初始化其实也有默认值的过程,只不过系统自动马上将默认值替换成为了大括号当中的具体数值.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] arr1 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">int</span>[] arr2 = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"></span><br><span class="line">        System.out.println(arr1[<span class="number">0</span>]);<span class="comment">//默认值为0;</span></span><br><span class="line">        System.out.println(arr1[<span class="number">1</span>]);<span class="comment">//默认值为0;</span></span><br><span class="line">        System.out.println(arr1[<span class="number">2</span>]);<span class="comment">//默认值为0;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*数组赋值*/</span></span><br><span class="line">        arr1[<span class="number">1</span>] = <span class="number">100</span>;</span><br><span class="line">        System.out.println(arr1[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -455,6 +464,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class test010 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">    </span><br><span class="line">    	int[] arr = new int[]&#123;1,2,3,4&#125;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="省略格式"><a class="markdownIt-Anchor" href="#省略格式"></a> 省略格式</h5>
 <p>​	数据类型[] 数组名 = {元素1,元素2,…,元素n};</p>
+<p>静态初始化不能使用省略格式</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test010</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    	<span class="keyword">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="拆分格式-2"><a class="markdownIt-Anchor" href="#拆分格式-2"></a> 拆分格式</h5>
 <p>​		不能再用省略格式<br>
