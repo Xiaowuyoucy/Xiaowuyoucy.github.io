@@ -112,6 +112,8 @@ public filename{
 
 程序运行期间，固定不变的量
 
+![image-20230910213657565](/images/javawz/image-20230910213657565.png)
+
 ```java
 public filename{
     public static void mian(String[] args)
@@ -135,6 +137,8 @@ public filename{
 ------
 
 ### <a style="text-decoration: none;color:black;" href="#kt"><div id="md8">数据类型</div></a>
+
+![image-20230910214330174](/images/javawz/image-20230910214330174.png)
 
 #### 	整型
 
@@ -161,7 +165,7 @@ public filename{
        byte 	bXinBie;		//1个字节
        short	sXiaoZheng;		//2个字节
        int		iRenLei;		//4个字节
-       long		lShaZi;			//4个字节
+       long		lShaZi;			//8个字节
         
         /**********浮点型************/
         float 	fFengShu;			//4个字节

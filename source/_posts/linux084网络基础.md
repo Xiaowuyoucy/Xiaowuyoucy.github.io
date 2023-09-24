@@ -1736,6 +1736,11 @@ sudo vi /etc/security/limits.conf
 ```
 	#include <sys/epoll.h>
 	int epoll_create(int size)		size：监听数目
+	参数说明:
+size: 最大节点数, 此参数在linux 2.6.8已被忽略, 但必须传递一个大于0的数.
+返回值:
+成功: 返回一个大于0的文件描述符, 代表整个树的树根.
+失败: 返回-1, 并设置errno值.
 ```
 
 2. 控制某个epoll监控的文件描述符上的事件：注册、修改、删除。
