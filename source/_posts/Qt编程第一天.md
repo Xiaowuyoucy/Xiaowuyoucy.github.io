@@ -281,6 +281,8 @@ connect( myBtn , &MyPushButton::clicked ,this, &MyWidget::close);
 
 
 
+当自定义插槽类有多个信号时,要使用函数指针来传递给connect函数,否则会出现歧义性,导致出错。
+
 ```
 #include "mywidget.h"
 #include <QPushButton>
@@ -638,25 +640,84 @@ Widget::~Widget()
 
 
 
+### Lambda表达式
+
+C++11中的Lambda表达式**用于定义并创建匿名的函数对象**，以简化编程工作。首先看一下Lambda表达式的基本构成：
+
+```
+[capture](parameters) mutable ->return-type
+{
+statement
+}
+
+[函数对象参数](操作符重载函数参数)mutable ->返回值{函数体}
+```
 
 
 
+函数对象参数有以下形式：
+空。没有使用任何函数对象参数。
+
+<br/>
+
+= ：函数体内可以使用Lambda所在作用范围内所有可见的局部变量（包括Lambda所在类的this），并且是值传递方式（相当于编译器自动为我们按值传递了所有局部变量）。
+
+<br/>
+
+& ：函数体内可以使用Lambda所在作用范围内所有可见的局部变量（包括Lambda所在类的this），并且是引用传递方式（相当于编译器自动为我们按引用传递了所有局部变量）。this。函数体内可以使用Lambda所在类中的成员变量。
+
+<br/>
+
+a ：将a按值进行传递。按值进行传递时，函数体内不能修改传递进来的a的拷贝，因为默认情况下函数是const的。要修改传递进来的a的拷贝，可以添加mutable修饰符。
+
+<br/>
+
+&a ：将a按引用进行传递。
+
+<br/>
+
+a, &b ：将a按值进行传递，b按引用进行传递。
+
+<br/>
+
+=，&a, &b ：除a和b按引用进行传递外，其他参数都按值进行传递。
+
+<br/>
+
+&, a, b ：除a和b按值进行传递外，其他参数都按引用进行传递。
+
+<br/>
+
+ 操作符重载函数参数；
+标识重载的()操作符的参数，没有参数时，这部分可以省略。参数可以通过按值（如：(a,b)）和按引用（如：(&a,&b)）两种方式进行传递。
+
+<br/>
+
+可修改标示符；
+mutable声明，这部分可以省略。按值传递函数对象参数时，加上mutable修饰符后，可以修改按值传递进来的拷贝（注意是能修改拷贝，而不是值本身）。
+
+```
+QPushButton * myBtn = new QPushButton (this);
+QPushButton * myBtn2 = new QPushButton (this);
+myBtn2->move(100,100);
+int m = 10;
+
+connect(myBtn,&QPushButton::clicked,this,[m] ()mutable { m = 20; qDebug() << m; });
+
+connect(myBtn2,&QPushButton::clicked,this,[=] ()  { qDebug() << m; });
+
+qDebug() << m;
+```
 
 
 
-#### 点击按钮触发自定义信号
+函数返回值；
 
+`->`返回值类型，标识函数返回值的类型，当返回值为void，或者函数体中只有一处return的地方（此时编译器可以自动推断出返回值类型）时，这部分可以省略。
 
+{}是函数体；
 
-
-
-
-
-
-
-
-
-
+​	`{}`，标识函数的实现，这部分不能省略，但函数体可以为空。
 
 
 
