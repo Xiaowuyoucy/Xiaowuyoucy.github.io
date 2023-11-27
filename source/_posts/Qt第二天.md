@@ -178,7 +178,7 @@ MainWindow::~MainWindow()
 
 
 
-
+<br/><br/>
 
 ### UI界面设计
 
@@ -194,7 +194,7 @@ MainWindow::~MainWindow()
 
 
 
-
+<br/><br/>
 
 ### 资源文件
 
@@ -278,4 +278,320 @@ MainWindow::~MainWindow()
 }
 
 ```
+
+
+
+<br/><br/><br/><br/>
+
+### 对话框
+
+#### 模态对话框创建
+
+```
+//模态对话框创建
+//        QDialog dlg(this);
+//        dlg.resize(120,30);
+//        dlg.exec();
+```
+
+#### 非模态对话框
+
+```
+//非模态对话框创建
+//          QDialog *dlg2 = new QDialog(this);
+//          dlg2->resize(120,30);
+//          dlg2->show();
+//          //设置 55号属性
+//          dlg2->setAttribute(Qt::WA_DeleteOnClose);
+```
+
+
+
+#### QMessageBox对话框
+
+```
+//错误提示对话框
+//QMessageBox::critical(this,"错误","critical");
+
+//信息提示对话框
+//QMessageBox::information(this,"信息","info");
+
+//询问提示对话框
+ // 参数1   父窗口  参数2  标题  参数3  提示信息  参数4  按键类型  参数5  默认关联回车按键
+//        if( QMessageBox::Save ==  QMessageBox::question(this,"询问","question" , QMessageBox::Save | QMessageBox::Cancel ,QMessageBox::Cancel))
+//        {
+//             qDebug()<<"点击的是保存";
+//        }
+//        else
+//        {
+//             qDebug()<<"点击的是取消";
+//        }
+
+
+//警告提示对话框
+//QMessageBox::warning(this,"警告","warning");
+```
+
+
+
+#### 标准常用的对话框
+
+```
+QColorDialog：			选择颜色；
+QFileDialog：			选择文件或者目录；
+QFontDialog：			选择字体；
+QInputDialog：			允许用户输入一个值，并将其值返回；
+QMessageBox：			模态对话框，用于显示信息、询问问题等；
+QPageSetupDialog：		为打印机提供纸张相关的选项；
+QPrintDialog：			打印机配置；
+QPrintPreviewDialog：	打印预览；
+QProgressDialog：		显示操作过程。
+```
+
+
+
+<br/><br/>
+
+```
+//颜色对话框
+//         QColor color = QColorDialog::getColor(Qt::red);
+//         qDebug() << color.red() << color.green() << color.blue() ;
+
+//文件对话框
+//          QString fileName = QFileDialog::getOpenFileName(this,"打开文件","C:\\Users\\zhangtao\\Desktop","(*.doc)");
+//          qDebug () <<fileName;
+
+//字体对话框
+        bool flag;
+        QFont font = QFontDialog::getFont(&flag,QFont("华文彩云",36));
+        qDebug() << "字体" << font.family().toUtf8().data() << "字号"<< font.pointSize()
+                 << "是否加粗"<<font.bold() << "是否倾斜" << font.italic();
+```
+
+
+
+
+
+### 界面布局
+
+#### 标签
+
+![image-20231107221304796](/images/javawz/image-20231107221304796.png)
+
+
+
+<br/><br/>
+
+#### 单行编辑框
+
+![image-20231107221411172](/images/javawz/image-20231107221411172.png)
+
+echoMode属性
+
+![image-20231107224230784](/images/javawz/image-20231107224230784.png)
+
+1. **Normal（正常模式）**：这是默认模式，用户输入的文本以明文形式显示在编辑框中。这是最常见的使用方式，适用于大多数文本输入场景。
+2. **NoEcho（无回显模式）**：在这个模式下，用户输入的文本不会显示在编辑框内，用于隐藏用户输入的文本，例如用于密码输入，以保护敏感信息。
+3. **Password（密码模式）**：在这个模式下，用户输入的文本以密码掩码字符（通常是圆点或星号）显示在编辑框内。这是用于密码输入框的常见设置，以保护密码的机密性。
+4. **PasswordEchoOnEdit（编辑时密码模式）**：用户在输入时，文本以明文形式显示在编辑框内，但当编辑框失去焦点后，文本会以密码掩码字符显示。这是一种用户友好的密码输入方式，让用户能够确认他们输入的内容。
+
+<br/><br/>
+
+#### 容器
+
+![image-20231107221630854](/images/javawz/image-20231107221630854.png)
+
+ 容器属性:
+
+​				固定容器大小
+
+
+
+<br/><br/>
+
+![image-20231107223351226](/images/javawz/image-20231107223351226.png)
+
+#### 水平布局
+
+![image-20231107222105903](/images/javawz/image-20231107222105903.png)
+
+<br/><br/>
+
+#### 垂直布局
+
+![image-20231107222141029](/images/javawz/image-20231107222141029.png)
+
+<br/><br/>
+
+#### 栅格布局
+
+几行几列的选栅格布局,然后再选垂直布局
+
+![image-20231107222937304](/images/javawz/image-20231107222937304.png)
+
+
+
+没有布局会有红圈
+
+![image-20231107222017658](/images/javawz/image-20231107222017658.png)
+
+
+
+<br/><br/>
+
+#### 弹簧
+
+固定布局的
+
+![image-20231107222349302](/images/javawz/image-20231107222349302.png)
+
+
+
+##### 弹簧属性
+
+![image-20231107222510511](/images/javawz/image-20231107222510511.png)
+
+Fixed是固定弹簧大小
+
+Expanding是可伸缩的
+
+
+
+
+
+<br/><br/>
+
+#### 打破布局
+
+![image-20231107222718372](/images/javawz/image-20231107222718372.png)
+
+
+
+![image-20231107222802528](/images/javawz/image-20231107222802528.png)
+
+
+
+<br/><br/>
+
+#### 修改窗口标题
+
+![image-20231107223711556](/images/javawz/image-20231107223711556.png)
+
+<br/><br/>
+
+#### 修改容器内边距
+
+![image-20231107223909831](/images/javawz/image-20231107223909831.png)
+
+![image-20231107223938922](/images/javawz/image-20231107223938922.png)
+
+<br/><br/>
+
+#### 固定窗口大小
+
+![image-20231107224614856](/images/javawz/image-20231107224614856.png)
+
+把minimumSize和maximumSize值都设置一样
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
