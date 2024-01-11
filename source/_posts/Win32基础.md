@@ -277,3 +277,60 @@ MessageBox 会根据平台使用的字符集来选择调用MessageBoxA还是Mess
 
 
 # 进程
+
+
+
+### 什么是进程
+
+进程提供程序所需的资源，如：数据、代码等等。
+
+
+
+### 进程内存空间的地址划分
+
+| **分区**     | **x86 32位Windows**     |
+| ------------ | ----------------------- |
+| 空指针赋值区 | 0x00000000 - 0x0000FFFF |
+| 用户模式区   | 0x00010000 - 0x7FFEFFFF |
+| 64KB禁入区   | 0x7FFF0000 - 0x7FFFFFFF |
+| 内核         | 0x80000000 - 0xFFFFFFFF |
+
+
+
+### 进程的组成部分：模块
+
+在OD中查看进程所包含的模块。
+
+每个模块都是一个可执行文件，遵守相同的格式，即PE结构。
+
+
+
+### 进程的创建： 
+
+ 任何进程都是别的进程创建的：CreateProcess()
+
+进程的创建过程
+	1、映射EXE文件
+	2、创建内核对象EPROCESS
+	3、映射系统DLL(ntdll.dll)
+	4、创建线程内核对象ETHREAD
+	5、系统启动线程
+		映射DLL(ntdll.LdrInitializeThunk)
+		线程开始执行
+
+
+
+![image-20240110222553959](../../themes/pure/source/images/javawz/image-20240110222553959.png)
+
+
+
+![image-20240110222608956](../../themes/pure/source/images/javawz/image-20240110222608956.png)
+
+![image-20240110222631845](../../themes/pure/source/images/javawz/image-20240110222631845.png)
+
+
+
+![image-20240110222817938](../../themes/pure/source/images/javawz/image-20240110222817938.png)
+
+
+
