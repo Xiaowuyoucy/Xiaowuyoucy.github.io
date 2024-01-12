@@ -195,12 +195,12 @@ strstr		wcsstr		//字符串查找
 	dword		DWORD		PDWORD
 	
 C语言：
-	char				CHAR			PCHAR
-	unsigned char		UCHAR			PUCHAR
-	short				SHORT			PSHORT
-	unsigned short		USHORT			PUSHORT
-	int					INT				PINT
-	unsigned int		UINT			PUINT  
+	char					CHAR			PCHAR
+	unsigned char			UCHAR			PUCHAR
+	short					SHORT			PSHORT
+	unsigned short			USHORT			PUSHORT
+	int						INT				PINT
+	unsigned int			UINT			PUINT  
 	
 C++语言：
 	bool		BOOL
