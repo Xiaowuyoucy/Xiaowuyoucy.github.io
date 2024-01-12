@@ -12,7 +12,7 @@ doc:
 
 范围是0-127
 
-![image-20240109230417590](../../themes/pure/source/images/javawz/image-20240109230417590.png)
+![image-20240109230417590](/images/javawz/image-20240109230417590.png)
 
 
 
@@ -22,7 +22,7 @@ doc:
 
 范围是128-255
 
-![image-20240109230502264](../../themes/pure/source/images/javawz/image-20240109230502264.png)
+![image-20240109230502264](/images/javawz/image-20240109230502264.png)
 
 
 
@@ -320,17 +320,185 @@ MessageBox 会根据平台使用的字符集来选择调用MessageBoxA还是Mess
 
 
 
-![image-20240110222553959](../../themes/pure/source/images/javawz/image-20240110222553959.png)
+![image-20240110222553959](/images/javawz/image-20240110222553959.png)
 
 
 
-![image-20240110222608956](../../themes/pure/source/images/javawz/image-20240110222608956.png)
+![image-20240110222608956](/images/javawz/image-20240110222608956.png)
 
-![image-20240110222631845](../../themes/pure/source/images/javawz/image-20240110222631845.png)
-
-
-
-![image-20240110222817938](../../themes/pure/source/images/javawz/image-20240110222817938.png)
+![image-20240110222631845](/images/javawz/image-20240110222631845.png)
 
 
+
+![image-20240110222817938](/images/javawz/image-20240110222817938.png)
+
+
+
+### 创建进程
+
+#### CreateProcess
+
+```
+BOOL CreateProcess(
+  LPCTSTR               lpApplicationName,        // 应用程序的可执行文件名或路径
+  LPTSTR                lpCommandLine,            // 命令行参数
+  LPSECURITY_ATTRIBUTES lpProcessAttributes,      // 进程对象的安全属性
+  LPSECURITY_ATTRIBUTES lpThreadAttributes,       // 主线程对象的安全属性
+  BOOL                  bInheritHandles,          // 指定新进程是否可以继承当前进程的句柄
+  DWORD                 dwCreationFlags,          // 控制进程的创建标志
+  LPVOID                lpEnvironment,            // 指向新进程的环境块的指针
+  LPCTSTR               lpCurrentDirectory,       // 指定新进程的当前工作目录
+  LPSTARTUPINFO         lpStartupInfo,            // 指定主窗口的外观及默认的I/O属性
+  LPPROCESS_INFORMATION lpProcessInformation      // 接收新进程和其主线程的信息
+);
+
+```
+
+
+
+```c
+#include <windows.h>
+#include <tchar.h>
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+    // 指定要执行的命令
+    LPCTSTR command = _T("C:\\路径\\到\\你的\\可执行文件.exe");
+
+    // 创建进程信息结构
+    PROCESS_INFORMATION processInfo;
+    ZeroMemory(&processInfo, sizeof(PROCESS_INFORMATION));
+
+    // 创建启动信息结构
+    STARTUPINFO startupInfo;
+    ZeroMemory(&startupInfo, sizeof(STARTUPINFO));
+    startupInfo.cb = sizeof(STARTUPINFO);
+
+    // 创建进程
+    if (CreateProcess(
+        NULL,               // 没有模块名（使用命令行）
+        command,            // 命令行
+        NULL,               // 进程句柄不可继承
+        NULL,               // 线程句柄不可继承
+        FALSE,              // 不继承句柄
+        0,                  // 无特殊标志
+        NULL,               // 使用父进程环境
+        NULL,               // 使用父进程目录
+        &startupInfo,       // 启动信息结构
+        &processInfo        // 进程信息结构
+    ))
+    {
+        // 等待子进程退出
+        WaitForSingleObject(processInfo.hProcess, INFINITE);
+
+        // 关闭进程和线程句柄
+        CloseHandle(processInfo.hProcess);
+        CloseHandle(processInfo.hThread);
+    }
+    else
+    {
+        _tprintf(_T("无法创建进程，错误码：%d\n"), GetLastError());
+    }
+
+    return 0;
+}
+
+```
+
+
+
+#### STARTUPINFO
+
+```
+typedef struct _STARTUPINFO {
+  DWORD  cb;                            // 结构体的大小，用于指定结构体版本
+  LPTSTR lpReserved;                    // 保留，必须为NULL
+  LPTSTR lpDesktop;                     // 指定新进程的桌面，通常为NULL
+  LPTSTR lpTitle;                       // 指定新进程的控制台窗口标题，通常为NULL
+  DWORD  dwX;                           // 指定新进程窗口的初始X坐标
+  DWORD  dwY;                           // 指定新进程窗口的初始Y坐标
+  DWORD  dwXSize;                       // 指定新进程窗口的初始宽度
+  DWORD  dwYSize;                       // 指定新进程窗口的初始高度
+  DWORD  dwXCountChars;                 // 指定新进程窗口的初始宽度（字符单位）
+  DWORD  dwYCountChars;                 // 指定新进程窗口的初始高度（字符单位）
+  DWORD  dwFillAttribute;               // 控制新进程窗口的文本和背景颜色
+  DWORD  dwFlags;                       // STARTF_* 标志位，用于指定 STARTUPINFO 结构体的标志
+  WORD   wShowWindow;                   // 指定新进程窗口的显示状态
+  WORD   cbReserved2;                   // 保留，必须为0
+  LPBYTE lpReserved2;                   // 保留，必须为NULL
+  HANDLE hStdInput;                     // 指定新进程的标准输入句柄
+  HANDLE hStdOutput;                    // 指定新进程的标准输出句柄
+  HANDLE hStdError;                     // 指定新进程的标准错误句柄
+} STARTUPINFO, *LPSTARTUPINFO;
+
+```
+
+
+
+#### PROCESS_INFORMATION
+
+typedef struct _PROCESS_INFORMATION {
+  HANDLE hProcess;           // 新进程的句柄，用于操作新进程
+  HANDLE hThread;            // 新进程的主线程的句柄，用于操作新进程的主线程
+  DWORD  dwProcessId;        // 新进程的进程标识符
+  DWORD  dwThreadId;         // 新进程的主线程标识符
+} PROCESS_INFORMATION, *LPPROCESS_INFORMATION;
+
+
+
+#### GetLastError
+
+- `GetLastError` 函数返回一个 `DWORD` 类型的错误代码，表示最近一次发生的错误。
+
+通常，当一个 Windows API 函数调用失败时，可以使用 `GetLastError` 函数获取详细的错误信息。错误代码可以通过查阅 Windows API 文档或使用 `FormatMessage` 函数转换为可读的错误消息。
+
+```
+DWORD GetLastError(void);
+```
+
+
+
+#### ZeroMemory 
+
+`ZeroMemory` 不是一个单独的函数，而是一个宏（macro），通常用于将内存区域的内容全部设置为零。以下是 `ZeroMemory` 宏的定义和简要中文注释：
+
+```
+#define ZeroMemory(Destination, Length) memset((Destination), 0, (Length))
+
+```
+
+- `ZeroMemory` 宏使用 `memset` 函数将目标内存区域的内容全部设置为零。
+- `Destination`：指向要清零的内存区域的指针。
+- `Length`：要清零的内存区域的字节数。
+
+这个宏的作用等同于使用 `memset` 函数将内存清零，但它是一种简化的写法。在实际使用中，可以选择使用 `memset` 函数或 `ZeroMemory` 宏，两者的效果是相同的。
+
+
+
+#### GetStartupInfo
+
+`GetStartupInfo` 是一个用于获取当前进程的 `STARTUPINFO` 结构体信息的 Windows API 函数。以下是该函数的原型和简要中文注释：
+
+```
+void GetStartupInfo(
+  LPSTARTUPINFO lpStartupInfo  // 指向 STARTUPINFO 结构体的指针，用于接收当前进程的启动信息
+);
+
+```
+
+
+
+调试器填写的STARTUPINFO 成员和系统打开进程填写的成员,内容是不一样的
+
+
+
+#### CloseHandle
+
+`CloseHandle` 是一个 Windows API 函数，用于关闭一个打开的内核对象的句柄。以下是该函数的原型和简要中文注释：
+
+```
+BOOL CloseHandle(
+  HANDLE hObject  // 要关闭的内核对象的句柄
+);
+```
 
