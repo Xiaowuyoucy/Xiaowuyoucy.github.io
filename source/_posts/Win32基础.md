@@ -437,12 +437,15 @@ typedef struct _STARTUPINFO {
 
 #### PROCESS_INFORMATION
 
+```
 typedef struct _PROCESS_INFORMATION {
   HANDLE hProcess;           // 新进程的句柄，用于操作新进程
   HANDLE hThread;            // 新进程的主线程的句柄，用于操作新进程的主线程
   DWORD  dwProcessId;        // 新进程的进程标识符
   DWORD  dwThreadId;         // 新进程的主线程标识符
 } PROCESS_INFORMATION, *LPPROCESS_INFORMATION;
+
+```
 
 
 
@@ -500,5 +503,310 @@ void GetStartupInfo(
 BOOL CloseHandle(
   HANDLE hObject  // 要关闭的内核对象的句柄
 );
+```
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+### 句柄表
+
+进程内核对象下有个句柄表,句柄表存放了句柄编号,当前内核对象是否允许被继承和内核对象的地址,我们用的就是句柄编号,通过句柄编号来使用对应的内核对象.
+
+句柄表是自己进程私有的
+
+![image-20240226002642858](/images/javawz/image-20240226002642858.png)
+
+
+
+多个进程可以共享同一个内核对象
+
+![image-20240226003220206](/images/javawz/image-20240226003220206.png)
+
+刚创建一个内核对象,默认计数器是1,如果再次打开同一个内核对象,计数器就是加1,也就是2
+
+只有计数器是0的时候,该内核对象才真正被释放
+
+
+
+关闭线程内核对象,必须关闭该线程,才能关闭线程内核对象.
+
+
+
+句柄表有一列包含了当前内核对象是否可以被继承
+
+
+
+如何使当前对象可以被继承?
+
+需要用到SECURITY_ATTRIBUTES 结构体成员
+
+```
+typedef struct _SECURITY_ATTRIBUTES { // sa  
+
+    DWORD  nLength; 
+
+    LPVOID lpSecurityDescriptor; 
+
+    BOOL   bInheritHandle; //当前内核对象是否可以被继承,true代表可以
+
+} SECURITY_ATTRIBUTES; 
+
+```
+
+
+
+例如CreateEvent函数参数中就有LPSECURITY_ATTRIBUTES,这里代表传入一个SECURITY_ATTRIBUTES结构体,代表当前创建出来的内核对象可以被继承.
+
+```c
+HANDLE CreateEvent(
+
+LPSECURITY_ATTRIBUTES lpEventAttributes,
+ // pointer to security attributes
+ 
+BOOL bManualReset,
+ // flag for manual-reset event
+ 
+BOOL bInitialState,
+ // flag for initial state
+ 
+LPCTSTR lpName
+ // pointer to event-object name
+ 
+);
+ 
+
+```
+
+```c
+SECURITY_ATTRIBUTES sa;
+sa.nLength = sizeof(sa);
+
+HANDLE h = CreateEvent(&sa,FALSE,FALSE,NULL);
+```
+
+<br>
+
+<br>
+
+![image-20240226011030841](/images/javawz/image-20240226011030841.png)
+
+
+
+![image-20240226192805501](/images/javawz/image-20240226192805501.png)
+
+
+
+### ID与句柄
+
+句柄编号是进程私有的，id是系统全局句柄表中的索引，该表存放了该系统的所有进程和线程内核对象
+
+![image-20240301222603927](/images/javawz/image-20240301222603927.png)
+
+
+
+### 以挂起的形式创建进程
+
+```c
+BOOL CreateProcess(
+  LPCTSTR lpApplicationName,                 		// name of executable module
+  LPTSTR lpCommandLine,                      		// command line string
+  LPSECURITY_ATTRIBUTES lpProcessAttributes, 	// SD
+  LPSECURITY_ATTRIBUTES lpThreadAttributes,  	// SD
+  BOOL bInheritHandles,                      		// handle inheritance option
+  DWORD dwCreationFlags,                     		// creation flags
+  LPVOID lpEnvironment,                      		// new environment block
+  LPCTSTR lpCurrentDirectory,                		// current directory name
+  LPSTARTUPINFO lpStartupInfo,               		// startup information
+  LPPROCESS_INFORMATION lpProcessInformation // process information
+);
+
+```
+
+dwCreationFlags 设置成CREATE_SUSPENDED，并用ResumeThread函数唤醒线程。
+
+```
+DWORD WINAPI ResumeThread(_In_ HANDLE hThread);
+```
+
+
+
+
+
+### 模块目录与工作目录
+
+#### 获取当前模块目录
+
+```
+DWORD WINAPI GetModuleFileName(
+    _In_opt_  HMODULE hModule,
+    _Out_     LPTSTR lpFilename,
+    _In_      DWORD nSize
+);
+
+hModule Long
+一个模块的句柄。可以是一个DLL模块，或者是一个应用程序的实例句柄。如果该参数为NULL，
+该函数返回该应用程序全路径。
+
+lpFileName String
+指定一个字串缓冲区，要在其中容纳文件的用NULL字符中止的路径名，hModule模块就是从这个文件装载进来的
+
+nSize Long
+装载到缓冲区lpFileName的最大字符数量
+
+返回值
+	Long，如执行成功，返回复制到lpFileName的实际字符数量；零表示失败。使用GetLastError可以打印错误信息。
+```
+
+
+
+#### 获取当前工作目录
+
+```
+DWORD GetCurrentDirectory(
+  DWORD  nBufferLength,
+  LPTSTR lpBuffer
+);
+nBufferLength 缓冲区的长度
+lpBuffer 指定一个预定义字串，用于装载当前目录
+
+返回值
+调用成功 返回装载到lpBuffer的字节数。
+使用GetLastError函数可获得错误信息。
+```
+
+
+
+### EnumProcesses
+
+获取系统所有进程id
+
+```
+头文件  Psapi.h 
+BOOL WINAPI EnumProcesses（_Out_ DWORD * pProcessIds，_In_ DWORD CB，_Out_ DWORD * pBytesReturned）;
+
+pProcessIds
+接收进程id的数组
+cb
+数组的大小
+pBytesReturned
+数组返回的字节数
+
+返回值
+成功返回非零数,失败返回零,可以使用函数 GetLastError获取错误信息.
+```
+
+
+
+### GetCommandLine
+
+获取命令行
+
+```
+LPTSTR GetCommandLine(void);
+```
+
+
+
+### CreateToolhelp32Snapshot
+
+获取进程信息为指定的进程、进程使用的堆`[HEAP]、模块[MODULE]`、[线程](https://baike.baidu.com/item/线程/103101?fromModule=lemma_inlink)建立一个快照。
+
+```
+
+HANDLE WINAPI CreateToolhelp32Snapshot(
+DWORD dwFlags, //用来指定“快照”中需要返回的对象，可以是TH32CS_SNAPPROCESS等
+DWORD th32ProcessID //一个进程ID号，用来指定要获取哪一个进程的快照，当获取系统进程列表或获取 当前进程快照时可以设为0
+);
+
+
+dwFlags
+指定快照中包含的系统内容，这个参数能够使用下列数值（常量）中的一个或多个。
+TH32CS_INHERIT(0x80000000) - 声明快照句柄是可继承的。
+TH32CS_SNAPALL - 在快照中包含系统中所有的进程和线程。
+TH32CS_SNAPHEAPLIST(0x00000001) - 在快照中包含在th32ProcessID中指定的进程的所有的堆。
+TH32CS_SNAPMODULE(0x00000008) - 在快照中包含在th32ProcessID中指定的进程的所有的模块。
+TH32CS_SNAPPROCESS(0x00000002) - 在快照中包含系统中所有的进程。
+TH32CS_SNAPTHREAD(0x00000004) - 在快照中包含系统中所有的线程。
+H32CS_SNAPALL = (TH32CS_SNAPHEAPLIST | TH32CS_SNAPPROCESS | TH32CS_SNAPTHREAD | TH32CS_SNAPMODULE)
+
+返回值
+调用成功，返回快照的句柄，调用失败，返回INVALID_HANDLE_VALUE 。
+```
+
+
+
+```
+BOOL WINAPI Process32First(
+    HANDLE hSnapshot,//_in
+    LPPROCESSENTRY32 lppe//_out
+);
+process32First是一个进程获取函数，当我们利用函数CreateToolhelp32Snapshot()获得当前运行进程的快照后，我们可以利用process32First函数来获得第一个进程的句柄。
+```
+
+
+
+```
+BOOLWINAPIProcess32Next(
+__inHANDLEhSnapshot,
+__outLPPROCESSENTRY32lppe
+);
+
+hSnapshot
+从CreateToolhelp32Snapshot 返回的句柄。
+lppe
+指向PROCESSENTRY32结构的指针。
+```
+
+
+
+```cpp
+#include<iostream>
+#include<windows.h>
+#include<tlhelp32.h>
+
+using namespace std;
+
+int main()
+{
+	HANDLE h = CreateToolhelp32Snapshot(TH32CS_SNAPALL | TH32CS_SNAPMODULE | TH32CS_SNAPHEAPLIST, 0);
+
+	if (h == INVALID_HANDLE_VALUE)
+	{
+		cout << "CreateToolhelp32Snapshot Error: " << GetLastError() << endl;
+		return -1;
+	}
+
+	PROCESSENTRY32 pe32;
+	pe32.dwSize = sizeof pe32;
+
+	BOOL bMore = ::Process32First(h, &pe32);
+	int i = 0;
+	while (bMore)
+	{
+		printf("进程名称：%ls--", pe32.szExeFile); //这里得到的应该是宽字符，用%ls,不然无法正常打印
+		printf("进程ID：%u\t", pe32.th32ProcessID);
+		bMore = ::Process32Next(h, &pe32);
+
+		
+		if (++i % 2 == 0)
+		{
+			cout << endl << endl;
+		}
+	}
+
+	cout << endl << endl << i;
+	CloseHandle(h);
+}
 ```
 
