@@ -1248,3 +1248,917 @@ doc:
 
 ```
 
+
+
+### 边框
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			
+			.box{
+				width: 200px;
+				height: 200px;
+				background-color: #bfa;
+				
+				/*设置边框
+				 	大部分的浏览器中，边框的宽度和颜色都是有默认值，而边框的样式默认值都是none
+				 * */
+				/*border-width:10px ;
+				border-color: red;
+				border-style: solid;*/
+				
+				/*
+				 * border
+				 * 	- 边框的简写样式，通过它可以同时设置四个边框的样式，宽度，颜色
+				 * 	- 而且没有任何的顺序要求
+				 * 	- border一指定就是同时指定四个边不能分别指定
+				 * 
+				 * border-top border-right border-bottom border-left
+				 * 	可以单独设置四个边的样式，规则和border一样，只不过它只对一个边生效
+				 */
+				/*border: red solid 10px   ;*/
+				/*border-left: red solid 10px   ;*/
+				
+				/*border-top: red solid 10px;
+				border-bottom: red solid 10px;
+				border-left: red solid 10px;*/
+				
+				border: red solid 10px;
+				border-right: none;
+				
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="box"></div>
+		
+	</body>
+</html>
+
+```
+
+
+
+### 内边距
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			.box1{
+				width: 200px;
+				height: 200px;
+				background-color: #bfa;
+				/*设置边框*/
+				border: 10px red solid;
+				
+				/*
+				 * 内边距（padding），指的是盒子的内容区与盒子边框之间的距离
+				 * 	一共有四个方向的内边距，可以通过：
+				 * 		padding-top
+				 * 		padding-right
+				 * 		padding-bottom
+				 * 		padding-left
+				 * 			来设置四个方向的内边距
+				 * 
+				 * 内边距会影响盒子的可见框的大小，元素的背景会延伸到内边距,
+				 * 	盒子的大小由内容区、内边距和边框共同决定
+				 * 	盒子可见框的宽度 = border-left-width + padding-left + width + padding-right + border-right-width
+				 *  可见宽的高度 = border-top-width + padding-top + height + padding-bottom + border-bottom-width
+				 */
+				
+				/*设置上内边距*/
+				/*padding-top: 100px;*/
+				/*设置右内边距*/
+				/*padding-right: 100px;
+				padding-bottom: 100px;
+				padding-left: 100px;*/
+				
+				/*
+				 * 使用padding可以同时设置四个边框的样式，规则和border-width一致
+				 */
+				/*padding: 100px;*/
+				
+				/*padding: 100px 200px;*/
+				
+				/*padding: 100px 200px 300px;*/
+				
+				padding: 100px 200px 300px 400px;
+			}
+			
+			/*
+			 * 创建一个子元素box1占满box2
+			 */
+			.box2{
+				width: 100%;
+				height: 100%;
+				background-color: yellow;
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="box1">
+			<div class="box2"></div>
+		</div>
+		
+	</body>
+</html>
+
+```
+
+
+
+### 外边距1
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			.box1{
+				width: 200px;
+				height: 200px;
+				background-color: #bfa;
+				border: 10px solid red;
+				/*
+				 * 外边距指的是当前盒子与其他盒子之间的距离，
+				 * 	他不会影响可见框的大小，而是会影响到盒子的位置。
+				 * 盒子有四个方向的外边距：
+				 * 	margin-top
+				 * 	margin-right
+				 * 	margin-bottom
+				 * 	margin-left
+				 * 
+				 * 由于页面中的元素都是靠左靠上摆放的，
+				 * 	所以注意当我们设置上和左外边距时，会导致盒子自身的位置发生改变，
+				 * 	而如果是设置右和下外边距会改变其他盒子的位置
+				 */
+				/*
+				 * 设置box1的上外边距，盒子上边框和其他的盒子的距离
+				 */
+				/*margin-top: 100px;*/
+				
+				/*
+				 * 左外边距
+				 */
+				/*margin-left: 100px;*/
+				
+				/*设置右和下外边距*/
+				/*margin-right: 100px;
+				margin-bottom: 100px;*/
+				
+				/*
+				 * 外边距也可以指定为一个负值，
+				 * 	如果外边距设置的是负值，则元素会向反方向移动
+				 */
+				/*margin-left: -150px;
+				margin-top: -100px;
+				margin-bottom: -100px;*/
+				/*margin-bottom: -100px;*/
+				
+				/*
+				 * margin还可以设置为auto，auto一般只设置给水平方向的margin
+				 * 	如果只指定，左外边距或右外边距的margin为auto则会将外边距设置为最大值
+				 * 	垂直方向外边距如果设置为auto，则外边距默认就是0
+				 * 
+				 * 如果将left和right同时设置为auto，则会将两侧的外边距设置为相同的值，
+				 * 	就可以使元素自动在父元素中居中，所以我们经常将左右外边距设置为auto
+				 * 	以使子元素在父元素中水平居中
+				 * 
+				 */
+				
+				/*margin-left: auto;
+				margin-right: auto;*/
+				
+				/*
+				 * 外边距同样可以使用简写属性 margin，可以同时设置四个方向的外边距,
+				 * 	规则和padding一样
+				 */
+				margin: 0 auto;
+				
+			}
+			
+			.box2{
+				width: 200px;
+				height: 200px;
+				background-color: yellow;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="box1"></div>
+		<div class="box2"></div>
+	</body>
+</html>
+
+```
+
+
+
+### 外边距2
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			.box1{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				/*
+				 * 为上边的元素设置一个下外边距
+				 */
+				margin-bottom: 100px;
+			}
+			
+			/*
+			 * 垂直外边距的重叠
+			 * 	- 在网页中相邻的垂直方向的外边距会发生外边距的重叠
+			 * 		所谓的外边距重叠指兄弟元素之间的相邻外边距会取最大值而不是取和
+			 * 		如果父子元素的垂直外边距相邻了，则子元素的外边距会设置给父元素
+			 */
+			
+			.box2{
+				width: 100px;
+				height: 100px;
+				background-color: green;
+				/**
+				 * 为下边的元素设置一个上外边距
+				 */
+				margin-top: 100px;
+			}
+			
+			.box3{
+				width: 200px;
+				height: 100px;
+				background-color: yellow;
+				
+				/*为box3设置一个上边框*/
+				/*border-top: 1px red solid;*/
+				/*padding-top: 1px;*/
+				
+				padding-top: 100px;
+			}
+			
+			.box4{
+				width: 100px;
+				height: 100px;
+				background-color: yellowgreen;
+				/*
+				 * 为子元素设置一个上外边距，是子元素的位置下移
+				 */
+				/*margin-top: 100px;*/
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="box3">
+			<div class="box4"></div>
+		</div>
+		
+		<div class="box1"></div>
+		<div class="box2"></div>
+	</body>
+</html>
+
+```
+
+
+
+### 浏览器默认样式
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			/*
+			 * 浏览器为了在页面中没有样式时，也可以有一个比较好的显示效果，
+			 * 	所以为很多的元素都设置了一些默认的margin和padding，
+			 * 	而它的这些默认样式，正常情况下我们是不需要使用的。
+			 * 
+			 * 所以我们往往在编写样式之前需要将浏览器中的默认的margin和padding统统的去掉
+			 * 	
+			 */
+			
+			/*
+			 * 清除浏览器的默认样式
+			 */
+			
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		
+			
+			.box1{
+				width: 100px;
+				height: 100px;
+				background-color: #bfa;
+			}
+			
+			p{
+				background-color: yellow;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<div class="box1"></div>
+		
+		<p>我是一个段落</p>
+		<p>我是一个段落</p>
+		<p>我是一个段落</p>
+		
+		<ul>
+			<li>无序列表</li>
+			<li>无序列表</li>
+			<li>无序列表</li>
+			<li>无序列表</li>
+		</ul>
+	</body>
+</html>
+
+```
+
+
+
+### 内联元素的盒子
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			span{
+				background-color: #bfa;
+			}
+			
+			.box1{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+			}
+			
+			.s1{
+				/*
+				 	内容区、内边距 、边框 、外边距
+				 * */
+				
+				/*
+				 * 内联元素不能设置width和height
+				 */
+				/*width: 200px;
+				height: 200px;*/
+				
+				/*
+				 * 设置水平内边距,内联元素可以设置水平方向的内边距
+				 */
+				padding-left: 100px ;
+				padding-right: 100px ;
+				
+				/*
+				 * 垂直方向内边距，内联元素可以设置垂直方向内边距，但是不会影响页面的布局
+				 */
+				/*padding-top: 50px;
+				padding-bottom: 50px;*/
+				
+				/*
+				 * 为元素设置边框,
+				 * 	内联元素可以设置边框，但是垂直的边框不会影响到页面的布局
+				 */
+				border: 1px blue solid;
+				
+				/*
+				 * 水平外边距
+				 * 	内联元素支持水平方向的外边距
+				 */
+				margin-left:100px ;
+				margin-right: 100px;
+				
+				/*
+				 * 内联元素不支持垂直外边距
+				 */
+				/*margin-top: 200px;
+				margin-bottom: 200px;*/
+				
+			}
+			
+			.s2{
+				/*
+				 * 为右边的元素设置一个左外边距
+				 * 水平方向的相邻外边距不会重叠，而是求和
+				 */
+				margin-left: 100px;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<span class="s1">我是一个span</span>
+		<span class="s2">我是一个span</span>
+		<span>我是一个span</span>
+		<span>我是一个span</span>
+		
+		<div class="box1"></div>
+	</body>
+</html>
+
+```
+
+
+
+### display
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			a{
+				background-color: #bfa;
+				
+				/*
+				 * 将一个内联元素变成块元素，
+				 * 	通过display样式可以修改元素的类型
+				 * 		可选值：
+				 * 			inline：可以将一个元素作为内联元素显示
+				 * 			block: 可以将一个元素设置块元素显示
+				 * 			inline-block：将一个元素转换为行内块元素
+				 * 					- 可以使一个元素既有行内元素的特点又有块元素的特点
+				 * 						既可以设置宽高，又不会独占一行
+				 * 			none: 不显示元素，并且元素不会在页面中继续占有位置
+				 */
+				display: none;
+				
+				/*为其设置一个宽和高*/
+				width: 500px;
+				height: 500px;
+			}
+			
+			.box{
+				width: 100px;
+				height: 100px;
+				background-color: orange;
+				
+				/*
+				 * display: none;
+				 * 	使用该方式隐藏的元素，不会在页面中显示，并且不再占据页面的位置
+				 */
+				/*display: none;*/
+				
+				/*
+				 * visibility
+				 * 	- 可以用来设置元素的隐藏和显示的状态
+				 * 	- 可选值：
+				 * 		visible 默认值，元素默认会在页面显示
+				 * 		hidden 元素会隐藏不显示	
+				 * 
+				 * 使用 visibility:hidden;隐藏的元素虽然不会在页面中显示，
+				 * 		但是它的位置会依然保持
+				 */
+				visibility:hidden ;
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="box"></div>
+		
+		<a href="#">我是一个大大的超链接</a>
+		
+		<span>hello</span>
+		
+	</body>
+</html>
+
+```
+
+
+
+### overflow
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			.box1{
+				width: 200px;
+				height: 200px;
+				background-color: #bfa;
+				/*
+				 * 子元素默认是存在于父元素的内容区中，
+				 * 		理论上讲子元素的最大可以等于父元素内容区大小
+				 * 	如果子元素的大小超过了父元素的内容区，则超过的大小会在父元素以外的位置显示，
+				 * 		超出父元素的内容，我们称为溢出的内容
+				 *  父元素默认是将溢出内容，在父元素外边显示，
+				 * 	通过overflow可以设置父元素如何处理溢出内容：
+				 * 		可选值：
+				 * 			- visible，默认值，不会对溢出内容做处理，元素会在父元素以外的位置显示
+				 * 			- hidden, 溢出的内容，会被修剪，不会显示
+				 * 			- scroll, 会为父元素添加滚动条，通过拖动滚动条来查看完整内容
+				 * 					- 该属性不论内容是否溢出，都会添加水平和垂直双方向的滚动条
+				 * 			- auto，会根据需求自动添加滚动条，
+				 * 						需要水平就添加水平
+				 * 						需要垂直就添加垂直
+				 * 						都不需要就都不加
+				 */
+				overflow: auto;
+			}
+			
+			.box2{
+				width: 100px;
+				height: 500px;
+				background-color: red;
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="box1">
+			在我的后园，可以看见墙外有两株树，一株是枣树，还有一株也是枣树。
+这上面的夜的天空，奇怪而高，我生平没有见过这样奇怪而高的天空。他仿佛要离开人间而去，使人们仰面不再看见。然而现在却非常之蓝，闪闪地䀹着几十个星星的眼，冷眼。他的口角上现出微笑，似乎自以为大有深意，而将繁霜洒在我的园里的野花草上。
+我不知道那些花草真叫什么名字，人们叫他们什么名字。我记得有一种开过极细小的粉红花，现在还开着，但是更极细小了，她在冷的夜气中，瑟缩地做梦，梦见春的到来，梦见秋的到来，梦见瘦的诗人将眼泪擦在她最末的花瓣上，告诉她秋虽然来，冬虽然来，而此后接着还是春，蝴蝶乱飞，蜜蜂都唱起春词来了。她于是一笑，虽然颜色冻得红惨惨地，仍然瑟缩着。
+枣树，他们简直落尽了叶子。先前，还有一两个孩子来打他们，别人打剩的枣子，现在是一个也不剩了，连叶子也落尽了。他知道小粉红花的梦，秋后要有春；他也知道落叶的梦，春后还是秋。他简直落尽叶子，单剩干子，然而脱了当初满树是果实和叶子时候的弧形，欠伸得很舒服。但是，有几枝还低亚着，护定他从打枣的竿梢所得的皮伤，而最直最长的几枝，却已默默地铁似的直刺着奇怪而高的天空，使天空闪闪地鬼䀹眼；直刺着天空中圆满的月亮，使月亮窘得发白。
+鬼䀹眼的天空越加非常之蓝，不安了，仿佛想离去人间，避开枣树，只将月亮剩下。然而月亮也暗暗地躲到东边去了。而一无所有的干子，却仍然默默地铁似的直刺着奇怪而高的天空，一意要制他的死命，不管他各式各样地䀹着许多蛊惑的眼睛。
+哇的一声，夜游的恶鸟飞过了。
+我忽而听到夜半的笑声，吃吃地，似乎不愿意惊动睡着的人，然而四围的空气都应和着笑。夜半，没有别的人，我即刻听出这声音就在我嘴里，我也即刻被这笑声所驱逐，回进自己的房。灯火的带子也即刻被我旋高了。
+后窗的玻璃上丁丁地响，还有许多小飞虫乱撞。不多久，几个进来了，许是从窗纸的破孔进来的。他们一进来，又在玻璃的灯罩上撞得丁丁地响。一个从上面撞进去了，他于是遇到火，而且我以为这火是真的。两三个却休息在灯的纸罩上喘气。那罩是昨晚新换的罩，雪白的纸，折出波浪纹的叠痕，一角还画出一枝猩红色的栀子。
+猩红的栀子开花时，枣树又要做小粉红花的梦，青葱地弯成弧形了……我又听到夜半的笑声；我赶紧砍断我的心绪，看那老在白纸罩上的小青虫，头大尾小，向日葵子似的，只有半粒小麦那么大，遍身的颜色苍翠得可爱，可怜。
+我打一个呵欠，点起一支纸烟，喷出烟来，对着灯默默地敬奠这些苍翠精致的英雄们。
+一九二四年九月十五日。 
+		</div>
+		
+	</body>
+</html>
+
+```
+
+
+
+### 文档流
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<!-- 
+			文档流
+				文档流处在网页的最底层，它表示的是一个页面中的位置，
+				 我们所创建的元素默认都处在文档流中
+				 
+			元素在文档流中的特点
+				块元素
+					1.块元素在文档流中会独占一行，块元素会自上向下排列。
+					2.块元素在文档流中默认宽度是父元素的100%
+					3.块元素在文档流中的高度默认被内容撑开
+				内联元素
+					1.内联元素在文档流中只占自身的大小，会默认从左向右排列，
+						如果一行中不足以容纳所有的内联元素，则换到下一行，
+						继续自左向右。
+					2.在文档流中，内联元素的宽度和高度默认都被内容撑开	
+		-->
+		
+		<!-- 
+			当元素的宽度的值为auto时，此时指定内边距不会影响可见框的大小，
+				而是会自动修改宽度，以适应内边距
+		-->
+		<div style="background-color: #bfa;">
+			<div style="height: 50px;"></div>
+		</div>
+		<div style="width: 100px; height: 100px; background-color: #ff0;"></div>
+		
+		
+		<span style="background-color: yellowgreen;">我是一个span</span>
+		<span style="background-color: yellowgreen;">我是一个span</span>
+		<span style="background-color: yellowgreen;">我是一个span</span>
+		<span style="background-color: yellowgreen;">我是一个span</span>
+		<span style="background-color: yellowgreen;">我是一个span</span>
+		<span style="background-color: yellowgreen;">我是一个span</span>
+	</body>
+</html>
+
+```
+
+
+
+### 浮动1
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			.box1{
+				width: 600px;
+				height: 200px;
+				background-color: red;
+				/*
+				 * 块元素在文档流中默认垂直排列，所以这个三个div自上至下依次排开，
+				 * 	如果希望块元素在页面中水平排列，可以使块元素脱离文档流
+				 * 使用float来使元素浮动，从而脱离文档流
+				 * 	可选值：
+				 * 		none，默认值，元素默认在文档流中排列
+				 * 		left，元素会立即脱离文档流，向页面的左侧浮动
+				 * 		right，元素会立即脱离文档流，向页面的右侧浮动
+				 * 
+				 * 当为一个元素设置浮动以后（float属性是一个非none的值），
+				 * 	元素会立即脱离文档流，元素脱离文档流以后，它下边的元素会立即向上移动
+				 * 	元素浮动以后，会尽量向页面的左上或这是右上漂浮，
+				 * 	直到遇到父元素的边框或者其他的浮动元素
+				 * 	如果浮动元素上边是一个没有浮动的块元素，则浮动元素不会超过块元素
+				 * 	浮动的元素不会超过他上边的兄弟元素，最多最多一边齐
+				 */
+				float: left;
+			}
+			
+			.box2{
+				width: 600px;
+				height: 200px;
+				background-color: yellow;
+				
+				float: left;
+			}
+			
+			.box3{
+				width: 200px;
+				height: 200px;
+				background-color: green;
+				
+				float: right;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="box1"></div>
+		<div class="box2"></div>
+		<div class="box3"></div>
+		
+	</body>
+</html>
+
+```
+
+
+
+### 浮动2
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box1{
+				width: 100px;
+				height: 100px;
+				background-color: #bfa;
+				/*
+				 * 浮动的元素不会盖住文字，文字会自动环绕在浮动元素的周围，
+				 * 	所以我们可以通过浮动来设置文字环绕图片的效果
+				 */ 
+				 
+				/*box1向左浮动*/
+				float: left;
+				
+			}
+			
+			.p1{
+				background-color: yellow;
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="box1"></div>
+		
+		<p class="p1">
+			在我的后园，可以看见墙外有两株树，一株是枣树，还有一株也是枣树。
+这上面的夜的天空，奇怪而高，我生平没有见过这样奇怪而高的天空。他仿佛要离开人间而去，使人们仰面不再看见。然而现在却非常之蓝，闪闪地䀹着几十个星星的眼，冷眼。他的口角上现出微笑，似乎自以为大有深意，而将繁霜洒在我的园里的野花草上。
+我不知道那些花草真叫什么名字，人们叫他们什么名字。我记得有一种开过极细小的粉红花，现在还开着，但是更极细小了，她在冷的夜气中，瑟缩地做梦，梦见春的到来，梦见秋的到来，梦见瘦的诗人将眼泪擦在她最末的花瓣上，告诉她秋虽然来，冬虽然来，而此后接着还是春，蝴蝶乱飞，蜜蜂都唱起春词来了。她于是一笑，虽然颜色冻得红惨惨地，仍然瑟缩着。
+枣树，他们简直落尽了叶子。先前，还有一两个孩子来打他们，别人打剩的枣子，现在是一个也不剩了，连叶子也落尽了。他知道小粉红花的梦，秋后要有春；他也知道落叶的梦，春后还是秋。他简直落尽叶子，单剩干子，然而脱了当初满树是果实和叶子时候的弧形，欠伸得很舒服。但是，有几枝还低亚着，护定他从打枣的竿梢所得的皮伤，而最直最长的几枝，却已默默地铁似的直刺着奇怪而高的天空，使天空闪闪地鬼䀹眼；直刺着天空中圆满的月亮，使月亮窘得发白。
+鬼䀹眼的天空越加非常之蓝，不安了，仿佛想离去人间，避开枣树，只将月亮剩下。然而月亮也暗暗地躲到东边去了。而一无所有的干子，却仍然默默地铁似的直刺着奇怪而高的天空，一意要制他的死命，不管他各式各样地䀹着许多蛊惑的眼睛。
+哇的一声，夜游的恶鸟飞过了。
+		</p>
+		
+	</body>
+</html>
+
+```
+
+
+
+### 浮动3
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			.box1{
+				/*
+				 * 在文档流中，子元素的宽度默认占父元素的全部
+				 */
+				background-color: #bfa;
+				
+				/*
+				 * 当元素设置浮动以后，会完全脱离文档流.
+				 * 	块元素脱离文档流以后，高度和宽度都被内容撑开
+				 */
+				/*float: left;*/
+			}
+			
+			.s1{
+				/*
+				 * 开启span的浮动
+				 * 	内联元素脱离文档流以后会变成块元素
+				 */
+				float: left;
+				width: 100px;
+				height: 100px;
+				background-color: yellow;
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="box1">a</div>
+		
+		<span class="s1">hello</span>
+		
+	</body>
+</html>
+
+```
+
+
+
+### 简单布局
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			/*清除默认样式*/
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			/*设置头部div*/
+			.header{
+				/*设置一个宽度*/
+				width: 1000px;
+				/*设置一个高度*/
+				height: 120px;
+				/*设置一个背景颜色*/
+				background-color: yellowgreen;
+				/*设置居中*/
+				margin: 0 auto;
+			}
+			
+			/*设置一个content*/
+			.content{
+				/*设置一个宽度*/
+				width: 1000px;
+				/*设置一个高度*/
+				height: 400px;
+				/*设置一个背景颜色*/
+				background-color: orange;
+				/*居中*/
+				margin: 10px auto;
+			}
+			
+			/*设置content中小div的样式*/
+			.left{
+				width: 200px;
+				height: 100%;
+				background-color: skyblue;
+				/*向左浮动*/
+				float: left;
+			}
+			
+			.center{
+				width: 580px;
+				height: 100%;
+				background-color: yellow;
+				/*向左浮动*/
+				float: left;
+				/*设置水平外边距*/
+				margin: 0 10px;
+			}
+			
+			.right{
+				width: 200px;
+				height: 100%;
+				background-color: pink;
+				/*向左浮动*/
+				float: left;
+			}
+			
+			
+			
+			/*设置一个footer*/
+			.footer{
+				/*设置一个宽度*/
+				width: 1000px;
+				/*设置一个高度*/
+				height: 120px;
+				/*设置一个背景颜色*/
+				background-color: silver;
+				/*居中*/
+				margin: 0 auto;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!-- 头部div -->
+		<div class="header"></div>
+		
+		<!-- 主体内容div -->
+		<div class="content">
+			
+			<!-- 左侧div -->
+			<div class="left"></div>
+			<!-- 中间div -->
+			<div class="center"></div>
+			<!-- 右侧div -->
+			<div class="right"></div>
+			
+		</div>
+		
+		<!-- 底部信息div -->
+		<div class="footer"></div>
+		
+	</body>
+</html>
+
+```
+
