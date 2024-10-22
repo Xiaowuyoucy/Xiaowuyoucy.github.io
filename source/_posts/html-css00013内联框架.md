@@ -40,9 +40,9 @@ doc:
 
 <br/>
 
-格式:`<iframe scr="目标路径" name="名字">`
+格式:`<iframe src="目标路径" name="名字">`
 
 ```html
-<iframe scr="demo.html" name="tom">
+<iframe src="demo.html" name="tom">
 ```
 
