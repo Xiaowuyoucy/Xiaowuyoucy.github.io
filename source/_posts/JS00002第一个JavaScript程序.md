@@ -31,6 +31,7 @@ doc:
 	<script>
 		alert("我爱你");
 		document.write("我爱你");
+        /*document.write在<body>中输出一个内容*/
 		console.log("get out!");
 	</script>
 </head>

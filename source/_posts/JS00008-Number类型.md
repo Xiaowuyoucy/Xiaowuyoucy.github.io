@@ -22,7 +22,7 @@ doc:
 
 `Infinity`表示正无穷
 
-`-Infinity`表示符无穷
+`-Infinity`表示负无穷
 
 使用`typeof`检查`Infinity`也会返回`Number`
 

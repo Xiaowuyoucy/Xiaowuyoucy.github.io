@@ -38,6 +38,8 @@ doc:
 
 ##### 如果需要插入其他js代码,则可以再创建一个新的`script`标签用于编写内部代码
 
+若果出现两个`<Script>`标签,会从上往下执行
+
 ```javascript
 		<script type="text/javascript" src="demo001.js">
 			
