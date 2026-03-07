@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>c语言 | YanChen</title>
+  <meta name="description" content="C语言的汇编表示方式 在C语言里插入汇编 1234__asm&amp;#123;	mov eax,1	mov ecx,eax&amp;#125; 123456789101112131415#include&amp;lt;stdio.h&amp;gt;int add(int a, int b)&amp;#123;			return a + b;;&amp;#125;int main()&amp;#123;	__asm mov eax, 1;	add(1">
+<meta name="keywords" content="web安全,网络安全资讯，WEB渗透，数据安全，渗透测试，学习投资，金融理财">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c语言">
+<meta property="og:url" content="https://xiaowuyoucy.github.io/2025/07/14/c语言/index.html">
+<meta property="og:site_name" content="YanChen">
+<meta property="og:description" content="C语言的汇编表示方式 在C语言里插入汇编 1234__asm&amp;#123;	mov eax,1	mov ecx,eax&amp;#125; 123456789101112131415#include&amp;lt;stdio.h&amp;gt;int add(int a, int b)&amp;#123;			return a + b;;&amp;#125;int main()&amp;#123;	__asm mov eax, 1;	add(1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250715045027579.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250715202759494.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250715204603231.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250716001433833.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250716003754128.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250716005210806.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250716034413184.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250716034351828.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250717000105492.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250717000856364.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250717000931078.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250717021157459.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250717022032412.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250717025403181.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250717030323733.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250717054246373.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250717054453245.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250717054839328.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250720014141813.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250720014515937.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250720015306862.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250720022159025.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250720021205296.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250720021520579.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250720024627330.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250720025036339.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250722041819898.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250722041914159.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250722042001400.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250722042414001.png">
+<meta property="og:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250722043358070.png">
+<meta property="og:updated_time" content="2025-07-21T21:05:14.475Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c语言">
+<meta name="twitter:description" content="C语言的汇编表示方式 在C语言里插入汇编 1234__asm&amp;#123;	mov eax,1	mov ecx,eax&amp;#125; 123456789101112131415#include&amp;lt;stdio.h&amp;gt;int add(int a, int b)&amp;#123;			return a + b;;&amp;#125;int main()&amp;#123;	__asm mov eax, 1;	add(1">
+<meta name="twitter:image" content="https://xiaowuyoucy.github.io/2025/07/themes/pure/source/images/javawz/image-20250715045027579.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xiaowuyoucy.github.io/2025/07/14/c语言/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YanChen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fonts2/iconfont.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xiaowuyoucy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">YanChen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> GuangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="https://www.xiaochenyan.top/navigation/index.html">
+            
+            <i class="icon icon-map-marker"></i>
+            
+            <span class="menu-title">导航</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon iconfont icon-video"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">格言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+				
+				<p id="hitokoto">:D 获取中...</p>
+				<p id="from" style="text-align: right"></p>
+                <script>
+					  var xhr = new XMLHttpRequest();
+					  xhr.open('get', 'https://v1.hitokoto.cn');
+					  xhr.onreadystatechange = function () {
+						if (xhr.readyState === 4) {
+						  var data = JSON.parse(xhr.responseText);
+						  var hitokoto = document.getElementById('hitokoto');
+						  hitokoto.innerText = data.hitokoto;
+						  var from = document.getElementById('from');
+						  from.innerText = "-- " + data.from;
+						}
+					  }
+					  xhr.send();
+				</script>
+				
+				
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Golang/">Golang</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">198</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KaliLinux/">KaliLinux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL/">MYSQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenSSL/">OpenSSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHCE/">RHCE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RHEL8/">RHEL8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WEB安全渗透/">WEB安全渗透</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows命令/">Windows命令</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows网络编程/">Windows网络编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/apache/">apache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/c/">c</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp/">cpp</a><span class="category-list-count">118</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cpp17从入门到精通/">cpp17从入门到精通</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/githubHexo/">githubHexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/libevent/">libevent</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">97</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计/">windows程序设计</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows程序设计2/">windows程序设计2</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/多端安全协议传输平台/">多端安全协议传输平台</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小说/">小说</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术资讯/">技术资讯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">38</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/易语言/">易语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇编逆向/">汇编逆向</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/理财投资/">理财投资</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简谈计算机/">简谈计算机</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程词汇/">编程词汇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程错误总结/">编程错误总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络爬虫/">网络爬虫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/英语单词/">英语单词</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机公共基础/">计算机公共基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络TCP-IP传输协议-网络抓包/">计算机网络TCP/IP传输协议/网络抓包</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络原理/">计算机网络原理</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/逆向工程/">逆向工程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/逆向工程核心原理/">逆向工程核心原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高中数学/">高中数学</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GET/">$_GET</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POST，-SERVER/">$_POST，$_SERVER</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REQUEST/">$_REQUEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOTO语句/">GOTO语句</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang函数/">Golang函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang匿名函数/">Golang匿名函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础/">Golang基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang基础类型占位符/">Golang基础类型占位符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang常量与变量里表达式/">Golang常量与变量里表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang循环结构/">Golang循环结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang指针/">Golang指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang标准输入与输出/">Golang标准输入与输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang流程控制/">Golang流程控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang程序运算/">Golang程序运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang类型转换及移位运算/">Golang类型转换及移位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang闭包函数/">Golang闭包函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ISO七层模型/">ISO七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java总结/">Java总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kalinux/">Kalinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Null和Undefined/">Null和Undefined</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP两种定义常量的形式/">PHP两种定义常量的形式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP常量/">PHP常量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python教程/">Python教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python笔记/">Python笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python运算符/">Python运算符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO网站优化/">SEO网站优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIR/">__DIR__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FILE/">__FILE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/">__LINE__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache环境变量/">apache环境变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache配置/">apache配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beef劫持/">beef劫持</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dowhile循环/">dowhile循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iota定义常量组/">iota定义常量组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript函数/">javascript函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-this方法/">js-this方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js布尔类型隐私转换/">js布尔类型隐私转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux目录结构/">linux目录结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php变量/">php变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urlib2/">urlib2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全渗透/">web安全渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web渗透/">web渗透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/变量的操作/">变量的操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/延时执行defer/">延时执行defer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拉格狼日/">拉格狼日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间复杂度测试/">时间复杂度测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财，投资/">理财，投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络模型/">网络模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/顺序表/">顺序表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/GET/" style="font-size: 13px;">$_GET</a> <a href="/tags/POST，-SERVER/" style="font-size: 13px;">$_POST，$_SERVER</a> <a href="/tags/REQUEST/" style="font-size: 13px;">$_REQUEST</a> <a href="/tags/Cookie/" style="font-size: 13px;">Cookie</a> <a href="/tags/GOTO语句/" style="font-size: 13px;">GOTO语句</a> <a href="/tags/Golang/" style="font-size: 13px;">Golang</a> <a href="/tags/Golang函数/" style="font-size: 13px;">Golang函数</a> <a href="/tags/Golang匿名函数/" style="font-size: 13px;">Golang匿名函数</a> <a href="/tags/Golang基础/" style="font-size: 14px;">Golang基础</a> <a href="/tags/Golang基础类型占位符/" style="font-size: 13px;">Golang基础类型占位符</a> <a href="/tags/Golang常量与变量里表达式/" style="font-size: 13px;">Golang常量与变量里表达式</a> <a href="/tags/Golang循环结构/" style="font-size: 13px;">Golang循环结构</a> <a href="/tags/Golang指针/" style="font-size: 13px;">Golang指针</a> <a href="/tags/Golang标准输入与输出/" style="font-size: 13px;">Golang标准输入与输出</a> <a href="/tags/Golang流程控制/" style="font-size: 13px;">Golang流程控制</a> <a href="/tags/Golang程序运算/" style="font-size: 13px;">Golang程序运算</a> <a href="/tags/Golang类型转换及移位运算/" style="font-size: 13px;">Golang类型转换及移位运算</a> <a href="/tags/Golang闭包函数/" style="font-size: 13px;">Golang闭包函数</a> <a href="/tags/ISO七层模型/" style="font-size: 13px;">ISO七层模型</a> <a href="/tags/Java总结/" style="font-size: 13px;">Java总结</a> <a href="/tags/Kalinux/" style="font-size: 13px;">Kalinux</a> <a href="/tags/Null和Undefined/" style="font-size: 13px;">Null和Undefined</a> <a href="/tags/PHP两种定义常量的形式/" style="font-size: 13px;">PHP两种定义常量的形式</a> <a href="/tags/PHP常量/" style="font-size: 13px;">PHP常量</a> <a href="/tags/Python教程/" style="font-size: 13px;">Python教程</a> <a href="/tags/Python笔记/" style="font-size: 13px;">Python笔记</a> <a href="/tags/Python运算符/" style="font-size: 13px;">Python运算符</a> <a href="/tags/SEO网站优化/" style="font-size: 13px;">SEO网站优化</a> <a href="/tags/XSS/" style="font-size: 14px;">XSS</a> <a href="/tags/DIR/" style="font-size: 13px;">__DIR__</a> <a href="/tags/FILE/" style="font-size: 13px;">__FILE__</a> <a href="/tags/LINE/" style="font-size: 13px;">__LINE__</a> <a href="/tags/apache环境变量/" style="font-size: 13px;">apache环境变量</a> <a href="/tags/apache配置/" style="font-size: 13px;">apache配置</a> <a href="/tags/beef劫持/" style="font-size: 13px;">beef劫持</a> <a href="/tags/dowhile循环/" style="font-size: 13px;">dowhile循环</a> <a href="/tags/iota定义常量组/" style="font-size: 13px;">iota定义常量组</a> <a href="/tags/javascript函数/" style="font-size: 13px;">javascript函数</a> <a href="/tags/js-this方法/" style="font-size: 13px;">js-this方法</a> <a href="/tags/js布尔类型隐私转换/" style="font-size: 13px;">js布尔类型隐私转换</a> <a href="/tags/linux目录结构/" style="font-size: 13px;">linux目录结构</a> <a href="/tags/php变量/" style="font-size: 13px;">php变量</a> <a href="/tags/sql注入/" style="font-size: 13px;">sql注入</a> <a href="/tags/urlib2/" style="font-size: 13px;">urlib2</a> <a href="/tags/web安全渗透/" style="font-size: 13px;">web安全渗透</a> <a href="/tags/web渗透/" style="font-size: 13px;">web渗透</a> <a href="/tags/变量的操作/" style="font-size: 13px;">变量的操作</a> <a href="/tags/延时执行defer/" style="font-size: 13px;">延时执行defer</a> <a href="/tags/拉格狼日/" style="font-size: 13px;">拉格狼日</a> <a href="/tags/时间复杂度测试/" style="font-size: 13px;">时间复杂度测试</a> <a href="/tags/理财，投资/" style="font-size: 13px;">理财，投资</a> <a href="/tags/算法/" style="font-size: 13px;">算法</a> <a href="/tags/网络模型/" style="font-size: 13px;">网络模型</a> <a href="/tags/计算机基础/" style="font-size: 13px;">计算机基础</a> <a href="/tags/顺序表/" style="font-size: 13px;">顺序表</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">66</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">87</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">51</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">125</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">109</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/逆向工程/">逆向工程</a>
+              </p>
+              <p class="item-title">
+                <a href="/2025/07/14/c语言/" class="title">c语言</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2025-07-13T19:46:33.000Z" itemprop="datePublished">2025-07-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/逆向工程核心原理/">逆向工程核心原理</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/12/22/PE文件格式/" class="title">PE文件格式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-12-22T10:36:53.000Z" itemprop="datePublished">2024-12-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JS/">JS</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/10/22/JS00025day1/" class="title">day1</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-10-21T20:42:40.000Z" itemprop="datePublished">2024-10-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/HTML-CSS/">HTML/CSS</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/09/12/html-css00023day01/" class="title">day01</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-09-12T00:18:25.000Z" itemprop="datePublished">2024-09-12</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/逆向工程/">逆向工程</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/01/07/Win32基础/" class="title">Win32基础</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-01-07T14:28:41.000Z" itemprop="datePublished">2024-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-c语言" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      c语言
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2025/07/14/c语言/" class="article-date">
+	  <time datetime="2025-07-13T19:46:33.000Z" itemprop="datePublished">2025-07-14</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/逆向工程/">逆向工程</a>
+  </span>
+
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2025/07/14/c语言/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.6k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 16(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="c语言的汇编表示方式"><a class="markdownIt-Anchor" href="#c语言的汇编表示方式"></a> C语言的汇编表示方式</h3>
+<p>在C语言里插入汇编</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__asm&#123;</span><br><span class="line">	mov eax,<span class="number">1</span></span><br><span class="line">	mov ecx,eax</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> a + b;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	__asm mov eax, <span class="number">1</span>;</span><br><span class="line">	add(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">00D71D90  push        ebp  </span><br><span class="line">00D71D91  mov         ebp,esp  </span><br><span class="line">00D71D93  sub         esp,0C0h  </span><br><span class="line">00D71D99  push        ebx  </span><br><span class="line">00D71D9A  push        esi  </span><br><span class="line">00D71D9B  push        edi  </span><br><span class="line">00D71D9C  lea         edi,[ebp+FFFFFF40h]  </span><br><span class="line">00D71DA2  mov         ecx,30h  </span><br><span class="line">00D71DA7  mov         eax,0CCCCCCCCh  </span><br><span class="line">00D71DAC  rep stos    dword ptr es:[edi]  </span><br><span class="line">	__asm mov eax, 1;</span><br><span class="line">00D71DAE  mov         eax,1  </span><br><span class="line">00D71DB3  push        2  </span><br><span class="line">00D71DB5  push        1  </span><br><span class="line">00D71DB7  call        00D71370  </span><br><span class="line">00D71DBC  add         esp,8  </span><br><span class="line">	add(1, 2);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">00D71DBF  xor         eax,eax  </span><br><span class="line">&#125;</span><br><span class="line">00D71DC1  pop         edi  </span><br><span class="line">&#125;</span><br><span class="line">00D71DC2  pop         esi  </span><br><span class="line">00D71DC3  pop         ebx  </span><br><span class="line">00D71DC4  add         esp,0C0h  </span><br><span class="line">00D71DCA  cmp         ebp,esp  </span><br><span class="line">00D71DCC  call        00D7120D  </span><br><span class="line">00D71DD1  mov         esp,ebp  </span><br><span class="line">00D71DD3  pop         ebp  </span><br><span class="line">00D71DD4  ret  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int add(int a, int b)</span><br><span class="line">&#123;</span><br><span class="line">00D724B0  push        ebp  </span><br><span class="line">00D724B1  mov         ebp,esp  </span><br><span class="line">00D724B3  sub         esp,0C0h  </span><br><span class="line">00D724B9  push        ebx  </span><br><span class="line">00D724BA  push        esi  </span><br><span class="line">00D724BB  push        edi  </span><br><span class="line">00D724BC  lea         edi,[ebp+FFFFFF40h]  </span><br><span class="line">00D724C2  mov         ecx,30h  </span><br><span class="line">00D724C7  mov         eax,0CCCCCCCCh  </span><br><span class="line">00D724CC  rep stos    dword ptr es:[edi]  </span><br><span class="line">00D724CE  mov         ecx,0D7B003h  </span><br><span class="line">00D724D3  call        00D71203  </span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	return a + b;;</span><br><span class="line">00D724D8  mov         eax,dword ptr [ebp+8]  </span><br><span class="line">00D724DB  add         eax,dword ptr [ebp+0Ch]  </span><br><span class="line">&#125;</span><br><span class="line">00D724DE  pop         edi  </span><br><span class="line">00D724DF  pop         esi  </span><br><span class="line">00D724E0  pop         ebx  </span><br><span class="line">00D724E1  add         esp,0C0h  </span><br><span class="line">00D724E7  cmp         ebp,esp  </span><br><span class="line">00D724E9  call        00D7120D  </span><br><span class="line">00D724EE  mov         esp,ebp  </span><br><span class="line">00D724F0  pop         ebp  </span><br><span class="line">00D724F1  ret</span><br></pre></td></tr></table></figure>
+<h4 id="main函数入出栈图"><a class="markdownIt-Anchor" href="#main函数入出栈图"></a> main函数(入/出)栈图</h4>
+<p><img src="../../themes/pure/source/images/javawz/image-20250715045027579.png" alt="image-20250715045027579"></p>
+<p>函数返回结果一般存放在eax中</p>
+<h3 id="参数传递与返回值"><a class="markdownIt-Anchor" href="#参数传递与返回值"></a> 参数传递与返回值</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">add(1, 2);</span><br><span class="line">	</span><br><span class="line">int add(int a, int b)</span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	return a + b;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//将2,1入栈,调用add函数,最后堆栈平衡</span><br><span class="line">00B21DB3  push        2  </span><br><span class="line">00B21DB5  push        1  </span><br><span class="line">00B21DB7  call        _add (0B21370h)  </span><br><span class="line">00B21DBC  add         esp,8  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//将a的值放入eax中</span><br><span class="line">return a + b;;</span><br><span class="line">00B224D8  mov         eax,dword ptr [a]  </span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">将a的值和b 的值相加,并且存入eax中</span><br><span class="line">return a + b;;</span><br><span class="line">00B224DB  add         eax,dword ptr [b]</span><br></pre></td></tr></table></figure>
+<h3 id="变量"><a class="markdownIt-Anchor" href="#变量"></a> 变量</h3>
+<p><img src="../../themes/pure/source/images/javawz/image-20250715202759494.png" alt="image-20250715202759494"></p>
+<p>全局变量在CE中显示绿色</p>
+<h3 id="变量与参数的内存布局"><a class="markdownIt-Anchor" href="#变量与参数的内存布局"></a> 变量与参数的内存布局</h3>
+<p>函数参数存放在堆栈中,一般是以ebp-8开始</p>
+<p>局部变量存放在堆栈红,一般是以ebp+8开始</p>
+<p>返回值一般存放在eax中</p>
+<h3 id="整数类型"><a class="markdownIt-Anchor" href="#整数类型"></a> 整数类型</h3>
+<p><img src="../../themes/pure/source/images/javawz/image-20250715204603231.png" alt="image-20250715204603231"></p>
+<p>数据溢出是把高位舍弃掉</p>
+<p>有符号和无符号的区别:</p>
+<p>拓展时与比较时才有区别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">拓展:</span><br><span class="line">有符号拓展</span><br><span class="line">char c = 1;	//c=00000001</span><br><span class="line">int b = c; 	//b = 00000000 00000000 00000000 00000001</span><br><span class="line"></span><br><span class="line">char  c = -1;	//c = 11111111</span><br><span class="line">				b本来是 00000000 00000000 00000000 00000000</span><br><span class="line">				赋值后 00000000 00000000 00000000 11111111</span><br><span class="line">				因为c是有符号类型且最高位是1,所以前面的0都用c的符号位去填充</span><br><span class="line">int b = c;		b = 11111111 11111111 11111111 11111111</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">无符号拓展</span><br><span class="line"></span><br><span class="line">unsigned char c = -1;	//c = 11111111</span><br><span class="line">无符号号数扩展直接填充0,不需要看符号位填充</span><br><span class="line">int b = c;		// b = 00000000 00000000 00000000 11111111</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">unsigned char i = -1;		</span><br><span class="line">unsigned char j = 1;		</span><br><span class="line">		</span><br><span class="line">if(i&gt;j)		</span><br><span class="line">&#123;		</span><br><span class="line">	printf(&quot;i&gt;j&quot;);	</span><br><span class="line">&#125;		</span><br><span class="line">else		</span><br><span class="line">&#123;		</span><br><span class="line">	printf(&quot;i&lt;j&quot;);	</span><br><span class="line">&#125;		</span><br><span class="line"></span><br><span class="line">i = -1 = FFFFFFFF</span><br><span class="line"></span><br><span class="line">j = 1 = 00000001</span><br><span class="line"></span><br><span class="line">因为都是无符号类型,所以i&gt;j</span><br></pre></td></tr></table></figure>
+<h3 id="浮点类型"><a class="markdownIt-Anchor" href="#浮点类型"></a> 浮点类型</h3>
+<p><img src="../../themes/pure/source/images/javawz/image-20250716001433833.png" alt="image-20250716001433833"></p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250716003754128.png" alt="image-20250716003754128"></p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250716005210806.png" alt="image-20250716005210806"></p>
+<p>也就是8.25用float或double类型,有效数字是包含整数部分的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">比如 8.25</span><br><span class="line">先将整数部分转换为二进制</span><br><span class="line">8 == 1000</span><br><span class="line"></span><br><span class="line">0.25转换小数部分</span><br><span class="line">0.25 == 0.01(二进制)</span><br><span class="line">0  1</span><br><span class="line">0.25*2 = 0.5</span><br><span class="line">0.5 * 2 = 1</span><br><span class="line"></span><br><span class="line">小数部分0.4 == 0.1100转成二进制：</span><br><span class="line">0.4 == 0.1100(二进制)</span><br><span class="line">0.4*2 = 0.8</span><br><span class="line">0.8*2 = 1.6</span><br><span class="line">0.6*2 = 1.2</span><br><span class="line">0.2*2 = 0.4</span><br><span class="line">0.4*2 = 0.8</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">8.25 == 1000.01(二进制)</span><br><span class="line">转换为科学计数法 1000.01 == 1.00001 * 2^3</span><br><span class="line"></span><br><span class="line">符号位是0 (正数是0,负数是1)</span><br><span class="line">指数符号位是1 (小数点向左移就填1,向右移就填0)</span><br><span class="line">指数位是 3 所以3-1 = 2 == 10 ==0000010(10二进制写后面,前面部分用0 补)</span><br><span class="line">尾数部分是 1 从左往右写入内存不够用0补(10000000000000000000000)</span><br><span class="line"></span><br><span class="line">8.25的内存存储形式:</span><br><span class="line">符号位	  指数符号位		指数移动数		二进制小数部分</span><br><span class="line">0 		1	      	000010			10000000000000000000000</span><br><span class="line">0100 0001 0000 0100 0000 0000 0000</span><br><span class="line">转换为16进制</span><br><span class="line">4     1    0    4   0     0    0</span><br><span class="line">小数转换到二进制是不完全精确的</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">0.25转换为二进制小数</span><br><span class="line">整数部分 0</span><br><span class="line">小数部分 01</span><br><span class="line">0.25 == 0.01</span><br><span class="line">0.01转换为科学计数法 == 1 * 2^-2</span><br><span class="line"></span><br><span class="line">实数是正数所以是0</span><br><span class="line">指数符号 0(因为是向右移动得到的)</span><br><span class="line">指数位 1111101</span><br><span class="line">	步骤:</span><br><span class="line">	2 == 0000010</span><br><span class="line">	按位取反==1111101</span><br><span class="line">尾数部分是0(因为1 *2%-2,1后面没有小数)</span><br><span class="line"></span><br><span class="line">0.25的内存存储形式:</span><br><span class="line">符号位		指数符号位	指数移动数		二进制小数部分</span><br><span class="line">0 			0  			1111101 	 00000000000000000000000</span><br><span class="line">0011 1110 1000 0000 0000 0000 0000 0000</span><br><span class="line">3	  E    8    0    0    0    0    0</span><br></pre></td></tr></table></figure>
+<h3 id="movss指令"><a class="markdownIt-Anchor" href="#movss指令"></a> movss指令</h3>
+<p>移动一个标量的单精度浮点数（float）值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movss xmm1, xmm2/m32  ; 从另一个 XMM 寄存器或内存中复制一个 float 到 xmm1</span><br><span class="line">movss xmm2/m32, xmm1  ; 把 xmm1 中的 float 值写到另一个 xmm 或内存中</span><br></pre></td></tr></table></figure>
+<h3 id="字符与字符串"><a class="markdownIt-Anchor" href="#字符与字符串"></a> 字符与字符串</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//编译器会将&apos;a&apos;拿去ASCII表中查找对应&apos;a&apos;的数值</span><br><span class="line">char c = &apos;a&apos;;</span><br><span class="line">//因为c存放的是&apos;a&apos;的数值所以putchar会用c的数值去ASCII表中查找,最后输&apos;a&apos;</span><br><span class="line">putchar(c);</span><br><span class="line"></span><br><span class="line">//str存放的是&quot;abcd&quot;中的第一个字符的地址(指针)</span><br><span class="line"></span><br><span class="line">char str[] = &quot;abcd&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="中文字符"><a class="markdownIt-Anchor" href="#中文字符"></a> 中文字符</h3>
+<p>一个中文字符用两个127以上的数值表示</p>
+<p>一个字节是一个中文字体的一半,所以要两个字节存放一个汉字</p>
+<p>中文字符编码GB2312或GB2312-80</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250716034413184.png" alt="image-20250716034413184"></p>
+<p>比如D0D6在中国代表中字,在韩国可能就是另外一种字体.这样的软件是不通用的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	char str[] = &quot;我&quot;;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="../../themes/pure/source/images/javawz/image-20250716034351828.png" alt="image-20250716034351828"></p>
+<h3 id="运算符与表达式"><a class="markdownIt-Anchor" href="#运算符与表达式"></a> 运算符与表达式</h3>
+<p>不同数据类型运算时会进行扩展</p>
+<p>比如一个int类型，一个float类型做运算时，会提升为float类型或double类型</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250717000105492.png" alt="image-20250717000105492"></p>
+<h4 id="setg和setl"><a class="markdownIt-Anchor" href="#setg和setl"></a> setg和setl</h4>
+<p>它们用于将 <strong>标志寄存器的结果（ZF、SF、OF 等）转换为布尔值（0 或 1）</strong> 存入目标寄存器或内存中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">指令		含义				条件				通常用于比较（cmp）后</span><br><span class="line">setg	Set if Greater	ZF=0 且 SF=OF	有符号大于（&gt;）</span><br><span class="line"></span><br><span class="line">setl	Set if Less	SF≠OF	有符号小于（&lt;）</span><br></pre></td></tr></table></figure>
+<p>用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">setg  reg/mem8   ; 如果比较结果为 &quot;greater&quot;，则设置为 1，否则为 0</span><br><span class="line"></span><br><span class="line">setl  reg/mem8   ; 如果比较结果为 &quot;less&quot;，则设置为 1，否则为 0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mov eax, 10</span><br><span class="line">mov ebx, 5</span><br><span class="line">cmp eax, ebx    ; 相当于 10 - 5</span><br><span class="line">setg al         ; 因为 10 &gt; 5，al = 1</span><br><span class="line">setl bl         ; 因为 10 &lt; 5 不成立，bl = 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setg / setl 是 有符号数比较</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">指令	有符号/无符号	等价条件	说明</span><br><span class="line">seta	无符号	(CF = 0) &amp;&amp; (ZF = 0)	无符号 a &gt; b</span><br><span class="line">setb	无符号	CF = 1	无符号 a &lt; b</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">指令		条件						有符号							含义</span><br><span class="line">sete	ZF == 1						无关							相等（==）</span><br><span class="line">setne	ZF == 0						无关							不等（!=）</span><br><span class="line">setg	ZF == 0 &amp;&amp; SF == OF			✅							大于（&gt;）</span><br><span class="line">setge	SF == OF					✅							大于等于（&gt;=）</span><br><span class="line">setl	SF != OF					✅							小于（&lt;）</span><br><span class="line">setle		小于或等于	(ZF = 1) or (SF ≠ OF)						a &lt;= b</span><br><span class="line">seta	CF == 0 &amp;&amp; ZF == 0			❌							无符号大于</span><br><span class="line">setb	CF == 1						❌							无符号小于</span><br></pre></td></tr></table></figure>
+<p><img src="../../themes/pure/source/images/javawz/image-20250717000856364.png" alt="image-20250717000856364"></p>
+<h4 id="shrsarshl"><a class="markdownIt-Anchor" href="#shrsarshl"></a> shr,sar,shl</h4>
+<p><code>shr</code>、<code>sar</code>、<code>shl</code> 是 <strong>x86/x64 汇编指令</strong>中用于**移位操作（bit shift）**的指令，用于对寄存器或内存中的数据执行按位左移或右移。</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250717000931078.png" alt="image-20250717000931078"></p>
+<h3 id="分支语句"><a class="markdownIt-Anchor" href="#分支语句"></a> 分支语句</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int add(int a, int b)</span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	return a + b;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int x, y;</span><br><span class="line">	x = 10;</span><br><span class="line">	y = 20;</span><br><span class="line"></span><br><span class="line">	if (x &gt; y)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;x &gt; y&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;x &lt; y&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">int x, y;</span><br><span class="line">	x = 10;</span><br><span class="line">00194F18  mov         dword ptr [ebp-8],0Ah  </span><br><span class="line">	y = 20;</span><br><span class="line">00194F1F  mov         dword ptr [ebp-14h],14h  </span><br><span class="line"></span><br><span class="line">	if (x &gt; y)</span><br><span class="line">00194F26  mov         eax,dword ptr [ebp-8]  </span><br><span class="line">00194F29  cmp         eax,dword ptr [ebp-14h]  </span><br><span class="line">00194F2C  jle         00194F3D  //如果x&lt;=y就会跳转</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;x &gt; y&quot;);</span><br><span class="line">00194F2E  push        197B30h  </span><br><span class="line">00194F33  call        0019104B  </span><br><span class="line">00194F38  add         esp,4  </span><br><span class="line">	&#125;</span><br><span class="line">00194F3B  jmp         00194F4A  </span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;x &lt; y&quot;);</span><br><span class="line">00194F3D  push        197BD4h  </span><br><span class="line">00194F42  call        0019104B  </span><br><span class="line">00194F47  add         esp,4  </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">00194F4A  xor         eax,eax  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="movzxmovsx指令"><a class="markdownIt-Anchor" href="#movzxmovsx指令"></a> movzx/movsx指令</h3>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+<th>高位如何填充</th>
+<th>用于哪种数？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>movsx</code></td>
+<td>带符号扩展的移动</td>
+<td>补符号位（最高位）</td>
+<td>✅ 有符号数</td>
+</tr>
+<tr>
+<td><code>movzx</code></td>
+<td>带<strong>零扩展</strong>的移动指令</td>
+<td>全部补 0</td>
+<td>✅ 无符号数</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movzx destination_reg, source_reg/mem</span><br><span class="line">movsx destination_reg, source_reg/mem</span><br></pre></td></tr></table></figure>
+<p><strong>destination_reg</strong>：目标寄存器，必须是 16 位或 32 位或 64 位</p>
+<p><strong>source_reg/mem</strong>：源寄存器或内存，必须是 8 位或 16 位</p>
+<p>会把低位的值复制过来，并将高位 <strong>补 0</strong>或<strong>补符号位</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov al, 0xFF        ; al = 11111111b = 255</span><br><span class="line">movzx eax, al       ; eax = 000000FFh = 255（32位）</span><br></pre></td></tr></table></figure>
+<h3 id="switch"><a class="markdownIt-Anchor" href="#switch"></a> SWITCH</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int add(int a, int b)</span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	return a + b;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int x = 5;</span><br><span class="line"></span><br><span class="line">	switch (2)</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">	case 3:</span><br><span class="line"></span><br><span class="line">		printf(&quot;1111&quot;);</span><br><span class="line">		break;</span><br><span class="line">	case 1:</span><br><span class="line">	</span><br><span class="line">		printf(&quot;1111&quot;);</span><br><span class="line">		break;</span><br><span class="line">	case 2:</span><br><span class="line">	</span><br><span class="line">		printf(&quot;1111&quot;);</span><br><span class="line">		break;</span><br><span class="line">	</span><br><span class="line">	case 4:</span><br><span class="line">	</span><br><span class="line">		printf(&quot;1111&quot;);</span><br><span class="line">		break;</span><br><span class="line">	case 100:</span><br><span class="line">		printf(&quot;1111&quot;);</span><br><span class="line">		break;</span><br><span class="line">	default:</span><br><span class="line">		printf(&quot;1111&quot;);		</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="case-数量小于4的时候没有索引表"><a class="markdownIt-Anchor" href="#case-数量小于4的时候没有索引表"></a> case 数量小于4的时候没有索引表</h4>
+<p><img src="../../themes/pure/source/images/javawz/image-20250717021157459.png" alt="image-20250717021157459"></p>
+<h4 id="case数量大于3就会用索引表"><a class="markdownIt-Anchor" href="#case数量大于3就会用索引表"></a> case数量大于3就会用索引表</h4>
+<p>这里减1是因为case数值最小的就是1，如果case最小是100，那么减的就是一百</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">006A189E  sub         ecx,1</span><br></pre></td></tr></table></figure>
+<h5 id="索引表的顺序与case存放的顺序无关索引表的顺序取决于case数值的大小一般数值最小的放在最前面从小到大写入"><a class="markdownIt-Anchor" href="#索引表的顺序与case存放的顺序无关索引表的顺序取决于case数值的大小一般数值最小的放在最前面从小到大写入"></a> 索引表的顺序与case存放的顺序无关，索引表的顺序取决于case数值的大小，一般数值最小的放在最前面，从小到大写入</h5>
+<p>索引值从0开始</p>
+<p>这个程序的索引表是006A192Ch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">006A18B6  jmp         dword ptr [edx*4+006A192Ch]</span><br></pre></td></tr></table></figure>
+<p><img src="../../themes/pure/source/images/javawz/image-20250717022032412.png" alt="image-20250717022032412"></p>
+<p>case断层也会从最小数值到最大数值按顺序填充索引表</p>
+<p>比如case最小是1,最大是5,中间有2,3,没有4,也会写将4写入索引表中,4的索引表内容是default的地址</p>
+<h4 id="记录索引的索引表"><a class="markdownIt-Anchor" href="#记录索引的索引表"></a> 记录索引的索引表</h4>
+<p>如果case断层距离相差很大,比如有case1,2,3,4,100；5-99都是不存在的，那么会建立一个记录索引的索引表，通过这个记录索引的索引表来查询对应的索引的值，5-99的记录索引的索引表内容就会用default的索引值填充。</p>
+<p>这里的05就是default的索引值。</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250717025403181.png" alt="image-20250717025403181"></p>
+<p>这个就是索引值表，然后通过索引值去访问跳转索引表</p>
+<p>这个程序一共有两个表，一个是记录索引值的表，一个是索引表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movzx       edx,byte ptr [ecx+00C34FDCh]	//查找对应的索引值</span><br><span class="line">jmp         dword ptr [edx*4+00C34FC4h]  	//通过索引值*4+00C34FC4h找到具体跳转的位置</span><br></pre></td></tr></table></figure>
+<p>这是跳转索引表</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250717030323733.png" alt="image-20250717030323733"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">	int x = 5;</span><br><span class="line">00C34F18  mov         dword ptr [ebp-8],5  </span><br><span class="line"></span><br><span class="line">	switch (2)</span><br><span class="line">00C34F1F  mov         dword ptr [ebp+FFFFFF30h],2  </span><br><span class="line">00C34F29  mov         eax,dword ptr [ebp+FFFFFF30h]  </span><br><span class="line">00C34F2F  sub         eax,1  </span><br><span class="line">00C34F32  mov         dword ptr [ebp+FFFFFF30h],eax  </span><br><span class="line">00C34F38  cmp         dword ptr [ebp+FFFFFF30h],63h  </span><br><span class="line">00C34F3F  ja          00C34FA0  </span><br><span class="line">00C34F41  mov         ecx,dword ptr [ebp+FFFFFF30h]  </span><br><span class="line">00C34F47  movzx       edx,byte ptr [ecx+00C34FDCh]  </span><br><span class="line">00C34F4E  jmp         dword ptr [edx*4+00C34FC4h]  </span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">	case 3:</span><br><span class="line"></span><br><span class="line">		printf(&quot;1111&quot;);</span><br><span class="line">00C34F55  push        0C37B30h  </span><br><span class="line">00C34F5A  call        00C3104B  </span><br><span class="line">00C34F5F  add         esp,4  </span><br><span class="line">		break;</span><br><span class="line">00C34F62  jmp         00C34FAD  </span><br><span class="line">	case 1:</span><br><span class="line">	</span><br><span class="line">		printf(&quot;1111&quot;);</span><br><span class="line">00C34F64  push        0C37B30h  </span><br><span class="line">00C34F69  call        00C3104B  </span><br><span class="line">00C34F6E  add         esp,4  </span><br><span class="line">		break;</span><br><span class="line">00C34F71  jmp         00C34FAD  </span><br><span class="line">	case 2:</span><br><span class="line">	</span><br><span class="line">		printf(&quot;1111&quot;);</span><br><span class="line">00C34F73  push        0C37B30h  </span><br><span class="line">	case 2:</span><br><span class="line">	</span><br><span class="line">		printf(&quot;1111&quot;);</span><br><span class="line">00C34F78  call        00C3104B  </span><br><span class="line">00C34F7D  add         esp,4  </span><br><span class="line">		break;</span><br><span class="line">00C34F80  jmp         00C34FAD  </span><br><span class="line">	</span><br><span class="line">	case 4:</span><br><span class="line">	</span><br><span class="line">		printf(&quot;1111&quot;);</span><br><span class="line">00C34F82  push        0C37B30h  </span><br><span class="line">00C34F87  call        00C3104B  </span><br><span class="line">00C34F8C  add         esp,4  </span><br><span class="line">		break;</span><br><span class="line">00C34F8F  jmp         00C34FAD  </span><br><span class="line">	case 100:</span><br><span class="line">		printf(&quot;1111&quot;);</span><br><span class="line">00C34F91  push        0C37B30h  </span><br><span class="line">00C34F96  call        00C3104B  </span><br><span class="line">00C34F9B  add         esp,4  </span><br><span class="line">		break;</span><br><span class="line">00C34F9E  jmp         00C34FAD  </span><br><span class="line">	default:</span><br><span class="line">		printf(&quot;1111&quot;);		</span><br><span class="line">00C34FA0  push        0C37B30h  </span><br><span class="line">00C34FA5  call        00C3104B  </span><br><span class="line">00C34FAA  add         esp,4  </span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="循环语句"><a class="markdownIt-Anchor" href="#循环语句"></a> 循环语句</h3>
+<p>在汇编中只要往回跳的大部分都是循环。</p>
+<h4 id="while循环"><a class="markdownIt-Anchor" href="#while循环"></a> while循环</h4>
+<p><img src="../../themes/pure/source/images/javawz/image-20250717054246373.png" alt="image-20250717054246373"></p>
+<h4 id="do-while循环"><a class="markdownIt-Anchor" href="#do-while循环"></a> do while循环</h4>
+<p><img src="../../themes/pure/source/images/javawz/image-20250717054453245.png" alt="image-20250717054453245"></p>
+<p>.</p>
+<h4 id="for循环"><a class="markdownIt-Anchor" href="#for循环"></a> for循环</h4>
+<p><img src="../../themes/pure/source/images/javawz/image-20250717054839328.png" alt="image-20250717054839328"></p>
+<h3 id="windows自动启动注册表"><a class="markdownIt-Anchor" href="#windows自动启动注册表"></a> windows自动启动注册表</h3>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>说明</th>
+<th>适用范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</code></td>
+<td><strong>系统级（所有用户）</strong> 开机启动</td>
+<td>对所有用户生效</td>
+</tr>
+<tr>
+<td><code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run</code></td>
+<td><strong>当前用户</strong> 开机启动</td>
+<td>仅当前登录用户</td>
+</tr>
+<tr>
+<td><code>HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run</code></td>
+<td><strong>32 位程序的启动项（64 位系统上）</strong></td>
+<td>针对 32 位程序</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>用途说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce</code></td>
+<td>仅在下一次开机时启动一次（常用于安装器）</td>
+</tr>
+<tr>
+<td><code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce</code></td>
+<td>同上，作用于当前用户</td>
+</tr>
+<tr>
+<td><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run</code></td>
+<td>管理策略强制启动，较少见</td>
+</tr>
+<tr>
+<td><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services</code></td>
+<td>注册服务（比启动项更早启动）</td>
+</tr>
+<tr>
+<td><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Active Setup\Installed Components</code></td>
+<td>某些程序开机初始化使用</td>
+</tr>
+<tr>
+<td><code>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit</code></td>
+<td>控制用户登录后启动的程序，常用于系统级后门</td>
+</tr>
+</tbody>
+</table>
+<h2 id="数组"><a class="markdownIt-Anchor" href="#数组"></a> 数组</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;windows.h&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	char c[10] = &#123; &apos;1&apos; &#125;;</span><br><span class="line"></span><br><span class="line">	printf(&quot;%d&quot;,sizeof c);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>申请10个字节的数组分配了12个字节,是因为内存默认是以4字节对齐的12是4的倍数。</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250720014141813.png" alt="image-20250720014141813"></p>
+<p>局部变量数组是从右到左入栈的，数值10放在栈底，数值1放在栈顶。</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250720014515937.png" alt="image-20250720014515937"></p>
+<h4 id="缓冲区溢出"><a class="markdownIt-Anchor" href="#缓冲区溢出"></a> 缓冲区溢出</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;windows.h&gt;</span><br><span class="line"></span><br><span class="line">void Fun()</span><br><span class="line">&#123;</span><br><span class="line">	while (1) &#123;</span><br><span class="line">		printf(&quot;111\n&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int yichu() &#123;</span><br><span class="line"></span><br><span class="line">	int a[8] = &#123; 1,2 &#125;;</span><br><span class="line"></span><br><span class="line">	a[9] = (int)Fun;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	yichu();</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为a[7]==ebp-4,a[8] ==ebp,a[9] == ebp+4。刚刚好ebp+4等于返回地址，所以	a[9] = (int)Fun覆盖原来的返回地址</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250720015306862.png" alt="image-20250720015306862"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[9] = (int)Fun;</span><br></pre></td></tr></table></figure>
+<h4 id="imul"><a class="markdownIt-Anchor" href="#imul"></a> imul</h4>
+<table>
+<thead>
+<tr>
+<th>用法形式</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>imul r/m32</code></td>
+<td><code>imul eax</code></td>
+<td>隐式用 <code>eax</code> 和 <code>r/m32</code> 相乘，结果在 <code>edx:eax</code></td>
+</tr>
+<tr>
+<td><code>imul reg32, r/m32</code></td>
+<td><code>imul eax, ebx</code></td>
+<td><code>eax = eax * ebx</code></td>
+</tr>
+<tr>
+<td><code>imul reg32, r/m32, imm</code></td>
+<td><code>imul eax, ebx, 10</code></td>
+<td><code>eax = ebx * 10</code></td>
+</tr>
+</tbody>
+</table>
+<h5 id="单操作数形式"><a class="markdownIt-Anchor" href="#单操作数形式"></a> 单操作数形式</h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov eax, 3</span><br><span class="line">imul dword ptr [ebx] ; eax * [ebx]，结果在 edx:eax</span><br></pre></td></tr></table></figure>
+<p><code>imul</code> 自动使用 <code>eax</code> 和操作数相乘，结果 64 位存在 <code>edx:eax</code>。</p>
+<h5 id="双操作数形式"><a class="markdownIt-Anchor" href="#双操作数形式"></a> 双操作数形式</h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imul eax, ebx ; eax = eax * ebx</span><br></pre></td></tr></table></figure>
+<p>只保留 32 位结果，溢出会导致结果错误，但不会引发异常。</p>
+<h5 id="三操作数形式"><a class="markdownIt-Anchor" href="#三操作数形式"></a> 三操作数形式</h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imul eax, ebx, 100 ; eax = ebx * 100</span><br></pre></td></tr></table></figure>
+<p>常用于计算偏移量，例如数组索引乘元素大小。</p>
+<h5 id="标志位影响"><a class="markdownIt-Anchor" href="#标志位影响"></a> 标志位影响</h5>
+<ul>
+<li><strong>OF（溢出标志）</strong> 和 <strong>CF（进位标志）</strong>：
+<ul>
+<li>如果结果超出目标寄存器大小，这两个标志会被置位。</li>
+</ul>
+</li>
+<li><strong>ZF/SF/PF</strong>：不受影响。</li>
+</ul>
+<h2 id="结构体"><a class="markdownIt-Anchor" href="#结构体"></a> 结构体</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;windows.h&gt;</span><br><span class="line"></span><br><span class="line">struct MY &#123;</span><br><span class="line">	char a;</span><br><span class="line">	char b;</span><br><span class="line">	int c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	struct MY m = &#123; &apos;a&apos;,&apos;b&apos;,123 &#125;;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结构体的局部变量也是从右到左入栈的</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250720022159025.png" alt="image-20250720022159025"></p>
+<h2 id="字节对齐"><a class="markdownIt-Anchor" href="#字节对齐"></a> 字节对齐</h2>
+<p>什么是字节对齐?</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250720021205296.png" alt="image-20250720021205296"></p>
+<h4 id="pragma-pack字节对齐数"><a class="markdownIt-Anchor" href="#pragma-pack字节对齐数"></a> #pragma pack(字节对齐数)</h4>
+<p><img src="../../themes/pure/source/images/javawz/image-20250720021520579.png" alt="image-20250720021520579"></p>
+<p>结构体的总大小: Min(某个成员的最大字节数,对齐参数)的倍数</p>
+<p>例如</p>
+<p>MY结构体的总大小是Min(4,1)的倍数,也就是1的倍数,因为最大是int 4个字节,对齐参数是1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#pragma pack(1)</span><br><span class="line">struct MY &#123;</span><br><span class="line">	char a;</span><br><span class="line">	char b;</span><br><span class="line">	int c;</span><br><span class="line">&#125;;</span><br><span class="line">#pragma pack()</span><br></pre></td></tr></table></figure>
+<p><img src="../../themes/pure/source/images/javawz/image-20250720024627330.png" alt="image-20250720024627330"></p>
+<h2 id="结构体数组"><a class="markdownIt-Anchor" href="#结构体数组"></a> 结构体数组</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;windows.h&gt;</span><br><span class="line">#pragma pack(1)</span><br><span class="line">struct MY &#123;</span><br><span class="line">	char a;</span><br><span class="line">	char b;</span><br><span class="line">	int c;</span><br><span class="line">&#125;;</span><br><span class="line">#pragma pack()</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	struct MY m[3] = &#123;</span><br><span class="line">		&#123;&apos;a&apos;,&apos;b&apos;,123&#125;,</span><br><span class="line">		&#123;&apos;a&apos;,&apos;b&apos;,123&#125;,</span><br><span class="line">		&#123;&apos;a&apos;,&apos;b&apos;,123&#125;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="../../themes/pure/source/images/javawz/image-20250720025036339.png" alt="image-20250720025036339"></p>
+<h2 id="指针类型"><a class="markdownIt-Anchor" href="#指针类型"></a> 指针类型</h2>
+<h4 id="指针宽度"><a class="markdownIt-Anchor" href="#指针宽度"></a> 指针宽度</h4>
+<p>如果是64位程序,指针类型的宽度是8字节,如果是32位程序,指针类型的宽度是4字节</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250722041819898.png" alt="image-20250722041819898"></p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250722041914159.png" alt="image-20250722041914159"></p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250722042001400.png" alt="image-20250722042001400"></p>
+<h2 id="取地址符"><a class="markdownIt-Anchor" href="#取地址符"></a> 取地址符</h2>
+<p>1、&amp;是取地址符，任何变量都可以使用&amp;来获取地址，但不能用在常量上。</p>
+<p>2、探测&amp;变量 的类型</p>
+<p><img src="../../themes/pure/source/images/javawz/image-20250722042414001.png" alt="image-20250722042414001"></p>
+<h2 id="取值运算符"><a class="markdownIt-Anchor" href="#取值运算符"></a> 取值运算符</h2>
+<p><img src="../../themes/pure/source/images/javawz/image-20250722043358070.png" alt="image-20250722043358070"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*加指针类型的类型是指针类型减去一个*</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xiaowuyoucy.github.io/2025/07/14/c语言/" title="c语言" target="_blank" rel="external">https://xiaowuyoucy.github.io/2025/07/14/c语言/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xiaowuyoucy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xiaowuyoucy" target="_blank"><span class="text-dark">YanChen</span><small class="ml-1x"></small></a></h3>
+        <div>Personal profile</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+		  
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2024/12/22/PE文件格式/" title="PE文件格式"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zfb.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wx.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xiaowuyoucy" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+	<span>More contact information</span>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:xiaowuyoucy.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '032928647cd59bc9f443',
+    clientSecret: '82a11fd93e4d0779655af6dc4b73942a03e95276',
+    repo: 'Xiaowuyoucy.github.io',
+    owner: 'Xiaowuyoucy',
+    admin: ['Xiaowuyoucy'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>
